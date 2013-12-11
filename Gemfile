@@ -43,3 +43,14 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+# Authentification
+gem 'devise'
+gem 'omniauth'
+gem "omniauth-cas", :git => "git://github.com/loocla/omniauth-cas.git", :branch => 'saml'
+
+# Authorisation
+gem 'cancan'
+gem 'rolify'
+
+gem 'haml'
