@@ -1,0 +1,14 @@
+[Wed Dec 11 12:25:33 2013] [error] [client 193.50.216.88] (13)Permission denied: access to / denied
+[Wed Dec 11 12:25:34 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:26:49 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /404.html denied
+[Wed Dec 11 12:26:51 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:29:48 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /404.html denied
+[Wed Dec 11 12:29:49 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:29:52 2013] [error] [client 193.50.216.88] (13)Permission denied: access to / denied
+[Wed Dec 11 12:29:53 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:31:01 2013] [error] [client 193.50.216.88] (13)Permission denied: access to / denied
+[Wed Dec 11 12:31:01 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:31:02 2013] [error] [client 193.50.216.88] (13)Permission denied: access to / denied
+[Wed Dec 11 12:31:02 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
+[Wed Dec 11 12:31:02 2013] [error] [client 193.50.216.88] (13)Permission denied: access to / denied
+[Wed Dec 11 12:31:03 2013] [error] [client 193.50.216.88] (13)Permission denied: access to /favicon.ico denied
