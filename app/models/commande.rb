@@ -6,6 +6,6 @@ class Commande < ActiveRecord::Base
 	belongs_to :personne
 	belongs_to :user
 
-	attr_accessible :assurance, :status
+	#attr_accessible :assurance, :status
 
 end
