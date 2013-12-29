@@ -3,4 +3,13 @@ class Chambre < ActiveRecord::Base
 	has_one :groupe
 
 	#attr_accessible :numero, :nbrplace
+
+	def to_s
+  	return self.numero
+  end
+
+  def to_str
+    return self.numero
+  end
+  
 end

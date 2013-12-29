@@ -10,4 +10,17 @@ class Personne < ActiveRecord::Base
 
 	validates :phone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }
 
+#=== Méthodes publiques ==============================================
+
+def nom_complet
+    return self.prenom+" "+self.nom
+end
+
+def assure?
+	# 
+end
+
+
+
+
 end
