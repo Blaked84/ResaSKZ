@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  price: 1
+  stock: 1
+  echeance: 2013-12-27
+
+two:
+  name: MyString
+  price: 1
+  stock: 1
+  echeance: 2013-12-27
