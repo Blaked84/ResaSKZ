@@ -11,7 +11,83 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131227123258) do
+ActiveRecord::Schema.define(version: 20131229123817) do
+
+  create_table "activites", force: true do |t|
+    t.string   "nom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "chambres", force: true do |t|
+    t.string   "numero"
+    t.integer  "nbrplace"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "commandes", force: true do |t|
+    t.boolean  "assurance"
+    t.boolean  "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "genres", force: true do |t|
+    t.string   "sexe"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "glisses", force: true do |t|
+    t.string   "nom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "groupes", force: true do |t|
+    t.string   "nom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "packs", force: true do |t|
+    t.string   "nom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "paiements", force: true do |t|
+    t.string   "etape"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "personnes", force: true do |t|
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "assurance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.integer  "price"
+    t.integer  "stock"
+    t.date     "echeance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tbks", force: true do |t|
+    t.string   "nom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -26,9 +102,16 @@ ActiveRecord::Schema.define(version: 20131227123258) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "referant_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "usertypes", force: true do |t|
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
