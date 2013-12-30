@@ -1,4 +1,7 @@
 LooklaDev::Application.routes.draw do
+  get "personne/index"
+  get "personne/show"
+  get "personne/edit"
   get "home/index"
   get "commande/index"
   get "product/index"

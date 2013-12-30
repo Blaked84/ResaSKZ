@@ -8,12 +8,16 @@
 </head>
 <body>
 
+<%= render 'layouts/menu' %>
+
+
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
-<%= render 'layouts/user_widget' %>
-
+<div id="wrapper" class="mw960p center">
 <%= yield %>
+</div>
+
 
 </body>
 </html>

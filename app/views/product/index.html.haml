@@ -1,0 +1,15 @@
+%h1
+  Product
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Produit
+      %th Quantitée totale
+      %th Date limite de réservation
+    %tbody
+      - @product.each do |prd|
+        %tr
+          %td=prd.name
+          %td=prd.stock
+          %td=prd.echeance
