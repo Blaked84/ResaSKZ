@@ -14,3 +14,11 @@
 # Ignore all logfiles and tempfiles.
 /log/**
 /tmp
+Gemfile.lock
+
+# Ignore file type
+
+## Rubymine files
+*.keep
+*.idea
+*.bundle
