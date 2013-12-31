@@ -1,4 +1,9 @@
 class Pack < ActiveRecord::Base
+
+	#################################################
+	# Les packs: PG /archi /jp... regroupe des produits
+	#################################################
+	
 	has_many :commande
 	has_many :product
 

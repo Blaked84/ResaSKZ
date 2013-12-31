@@ -1,4 +1,8 @@
 class Usertype < ActiveRecord::Base
+	#################################################
+	# Type: PG / pecs
+	#################################################
+	
 	has_many :personne
 
 	#attr_accessible :type

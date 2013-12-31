@@ -1,6 +1,11 @@
 class Product < ActiveRecord::Base
+
+	#################################################
+	# Les produits commandable
+	#################################################
 	has_many :commande
 	has_many :pack
+	has_one :categorie
 
 	#attr_accessible :name, :price, :stock, :echeance
 
@@ -10,5 +15,9 @@ class Product < ActiveRecord::Base
 
 	def to_str
 		return self.nom
+	end
+
+	def price_euro
+		return self.price / 100.0
 	end
 end

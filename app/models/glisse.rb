@@ -1,4 +1,7 @@
 class Glisse < ActiveRecord::Base
+	#################################################
+	# Type de glisse: ski /snow
+	#################################################
 	has_many :commande
 
 	#attr_accessible :nom

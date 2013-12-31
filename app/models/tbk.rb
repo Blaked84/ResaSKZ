@@ -1,4 +1,8 @@
 class Tbk < ActiveRecord::Base
+
+	#################################################
+	# Les TBK gérant les dossiers
+	#################################################
 	has_many :commande
 
 	def to_s

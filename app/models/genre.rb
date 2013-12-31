@@ -1,4 +1,7 @@
 class Genre < ActiveRecord::Base
+	#################################################
+	# Homme / femme
+	#################################################	
 	has_many :personne
 
 	#attr_accessible :sexe

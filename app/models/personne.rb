@@ -1,4 +1,8 @@
 class Personne < ActiveRecord::Base
+
+	#################################################
+	# Les personnes physiques. Appartiennent à un user
+	#################################################
 	has_many :groupe
 	has_many :commande
 	has_many :activite

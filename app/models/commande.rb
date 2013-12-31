@@ -1,4 +1,8 @@
 class Commande < ActiveRecord::Base
+	#################################################
+	# Les commandes réalisées par les users.
+	#################################################
+
 	has_many :product
 	has_one :pack
 	belongs_to :glisse
@@ -8,4 +12,7 @@ class Commande < ActiveRecord::Base
 
 	#attr_accessible :assurance, :status
 
+	def ok?
+		return
+	end
 end

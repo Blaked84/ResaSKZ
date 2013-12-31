@@ -6,10 +6,12 @@
     %tr
       %th Produit
       %th Quantitée totale
+      %th Prix (€)
       %th Date limite de réservation
     %tbody
       - @product.each do |prd|
         %tr
           %td=prd.name
           %td=prd.stock
+          %td=prd.price_euro
           %td=prd.echeance

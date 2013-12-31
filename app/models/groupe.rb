@@ -1,4 +1,8 @@
 class Groupe < ActiveRecord::Base
+	#################################################
+	# Groupe pour des activitées
+	#################################################
+	
 	has_many :personne
 	has_one :chambre
 

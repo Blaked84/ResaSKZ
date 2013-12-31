@@ -1,4 +1,9 @@
 class Chambre < ActiveRecord::Base
+	#################################################
+    # Les chambres: on leur attribue des personnes
+	#################################################
+
+
 	# il faut prévoir que les chambres sont louées 2 fois
 	has_one :groupe
 

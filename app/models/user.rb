@@ -1,4 +1,11 @@
 class User < ActiveRecord::Base
+
+  #################################################
+  # Les users / compte => entité se connctant au 
+  # site et pouvant avoir en charge plusieurs 
+  # commandes de plusieurs personnes
+  #################################################
+
   has_many :commandes
   has_many :personnes,  class_name: "Personne", foreign_key: "user_id"
 
