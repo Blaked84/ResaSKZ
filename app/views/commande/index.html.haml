@@ -11,8 +11,8 @@
     %tbody
       - @commande.each do |c|
         %tr
-          %td=c.id
-          / # %td=link_to c.id, productshow_path(c.id)
+          / %td=c.id
+          %td=link_to c.id, commandeshow_path(c.id)
           %td 
           / # Nom de la personne
           %td=conditional_format(c.assurance)

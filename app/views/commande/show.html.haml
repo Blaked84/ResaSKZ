@@ -1,0 +1,21 @@
+%h1
+  Commande #
+  =@commande.id
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Commande ID
+      %th Nom
+      %th Assurance
+      %th Statut
+    %tbody
+      %tr
+      %td=@commande.id
+      %td 
+      / # Nom de la personne
+      %td=conditional_format(@commande.assurance)
+      %td=conditional_format(@commande.status)
+
+
+

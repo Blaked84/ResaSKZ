@@ -10,6 +10,7 @@ LooklaDev::Application.routes.draw do
   
   get '/personne/:id', to: 'personne#show', as: :personneshow
   get '/product/:id', to: 'product#show', as: :productshow
+  get '/commande/:id', to: 'commande#show', as: :commandeshow
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
