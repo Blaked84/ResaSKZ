@@ -4,4 +4,8 @@ class ProductController < ApplicationController
     # authorize! :show, @product
     @titre = "Produit"
   end
+
+  def show
+  	@product = Product.find(params[:id])
+  end
 end

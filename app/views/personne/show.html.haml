@@ -1,2 +1,10 @@
-<h1>Personne#show</h1>
-<p>Find me in app/views/personne/show.html.erb</p>
+%h1=@personne.nom_complet
+%p
+  Tél: 
+  =@personne.phone
+%p
+  email: 
+  =@personne.email
+%p
+  assurance:
+  =conditional_format(@personne.assurance?)

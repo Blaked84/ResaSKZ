@@ -11,7 +11,9 @@
     %tbody
       - @product.each do |prd|
         %tr
-          %td=prd.name
+          %td=link_to prd.name, productshow_path(prd.id)
           %td=prd.stock
           %td=prd.price_euro
           %td=prd.echeance
+
+

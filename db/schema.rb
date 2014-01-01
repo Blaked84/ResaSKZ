@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131230232502) do
+ActiveRecord::Schema.define(version: 20140101224545) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20131230232502) do
     t.date     "echeance"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "description"
   end
 
   create_table "tbks", force: true do |t|

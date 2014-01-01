@@ -54,4 +54,4 @@ gem "omniauth-cas", :git => "git://github.com/loocla/omniauth-cas.git", :branch 
 gem 'cancan'
 gem 'rolify'
 
-gem 'haml'
+gem 'haml-rails'

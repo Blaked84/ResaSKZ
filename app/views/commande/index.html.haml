@@ -1,0 +1,22 @@
+%h1
+  Commandes
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Commande ID
+      %th Nom
+      %th Assurance
+      %th Statut
+    %tbody
+      - @commande.each do |c|
+        %tr
+          %td=c.id
+          / # %td=link_to c.id, productshow_path(c.id)
+          %td 
+          / # Nom de la personne
+          %td=conditional_format(c.assurance)
+          %td=conditional_format(c.status)
+
+
+

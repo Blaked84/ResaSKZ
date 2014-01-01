@@ -6,6 +6,7 @@ class PersonneController < ApplicationController
   end
 
   def show
+  	@personne = Personne.find(params[:id])
   end
 
   def edit
