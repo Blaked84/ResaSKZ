@@ -20,6 +20,12 @@ def nom_complet
     return self.prenom+" "+self.nom
 end
 
+def taille_metre
+	if self.taille
+		return self.taille / 100.0
+	end
+end
+
 def assure?
 	# 
 end
