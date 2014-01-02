@@ -3,7 +3,7 @@ class Groupe < ActiveRecord::Base
 	# Groupe pour des activitées
 	#################################################
 	
-	has_many :personne
+	has_many :personne, class_name: "Personne", foreign_key: "groupe_id"
 	has_one :chambre
 
 	#attr_accessible :nom

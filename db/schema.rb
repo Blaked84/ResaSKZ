@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140102000716) do
+ActiveRecord::Schema.define(version: 20140102175003) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "id_event"
   end
 
   create_table "categories", force: true do |t|
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20140102000716) do
     t.integer  "nbrplace"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "id_event"
   end
 
   create_table "commandes", force: true do |t|
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 20140102000716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "description"
+    t.integer  "id_event"
   end
 
   create_table "tbks", force: true do |t|
