@@ -1,20 +1,25 @@
-%h1
-  Product
-  =@evenement
+%div.top-info.pa1
+  %h1
+    Product
+    =@evenement
 
-%table.striped.alternate
-  %thead
-    %tr
-      %th Produit
-      %th Quantitée totale
-      %th Prix (€)
-      %th Date limite de réservation
-    %tbody
-      - @product.each do |prd|
+- @categories.each_with_index do |ca, i|
+  %div.pa1.fiche.brdr-b
+    %h2=ca.nom
+    %table.striped.alternate
+      %thead
         %tr
-          %td=link_to prd.name, productshow_path(prd.id)
-          %td=prd.stock
-          %td=prd.price_euro
-          %td=prd.echeance
+          %th Produit
+          %th Quantitée totale
+          %th Prix (€)
+          %th Date limite de réservation
+        %tbody
+          - @product.each do |prd|
+            -if prd.categorie_id==i+1
+              %tr
+                %td=link_to prd.name, productshow_path(prd.id)
+                %td=prd.stock
+                %td=prd.price_euro
+                %td=prd.echeance
 
 

@@ -7,6 +7,7 @@ class ProductController < ApplicationController
     	@product = Product.all.sort_by{|a| a.name}
     end
     # authorize! :show, @product
+    @categories = Categorie.all
     @titre = "Produit"
   end
 

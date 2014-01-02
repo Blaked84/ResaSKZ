@@ -34,7 +34,8 @@ case Rails.env
 		:stock => 211,
 		:echeance => DateTime.new(2013,2,3),
 		:description => "MIAM MAIM",
-		:event_id => 1
+		:event_id => 1,
+		:categorie_id => 2
 		)
 	Product.create(
 		:name => "Tarte",
@@ -42,7 +43,8 @@ case Rails.env
 		:stock => 211,
 		:echeance => DateTime.new(2013,2,3),
 		:description => "MIAM MAIM",
-		:event_id => 2
+		:event_id => 2,
+		:categorie_id => 3
 		)
 	Commande.create(
 		:assurance => 0,
