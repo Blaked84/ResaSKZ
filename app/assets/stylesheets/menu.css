@@ -1,6 +1,21 @@
 nav{
 	/*height:40px;*/
 	width: 100%;
-	background: #AAA;
+	background: #fff;
 	margin: 0;
+	border-bottom: 2px solid #BBB;
 }
+
+nav a, nav a:visited{color: #666;}
+nav a:hover{color: #c0392b}
+nav a, nav a:visited, nav a:hover{
+	text-decoration: none;
+	-webkit-transition:.2s linear all;
+	   -moz-transition:.2s linear all;
+	     -o-transition:.2s linear all;
+	        transition:.2s linear all;
+}
+nav il{
+	font-size: 1.3em;
+	padding-right: 1em;
+	}

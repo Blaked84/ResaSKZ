@@ -58,6 +58,8 @@ h1, .h1-like {
 	margin: 0.6563em 0 0 0;
 	font-size: 2.2857em; /* equiv 32px */
 	line-height: 1.3126;
+	color: #222;
+	text-shadow: 1px 1px 0px #FFF;
 }
 h2, .h2-like {
 	margin: 0.75em 0 0 0;
@@ -1171,3 +1173,14 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 	color:#FFF;
 	
 }
+
+body{background: #ecf0f1;}
+
+.top-info{
+	background: #DDD;
+}
+.fiche{
+	background: #FFF;
+}
+
+.brdr-b{border-bottom: 1px solid #bbb;}

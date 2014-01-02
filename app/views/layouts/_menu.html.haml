@@ -1,10 +1,12 @@
 %nav
   .mw960p.center
-    .pa2
-      %ul.inline
+    .pt2.pb2.pl0
+      %ul.inline.pl0
+        %il ResaSKZ
         %il= link_to "Acc", root_path
         %il= link_to "Personnes", personne_index_path
         %il= link_to "Produits", product_index_path
         %il= link_to "Commandes", commande_index_path
         %il= link_to "Evenements", event_index_path
+        %il= link_to "Admin", admin_index_path
         %il= render 'layouts/user_widget'

@@ -1,33 +1,36 @@
-%h1=@personne.nom_complet
-%p
-  Tél: 
-  =@personne.phone
-%p
-  email: 
-  =@personne.email
-%p
-  assurance:
-  =conditional_format(@personne.assurance?)
-%p
-  Adresse:
-  =@personne.adresse
-  =@personne.codepostal
-  =@personne.ville
-%p 
-  Bucque:
-  =@personne.bucque
-%p 
-  Fams: 
-  =@personne.fams
-%p 
-  Promo:
-  =@personne.promo
-%p 
-  Id gadz.org:
-  =@personne.idGadzOrg
-%p 
-  taille (m):
-  =@personne.taille_metre
-%p 
-  Pointure:
-  =@personne.pointure
+%div.top-info.pa1
+  %h1=@personne.nom_complet
+  %p
+    =@personne.bucque
+    =@personne.fams
+    =@personne.promo
+
+%div.pa1.fiche.brdr-b
+  %p 
+    Id gadz.org:
+    =@personne.idGadzOrg
+  %p
+    Tél: 
+    =@personne.phone
+  %p
+    email: 
+    =@personne.email
+
+  %p
+    Adresse:
+    =@personne.adresse
+    =@personne.codepostal
+    =@personne.ville
+
+%div.pa1.fiche
+  
+  %p 
+    taille (m):
+    =@personne.taille_metre
+  %p 
+    Pointure:
+    =@personne.pointure
+
+    %p
+    assurance:
+    =conditional_format(@personne.assurance?)
