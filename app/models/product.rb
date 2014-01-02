@@ -6,6 +6,7 @@ class Product < ActiveRecord::Base
 	has_many :commande
 	has_many :pack
 	has_one :categorie
+	belongs_to :event
 
 	#attr_accessible :name, :price, :stock, :echeance
 

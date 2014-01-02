@@ -1,5 +1,5 @@
 class AddIdeventToActivite < ActiveRecord::Migration
   def change
-    add_column :activites, :id_event, :integer
+    add_column :activites, :event_id, :integer
   end
 end
