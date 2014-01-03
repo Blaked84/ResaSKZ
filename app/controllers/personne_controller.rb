@@ -7,6 +7,7 @@ class PersonneController < ApplicationController
 
   def show
   	@personne = Personne.find(params[:id])
+    @taillevetement = Taillevetement.find(@personne.taillevetement_id).name
   end
 
   def edit

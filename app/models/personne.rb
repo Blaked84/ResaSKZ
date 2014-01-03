@@ -2,6 +2,8 @@ class Personne < ActiveRecord::Base
 
 	#################################################
 	# Les personnes physiques. Appartiennent à un user
+	# Les champs précédés de "p" correspondent à la 
+	# personne à contacter en cas de problème
 	#################################################
 	has_many :groupe
 	has_many :commande
@@ -30,7 +32,9 @@ def assure?
 	# 
 end
 
-
+def p_nom_complet
+    return self.pprenom+" "+self.pnom
+end
 
 
 end

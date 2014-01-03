@@ -6,6 +6,9 @@
     =@personne.promo
 
 %div.pa1.fiche.brdr-b
+  %p
+    Né le:
+    =@personne.naissance.to_date
   %p 
     Id gadz.org:
     =@personne.idGadzOrg
@@ -22,15 +25,37 @@
     =@personne.codepostal
     =@personne.ville
 
-%div.pa1.fiche
+%div.pa1.fiche.brdr-b
   
   %p 
-    taille (m):
+    Taille (m):
     =@personne.taille_metre
+  %p
+    Taille vêtement:
+    =@taillevetement
   %p 
     Pointure:
     =@personne.pointure
 
-    %p
+  %p
     assurance:
     =conditional_format(@personne.assurance?)
+
+%div.pa1.fiche
+  %h2
+    Personne à contacter en cas de problème
+
+  %p=@personne.p_nom_complet
+  %p
+    Lien de parenté: 
+    =@personne.plienparente
+
+  %p
+    Tél:
+    =@personne.pphone
+  %p
+    Adresse:
+    =@personne.padresse
+    =@personne.pcomplement
+    =@personne.pcodepostal
+    =@personne.pville
