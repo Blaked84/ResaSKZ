@@ -79,8 +79,35 @@ ActiveRecord::Schema.define(version: 20140102233708) do
     t.datetime "updated_at"
   end
 
-# Could not dump table "personnes" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "personnes", force: true do |t|
+    t.string   "nom"
+    t.string   "prenom"
+    t.string   "phone"
+    t.string   "email"
+    t.boolean  "assurance"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "adresse"
+    t.string   "ville"
+    t.integer  "codepostal"
+    t.string   "bucque"
+    t.string   "fams"
+    t.string   "promo"
+    t.string   "idGadzOrg"
+    t.integer  "taille"
+    t.integer  "pointure"
+    t.integer  "taillevetement_id"
+    t.string   "complement"
+    t.string   "pnom"
+    t.string   "pprenom"
+    t.string   "plienparente"
+    t.string   "padresse"
+    t.string   "pcomplement"
+    t.string   "pville"
+    t.string   "pcodepostal"
+    t.string   "pphone"
+  end
 
   create_table "products", force: true do |t|
     t.string   "name"
