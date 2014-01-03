@@ -17,6 +17,7 @@ case Rails.env
 		:phone => "0612345678",
 		:assurance => 0,
 		:adresse => "12 rue felix savart",
+		:complement => "RESAM",
 		:ville => "metz",
 		:codepostal => "57000",
 		:bucque => "bucquetrololo",
@@ -24,7 +25,17 @@ case Rails.env
 		:promo => "211",
 		:idGadzOrg => "georges.duchemin.2011",
 		:taille => "184",
-		:pointure => "42"
+		:pointure => "42",
+		:taillevetement_id => "2",
+		:pnom => "Duchemin",
+		:pprenom => "Robert",
+	    :plienparente => "Pere",
+	    :padresse => "84 rue du PG",
+	    :pcomplement => "Resid's du gorgu",
+	    :pville => "Paris",
+	    :pcodepostal=> 75001,
+	    :pphone => "068484848484"
+
 
 		)
 
