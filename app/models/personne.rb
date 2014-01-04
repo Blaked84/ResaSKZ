@@ -10,7 +10,8 @@ class Personne < ActiveRecord::Base
 	has_many :activite
 	has_one :genres
 	has_one :usertype
-	belongs_to :user, :dependent => :destroy  # à vérifier ça...
+	belongs_to :user
+	belongs_to :taillevetement
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
