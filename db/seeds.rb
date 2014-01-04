@@ -99,7 +99,7 @@ case Rails.env
 		:event_id => 2,
 		:categorie_id => 3
 		)
-	com = user_georges.commandes.create(
+	com = user_georges.create_commande(
 		:assurance => 0,
 		:status => 0)
 
