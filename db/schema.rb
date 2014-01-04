@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104155403) do
+ActiveRecord::Schema.define(version: 20140104161256) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20140104155403) do
     t.integer "commande_id"
     t.integer "product_id"
   end
+
+  create_table "configurables", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "configurables", ["name"], name: "index_configurables_on_name"
 
   create_table "events", force: true do |t|
     t.datetime "created_at"

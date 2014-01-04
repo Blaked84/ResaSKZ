@@ -55,3 +55,4 @@ gem 'cancan'
 gem 'rolify'
 
 gem 'haml-rails'
+gem 'configurable_engine'
