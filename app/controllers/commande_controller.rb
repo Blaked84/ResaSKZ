@@ -15,15 +15,15 @@ class CommandeController < ApplicationController
  	@produits = @commande.products
 
  	# total du prix d'une commande
- 	total = @produits.map{|p| p.price_euro}.sum
-
+ 	total = @produits.map{|p| p.price}.sum
+ 	@total_euro = total /100.0
 
  	# liste des paiements associés à une commande
  	@paiements = @commande.paiements
  	# total des paiements d'une commande pour préparer à la vérification
  	@totalpaiement_euro = @paiements.map{|p| p.amount_euro}.sum
 
- 	@paiement_du_euro = total - @totalpaiement_euro
+ 	@paiement_du_euro = @total_euro - @totalpaiement_euro
  	##### Vérification du statut d'une commande
  	# status = true si:
  	# @total = @totalpaiement ET

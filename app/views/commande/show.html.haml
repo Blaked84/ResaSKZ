@@ -32,10 +32,12 @@
 %table.striped.alternate
   %thead
     %tr
+      %th Total commande (€)
       %th Commande payée totalement
-      %th Reste à payer
+      %th Reste à payer (€)
   %tbody
     %tr
+      %td=@total_euro
       %td=conditional_format(@paiementok)
       %td=@paiement_du_euro
 
@@ -63,3 +65,23 @@
         %strong Total
       %td=@totalpaiement_euro
 
+%h2
+  Produits
+%table.striped.alternate
+  %thead
+    %tr
+      %th Produit
+      %th Quantitée totale
+      %th Prix (€)
+  %tbody
+    - @produits.each do |prd|
+      %tr
+        %td=link_to prd.name, productshow_path(prd.id)
+        %td=prd.stock
+        %td=prd.price_euro
+    %tr 
+      %td
+        %hr
+      %td
+        %strong Total
+      %td=@total_euro
