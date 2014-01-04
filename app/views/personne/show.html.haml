@@ -41,7 +41,7 @@
     assurance:
     =conditional_format(@personne.assurance?)
 
-%div.pa1.fiche
+%div.pa1.fiche.brdr-b
   %h2
     Personne à contacter en cas de problème
 
@@ -59,3 +59,19 @@
     =@personne.pcomplement
     =@personne.pcodepostal
     =@personne.pville
+
+%div.pa1.fiche
+  %h2 Commandes
+  
+  - @commande.each do |c|
+    %table.striped.alternate
+      %thead
+        %tr
+          %th Commande ID
+          %th Assurance
+          %th Statut
+        %tbody
+          %tr
+          %td=link_to c.id, commandeshow_path(c.id)
+          %td=conditional_format(c.assurance)
+          %td=conditional_format(c.status)
