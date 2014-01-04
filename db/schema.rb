@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103232526) do
+ActiveRecord::Schema.define(version: 20140104111536) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -77,6 +77,8 @@ ActiveRecord::Schema.define(version: 20140103232526) do
     t.string   "etape"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "commande_id"
+    t.integer  "amount_cents"
   end
 
   create_table "personnes", force: true do |t|

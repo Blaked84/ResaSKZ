@@ -1,4 +1,8 @@
 LooklaDev::Application.routes.draw do
+  get "paiement/create"
+  get "paiement/index"
+  get "paiement/show"
+  get "paiement/update"
   get "event/index"
   # get "event/show"
   get "admin/index"

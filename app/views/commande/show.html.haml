@@ -9,12 +9,33 @@
       %th Nom
       %th Assurance
       %th Statut
-    %tbody
-      %tr
+  %tbody
+    %tr
       %td=@commande.id
       %td=@personne
       %td=conditional_format(@commande.assurance)
       %td=conditional_format(@commande.status)
 
+%h2
+  Paiements effectués pour cette commande
 
+%table.striped.alternate
+  %thead
+    %tr
+      %th ID
+      %th date
+      %th Montant
+      
+  %tbody
+    - @paiements.each do |p|
+      %tr
+        %td=p.id
+        %td=p.date
+        %td=p.amount_euro
+    %tr 
+      %td
+        %hr
+      %td
+        %strong Total
+      %td=@totalpaiement
 

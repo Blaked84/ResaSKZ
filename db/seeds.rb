@@ -63,6 +63,9 @@ case Rails.env
 		:assurance => 0,
 		:status => 0,
 		:personne_id => 1)
+	Paiement.create(
+		:commande_id => 1,
+		:amount_cents => 8400)
 end
 
 # Prod
