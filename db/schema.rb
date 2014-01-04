@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140104111536) do
+ActiveRecord::Schema.define(version: 20140104133845) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20140104111536) do
     t.string   "pcodepostal"
     t.string   "pphone"
     t.datetime "naissance"
+    t.boolean  "documentassurance"
   end
 
   create_table "products", force: true do |t|

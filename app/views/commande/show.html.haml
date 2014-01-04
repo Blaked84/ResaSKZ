@@ -2,19 +2,43 @@
   Commande #
   =@commande.id
 
+
 %table.striped.alternate
   %thead
     %tr
       %th Commande ID
       %th Nom
-      %th Assurance
       %th Statut
   %tbody
     %tr
       %td=@commande.id
-      %td=@personne
+      %td=@personne.nom_complet
+      %td=conditional_format(@status)
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Assurance commandée
+      %th Personne assurée
+      %th Justificatif assurance
+      %th Récapitulatif assurance
+  %tbody
+    %tr
       %td=conditional_format(@commande.assurance)
-      %td=conditional_format(@commande.status)
+      %td=conditional_format(@personne.assurance)
+      %td=conditional_format(@personne.documentassurance)
+      %td=conditional_format(@assuranceok)
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Commande payée totalement
+      %th Reste à payer
+  %tbody
+    %tr
+      %td=conditional_format(@paiementok)
+      %td=@paiement_du_euro
+
 
 %h2
   Paiements effectués pour cette commande
@@ -37,5 +61,5 @@
         %hr
       %td
         %strong Total
-      %td=@totalpaiement
+      %td=@totalpaiement_euro
 

@@ -38,8 +38,12 @@
     =@personne.pointure
 
   %p
-    assurance:
+    Assurance personelle:
     =conditional_format(@personne.assurance?)
+  
+  %p
+    Attestation d'assurance: 
+    =@personne.document_assurance
 
 %div.pa1.fiche.brdr-b
   %h2

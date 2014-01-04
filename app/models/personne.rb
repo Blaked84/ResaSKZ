@@ -1,3 +1,4 @@
+#encoding: utf-8
 class Personne < ActiveRecord::Base
 
 	#################################################
@@ -29,7 +30,19 @@ def taille_metre
 end
 
 def assure?
-	# 
+	return self.assurance 
+end
+
+def document_assurance
+	if assure?
+		if self.documentassurance
+			return "Document fourni"
+		else
+			return "Docuement à fournir ou en cours de traitement"
+		end
+	else
+		return "Assurance à commander dans les produits"
+	end 
 end
 
 def p_nom_complet
