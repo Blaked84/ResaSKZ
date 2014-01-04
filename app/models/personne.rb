@@ -7,7 +7,6 @@ class Personne < ActiveRecord::Base
 	# personne à contacter en cas de problème
 	#################################################
 	has_many :groupe
-	has_many :commande
 	has_many :activite
 	has_one :genres
 	has_one :usertype
@@ -49,5 +48,12 @@ def p_nom_complet
     return self.pprenom+" "+self.pnom
 end
 
+
+#commande : 
+#Renvoie la commande associé à l'User auquel est rataché la personne
+#Nul si aucun User rataché (ne devrait pas arriver)
+def commande
+	self.user ? self.user.commande : nil
+end
 
 end

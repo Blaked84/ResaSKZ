@@ -6,12 +6,53 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+
+# Prod
+puts "Evenements"
+Event.create(
+	:Name => "SKZ Semaine 1",
+	:Description => "ejfenbjbdjkcbkjvcbcjdc")
+Event.create(
+	:Name => "SKZ Semaine 2",
+	:Description => "ejfenbjbdjkcbkjvcbcjdc")
+
+
+puts "Categories"
+listecategorries=["Pack","Nourriture","RCC","Transport aller","Transport retour"]
+listecategorries.each do |c|
+	Categorie.create(:nom =>c)
+end
+
+# puts "UserTypes"
+# Usertype.create(:)
+
+puts "Genres"
+Genre.create(:sexe => "H")
+Genre.create(:sexe => "F")
+
+puts "taillevetements"
+listevet=["S","M","L","XL","XXL"]
+listevet.each do |c|
+	Taillevetement.create(:name =>c)
+end
+
+puts "tbk"
+listet=["Siber's","Clun's","Chalon's","Bordel's","KIN","Boquette","Birse","Paris"].sort
+listet.each do |c|
+	Tbk.create(:nom =>c)
+end
+
 # test only 
 case Rails.env
 	when "development"
 
 	puts "Seed dev"
-	george=Personne.create(
+
+	user_georges=User.create(
+				email:"mail@mail.fr",
+				password:"iresam157")
+
+	georges=user_georges.personnes.create(
 		:nom => "Duchemin",
 		:prenom => "Georges",
 		:phone => "0612345678",
@@ -38,8 +79,6 @@ case Rails.env
 	    :pville => "Paris",
 	    :pcodepostal=> 75001,
 	    :pphone => "068484848484"
-
-
 		)
 
 	tarte = Product.create(
@@ -60,46 +99,12 @@ case Rails.env
 		:event_id => 2,
 		:categorie_id => 3
 		)
-	com = Commande.create(
+	com = user_georges.commandes.create(
 		:assurance => 0,
-		:status => 0,
-		:personne_id => 1)
+		:status => 0)
 
 	com.products << gato
 
-	Paiement.create(
-		:commande_id => 1,
+	com.paiements.create(
 		:amount_cents => 8400)
-end
-
-# Prod
-puts "Evenements"
-Event.create(
-	:Name => "SKZ Semaine 1",
-	:Description => "ejfenbjbdjkcbkjvcbcjdc")
-Event.create(
-	:Name => "SKZ Semaine 2",
-	:Description => "ejfenbjbdjkcbkjvcbcjdc")
-
-
-puts "Categories"
-listecategorries=["Pack","Nourriture","RCC","Transport aller","Transport retour"]
-listecategorries.each do |c|
-	Categorie.create(:nom =>c)
-end
-
-puts "genres"
-Genre.create(:sexe => "H")
-Genre.create(:sexe => "F")
-
-puts "taillevetements"
-listevet=["S","M","L","XL","XXL"]
-listevet.each do |c|
-	Taillevetement.create(:name =>c)
-end
-
-puts "tbk"
-listet=["Siber's","Clun's"]
-listet.each do |c|
-	Tbk.create(:nom =>c)
 end

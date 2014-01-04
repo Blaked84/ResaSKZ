@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20140104161256) do
     t.boolean  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "personne_id"
+    t.integer  "user_id"
   end
 
   create_table "commandes_products", force: true do |t|

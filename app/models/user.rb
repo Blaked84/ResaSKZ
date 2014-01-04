@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # commandes de plusieurs personnes
   #################################################
 
-  has_many :commandes
+  has_one :commande
   has_many :personnes,  class_name: "Personne", foreign_key: "user_id"
 
   belongs_to :referant, class_name: "Personne", foreign_key: "referant_id"

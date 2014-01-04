@@ -6,13 +6,13 @@ class Commande < ActiveRecord::Base
 	has_one :pack
 	belongs_to :glisse
 	belongs_to :tbk
-	belongs_to :personne
 	belongs_to :user
 	has_and_belongs_to_many :products
+	has_many :paiements
 
 	#attr_accessible :assurance, :status
 
 	def ok?
-		return
+		return false
 	end
 end

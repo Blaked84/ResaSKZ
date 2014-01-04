@@ -7,8 +7,8 @@ class PersonneController < ApplicationController
 
   def show
   	@personne = Personne.find(params[:id])
-    @taillevetement = Taillevetement.find(@personne.taillevetement_id).name
-    @commande = Commande.all.where(personne_id: @personne.id)
+    @taillevetement = @personne.taillevetement.name
+    @commande = @personne.commande
 
   end
 

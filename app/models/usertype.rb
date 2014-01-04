@@ -3,7 +3,7 @@ class Usertype < ActiveRecord::Base
 	# Type: PG / pecs
 	#################################################
 
-	has_many :personne,  class_name: "Personne", foreign_key: "usertype_id"
+	has_many :personnes,  class_name: "Personne", foreign_key: "usertype_id"
 
 	#attr_accessible :type
 
