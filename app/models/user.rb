@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
 
   #################################################
   # Les users / compte => entité se connctant au 

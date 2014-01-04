@@ -11,7 +11,7 @@ case Rails.env
 	when "development"
 
 	puts "Seed dev"
-	Personne.create(
+	george=Personne.create(
 		:nom => "Duchemin",
 		:prenom => "Georges",
 		:phone => "0612345678",
@@ -42,7 +42,7 @@ case Rails.env
 
 		)
 
-	Product.create(
+	tarte = Product.create(
 		:name => "Tarte",
 		:price => 8400,
 		:stock => 211,
@@ -51,19 +51,22 @@ case Rails.env
 		:event_id => 1,
 		:categorie_id => 2
 		)
-	Product.create(
-		:name => "Tarte",
-		:price => 8400,
+	gato = Product.create(
+		:name => "GATO",
+		:price => 15700,
 		:stock => 211,
 		:echeance => DateTime.new(2013,2,3),
-		:description => "MIAM MAIM",
+		:description => "Scrunch Scrunch !",
 		:event_id => 2,
 		:categorie_id => 3
 		)
-	Commande.create(
+	com = Commande.create(
 		:assurance => 0,
 		:status => 0,
 		:personne_id => 1)
+
+	com.products << gato
+
 	Paiement.create(
 		:commande_id => 1,
 		:amount_cents => 8400)
