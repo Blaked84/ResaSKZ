@@ -36,6 +36,9 @@ end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
+# Use puma as the app server
+gem 'puma'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 
@@ -48,7 +51,7 @@ end
 # Authentification
 gem 'devise'
 gem 'omniauth'
-gem "omniauth-cas", :git => "git://github.com/loocla/omniauth-cas.git", :branch => 'saml'
+gem "omniauth-cas", :git => "https://github.com/loocla/omniauth-cas.git", :branch => 'saml'
 
 # Authorisation
 gem 'cancan'
