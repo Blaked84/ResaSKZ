@@ -1,4 +1,4 @@
-class CreateCommandesProducts < ActiveRecord::Migration
+class CreateCommandeProducts < ActiveRecord::Migration
   def change
     create_table :commande_products do |t|
       t.belongs_to :commande
