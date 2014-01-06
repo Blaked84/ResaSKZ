@@ -8,9 +8,9 @@ class Personne < ActiveRecord::Base
 	#################################################
 	has_many :groupe
 	has_many :activite
-	has_one :genres
+	belongs_to :genre
 	has_one :usertype
-	belongs_to :user
+	belongs_to :user, dependent: :destroy
 	belongs_to :taillevetement
 	has_many :commandes
 

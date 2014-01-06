@@ -45,4 +45,35 @@ class User < ActiveRecord::Base
 
   end
 
+  def self.omniauth(auth_data, signed_in_resource=nil)
+    # auth_data : take a look on Users::OmniauthCallbacksController
+    if user = User.find_by_uid(auth_data[:uid])
+      user
+    else
+      user = User.create(
+        email: auth_data[:info][:email],
+        password: Devise.friendly_token[0,20],
+        uid: auth_data[:uid],
+        first_name: auth_data[:extra][:firstname],
+        last_name: auth_data[:extra][:lastname],
+        gender: auth_data[:extra][:sex]
+        )
+
+      #AJOUTER Usertype = Gadz
+
+      pers = user.personnes.create(
+        :prenom => auth_data[:extra][:firstname],
+        :nom => auth_data[:extra][:lastname],
+        :email => auth_data[:info][:email],
+        :bucque => nil ,
+        :fams => nil ,
+        :promo => nil
+        )
+
+      pers.genre = Genre.from_cas(auth_data[:extra][:sex])
+
+      user
+    end
+  end
+
 end
