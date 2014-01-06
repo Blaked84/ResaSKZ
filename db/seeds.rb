@@ -48,6 +48,11 @@ case Rails.env
 
 	puts "Seed dev"
 
+	user_gorgu=User.create(
+				email:"gorgu@gadz.org",
+				password:"iresam157")
+	user_gorgu.add_role :gorgu
+
 	user_georges=User.create(
 				email:"mail@mail.fr",
 				password:"iresam157")
@@ -81,6 +86,8 @@ case Rails.env
 	    :pphone => "068484848484"
 		)
 
+
+
 	tarte = Product.create(
 		:name => "Tarte",
 		:price => 8400,
@@ -99,7 +106,7 @@ case Rails.env
 		:event_id => 2,
 		:categorie_id => 3
 		)
-	com = user_georges.create_commande(
+	com = georges.commandes.create(
 		:assurance => 0,
 		:status => 0)
 

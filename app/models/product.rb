@@ -3,7 +3,8 @@ class Product < ActiveRecord::Base
 	#################################################
 	# Les produits commandable
 	#################################################
-	has_and_belongs_to_many :commandes
+	has_many :commandes, through: :commande_products
+	has_many :commande_products
 	has_many :pack
 	has_one :categorie
 	belongs_to :event

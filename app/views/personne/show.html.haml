@@ -67,14 +67,15 @@
 %div.pa1.fiche
   %h2 Commandes
   
-  %table.striped.alternate
-    %thead
-      %tr
-        %th Commande ID
-        %th Assurance
-        %th Statut
-      %tbody
+  -@commandes.each do |commande|
+    %table.striped.alternate
+      %thead
         %tr
-        %td=link_to @commande.id, commandeshow_path(@commande.id)
-        %td=conditional_format(@commande.assurance)
-        %td=conditional_format(@commande.status)
+          %th Commande ID
+          %th Assurance
+          %th Statut
+        %tbody
+          %tr
+          %td=link_to commande.id, commandeshow_path(commande.id)
+          %td=conditional_format(commande.assurance)
+          %td=conditional_format(commande.status)

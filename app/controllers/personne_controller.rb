@@ -8,7 +8,7 @@ class PersonneController < ApplicationController
   def show
   	@personne = Personne.find(params[:id])
     @taillevetement = @personne.taillevetement.name
-    @commande = @personne.commande
+    @commandes = @personne.commandes
 
   end
 

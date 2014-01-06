@@ -5,10 +5,7 @@ class CommandeController < ApplicationController
 
   def show
  	@commande = Commande.find(params[:id])
- 	@personnes = @commande.user.personnes
-
- 	#DEFINI POUR LA VUE DE TEST, A SUPPRIMER
- 	@personne = @personnes.first
+ 	@personne = @commande.personne
 
  	##### à definir quand les associations commande <-> produits seront faites
 	# liste des produit d'une commande

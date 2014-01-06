@@ -12,6 +12,7 @@ class Personne < ActiveRecord::Base
 	has_one :usertype
 	belongs_to :user
 	belongs_to :taillevetement
+	has_many :commandes
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
@@ -49,12 +50,5 @@ def p_nom_complet
     return self.pprenom+" "+self.pnom
 end
 
-
-#commande : 
-#Renvoie la commande associé à l'User auquel est rataché la personne
-#Nul si aucun User rataché (ne devrait pas arriver)
-def commande
-	self.user ? self.user.commande : nil
-end
 
 end
