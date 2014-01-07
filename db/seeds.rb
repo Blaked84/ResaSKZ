@@ -57,7 +57,7 @@ case Rails.env
 				email:"mail@mail.fr",
 				password:"iresam157")
 
-	georges=user_georges.personnes.create(
+	georges=user_georges.create_referant(
 		:nom => "Duchemin",
 		:prenom => "Georges",
 		:phone => "0612345678",
@@ -86,6 +86,7 @@ case Rails.env
 	    :pphone => "068484848484"
 		)
 
+	user_georges.save
 
 	tarte = Product.create(
 		:name => "Tarte",
