@@ -76,7 +76,7 @@
   %tbody
     - @produits.each do |prd|
       %tr
-        %td=link_to prd.name, productshow_path(prd.id)
+        %td=link_to prd.name, product_path(prd.id)
         %td=prd.stock
         %td=prd.price_euro
     %tr 

@@ -7,7 +7,7 @@
       %th Evénement
       %th Description
     %tbody
-      - @event.each do |e|
+      - @events.each do |e|
         %tr
-          %td=link_to e.Name, eventshow_path(e.id)
+          %td=link_to e.Name, event_path(e.id)
           %td=e.Description

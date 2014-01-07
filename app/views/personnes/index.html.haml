@@ -5,8 +5,8 @@
       %th Prénom
       %th assurance
   %tbody
-    - @personne.each do |p|
+    - @personnes.each do |p|
       %tr
-        %td=link_to p.nom, personneshow_path(p.id)
+        %td=link_to p.nom, personne_path(p.id)
         %td=p.prenom
         %td=conditional_format(p.assurance)

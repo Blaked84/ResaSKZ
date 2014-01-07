@@ -76,6 +76,6 @@
           %th Statut
         %tbody
           %tr
-          %td=link_to commande.id, commandeshow_path(commande.id)
+          %td=link_to commande.id, commande_path(commande.id)
           %td=conditional_format(commande.assurance)
           %td=conditional_format(commande.status)

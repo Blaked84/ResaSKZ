@@ -1,10 +1,16 @@
-class CommandeController < ApplicationController
+class CommandesController < ApplicationController
+  
+  load_and_authorize_resource
+
   def index
-  	@commande = Commande.all.sort_by{|a| a.updated_at}
+  	@commandes = Commande.all.sort_by{|a| a.updated_at}
+  	authorize! :show, @commandes
   end
 
   def show
- 	@commande = Commande.find(params[:id])
+  	@commandes = Commande.find(params[:id])
+  	authorize! :show, @commande
+
  	@personne = @commande.personne
 
  	##### à definir quand les associations commande <-> produits seront faites

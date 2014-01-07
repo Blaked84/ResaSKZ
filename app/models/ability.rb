@@ -33,10 +33,12 @@ class Ability
 
     if user.has_role? :gorgu
         can :manage, :all
+        can :read_admin, User
     end
 
     if user.has_role? :admin
         can :manage, :all
+        can :read_admin, User
     end
 
     can :create, Personne
@@ -46,13 +48,13 @@ class Ability
     end
 
     can :read, Paiement do |p|
-        user.personnes.map{|p| p.commandes}.sum.map{|c| c.paiements}.sum.include?(p)
+        user.personnes.map{|p| p.commandes}.flatten.map{|c| c.paiements}.flatten.include?(p)
     end
 
 
-    can :create, Commandes
+    can :create, Commande
     can [:read, :update], Commande do |c|
-        user.personnes.map{|p| p.commandes}.sum.include?(c)
+        user.personnes.map{|p| p.commandes}.flatten.include?(c)
     end
 
     can :read, Event

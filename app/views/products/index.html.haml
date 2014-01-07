@@ -14,10 +14,10 @@
           %th Prix (€)
           %th Date limite de réservation
         %tbody
-          - @product.each do |prd|
+          - @products.each do |prd|
             -if prd.categorie_id==i+1
               %tr
-                %td=link_to prd.name, productshow_path(prd.id)
+                %td=link_to prd.name, product_path(prd.id)
                 %td=prd.stock
                 %td=prd.price_euro
                 %td=prd.echeance

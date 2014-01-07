@@ -1,5 +1,8 @@
 class AdminController < ApplicationController
   def index
+
+  	authorize! :read_admin, User
+
   	@nbrPersonnes = Personne.all.count.to_s
   	@nbrPersonnesNonAssuree = Personne.where( assurance: false).count
 
