@@ -87,7 +87,6 @@ case Rails.env
 		)
 
 
-
 	tarte = Product.create(
 		:name => "Tarte",
 		:price => 8400,
