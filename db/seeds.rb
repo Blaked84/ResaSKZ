@@ -110,7 +110,7 @@ case Rails.env
 		:assurance => 0,
 		:status => 0)
 
-	com.products << gato
+	com.add_product(gato)
 
 	com.paiements.create(
 		:amount_cents => 8400)

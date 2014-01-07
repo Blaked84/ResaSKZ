@@ -19,6 +19,13 @@ class Commande < ActiveRecord::Base
 
 	#Ajoute un produit à la commande en précisant le nombre de produits
 	def add_product (product, nbr = 1)
-		self.commande_products.create(nombre: nbr, product_id: product.id)
+		cp=self.commande_products.find_or_create_by(product_id: product.id) 
+		
+		if cp.nombre
+			cp.nombre += nbr
+		else
+			cp.nombre = nbr
+		end
+		cp.save
 	end
 end
