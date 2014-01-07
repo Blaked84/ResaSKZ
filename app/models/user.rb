@@ -45,6 +45,13 @@ class User < ActiveRecord::Base
 
   end
 
+  def check_pending_reg
+
+    return 'user_path('+id+')' unless inscription_terminee
+
+  end
+
+  #Retrouve un user a partir du UID ou le crée
   def self.omniauth(auth_data, signed_in_resource=nil)
     # auth_data : take a look on Users::OmniauthCallbacksController
     if user = User.find_by_uid(auth_data[:uid])
