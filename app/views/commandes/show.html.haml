@@ -7,12 +7,14 @@
   %thead
     %tr
       %th Commande ID
+      %th Compte référant
       %th Nom
       %th Statut
   %tbody
     %tr
       %td=@commande.id
-      %td=@personne.nom_complet
+      %td=link_to @personne.referant.nom_complet, personne_path(@personne.id)
+      %td=link_to @personne.nom_complet, personne_path(@personne.id)
       %td=conditional_format(@status)
 
 %table.striped.alternate
