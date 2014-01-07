@@ -35,8 +35,27 @@ class Ability
         can :manage, :all
     end
 
-    
+    if user.has_role? :admin
+        can :manage, :all
+    end
 
+    can :create, Personne
+
+    can [:read, :update], Personne do |p|
+        user.personnes.include? p
+    end
+
+    can :read, Paiement do |p|
+        user.personnes.map{|p| p.commandes}.sum.map{|c| c.paiements}.sum.include?(p)
+    end
+
+
+    can :create, Commandes
+    can [:read, :update], Commande do |c|
+        user.personnes.map{|p| p.commandes}.sum.include?(c)
+    end
+
+    can :read, Event
 
   end
 end
