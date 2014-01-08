@@ -18,6 +18,11 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:GadzOrg]
 
+def referant_show
+  unless self.referant.nil?
+    return self.referant.nom_complet
+  end
+end
 
   private
 

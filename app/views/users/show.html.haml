@@ -1,6 +1,25 @@
-%p#notice= notice
+%div.top-info.pa1
+	%p#notice= notice
 
+	%p
+		Référant du compte:
+		=@user.referant_show
 
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+%div.fiche.pa1.brdr-b
+
+	%div.tree.pa3
+		%ul
+			%li
+				%a
+					Compte:
+					=@user.referant_show
+				%ul
+					- @user.personnes.each do |p|
+						%li=link_to p.nom_complet, personne_path(p.id) 
+	%p
+		Nombre de personnes liées au compte:
+		=@user.personnes.count
+
+%div.pa1.fiche
+	= link_to 'Edit', edit_user_path(@user), :class => "pure-button pure-button-primary"
+	= link_to 'Back', users_path, :class => "pure-button"

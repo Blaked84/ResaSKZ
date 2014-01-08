@@ -69,4 +69,6 @@ group :development do
 
 	gem 'better_errors'
 
+	gem 'rails-erd' #pour les diagramme UML
+
 end
