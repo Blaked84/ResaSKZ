@@ -18,15 +18,15 @@ class CommandesController < ApplicationController
  	@produits = @commande.products
 
  	# total du prix d'une commande
- 	total = @produits.map{|p| p.price}.sum
- 	@total_euro = total /100.0
+ 	# total = @produits.map{|p| p.price}.sum
+ 	@total_euro = @commande.montant_total.to_i / 100.0
 
  	# liste des paiements associés à une commande
  	@paiements = @commande.paiements
  	# total des paiements d'une commande pour préparer à la vérification
- 	@totalpaiement_euro = @paiements.map{|p| p.amount_euro}.sum
+ 	@totalpaiement_euro = @commande.montant_paye / 100.0
 
- 	@paiement_du_euro = @total_euro - @totalpaiement_euro
+ 	@paiement_du_euro = @commande.montant_du.to_i / 100.0
  	##### Vérification du statut d'une commande
  	# status = true si:
  	# @total = @totalpaiement ET
@@ -54,6 +54,6 @@ class CommandesController < ApplicationController
  	# 	@status=false
  	# end
 
- 	@status = false
+ 	@status = @commande.complete?
   end
 end

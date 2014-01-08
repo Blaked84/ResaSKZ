@@ -69,12 +69,16 @@ class Commande < ActiveRecord::Base
 
 
 	#Montant total de la commande (Produits * quantités)
-	def montant_du
-		self.commande_products.map{|cp| cp.nombre * cp.product.price_euro}.sum
+	def montant_total
+		self.commande_products.map{|cp| cp.nombre.to_i * cp.product.price}.sum
 	end
 
 	#Montant déjà payé (Somme des paiements)
 	def montant_paye
-		self.paiements.map{|p| p.amount_euro}.sum
+		self.paiements.map{|p| p.amount_cents}.sum
+	end
+
+	def montant_du
+		montant_total - montant_paye
 	end
 end

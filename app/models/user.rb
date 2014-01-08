@@ -24,6 +24,10 @@ def referant_show
   end
 end
 
+def nom_complet
+  return self.first_name.to_s + " " + self.last_name.to_s
+end
+
   private
 
   def before_save
