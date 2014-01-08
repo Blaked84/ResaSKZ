@@ -13,6 +13,84 @@
  */
 
 
+@font-face {
+    font-family: 'PTSansRegular';
+    src: url('PTS55F.eot');
+    src: url('PTS55F.eot?#iefix') format('embedded-opentype'),
+         url('PTS55F.woff') format('woff'),
+         url('PTS55F.ttf') format('truetype'),
+         url('PTS55F.svg#PTSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+ @font-face {
+    font-family: 'NoticiaTextRegular';
+    src: url('noticia/NoticiaText-Regular-webfont.eot');
+    src: url('noticia/NoticiaText-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('noticia/NoticiaText-Regular-webfont.woff') format('woff'),
+         url('noticia/NoticiaText-Regular-webfont.ttf') format('truetype'),
+         url('noticia/NoticiaText-Regular-webfont.svg#NoticiaTextRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AsapRegular';
+    src: url('asap/Asap-Regular-webfont.eot');
+    src: url('asap/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('asap/Asap-Regular-webfont.woff') format('woff'),
+         url('asap/Asap-Regular-webfont.ttf') format('truetype'),
+         url('asap/Asap-Regular-webfont.svg#AsapRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AsapItalic';
+    src: url('asap/Asap-Italic-webfont.eot');
+    src: url('asap/Asap-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('asap/Asap-Italic-webfont.woff') format('woff'),
+         url('asap/Asap-Italic-webfont.ttf') format('truetype'),
+         url('asap/Asap-Italic-webfont.svg#AsapItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AsapBold';
+    src: url('asap/Asap-Bold-webfont.eot');
+    src: url('asap/Asap-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('asap/Asap-Bold-webfont.woff') format('woff'),
+         url('asap/Asap-Bold-webfont.ttf') format('truetype'),
+         url('asap/Asap-Bold-webfont.svg#AsapBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'AsapBoldItalic';
+    src: url('asap/Asap-BoldItalic-webfont.eot');
+    src: url('asap/Asap-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('asap/Asap-BoldItalic-webfont.woff') format('woff'),
+         url('asap/Asap-BoldItalic-webfont.ttf') format('truetype'),
+         url('asap/Asap-BoldItalic-webfont.svg#AsapBoldItalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+
+
+
 /*!
 * www.KNACSS.com V2.9 (2013-10) @author: Raphael Goetter, Alsacreations
 * Licence WTFPL http://www.wtfpl.net/ 
@@ -60,31 +138,42 @@ h1, .h1-like {
 	line-height: 1.3126;
 	color: #222;
 	text-shadow: 1px 1px 0px #FFF;
+	font-family: "NoticiaTextRegular";
 }
 h2, .h2-like {
 	margin: 0.75em 0 0 0;
-	font-size: 2em; /* equiv 28px */
+	font-size: 1.5em; /* equiv 28px */
 	line-height: 1.5;
+	font-family: "NoticiaTextRegular";
+
 }
 h3, .h3-like {
 	margin: 0.875em 0 0 0;
 	font-size: 1.7143em; /* equiv 24px */
 	line-height: 1.75;
+	font-family: "NoticiaTextRegular";
+
 }
 h4, .h4-like {
 	margin: 1.05em 0 0 0;
 	font-size: 1.4286em; /* equiv 20px */
 	line-height: 1.05;
+	font-family: "NoticiaTextRegular";
+
 }
 h5, .h5-like {
 	margin: 1.1667em 0 0 0;
 	font-size: 1.2857em; /* equiv 18px */
 	line-height: 1.1667;
+	font-family: "NoticiaTextRegular";
+
 }
 h6, .h6-like {
 	margin: 1.3125em 0 0 0;
 	font-size: 1.1429em; /* equiv 16px */
 	line-height: 1.3125;
+	font-family: "NoticiaTextRegular";
+
 }
 
 /* alternate font-sizing */
@@ -109,6 +198,8 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	font-family: "Lucida Sans","Lucida Sans Unicode","Lucida Grande",Lucida,Verdana,Arial,sans-serif;
+
 }
 ul,
 ol {
@@ -1312,7 +1403,7 @@ right connector from last child*/
 body{background: #ecf0f1;}
 
 .top-info{
-	background: #DDD;
+	background: #f3f3f3;
 }
 .fiche{
 	background: #FFF;

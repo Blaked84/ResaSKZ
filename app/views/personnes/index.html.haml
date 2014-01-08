@@ -1,12 +1,15 @@
-%table.striped.alternate
-  %thead
-    %tr
-      %th Nom
-      %th Prénom
-      %th assurance
-  %tbody
-    - @personnes.each do |p|
+%div.top-info.pa1
+  %h1 Personnes
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate
+    %thead
       %tr
-        %td=link_to p.nom, personne_path(p.id)
-        %td=p.prenom
-        %td=conditional_format(p.assurance)
+        %th Nom
+        %th Prénom
+        %th assurance
+    %tbody
+      - @personnes.each do |p|
+        %tr
+          %td=link_to p.nom, personne_path(p.id)
+          %td=p.prenom
+          %td=conditional_format(p.assurance)
