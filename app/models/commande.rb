@@ -1,7 +1,7 @@
 class Commande < ActiveRecord::Base
 	#################################################
 	# Les commandes réalisées par les users.
-	#################################################
+	######## => #########################################
 
 	has_one :pack
 	belongs_to :glisse
@@ -12,6 +12,11 @@ class Commande < ActiveRecord::Base
 	has_many :paiements
 
 	#attr_accessible :assurance, :status
+
+	attr_accessor :missings
+	attr_accessor :warnings
+
+	validate :personne, :presence => true
 	
 	def ok?
 		return false
@@ -27,5 +32,49 @@ class Commande < ActiveRecord::Base
 			cp.nombre = nbr
 		end
 		cp.save
+	end
+
+	##### Vérification du statut d'une commande
+ 	# complete? => true si:
+ 	# total à payer =  total des paiement ET
+ 	# (la personne à une assurance ET a donné un justificatif) OU a dans sa commande un produit assurance
+	def complete?
+
+
+		self.missings = []
+
+		#Verification du paiemente
+		du=self.montant_du
+		paye=self.montant_paye
+		self.missings << "Commande non payee entieremente. Reste : #{du-paye}" unless du <= paye
+
+
+		#Vérification de l'assurance
+
+		produit_assurance=false
+
+		self.products.each{|p| produit_assurance = true if p.categorie_id == Configurable[:id_cat_assurance]}
+
+		unless produit_assurance
+			if self.personne.assurance
+				self.missings << "Personne avec assurance personnelle mais pas de justificatif" unless self.personne.documentassurance
+			else
+				self.missings << "Personne non assuree"
+			end
+		end
+
+		missings.blank?
+
+	end
+
+
+	#Montant total de la commande (Produits * quantités)
+	def montant_du
+		self.commande_products.map{|cp| cp.nombre * cp.product.price_euro}.sum
+	end
+
+	#Montant déjà payé (Somme des paiements)
+	def montant_paye
+		self.paiements.map{|p| p.amount_euro}.sum
 	end
 end

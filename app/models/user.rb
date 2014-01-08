@@ -69,7 +69,7 @@ class User < ActiveRecord::Base
 
       #AJOUTER Usertype = Gadz
 
-      pers = user.personnes.create(
+      pers = user.create_referant(
         :prenom => auth_data[:extra][:firstname],
         :nom => auth_data[:extra][:lastname],
         :email => auth_data[:info][:email],
@@ -78,6 +78,8 @@ class User < ActiveRecord::Base
         :promo => nil,
         enregistrement_termine: false,
         )
+
+      user.save
 
       pers.genre = Genre.from_cas(auth_data[:extra][:sex])
 

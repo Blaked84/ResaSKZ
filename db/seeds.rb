@@ -21,6 +21,10 @@ puts "Categories"
 listecategorries=["Pack","Nourriture","RCC","Transport aller","Transport retour"]
 listecategorries.each do |c|
 	Categorie.create(:nom =>c)
+cat_assurance = Categorie.create(:nom =>"Assurance")
+Configurable[:id_cat_assurance]=cat_assurance.id
+
+
 end
 
 # puts "UserTypes"
