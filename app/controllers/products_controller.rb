@@ -3,9 +3,9 @@ class ProductsController < ApplicationController
   load_and_authorize_resource :except => [:index]
 
   def index
-    if params[:event]
-    	@products =	Product.all.where(event_id: params[:event]).sort_by{|a| a.name}
-    	@evenement = Event.find(params[:event]).Name
+    if params[:event_id]
+    	@products =	Product.all.where(event_id: params[:event_id]).sort_by{|a| a.name}
+    	@evenement = Event.find(params[:event_id]).Name
     else
     	@products = Product.all.sort_by{|a| a.name}
     end

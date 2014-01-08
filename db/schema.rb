@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140107174745) do
+ActiveRecord::Schema.define(version: 20140108114541) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20140107174745) do
     t.integer  "commande_id"
     t.integer  "product_id"
     t.integer  "nombre"
+    t.integer  "personne_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -185,7 +186,9 @@ ActiveRecord::Schema.define(version: 20140107174745) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
+    t.date     "birthday"
     t.boolean  "inscription_terminee"
+    t.boolean  "cgu_accepted"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

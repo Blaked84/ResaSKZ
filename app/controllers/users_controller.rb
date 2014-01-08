@@ -63,6 +63,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def cgu
+    set_user
+  end
+
+  def cgu_accept
+    set_user
+
+    @user.cgu_accepted=true if params[:cgu_accepted]
+
+
+
+    if @user.save
+      if @user.cgu_accepted
+        render action: 'cgu'
+      else
+        render action: 'cgu'
+      end
+    else
+      render action: 'cgu'
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
