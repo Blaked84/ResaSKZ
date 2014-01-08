@@ -68,6 +68,8 @@
 
 %div.pa1.fiche
   %h2 Commandes
+
+
   
   -@commandes.each do |commande|
     %table.striped.alternate
@@ -78,6 +80,6 @@
           %th Statut
         %tbody
           %tr
-          %td=link_to commande.id, commande_path(commande.id)
+          %td=link_to commande.id, personne_commande_path(@personne.id,commande.id)
           %td=conditional_format(commande.assurance)
           %td=conditional_format(commande.status)

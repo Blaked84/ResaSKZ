@@ -3,13 +3,23 @@ LooklaDev::Application.routes.draw do
   get "admin/index"
   get "home/index"
   resources :commandes
-  resources :events
+  
+  resources :events  
   resources :paiements
-  resources :personnes
+  resources :personnes do
+    resources :commandes do
+      resources :events do
+        resources :products
+      end
+    end
+  end
   resources :products
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
+  match "products" => "products", :via => :get,:as => :product_commande
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

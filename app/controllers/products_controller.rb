@@ -19,4 +19,13 @@ class ProductsController < ApplicationController
   	@evenement = Event.find(@product.event_id).Name
 
   end
+
+  # def product_add_to_commande
+    
+  #   commande=Personne
+    
+  #   Product.each do |prd|
+  #     if params["prd_" + pdr.id.to_s]
+
+  # end
 end

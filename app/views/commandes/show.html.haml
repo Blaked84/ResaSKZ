@@ -69,6 +69,8 @@
 
 %h2
   Produits
+/ # %p=link_to "Ajouter des produit à ma commande", personne_commande_event_products_path(@personne.id,@commande.id,1)
+
 %table.striped.alternate
   %thead
     %tr

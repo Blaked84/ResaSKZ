@@ -61,6 +61,8 @@ gem 'rolify'
 gem 'haml-rails'
 gem 'configurable_engine'
 
+gem "binding_of_caller", "~> 0.7.2"
+
 group :development do
 
 	gem 'sqlite3'
