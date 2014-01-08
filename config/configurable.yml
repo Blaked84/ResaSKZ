@@ -31,3 +31,8 @@ site_title:
 #   name: Secret Password for Accessing Secret Areas
 #   default: secret
 #   type: password
+
+id_cat_assurance:
+  name: Identifiant de la categorie de produit Assurance            # sets the edit label
+  default: 0               # sets the default value
+  type: integer             # coerces the value to an integer
