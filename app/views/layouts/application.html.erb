@@ -18,6 +18,9 @@
 <%= yield %>
 </div>
 
+<%if ENV['RAILS_ENV'] == "development"%>
+<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
+<%end%>
 
 </body>
 </html>
