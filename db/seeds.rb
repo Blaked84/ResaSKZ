@@ -46,6 +46,22 @@ listet.each do |c|
 	Tbk.create(:nom =>c)
 end
 
+listeproduits=[
+	["test",21100,10,DateTime.new(2013,2,3),"plopplop",1,2],
+	["test2",21100,12,DateTime.new(2013,2,3),"plopplop",1,2]
+]
+listeproduits.each do |c|
+	a=Product.create(
+		:name => c[0],
+		:price => c[1],
+		:stock => c[2],
+		:echeance => c[3],
+		:description => c[4],
+		:event_id => c[5],
+		:categorie_id => c[6]
+		)
+	a.save
+end
 # test only 
 case Rails.env
 	when "development"
