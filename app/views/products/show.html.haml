@@ -1,16 +1,18 @@
-%h1=@product.name
-%p
-	Evenement
-	=@evenement
-%p
-	Stock: 
-	=@product.stock
-%p
-	Prix:
-	=@product.price_euro
-%p
-	Date limite de résevation:
-	=@product.echeance
-%p
-	Description:
-	=@product.description
+%div.top-info.pa1
+	%h1=@product.name
+%div.fiche.pa1.brdr-b
+	%p
+		Evenement:
+		=@evenement
+	%p
+		Stock: 
+		=@product.stock
+	%p
+		Prix:
+		=@product.price_euro
+	%p
+		Date limite de résevation:
+		=@product.echeance
+	%p
+		Description:
+		=@product.description
