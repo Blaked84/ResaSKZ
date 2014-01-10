@@ -136,7 +136,7 @@ h1, .h1-like {
 	margin: 0.6563em 0 0 0;
 	font-size: 2.2857em; /* equiv 32px */
 	line-height: 1.3126;
-	color: #222;
+	color: #333;
 	text-shadow: 1px 1px 0px #FFF;
 	font-family: "NoticiaTextRegular";
 }
@@ -145,6 +145,7 @@ h2, .h2-like {
 	font-size: 1.5em; /* equiv 28px */
 	line-height: 1.5;
 	font-family: "NoticiaTextRegular";
+	color: #555;
 
 }
 h3, .h3-like {

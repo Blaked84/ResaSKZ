@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>LooklaDev</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<%if user_signed_in?%>
+<%= render 'layouts/menu' %>
+<%end%>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<div id="wrapper" class="center">
+<%= yield %>
+</div>
+
+<%if ENV['RAILS_ENV'] == "development"%>
+<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
+<%end%>
+
+</body>
+</html>

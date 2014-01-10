@@ -1,15 +1,16 @@
-%nav
-  .mw960p.center
-    .pt2.pb2.pl0
-      %ul.inline.pl0
-        %il ResaSKZ
-        %il= link_to "Accueil", root_path
-        %il= link_to "Personnes", personnes_path
-        %il= link_to "Produits", products_path
-        %il= link_to "Commandes", commandes_path
-        %il= link_to "Evenements", events_path
-        -if can? :admin, User
-          %il= link_to "Comptes", users_path
-          %il= link_to "Admin", admin_index_path
+-if user_signed_in?
+  %nav
+    .mw960p.center
+      .pt2.pb2.pl0
+        %ul.inline.pl0
+          %il ResaSKZ
+          %il= link_to "Accueil", root_path
+          %il= link_to "Personnes", personnes_path
+          %il= link_to "Produits", products_path
+          %il= link_to "Commandes", commandes_path
+          %il= link_to "Evenements", events_path
+          -if can? :admin, User
+            %il= link_to "Comptes", users_path
+            %il= link_to "Admin", admin_index_path
 
-        %il.right= render 'layouts/user_widget'
+          %il.right= render 'layouts/user_widget'

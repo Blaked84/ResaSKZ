@@ -3,7 +3,7 @@ nav{
 	width: 100%;
 	background: #fff;
 	margin: 0;
-	border-bottom: 2px solid #BBB;
+	border-bottom: 2px solid #c0392b;
 }
 
 nav a, nav a:visited{color: #666;}
