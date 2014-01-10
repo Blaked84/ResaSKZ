@@ -36,11 +36,13 @@
   %table.striped.alternate
     %thead
       %tr
+        %th Cheque de caution donné
         %th Total commande (€)
         %th Commande payée totalement
         %th Reste à payer (€)
     %tbody
       %tr
+        %td=conditional_format(@commande.caution)
         %td=@total_euro
         %td=conditional_format(@paiementok)
         %td=@paiement_du_euro

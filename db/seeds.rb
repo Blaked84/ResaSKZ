@@ -204,7 +204,7 @@ case Rails.env
 		)
 	com = georges.commandes.create(
 		:assurance => 0,
-		:status => 0
+		:status => 0,
 		:caution => 1)
 
 	com.add_product(gato)
