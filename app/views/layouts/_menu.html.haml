@@ -11,6 +11,7 @@
           %il= link_to "Evenements", events_path
           -if can? :admin, User
             %il= link_to "Comptes", users_path
+            %il= link_to "Paiements", paiements_path
             %il= link_to "Admin", admin_index_path
 
           %il.right= render 'layouts/user_widget'
