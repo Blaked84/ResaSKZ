@@ -63,6 +63,11 @@ class Commande < ActiveRecord::Base
 			end
 		end
 
+		# vérifie si une caution est donnée
+		unless self.caution
+			self.missings << "Commande sans caution"
+		end
+
 		missings.blank?
 
 	end

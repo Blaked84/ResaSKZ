@@ -17,7 +17,7 @@
         %td=@commande.id
         %td=link_to @personne.user.referant.nom_complet, user_path(@personne.user.id)
         %td=link_to @personne.nom_complet, personne_path(@personne.id)
-        %td=conditional_format(@status)
+        %td=conditional_format(@commande.complete?)
 
   %table.striped.alternate
     %thead
