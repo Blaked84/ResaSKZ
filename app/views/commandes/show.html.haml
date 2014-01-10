@@ -1,7 +1,7 @@
 %div.top-info.pa1
   %h1
     Commande #
-    =@commande.id
+    =@commande.ean
 
 %div.fiche.pa1.brdr-b
 
@@ -11,13 +11,15 @@
         %th Commande ID
         %th Compte référant
         %th Nom
-        %th Statut
+        %th Commande valide
+        %th Etat
     %tbody
       %tr
-        %td=@commande.id
+        %td=@commande.ean
         %td=link_to @personne.user.referant.nom_complet, user_path(@personne.user.id)
         %td=link_to @personne.nom_complet, personne_path(@personne.id)
         %td=conditional_format(@commande.complete?)
+        %td=@commande.status
 
   %table.striped.alternate
     %thead
