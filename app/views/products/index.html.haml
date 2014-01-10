@@ -1,6 +1,6 @@
 %div.top-info.pa1
   %h1
-    Product
+    Produits 
     =@evenement
 
 / # =form_tag( product_commande_path, :method => :post) do
@@ -15,6 +15,8 @@
           %th Quantitée totale
           %th Prix (€)
           %th Date limite de réservation
+          -if not @evenement
+            %th Evenement
         %tbody
           - @products.each do |prd|
             -if prd.categorie_id==i+1
@@ -25,6 +27,8 @@
                 %td=prd.stock
                 %td=prd.price_euro
                 %td=prd.echeance
+                -if not @evenement
+                  %td=prd.event.Name
                   
 / #  =submit_tag 'Valider'
 

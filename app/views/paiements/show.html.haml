@@ -1,2 +1,29 @@
-%h1 Paiement#show
-%p Find me in app/views/paiement/show.html.haml
+%div.top-info.pa1
+	%h1 
+		Paiement #
+		=@paiement.id
+
+
+%div.pa1.fiche.brdr-b
+	%table.striped.alternate
+		%thead
+			%tr
+				%th ID
+				%th date
+				%th Montant
+
+		%tbody
+			%tr
+				%td=@paiement.id
+				%td=@paiement.date
+				%td=@paiement.amount_euro
+
+	%p
+		Commande: 
+		=link_to @commande.id, commande_path(@commande.id)
+	%p
+		Personne: 
+		=link_to @personne.nom_complet, personne_path(@personne.id)
+	%p
+		Référant: 
+		=link_to @referant.nom_complet, personne_path(@referant.id)

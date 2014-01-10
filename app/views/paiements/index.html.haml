@@ -1,2 +1,17 @@
-%h1 Paiement#index
-%p Find me in app/views/paiement/index.html.haml
+%div.top-info.pa1
+	%h1 Paiements
+
+%div.pa1.fiche.brdr-b
+	%table.striped.alternate
+		%thead
+			%tr
+				%th ID
+				%th date
+				%th Montant
+
+		%tbody
+			- @paiements.each do |p|
+				%tr
+					%td=link_to p.id, paiement_path(p.id)
+					%td=p.date
+					%td=p.amount_euro

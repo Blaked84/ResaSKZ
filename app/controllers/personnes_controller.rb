@@ -10,7 +10,7 @@ class PersonnesController < ApplicationController
   def show
     @personne = Personne.find(params[:id])
     authorize! :show, @personne
-    @taillevetement = @personne.taillevetement.name
+    @personne.taillevetement ? @taillevetement = @personne.taillevetement.name : nil
     @commandes = @personne.commandes
 
   end
