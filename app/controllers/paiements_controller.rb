@@ -3,6 +3,7 @@ class PaiementsController < ApplicationController
   load_and_authorize_resource
 
   def create
+  # utiliser SecureRandom.hex(10) pour le hash du paiement (paiement_hash)
   end
 
   def index

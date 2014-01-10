@@ -209,5 +209,7 @@ case Rails.env
 	com.add_product(gato)
 
 	com.paiements.create(
-		:amount_cents => 8400)
+		:amount_cents => 8400,
+		:paiement_hash => SecureRandom.hex(10)
+	)
 end
