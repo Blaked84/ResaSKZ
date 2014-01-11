@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140108114541) do
+ActiveRecord::Schema.define(version: 20140110200829) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20140108114541) do
     t.integer  "commande_id"
     t.integer  "product_id"
     t.integer  "nombre"
-    t.integer  "personne_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,6 +48,8 @@ ActiveRecord::Schema.define(version: 20140108114541) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "personne_id"
+    t.boolean  "caution"
+    t.string   "ean"
   end
 
   create_table "configurables", force: true do |t|
@@ -97,6 +98,7 @@ ActiveRecord::Schema.define(version: 20140108114541) do
     t.datetime "updated_at"
     t.integer  "commande_id"
     t.integer  "amount_cents"
+    t.string   "paiement_hash"
   end
 
   create_table "personnes", force: true do |t|
@@ -186,7 +188,6 @@ ActiveRecord::Schema.define(version: 20140108114541) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "gender"
-    t.date     "birthday"
     t.boolean  "inscription_terminee"
     t.boolean  "cgu_accepted"
   end

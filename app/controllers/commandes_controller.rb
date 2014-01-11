@@ -1,6 +1,11 @@
 class CommandesController < ApplicationController
   
   load_and_authorize_resource
+  
+  def create
+    # pour la generation du code ean13 qui sert aussi d'id publique:
+    # (SecureRandom.random_number *10**14).to_s[0,13]
+  end
 
   def index
   	@commandes = Commande.all.sort_by{|a| a.updated_at}

@@ -12,6 +12,6 @@
 		%tbody
 			- @paiements.each do |p|
 				%tr
-					%td=link_to p.id, paiement_path(p.id)
+					%td=link_to p.paiement_hash, paiement_path(p.id)
 					%td=p.date
 					%td=p.amount_euro

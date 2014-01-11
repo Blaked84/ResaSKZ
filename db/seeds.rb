@@ -204,10 +204,15 @@ case Rails.env
 		)
 	com = georges.commandes.create(
 		:assurance => 0,
-		:status => 0)
+		:status => 0,
+		:caution => 1,
+		:ean => (SecureRandom.random_number *10**14).to_s[0,13]
+	)
 
 	com.add_product(gato)
 
 	com.paiements.create(
-		:amount_cents => 8400)
+		:amount_cents => 8400,
+		:paiement_hash => SecureRandom.hex(10)
+	)
 end
