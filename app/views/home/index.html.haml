@@ -1,7 +1,6 @@
 %h1.txtcenter Réservations SKZ 2014
 .center.mw960p.pa3
-	.div.center.w50
-		%img{:src => "assets/logo_1280.png", :alt => ""}/ 
+	.div.center.w50=image_tag("logo_1280.png")
 
 -unless user_signed_in?
 	.center.txtcenter=link_to 'Connexion', new_user_session_path, :class => "pure-button pure-button-primary"

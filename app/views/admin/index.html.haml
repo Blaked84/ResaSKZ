@@ -1,15 +1,30 @@
-%h1 Admin
+%div.top-info.pa1
+	%h1 Admin
 
-Nombre de personnes inscrites:
-%span=@nbrPersonnes
-Nombre de personnes non assurées:
-%span=@nbrPersonnesNonAssuree
+%div.fiche.pa1.brdr-b
+	Nombre de personnes inscrites:
+	%span=@nbrPersonnes
+	Nombre de personnes non assurées:
+	%span=@nbrPersonnesNonAssuree
 
-%h2 Produits
-%h2 Commandes
-%p
-	nombre de commande: 
-	=@nbrCommande
-%p
-	nombre de commande validées: 
-	=@nbrCommandeValidee
+%div.top-info.pa1
+	%h2 Commandes gérées par chaque tbk
+%div.fiche.pa1.brdr-b
+	%div= pie_chart @tbkcom
+
+%div.top-info.pa1
+	%h2 Produits
+	%div= bar_chart [["a",1,2],["b",2,3]]
+%div.fiche.pa1.brdr-b
+
+%div.top-info.pa1
+	%h2 Commandes
+	%h3 Commandes incomplètes
+	%span= bar_chart chart_etatcommande_path
+%div.fiche.pa1.brdr-b
+	%p
+		nombre de commande: 
+		=@nbrCommande
+	%p
+		nombre de commande validées: 
+		=@nbrCommandeValidee

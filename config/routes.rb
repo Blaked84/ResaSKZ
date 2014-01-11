@@ -1,8 +1,9 @@
 LooklaDev::Application.routes.draw do
-  
+
   get "admin/index"
   get "home/index"
   resources :commandes
+  get "chart/etatcommande" => "chart#etatcommande"
   
   resources :events do
     resources :products

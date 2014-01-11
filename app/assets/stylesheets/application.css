@@ -150,7 +150,7 @@ h2, .h2-like {
 }
 h3, .h3-like {
 	margin: 0.875em 0 0 0;
-	font-size: 1.7143em; /* equiv 24px */
+	font-size: 1.2em; /* equiv 24px */
 	line-height: 1.75;
 	font-family: "NoticiaTextRegular";
 

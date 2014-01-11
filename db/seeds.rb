@@ -179,7 +179,8 @@ case Rails.env
 	    :pcomplement => "Resid's du gorgu",
 	    :pville => "Paris",
 	    :pcodepostal=> 75001,
-	    :pphone => "068484848484"
+	    :pphone => "068484848484",
+	    :genre_id => 1
 		)
 
 	user_georges.save
@@ -206,7 +207,16 @@ case Rails.env
 		:assurance => 0,
 		:status => 0,
 		:caution => 1,
-		:ean => (SecureRandom.random_number *10**14).to_s[0,13]
+		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+		:tbk_id => 1
+	)
+
+	com = georges.commandes.create(
+		:assurance => 0,
+		:status => 0,
+		:caution => 1,
+		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+		:tbk_id => 2
 	)
 
 	com.add_product(gato)
