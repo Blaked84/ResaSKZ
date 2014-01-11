@@ -7,20 +7,15 @@
 	Nombre de personnes non assurées:
 	%span=@nbrPersonnesNonAssuree
 
-%div.top-info.pa1
-	%h2 Commandes gérées par chaque tbk
-%div.fiche.pa1.brdr-b
-	%div= pie_chart @tbkcom
 
-%div.top-info.pa1
-	%h2 Produits
-	%div= bar_chart [["a",1,2],["b",2,3]]
-%div.fiche.pa1.brdr-b
 
 %div.top-info.pa1
 	%h2 Commandes
+%div.fiche.pa1.brdr-b
 	%h3 Commandes incomplètes
 	%span= bar_chart chart_etatcommande_path
+	%h3 Commandes gérées par chaque tbk
+	%span= pie_chart chart_tbkcommandes_path
 %div.fiche.pa1.brdr-b
 	%p
 		nombre de commande: 
@@ -28,3 +23,15 @@
 	%p
 		nombre de commande validées: 
 		=@nbrCommandeValidee
+
+
+%div.top-info.pa1
+	%h2 Paiements
+%div.fiche.pa1.brdr-b
+	%span= pie_chart chart_paiement_path
+	
+
+%div.top-info.pa1
+	%h2 Produits
+%div.fiche.pa1.brdr-b
+	%div

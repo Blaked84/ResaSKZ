@@ -203,6 +203,18 @@ case Rails.env
 		:event_id => 2,
 		:categorie_id => 3
 		)
+	
+	i=1
+	while i<2000
+		com = georges.commandes.create(
+		:assurance => 0,
+		:status => 0,
+		:caution => 1,
+		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+		:tbk_id => SecureRandom.random_number(9)
+	)
+		i+=1
+	end
 	com = georges.commandes.create(
 		:assurance => 0,
 		:status => 0,
@@ -211,13 +223,7 @@ case Rails.env
 		:tbk_id => 1
 	)
 
-	com = georges.commandes.create(
-		:assurance => 0,
-		:status => 0,
-		:caution => 1,
-		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-		:tbk_id => 2
-	)
+	
 
 	com.add_product(gato)
 

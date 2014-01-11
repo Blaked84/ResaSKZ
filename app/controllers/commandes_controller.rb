@@ -8,7 +8,7 @@ class CommandesController < ApplicationController
   end
 
   def index
-  	@commandes = Commande.all.sort_by{|a| a.updated_at}
+  	@commandes = Commande.paginate(:page => params[:page])
   	authorize! :show, @commandes
   end
 
