@@ -1,22 +1,26 @@
-%h1
-  Commandes
+%div.top-info.pa1
+  %h1
+    Commandes
 
-%table.striped.alternate
-  %thead
-    %tr
-      %th Commande ID
-      %th Nom
-      %th Assurance
-      %th Statut
-    %tbody
-      - @commandes.each do |c|
-        %tr
-          / %td=c.id
-          %td=link_to c.ean, commande_path(c.id)
-          %td 
-          / # Nom de la personne
-          %td=conditional_format(c.assurance)
-          %td=conditional_format(c.status)
-
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Commande ID
+        %th Date de création
+        %th Nom
+        %th Assurance
+        %th Statut
+      %tbody
+        - @commandes.each do |c|
+          %tr
+            / %td=c.id
+            %td=link_to c.ean, commande_path(c.id)
+            %td=c.created_at.to_s.gsub("UTC","")
+            %td 
+            / # Nom de la personne
+            %td=conditional_format(c.assurance)
+            %td=conditional_format(c.status)
+  = will_paginate @commande
 
 

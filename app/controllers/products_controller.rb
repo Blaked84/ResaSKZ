@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @evenement = @product.event.name
+    @evenement = @product.event.Name
   end
 
   # GET /products/new

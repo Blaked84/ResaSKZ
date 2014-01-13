@@ -57,8 +57,13 @@ gem 'rolify'
 
 gem 'haml-rails'
 gem 'configurable_engine'
+# pour les charts sur la page admin
+gem "chartkick"
+gem 'groupdate'
 
 gem "binding_of_caller", "~> 0.7.2"
+
+gem 'will_paginate', '~> 3.0.0'
 
 group :development do
 
