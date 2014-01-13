@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_workflow_register_user, only: [:show]
 
   authorize_resource
 
@@ -71,9 +72,6 @@ class UsersController < ApplicationController
     set_user
 
     @user.cgu_accepted=true if params[:cgu_accepted]
-
-
-
     if @user.save
       if @user.cgu_accepted
         render action: 'cgu'
@@ -83,8 +81,12 @@ class UsersController < ApplicationController
     else
       render action: 'cgu'
     end
-
   end
+
+
+  def user_infos
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -95,5 +97,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params[:user]
+    end
+
+    def check_workflow_register_user
+      check_register_workflow(current_user)
     end
 end

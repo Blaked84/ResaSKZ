@@ -17,4 +17,9 @@ class PersonnesController < ApplicationController
 
   def edit
   end
+
+  def personne_infos
+  end
+
+
 end

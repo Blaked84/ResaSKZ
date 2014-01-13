@@ -9,6 +9,7 @@ LooklaDev::Application.routes.draw do
   end 
   resources :paiements
   resources :personnes do
+    get 'personne_infos'
     resources :commandes do
       resources :events do
         resources :products
@@ -24,6 +25,7 @@ LooklaDev::Application.routes.draw do
     member do
       get 'cgu'
       post 'cgu'=>"users#cgu_accept"
+      get 'user_infos'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
