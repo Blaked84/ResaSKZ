@@ -1,0 +1,12 @@
+= form_for @personne do |f|
+  - if @personne.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@personne.errors.count, "error")} prohibited this personne from being saved:"
+      %ul
+        - @personne.errors.full_messages.each do |msg|
+          %li= msg 
+
+  = render :partial => "form_fields", :locals => {:f => f, reg: false, personne: @personne}
+
+  .actions
+    = f.submit 'Save'

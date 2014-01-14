@@ -1,0 +1,115 @@
+-if not reg
+  %h2 Informations personnelles
+  .field
+    =f.label :email
+    <br/>
+    =f.email_field :email
+  .field
+    =f.label :prenom, 'Prenom'
+    <br/>
+    =f.text_field :prenom
+  .field
+    =f.label :nom, 'Nom'
+    <br/>
+    =f.text_field :nom
+  .field
+    =f.label :genre, 'Sexe'
+    <br/>
+    =f.select :genre, [['Homme',Genre.from_cas('m')],['Femme',Genre.from_cas('f')]]    
+.field
+  =f.label :naissance, 'Date de naissance'
+  <br/>
+  =f.date_field :naissance
+.field
+  =f.label :phone, 'Numero de téléphone'
+  <br/>
+  =f.text_field :phone
+.field
+  =f.label :adresse, 'Adresse'
+  <br/>
+  =f.text_field :adresse
+.field
+  =f.label :complement, 'Complement d\'adresse'
+  <br/>
+  =f.text_area :complement
+.field
+  =f.label :codepostal, 'Code postal'
+  <br/>
+  =f.text_field :codepostal
+.field
+  =f.label :ville, 'Ville'
+  <br/>
+  =f.text_field :ville
+-if @personne.is_gadz?
+  %h2 Informations Gadaziques
+  .field
+    =f.label :bucque, 'Buque'
+    <br/>
+    =f.text_field :bucque
+  .field
+    =f.label :fams, 'Fam\'s'
+    <br/>
+    =f.text_field :fams
+  .field
+    =f.label :promo, 'Promo'
+    <br/>
+    =f.text_field :promo
+  -if can? :see_admin, User
+    .field
+      =f.label :idGadzOrg, 'UID'
+      <br/>
+      =f.text_field :idGadzOrg
+  %h2 Mensurations
+  .field
+    =f.label :pointure, 'Pointure'
+    <br/>
+    =f.text_field :pointure
+  .field
+    =f.label :taillevetement_id, 'Taille de vetements'
+    <br/>
+    =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}
+  %h2 Personne a prévenir en cas d'urgence
+  .field
+    =f.label :pprenom, 'Prenom'
+    <br/>
+    =f.text_field :pprenom
+  .field
+    =f.label :pnom, 'Nom'
+    <br/>
+    =f.text_field :pnom
+  .field
+    =f.label :plienparente, 'Lien de parenté'
+    <br/>
+    =f.text_field :plienparente
+  .field
+    =f.label :pphone, 'Numero de téléphone'
+    <br/>
+    =f.text_field :pphone
+  .field
+    =f.label :padresse, 'Adresse'
+    <br/>
+    =f.text_field :padresse
+  .field
+    =f.label :pcomplement, 'Complement d\'adresse'
+    <br/>
+    =f.text_area :pcomplement
+  .field
+    =f.label :pcodepostal, 'Code postal'
+    <br/>
+    =f.text_field :pcodepostal
+  .field
+    =f.label :pville, 'Ville'
+    <br/>
+    =f.text_field :pville
+
+
+  %h2 Informations complémentaires
+  .field
+    =f.label :commentaires, 'Commentaires'
+    <br/>
+    =f.text_area :commentaires
+  -if can? :see_admin, User
+    .field
+      =f.label :commentaires_admin, 'Commentaire admin'
+      <br/>
+      =f.text_area :commentaires_admin

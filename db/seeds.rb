@@ -28,8 +28,8 @@ Configurable[:id_cat_assurance]=cat_assurance.id
 # Usertype.create(:)
 
 puts "Genres"
-Genre.create(:sexe => "H")
-Genre.create(:sexe => "F")
+Genre.create(:sexe => "H", :nom_cas => "male", :nom_complet => "Homme")
+Genre.create(:sexe => "F", :nom_cas => "female", :nom_complet => "Femme")
 
 puts "taillevetements"
 listevet=["S","M","L","XL","XXL"]
@@ -147,12 +147,19 @@ case Rails.env
 
 	user_gorgu=User.create(
 				email:"gorgu@gadz.org",
-				password:"iresam157")
+				password:"iresam157",
+				first_name: 'Gorgu',
+				last_name: 'Gadz',
+				gender: 'male'
+				)
 	user_gorgu.add_role :gorgu
 
 	user_georges=User.create(
 				email:"mail@mail.fr",
-				password:"iresam157")
+				password:"iresam157",
+				first_name: 'Georges',
+				last_name: 'Duchemin',
+				gender: 'male')
 
 	georges=user_georges.create_referant(
 		:nom => "Duchemin",
@@ -186,50 +193,23 @@ case Rails.env
 
 	user_georges.save
 
-	tarte = Product.create(
-		:name => "Tarte",
-		:price => 8400,
-		:stock => 211,
-		:echeance => DateTime.new(2013,2,3),
-		:description => "MIAM MAIM",
-		:event_id => 1,
-		:categorie_id => 2
-		)
-	gato = Product.create(
-		:name => "GATO",
-		:price => 15700,
-		:stock => 211,
-		:echeance => DateTime.new(2013,2,3),
-		:description => "Scrunch Scrunch !",
-		:event_id => 2,
-		:categorie_id => 3
-		)
+	puts "User & Personnes created"
 	
-	i=1
-	while i<2000
-		com = georges.commandes.create(
-		:assurance => 0,
-		:status => 0,
-		:caution => 1,
-		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-		:tbk_id => SecureRandom.random_number(9)
-	)
-		i+=1
-	end
+	# while i<200
+	# 	com = georges.commandes.create(
+	# 	:assurance => 0,
+	# 	:status => 0,
+	# 	:caution => 1,
+	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+	# 	:tbk_id => SecureRandom.random_number(9)
+	# )
+	# 	i+=1
+	# end
 	com = georges.commandes.create(
 		:assurance => 0,
 		:status => 0,
 		:caution => 1,
 		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
 		:tbk_id => 1
-	)
-
-	
-
-	com.add_product(gato)
-
-	com.paiements.create(
-		:amount_cents => 8400,
-		:paiement_hash => SecureRandom.hex(10)
 	)
 end

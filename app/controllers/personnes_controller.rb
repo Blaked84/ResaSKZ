@@ -8,7 +8,6 @@ class PersonnesController < ApplicationController
   end
 
   def show
-    @personne = Personne.find(params[:id])
     authorize! :show, @personne
     @personne.taillevetement ? @taillevetement = @personne.taillevetement.name : nil
     @commandes = @personne.commandes
@@ -18,8 +17,46 @@ class PersonnesController < ApplicationController
   def edit
   end
 
-  def personne_infos
+  def update
   end
 
+  def personne_infos 
+    set_personne
+
+  end
+
+private
+
+  def set_personne
+    @personne = Personne.find(params[:id])
+  end
+
+  def referant_params
+  params.require(:personne).permit( :naissance,
+                                    :phone,
+                                    :adresse,
+                                    :complement,
+                                    :codepostal,
+                                    :ville,
+                                    :bucque,
+                                    :fams,
+                                    :promo,
+                                    :pointure,
+                                    :taillevetement_id,
+                                    :pprenom,
+                                    :pnom,
+                                    :plienparente,
+                                    :pphone,
+                                    :padresse,
+                                    :pcomplement,
+                                    :pcodepostal,
+                                    :pville,
+                                    :commentaires,
+                                    :nom,
+                                    :prenom,
+                                    :genre_id,
+                                    :email
+                                    )
+  end
 
 end
