@@ -150,7 +150,9 @@ case Rails.env
 				password:"iresam157",
 				first_name: 'Gorgu',
 				last_name: 'Gadz',
-				gender: 'male'
+				gender: 'male',
+				cgu_accepted: true,
+				inscription_terminee: true,
 				)
 	user_gorgu.add_role :gorgu
 
@@ -159,7 +161,10 @@ case Rails.env
 				password:"iresam157",
 				first_name: 'Georges',
 				last_name: 'Duchemin',
-				gender: 'male')
+				gender: 'male',
+				cgu_accepted: false,
+				inscription_terminee: false,
+				)
 
 	georges=user_georges.create_referant(
 		:nom => "Duchemin",

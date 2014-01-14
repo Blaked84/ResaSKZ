@@ -174,6 +174,7 @@ class UsersController < ApplicationController
     end
 
     def check_workflow_register_user
-      check_register_workflow(current_user)
+      set_user
+      check_register_workflow(@user) unless @user.id != current_user.id
     end
 end
