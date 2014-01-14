@@ -14,10 +14,19 @@ class Genre < ActiveRecord::Base
 		return self.sexe
 	end
 
-	#Renvoie le genre Homme si 'm'
-	#Renvoie le genre Femme si 'f'
+	def long_name
+		return 'Homme' if self.sexe == 'H'
+		return 'Femme' if self.sexe == 'F'
+	end
+
+	#Renvoie le genre Homme si 'male'
+	#Renvoie le genre Femme si 'female'
 	def self.from_cas(data)
-		data_traite = data == 'm' ? 'H' : data.upcase
-		self.find_by_sexe(data_traite)
+		self.find_by_nom_cas(data)
+	end
+
+	def to_cas
+		return 'male' if self.sexe == 'H'
+		return 'female' if self.sexe == 'F'
 	end
 end

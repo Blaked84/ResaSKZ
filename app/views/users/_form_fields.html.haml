@@ -1,0 +1,34 @@
+%h2 Informations personnelles
+.field
+  =f.label :email
+  <br/>
+  -if can? :see_admin, User
+    =f.email_field :email
+  -else
+    =f.email_field :email, readonly: true
+    (Il ne peut etre modifier que sur demande aux admins et permet de vous identifier)
+.field
+  =f.label :password, 'Mot de passe'
+  <br/>
+  =f.password_field :password
+.field
+  =f.label :password_confirmation, 'Confirmation'
+  <br/>
+  =f.password_field :password_confirmation
+.field
+  =f.label :first_name, 'Prenom'
+  <br/>
+  =f.text_field :first_name
+.field
+  =f.label :last_name, 'Nom'
+  <br/>
+  =f.text_field :last_name
+.field
+  =f.label :gender, 'Sexe'
+  <br/>
+  =f.select :gender, [['Homme','m'],['Femme','f']]
+-if can? :see_admin, User
+  .field
+    =f.label :inscription_terminee, 'Inscription terminee'
+    <br/>
+    =f.check_box :inscription_terminee

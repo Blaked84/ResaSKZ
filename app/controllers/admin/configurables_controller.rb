@@ -8,7 +8,7 @@ class Admin::ConfigurablesController < ApplicationController
   
 
  def protect_my_code
- 	#authorize! :voir_page_admin, User
+ 	authorize! :read_admin, User
  end
 
 end

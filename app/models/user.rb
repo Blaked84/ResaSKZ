@@ -13,10 +13,44 @@ class User < ActiveRecord::Base
 
   before_save :before_save
 
+  # EXTRACT FROM SCHEMA :
+  # create_table "users", force: true do |t|
+  #   t.string   "email",                  default: "", null: false
+  #   t.string   "encrypted_password",     default: "", null: false
+  #   t.string   "reset_password_token"
+  #   t.datetime "reset_password_sent_at"
+  #   t.datetime "remember_created_at"
+  #   t.integer  "sign_in_count",          default: 0,  null: false
+  #   t.datetime "current_sign_in_at"
+  #   t.datetime "last_sign_in_at"
+  #   t.string   "current_sign_in_ip"
+  #   t.string   "last_sign_in_ip"
+  #   t.datetime "created_at"
+  #   t.datetime "updated_at"
+  #   t.integer  "referant_id"
+  #   t.string   "uid"
+  #   t.string   "first_name"
+  #   t.string   "last_name"
+  #   t.string   "gender"
+  #   t.boolean  "inscription_terminee"
+  #   t.boolean  "cgu_accepted"
+  # end
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:GadzOrg]
+
+### VALIDATION#################################################################
+
+#### Attributs
+  validates :first_name, :length => { :in => 2..30 }
+  validates :last_name, :length => { :in => 2..30 }
+  validates :gender,:inclusion => {  :in => ['male','female']}
+
+#### Associations
+
+###############################################################################
 
 def referant_show
   unless self.referant.nil?
@@ -27,6 +61,19 @@ end
 def nom_complet
   return self.first_name.to_s + " " + self.last_name.to_s
 end
+
+def sync_from_personne(pers)
+  self.first_name = pers.prenom
+  self.last_name = pers.nom
+  self.gender = pers.gender.to_cas
+  self.email = pers.email
+  self.uid = pers.idGadzOrg
+
+  self.save
+
+end
+
+
 
   private
 
@@ -62,6 +109,10 @@ end
 
   #Retrouve un user a partir du UID ou le crée
   def self.omniauth(auth_data, signed_in_resource=nil)
+    
+    logger.debug "=================================="
+    logger.info "Connexion depuis le CAS uid : "+auth_data[:uid]
+
     # auth_data : take a look on Users::OmniauthCallbacksController
     if user = User.find_by_uid(auth_data[:uid])
       user
@@ -75,6 +126,10 @@ end
         gender: auth_data[:extra][:sex],
         inscription_terminee: false,
         )
+
+      logger.debug user.inspect
+      logger.debug "Erreurs"
+      user.errors.each{|k,e| logger.debug k.to_s+" : "+e.to_s}
 
       #AJOUTER Usertype = Gadz
 
@@ -91,6 +146,8 @@ end
       user.save
 
       pers.genre = Genre.from_cas(auth_data[:extra][:sex])
+
+      pers.save
 
       user
     end

@@ -41,6 +41,10 @@ class Ability
         can :read_admin, User
     end
 
+    can :cgu, user
+    can :user_infos, user
+    can :dashboard, user
+
     can :create, Personne
 
     can [:read, :update], Personne do |p|
