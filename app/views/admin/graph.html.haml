@@ -1,0 +1,36 @@
+%div.top-info.pa1
+	%h1 Graph Admin
+
+
+%div.top-info.pa1
+	%h2 Commandes
+%div.fiche.pa1.brdr-b
+	%h3 Commandes incomplètes
+	%span= bar_chart chart_etatcommande_path
+	%h3 Commandes gérées par chaque tbk
+	%span= pie_chart chart_tbkcommandes_path
+
+
+
+%div.top-info.pa1
+	%h2 Paiements
+%div.fiche.pa1.brdr-b
+	%span= pie_chart chart_paiement_path
+	
+
+%div.top-info.pa1
+	%h2 Produits
+%div.fiche.pa1.brdr-b
+	-@event.each do |e|
+		%div.row
+			 
+			%div.col.w50
+				%h3
+					Bus aller
+					=e.Name
+				=bar_chart statsbus_path(Configurable[:id_cat_busaller],e.id)
+			%div.col.w50
+				%h3
+					Bus retour
+					=e.Name
+				=bar_chart statsbus_path(Configurable[:id_cat_busretour],e.id)

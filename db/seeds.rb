@@ -18,9 +18,11 @@ Event.create(
 
 
 puts "Categories"
-listecategorries=["Pack","Nourriture","RCC","Transport aller","Transport retour","Assurance"]
+listecategorries=["Pack","Nourriture","Transport Aller","Transport Retour","RCC","Assurance"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurance').id.to_s
+Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
+Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.to_s
 
 # puts "UserTypes"
 # Usertype.create(:)
@@ -204,7 +206,7 @@ case Rails.env
 		)
 	
 	i=1
-	while i<200
+	while i<2000
 		com = georges.commandes.create(
 		:assurance => 0,
 		:status => 0,

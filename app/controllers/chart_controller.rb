@@ -1,6 +1,9 @@
 class ChartController < ApplicationController
 	# json pour le gros graph
+  # caches_action :etatcommande,  :expires_in => 0.minutes
+
   def etatcommande
+    # expire_action :action => :etatcommande
   	render :json => Tbk.all.map{|t| [t.nom,  t.commandes.all.map{|c| c.complete?}.count(false)]}
   end
 
@@ -22,4 +25,11 @@ class ChartController < ApplicationController
   	end
   	render :json => @tbkcom
   end
+
+  def statsbus
+    #params categorie_id, event_id 
+    b=Categorie.find(params[:categorie_id]).product.where(event_id: params[:event_id]).map{|p| [p.name, p.commande_products.map{|cp| cp.nombre}.sum]}
+    render :json => b
+  end
+
 end

@@ -5,13 +5,16 @@ class AdminController < ApplicationController
 
   	@commandes=Commande.all
   	
-  	@nbrPersonnes = Personne.all.count.to_s
+  	@nbrPersonnes = Personne.all.count
   	@nbrPersonnesNonAssuree = Personne.where( assurance: false).count
 
-  	@nbrCommande = @commandes.count.to_s
-  	@nbrCommandeValidee = Commande.where( status: true).count.to_s
+  	@nbrCommande = @commandes.count
+  	@nbrCommandeValidee = Commande.where( status: true).count
   	
+    @nbrCommandesNonValidee = @nbrCommande-@nbrCommandeValidee
+
   	@tbk= Tbk.all
+    @event=Event.all
 
   	# @tbkcom=Array.new
   	# @tbk.each_with_index do |t,i| 
@@ -23,5 +26,9 @@ class AdminController < ApplicationController
 
   end
 
+  def graph
+    authorize! :read_admin, User
+    @event=Event.all
+  end
   
 end
