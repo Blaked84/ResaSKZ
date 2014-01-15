@@ -1,5 +1,7 @@
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= link_to "Se connecter par: #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
+    <div class='center w50'>
+    <%= link_to image_tag("logo_gadzorg.png"), omniauth_authorize_path(resource_name, provider) %>
+    </div>  
   <% end -%>
 <% end -%>

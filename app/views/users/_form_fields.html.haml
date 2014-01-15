@@ -26,7 +26,7 @@
 .field
   =f.label :gender, 'Sexe'
   <br/>
-  =f.select :gender, [['Homme','m'],['Femme','f']]
+  =f.select :gender, Genre.all.map{|g| [g.nom_complet,g.nom_cas]}
 -if can? :see_admin, User
   .field
     =f.label :inscription_terminee, 'Inscription terminee'

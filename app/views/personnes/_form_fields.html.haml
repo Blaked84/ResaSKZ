@@ -15,7 +15,7 @@
   .field
     =f.label :genre, 'Sexe'
     <br/>
-    =f.select :genre, [['Homme',Genre.from_cas('m')],['Femme',Genre.from_cas('f')]]    
+    =f.select :genre, Genre.all.map{|g| [g.nom_complet,g.id]}    
 .field
   =f.label :naissance, 'Date de naissance'
   <br/>

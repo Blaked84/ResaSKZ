@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:GadzOrg]
 
 ### VALIDATION#################################################################
@@ -52,52 +52,55 @@ class User < ActiveRecord::Base
 
 ###############################################################################
 
-def referant_show
-  unless self.referant.nil?
-    return self.referant.nom_complet
+  def referant_show
+    unless self.referant.nil?
+      return self.referant.nom_complet
+    end
   end
-end
 
-def nom_complet
-  return self.first_name.to_s + " " + self.last_name.to_s
-end
+  def nom_complet
+    return self.first_name.to_s + " " + self.last_name.to_s
+  end
 
-def sync_from_personne(pers)
-  self.first_name = pers.prenom
-  self.last_name = pers.nom
-  self.gender = pers.gender.to_cas
-  self.email = pers.email
-  self.uid = pers.idGadzOrg
+  def sync_from_personne(pers)
+    self.first_name = pers.prenom
+    self.last_name = pers.nom
+    self.gender = pers.gender.to_cas
+    self.email = pers.email
+    self.uid = pers.idGadzOrg
 
-  self.save
+    self.save
 
-end
+  end
 
+  def admin?
+    self.has_role?(:admin)|| self.has_role?(:gorgu)
+  end
 
 
   private
 
   def before_save
 
-  	ancien = self.new_record? ? User.new :  User.find(self.id)
+    ancien = self.new_record? ? User.new :  User.find(self.id)
 
-  	add_to_personnes(self.referant) if self.referant_id != ancien.referant_id
+    add_to_personnes(self.referant) if self.referant_id != ancien.referant_id
 
   end
 
   def add_to_personnes(personne)
 
-  	ancien = self.new_record? ? User.new :  User.find(self.id)
+    ancien = self.new_record? ? User.new :  User.find(self.id)
 
-  	if not self.personnes.include?(personne)
-  		self.personnes.delete(ancien.referant) if ancien.referant and self.personnes.include?(ancien.referant)
-  	end
+    if not self.personnes.include?(personne)
+      self.personnes.delete(ancien.referant) if ancien.referant and self.personnes.include?(ancien.referant)
+    end
 
 
-  	if personne
-  		personne.user = self
-  		personne.save
-  	end
+    if personne
+      personne.user = self
+      personne.save
+    end
 
   end
 
@@ -106,6 +109,7 @@ end
     return 'user_path('+id+')' unless inscription_terminee
 
   end
+
 
   #Retrouve un user a partir du UID ou le crée
   def self.omniauth(auth_data, signed_in_resource=nil)

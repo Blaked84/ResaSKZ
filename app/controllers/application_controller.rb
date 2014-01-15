@@ -20,7 +20,15 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    current_user ? dashboard_user_path(current_user) : root_path
+    if current_user
+      if current_user.admin?
+        admin_index_path
+      else
+        dashboard_user_path(current_user)
+      end
+    else
+      root_path
+    end
   end
 
 
@@ -28,11 +36,11 @@ class ApplicationController < ActionController::Base
 
   def check_register_workflow(user)
 
-    return redirect_to new_user_session_url, :alert => "You have to log in to continue." unless user
+    return redirect_to new_user_session_url, :alert => "Vous devez vous connecter pour continuer" unless user
 
-    return redirect_to cgu_user_url(user), :alert => "Vous n'avez pas accepte les CGU" unless user.cgu_accepted
+    return redirect_to cgu_user_url(user), :alert => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
 
-    return redirect_to user_infos_user_url(user), :alert => "Vous n'avez pas fini de remplir vos information d'inscription" unless user.inscription_terminee
+    return redirect_to user_infos_user_url(user), :alert => "Veuillez renseigner vos informations d'inscription avant de continuer" unless user.inscription_terminee
 
     user.personnes.each do |p|
       return redirect_to personne_infos_personne_url(p), :alert => "Vous n'avez pas fini de remplir vos information d'inscription" unless p.enregistrement_termine
