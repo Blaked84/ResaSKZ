@@ -65,6 +65,8 @@ gem "binding_of_caller", "~> 0.7.2"
 
 gem 'will_paginate', '~> 3.0.0'
 
+gem 'actionpack-action_caching'
+
 group :development do
 
 	gem 'sqlite3'

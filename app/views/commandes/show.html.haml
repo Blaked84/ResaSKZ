@@ -21,6 +21,13 @@
         %td=conditional_format(@commande.complete?)
         %td=@commande.status
 
+  %p
+    Bypass paiement:
+    =@commande.bypasspaiement
+  %p
+    Bypass assurance:
+    =@commande.bypassassurance
+
   %table.striped.alternate
     %thead
       %tr

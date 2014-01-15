@@ -46,7 +46,7 @@ class Commande < ActiveRecord::Base
 		#Verification du paiemente
 		du=self.montant_du
 		paye=self.montant_paye
-		self.missings << "Commande non payee entieremente. Reste : #{du-paye}" unless du <= paye
+		self.missings << "Commande non payee entieremente. Reste : #{du-paye}" unless du <= paye unless self.bypasspaiement
 
 
 		#Vérification de l'assurance
@@ -55,7 +55,7 @@ class Commande < ActiveRecord::Base
 
 		self.products.each{|p| produit_assurance = true if p.categorie_id == Configurable[:id_cat_assurance]}
 
-		unless produit_assurance
+		unless produit_assurance || self.bypassassurance
 			if self.personne.assurance
 				self.missings << "Personne avec assurance personnelle mais pas de justificatif" unless self.personne.documentassurance
 			else

@@ -1,26 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LooklaDev</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>LooklaDev</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
 
-<%if user_signed_in?%>
-<%= render 'layouts/menu' %>
-<%end%>
+	<%if user_signed_in?%>
+	<%= render 'layouts/menu' %>
+	<%end%>
 
-<%= render 'layouts/flash_messages' %>
+	<% flash.each do |key, value| %>
+	<div id="notif" class="mw960p center pa1">
+		<div class="<%= key %> notif"><%= value %></div>
+	</div>
+	<% end %>
+	
+<!-- 	<%= javascript_include_tag "application" %>
+	<%= custom_bootstrap_flash %> -->
 
-<div id="wrapper" class="center">
-<%= yield %>
-</div>
 
-<%if ENV['RAILS_ENV'] == "development"%>
-<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
-<%end%>
+	<div id="wrapper" class="center">
+		<%= yield %>
+	</div>
+
+	<%if ENV['RAILS_ENV'] == "development"%>
+	<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
+	<%end%>
 
 </body>
 </html>

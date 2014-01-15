@@ -19,10 +19,11 @@ Event.create(
 
 
 puts "Categories"
-listecategorries=["Pack","Nourriture","RCC","Transport aller","Transport retour"]
+listecategorries=["Pack","Nourriture","Transport Aller","Transport Retour","RCC","Assurance"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
-cat_assurance = Categorie.create(:nom =>"Assurance")
-Configurable[:id_cat_assurance]=cat_assurance.id
+Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurance').id.to_s
+Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
+Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.to_s
 
 # puts "UserTypes"
 # Usertype.create(:)

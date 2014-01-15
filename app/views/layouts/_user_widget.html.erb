@@ -1,6 +1,6 @@
 
 <% if user_signed_in? %>
-<span><%= current_user.email %></span>
+<span><%= link_to current_user.email, user_path(current_user.id) %></span>
 
 		<%= link_to 'Déconnexion', destroy_user_session_path, :method => :delete %>
 <% else %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140114175922) do
+ActiveRecord::Schema.define(version: 20140115190503) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20140114175922) do
     t.boolean  "caution"
     t.string   "ean"
     t.integer  "tbk_id"
+    t.integer  "bypasspaiement"
+    t.integer  "bypassassurance"
   end
 
   create_table "configurables", force: true do |t|

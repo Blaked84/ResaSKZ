@@ -7,9 +7,9 @@
           %il= link_to "Accueil", root_path
           %il= link_to "Personnes", personnes_path
           %il= link_to "Produits", products_path
-          %il= link_to "Commandes", commandes_path
           %il= link_to "Evenements", events_path
           -if can? :admin, User
+            %il= link_to "Commandes", commandes_path
             %il= link_to "Comptes", users_path
             %il= link_to "Paiements", paiements_path
             %il= link_to "Admin", admin_index_path

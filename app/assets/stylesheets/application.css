@@ -8,10 +8,11 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require toastr
  *= require_self
  *= require_tree .
  */
-
+ *= require toastr
 
 @font-face {
     font-family: 'PTSansRegular';
@@ -1389,6 +1390,20 @@ right connector from last child*/
 }
 /**************************************************** /Orgcharts *****************************************************/
 
+/**************************************************** flash info *****************************************************/
+.notif{
+	border-radius: 5px;
+padding: 5px;
+color: #fff;
+}
+.alert{
+	background: #c0392b;
+}
+.notice{
+	background: #27ae60;
+}
+
+/**************************************************** /flash info *****************************************************/
 /**************************************************** Color tag *****************************************************/
 
 .green{ background:#2ecc71}
