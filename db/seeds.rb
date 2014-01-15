@@ -156,7 +156,10 @@ case Rails.env
 				)
 	user_gorgu.add_role :gorgu
 
-	user_georges=User.create(
+	puts "Erreurs gorgu" unless user_gorgu.errors.blank?
+    user_gorgu.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
+
+	user_georges=User.create!(
 				email:"mail@mail.fr",
 				password:"iresam157",
 				first_name: 'Georges',
@@ -166,7 +169,10 @@ case Rails.env
 				inscription_terminee: false,
 				)
 
-	georges=user_georges.create_referant(
+	puts "Erreurs georges" unless user_georges.errors.blank?
+    user_georges.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
+
+	georges=user_georges.personnes.create!(
 		:nom => "Duchemin",
 		:prenom => "Georges",
 		:phone => "0612345678",
@@ -192,9 +198,18 @@ case Rails.env
 	    :pcomplement => "Resid's du gorgu",
 	    :pville => "Paris",
 	    :pcodepostal=> 75001,
-	    :pphone => "068484848484",
-	    :genre_id => 1
+	    :pphone => "0684848484",
+	    :genre_id => 1,
+	    :enregistrement_termine => false,
 		)
+	puts "Erreurs georges" if georges.errors
+    georges.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
+
+	user_georges.referant=georges
+	
+	user_georges.save!
+
+
 
 	user_georges.save
 

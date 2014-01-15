@@ -16,8 +16,47 @@ class Personne < ActiveRecord::Base
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
-	validates :phone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }
+#### VALIDATIONS ##############################################################
 
+###### Attributs ##############################################################
+
+	# validates :email, presence: true
+	validates :email, :format => { :with => /\A[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+\z/}
+	# validates :nom, presence: true
+	validates :nom , :length => { :in => 2..30 }
+	# validates :prenom, presence: true
+	validates :prenom , :length => { :in => 2..30 }
+	validates :phone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }
+	# validates :assurance ,:inclusion => {  :in => [true,false]}
+	validates :adresse , :presence => true
+	validates :ville , :presence => true
+	validates :codepostal , :presence => true
+	validates :taille , :presence => true
+	validates :taille , :numericality => true
+	validates :pointure , :presence => true
+	validates :pointure , :numericality => true
+
+	# validates :pnom, presence: true
+	validates :pnom , :length => { :in => 2..30 }
+	# validates :pprenom, presence: true
+	validates :pprenom , :length => { :in => 2..30 }
+	validates :plienparente, presence: true
+	validates :pphone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }
+	validates :padresse , :presence => true
+	validates :pville , :presence => true
+	validates :pcodepostal , :presence => true
+
+	# validates :documentassurance, :inclusion => {  :in => [true,false]}
+	# validates :enregistrement_termine, :inclusion => {  :in => [true,false]}
+	
+
+
+###### Associations ###########################################################
+	validates :user, presence: true
+	validates :genre, presence: true
+	validates :taillevetement, presence: true
+
+###############################################################################
 	  # EXTRACT FROM SCHEMA
 	  # create_table "personnes", force: true do |t|
 	  #   t.string   "email"

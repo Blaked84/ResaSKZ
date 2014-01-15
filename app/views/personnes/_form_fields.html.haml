@@ -59,57 +59,61 @@
       =f.label :idGadzOrg, 'UID'
       <br/>
       =f.text_field :idGadzOrg
-  %h2 Mensurations
-  .field
-    =f.label :pointure, 'Pointure'
-    <br/>
-    =f.text_field :pointure
-  .field
-    =f.label :taillevetement_id, 'Taille de vetements'
-    <br/>
-    =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}
-  %h2 Personne a prévenir en cas d'urgence
-  .field
-    =f.label :pprenom, 'Prenom'
-    <br/>
-    =f.text_field :pprenom
-  .field
-    =f.label :pnom, 'Nom'
-    <br/>
-    =f.text_field :pnom
-  .field
-    =f.label :plienparente, 'Lien de parenté'
-    <br/>
-    =f.text_field :plienparente
-  .field
-    =f.label :pphone, 'Numero de téléphone'
-    <br/>
-    =f.text_field :pphone
-  .field
-    =f.label :padresse, 'Adresse'
-    <br/>
-    =f.text_field :padresse
-  .field
-    =f.label :pcomplement, 'Complement d\'adresse'
-    <br/>
-    =f.text_area :pcomplement
-  .field
-    =f.label :pcodepostal, 'Code postal'
-    <br/>
-    =f.text_field :pcodepostal
-  .field
-    =f.label :pville, 'Ville'
-    <br/>
-    =f.text_field :pville
+%h2 Mensurations
+.field
+  =f.label :taille, 'Taille (en cm)'
+  <br/>
+  =f.text_field :taille
+.field
+  =f.label :pointure, 'Pointure'
+  <br/>
+  =f.text_field :pointure
+.field
+  =f.label :taillevetement_id, 'Taille de vetements'
+  <br/>
+  =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}
+%h2 Personne a prévenir en cas d'urgence
+.field
+  =f.label :pprenom, 'Prenom'
+  <br/>
+  =f.text_field :pprenom
+.field
+  =f.label :pnom, 'Nom'
+  <br/>
+  =f.text_field :pnom
+.field
+  =f.label :plienparente, 'Lien de parenté'
+  <br/>
+  =f.text_field :plienparente
+.field
+  =f.label :pphone, 'Numero de téléphone'
+  <br/>
+  =f.text_field :pphone
+.field
+  =f.label :padresse, 'Adresse'
+  <br/>
+  =f.text_field :padresse
+.field
+  =f.label :pcomplement, 'Complement d\'adresse'
+  <br/>
+  =f.text_area :pcomplement
+.field
+  =f.label :pcodepostal, 'Code postal'
+  <br/>
+  =f.text_field :pcodepostal
+.field
+  =f.label :pville, 'Ville'
+  <br/>
+  =f.text_field :pville
 
 
-  %h2 Informations complémentaires
+%h2 Informations complémentaires
+.field
+  =f.label :commentaires, 'Commentaires'
+  <br/>
+  =f.text_area :commentaires
+-if can? :see_admin, User
   .field
-    =f.label :commentaires, 'Commentaires'
+    =f.label :commentaires_admin, 'Commentaire admin'
     <br/>
-    =f.text_area :commentaires
-  -if can? :see_admin, User
-    .field
-      =f.label :commentaires_admin, 'Commentaire admin'
-      <br/>
-      =f.text_area :commentaires_admin
+    =f.text_area :commentaires_admin

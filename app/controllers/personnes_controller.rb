@@ -42,6 +42,7 @@ private
                                     :fams,
                                     :promo,
                                     :pointure,
+                                    :taille,
                                     :taillevetement_id,
                                     :pprenom,
                                     :pnom,

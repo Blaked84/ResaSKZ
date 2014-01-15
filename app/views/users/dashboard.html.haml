@@ -1,4 +1,26 @@
-%h1 New user
+%h1= @user.nom_complet
 
+%h2 Infos à afficher sur cette page :
+%ul
+  %li Lien pour parrainer une personne
+  %li Lien pour modifier ses informations
+  %li
+    liste des personnes gérées par cet user
+    %ul
+      %li Nom
+      %li Lien pour modifier ses informations
+      %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
+      %li Lien pour passer une commande
+      %li Lien pour ajouter une personne
+      %li
+        Liste des commandes de chaque user
+        %ul
+          %li Event
+          %li montant total
+          %li Etat de la commande
+  %li Indicateur de l'état global des commande (toute les commande ok ?)
 
-= link_to 'Back', users_path
+%h2 Objets dispos sur cette page :
+%ul
+  %li
+    @user

@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   belongs_to :referant, class_name: "Personne", foreign_key: "referant_id"
 
-  before_save :before_save
+  #before_save :before_save
 
   # EXTRACT FROM SCHEMA :
   # create_table "users", force: true do |t|
@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:GadzOrg]
 
 ### VALIDATION#################################################################
@@ -115,13 +115,13 @@ class User < ActiveRecord::Base
   def self.omniauth(auth_data, signed_in_resource=nil)
     
     logger.debug "=================================="
-    logger.info "Connexion depuis le CAS uid : "+auth_data[:uid]
+    logger.debug "Connexion depuis le CAS uid : "+auth_data[:uid]
 
     # auth_data : take a look on Users::OmniauthCallbacksController
     if user = User.find_by_uid(auth_data[:uid])
       user
     else
-      user = User.create(
+      user = User.new(
         email: auth_data[:info][:email],
         password: Devise.friendly_token[0,20],
         uid: auth_data[:uid],
@@ -129,7 +129,9 @@ class User < ActiveRecord::Base
         last_name: auth_data[:extra][:lastname],
         gender: auth_data[:extra][:sex],
         inscription_terminee: false,
+        cgu_accepted: false
         )
+      user.save!(:validate=>false)
 
       logger.debug user.inspect
       logger.debug "Erreurs"
@@ -137,21 +139,33 @@ class User < ActiveRecord::Base
 
       #AJOUTER Usertype = Gadz
 
-      pers = user.create_referant(
+      pers = user.personnes.new(
         :prenom => auth_data[:extra][:firstname],
         :nom => auth_data[:extra][:lastname],
         :email => auth_data[:info][:email],
         :bucque => nil ,
         :fams => nil ,
         :promo => nil,
-        enregistrement_termine: false,
+        enregistrement_termine: false
         )
 
-      user.save
-
       pers.genre = Genre.from_cas(auth_data[:extra][:sex])
+      pers.save!(:validate=>false)
+      logger.debug pers.errors.inspect
 
-      pers.save
+      user=User.find(user.id)
+
+      user.update_attribute(:referant_id,pers.id)
+      logger.debug user.errors.inspect
+
+      logger.debug "User valide ?"
+      logger.debug user.valid?
+
+      logger.debug user.inspect
+      logger.debug "Erreurs"
+
+
+      # user.save!(:validate=>false)
 
       user
     end

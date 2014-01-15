@@ -88,13 +88,15 @@ class UsersController < ApplicationController
 
     @user.cgu_accepted=true if params[:cgu_accepted]
 
-    if @user.save
+    if @user.save(:validate => false)
       if @user.cgu_accepted
         return redirect_to user_infos_user_url @user.id
       else
+        flash.now[:alert] = "Vous devez lire et accepter les CGU avant de pouvoir continuer"
         render action: 'cgu'
       end
     else
+      flash.now[:alert] = "Une erreur a eu lieu lors de la sauvegarde. Si l'erreur persiste, contactez un adminnistrateur"
       render action: 'cgu'
     end
   end
@@ -111,8 +113,6 @@ class UsersController < ApplicationController
     @personne = @user.referant
     authorize! :user_infos, @user
 
-    @user.inscription_terminee = true
-
     respond_to do |format|
       if @user.update(user_params) && @user.referant.update_attributes(referant_params) && @user.update_attribute(:inscription_terminee, true) && @personne.update_attribute(:enregistrement_termine, true)
 
@@ -120,6 +120,14 @@ class UsersController < ApplicationController
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
+
+        @user.valid?
+        @personne.valid?
+
+        @personne.errors.full_messages.each do |m|
+          @user.errors.add(:base, m)
+        end
+
         format.html { render action: 'user_infos' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -159,6 +167,7 @@ class UsersController < ApplicationController
                                                       :bucque,
                                                       :fams,
                                                       :promo,
+                                                      :taille,
                                                       :pointure,
                                                       :taillevetement_id,
                                                       :pprenom,
