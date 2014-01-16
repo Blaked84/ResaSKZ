@@ -1,2 +1,7 @@
-<h1>Personne#edit</h1>
-<p>Find me in app/views/personne/edit.html.erb</p>
+%h1 Edition de Personne
+
+= render 'form'
+
+= link_to 'Show', @personne
+\|
+= link_to 'Back', personnes_path

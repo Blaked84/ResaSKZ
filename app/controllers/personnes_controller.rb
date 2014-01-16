@@ -1,6 +1,7 @@
 class PersonnesController < ApplicationController
   
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
+  before_action :set_personne, only: [:show, :edit, :update, :destroy]
 
   def index
   	@personnes = Personne.all.sort_by{|a| a.nom}
@@ -10,7 +11,6 @@ class PersonnesController < ApplicationController
 
   def show
     authorize! :show, @personne
-    @personne = Personne.find(params[:id])
     @personne.taillevetement ? @taillevetement = @personne.taillevetement.name : nil
     @commandes = @personne.commandes
 
@@ -24,7 +24,22 @@ class PersonnesController < ApplicationController
 
   def personne_infos 
     set_personne
+    authorize! :user_infos, @personne
+  end
 
+  def update_personne_infos 
+    set_personne
+    authorize! :user_infos, @personne
+
+    respond_to do |format|
+      if @personne.update_attributes(personne_params) && @personne.update_attribute(:enregistrement_termine, true)
+        format.html { redirect_to dashboard_user_url @personne.user, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'personne_infos' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
 private

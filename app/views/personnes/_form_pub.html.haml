@@ -1,4 +1,4 @@
-= form_for @personne do |f|
+= form_for @personne, :url => personne_infos_personne_path(@personne), :method => :post do |f|
   - if @personne.errors.any?
     #error_explanation
       %h2= "#{pluralize(@personne.errors.count, "error")} prohibited this personne from being saved:"
