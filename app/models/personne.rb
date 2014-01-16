@@ -10,7 +10,7 @@ class Personne < ActiveRecord::Base
 	has_many :activite
 	belongs_to :genre
 	has_one :usertype
-	belongs_to :user, dependent: :destroy
+	belongs_to :user
 	belongs_to :taillevetement
 	has_many :commandes
 
@@ -100,7 +100,7 @@ class Personne < ActiveRecord::Base
 #=== Méthodes publiques ==============================================
 
 def nom_complet
-    return self.prenom+" "+self.nom
+    return self.prenom.to_s+" "+self.nom.to_s
 end
 
 def taille_metre
@@ -148,7 +148,7 @@ def document_assurance
 end
 
 def p_nom_complet
-    return self.pprenom+" "+self.pnom
+    return self.pprenom.to_s+" "+self.pnom.to_s
 end
 
 def sync_from_user(user)
@@ -158,7 +158,7 @@ def sync_from_user(user)
   self.email=user.email
   self.idGadzOrg=user.uid
 
-  self.save
+  self.save(:validate => false)
 end
 
 

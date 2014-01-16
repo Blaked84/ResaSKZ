@@ -44,6 +44,7 @@ class Ability
     can :cgu, user
     can :user_infos, user
     can :dashboard, user
+    can :parrainer, user if user.has_role? :gadz
 
     can :create, Personne
 

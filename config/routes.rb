@@ -38,6 +38,8 @@ LooklaDev::Application.routes.draw do
       get 'user_infos'
       post 'user_infos'=>"users#update_user_infos"
       get 'dashboard'
+      get 'parrainer'
+      post 'parrainer'=>"users#create_parrainer"
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

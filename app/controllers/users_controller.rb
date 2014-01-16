@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
 
 
@@ -36,10 +37,25 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     authorize! :create, @user
 
+
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @user }
+        pers = @user.personnes.new(
+        :prenom => @user.first_name,
+        :nom => @user.last_name,
+        :email => @user.email,
+        enregistrement_termine: false
+        )
+
+        pers.genre = Genre.from_cas(@user.gender)   
+        if pers.save!(:validate=>false)
+          @user.update_attribute(:referant_id,pers.id)
+          format.html { redirect_to @user, notice: 'User was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @user }
+        else
+          format.html { redirect_to @user, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -116,14 +132,14 @@ class UsersController < ApplicationController
     authorize! :user_infos, @user
 
     respond_to do |format|
-      if @user.update(user_params) && @user.referant.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         @user.referant.sync_from_user(@user) if @user.referant
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
 
-        @user.valid?
+        @personne.assign_attributes(referant_params)
         @personne.valid?
 
         @personne.errors.full_messages.each do |m|
@@ -134,8 +150,50 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
-
   end  
+
+  def new_personne
+  end
+
+  def add_personne
+  end
+
+  def parrainer
+    @parrain=User.find(params[:id])
+    authorize! :parrainer, @parrain
+    @user=@parrain.filleuls.new
+  end
+
+  def create_parrainer
+    @parrain=User.find(params[:id])
+    authorize! :parrainer, @parrain
+    @user=@parrain.filleuls.new(user_params_pub(:registration => true))
+
+    respond_to do |format|
+      if @user.save
+        pers = @user.personnes.new(
+        :prenom => @user.first_name,
+        :nom => @user.last_name,
+        :email => @user.email,
+        enregistrement_termine: false
+        )
+
+        pers.genre = Genre.from_cas(@user.gender)   
+        if pers.save!(:validate=>false)
+          @user.update_attribute(:referant_id,pers.id)
+          format.html { redirect_to dashboard_user_path @user, notice: 'User was successfully created.' }
+          format.json { render action: 'dashboard', status: :created, location: @user }
+        else
+          format.html { redirect_to @user, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      else
+        format.html { render action: 'parrainer' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
 
   def dashboard
     set_user
@@ -151,8 +209,23 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params_pub
-      params.require(:user).permit(:first_name, :last_name, :gender, :password, :password_confirmation)
+    def user_params_pub opts
+      
+      permit_list = [:first_name,
+                    :last_name,
+                    :gender,
+                    :password,
+                    :password_confirmation]
+      permit_list << :email if opts[:registration]
+
+      perm = params.require(:user).permit( permit_list)
+
+
+      logger.debug "User params pub opts"
+      logger.debug opts.inspect
+      logger.debug perm
+
+      return perm
     end
 
     def user_params
@@ -160,7 +233,7 @@ class UsersController < ApplicationController
     end
 
     def referant_params
-      params.require(:user).require(:personne).permit(:naissance,
+      params.fetch(:user).require(:personne).permit(:naissance,
                                                       :phone,
                                                       :adresse,
                                                       :complement,

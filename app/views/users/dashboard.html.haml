@@ -2,7 +2,10 @@
 
 %h2 Infos à afficher sur cette page :
 %ul
-  %li Lien pour parrainer une personne
+  %li
+    Lien pour parrainer une personne :
+    -if can? :parrainer, @user
+      = link_to "Parrainer", parrainer_user_path(@user)
   %li Lien pour modifier ses informations
   %li
     liste des personnes gérées par cet user

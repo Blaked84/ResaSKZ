@@ -7,6 +7,7 @@ class Commande < ActiveRecord::Base
 	belongs_to :glisse
 	belongs_to :tbk
 	belongs_to :personne
+	belongs_to :event
 	has_many :products, through: :commande_products
 	has_many :commande_products
 	has_many :paiements

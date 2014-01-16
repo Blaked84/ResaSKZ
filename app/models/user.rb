@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   # commandes de plusieurs personnes
   #################################################
 
-  has_many :personnes,  class_name: "Personne", foreign_key: "user_id"
+  has_one :parrain,  class_name: "User", foreign_key: "parrain_id", inverse_of: :filleuls
+  has_many :filleuls,  class_name: "User", foreign_key: "parrain_id", inverse_of: :parrain
+
+  has_many :personnes,  class_name: "Personne", foreign_key: "user_id", dependent: :destroy
 
   belongs_to :referant, class_name: "Personne", foreign_key: "referant_id"
 
@@ -69,7 +72,7 @@ class User < ActiveRecord::Base
     self.email = pers.email
     self.uid = pers.idGadzOrg
 
-    self.save
+    self.save(:validate => false)
 
   end
 
@@ -77,6 +80,9 @@ class User < ActiveRecord::Base
     self.has_role?(:admin)|| self.has_role?(:gorgu)
   end
 
+  def gadz?
+
+  end
 
   private
 
@@ -153,17 +159,8 @@ class User < ActiveRecord::Base
       pers.save!(:validate=>false)
       logger.debug pers.errors.inspect
 
-      user=User.find(user.id)
-
       user.update_attribute(:referant_id,pers.id)
-      logger.debug user.errors.inspect
-
-      logger.debug "User valide ?"
-      logger.debug user.valid?
-
-      logger.debug user.inspect
-      logger.debug "Erreurs"
-
+      user.add_role :gadz
 
       # user.save!(:validate=>false)
 

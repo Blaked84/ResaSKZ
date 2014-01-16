@@ -6,10 +6,9 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-  = render :partial => "form_fields", :locals => {:f => f}
+  = render :partial => "form_fields", :locals => {:f => f, :reg => false}
 
-  =f.fields_for @user.referant do |fp|
-    -@personnne = @user.referant
+  =f.fields_for @personne do |fp|
     = render :partial => "personnes/form_fields", :locals => {:f => fp, :reg => true}
 
 

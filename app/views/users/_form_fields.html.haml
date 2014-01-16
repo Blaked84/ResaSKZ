@@ -2,7 +2,7 @@
 .field
   =f.label :email
   <br/>
-  -if can? :see_admin, User
+  -if reg || can?(:see_admin, User)
     =f.email_field :email
   -else
     =f.email_field :email, readonly: true

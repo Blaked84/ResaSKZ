@@ -1,4 +1,6 @@
-= form_for @user do |f|
+%h1 Parrainer un ami
+
+= form_for @user, :url => parrainer_user_path(@parrain), :method => :post do |f|
   - if @user.errors.any?
     #error_explanation
       %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
@@ -6,6 +8,8 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
-  = render :partial => "form_fields", :locals => {:f => f, :reg => false}
+  = render :partial => "form_fields", :locals => {:f => f, :reg => true}
   .actions
     = f.submit 'Save'
+
+= link_to 'Back', dashboard_user_path(@parrain)
