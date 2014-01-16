@@ -116,7 +116,7 @@ class UsersController < ApplicationController
     authorize! :user_infos, @user
 
     respond_to do |format|
-      if @user.update(user_params) && @user.referant.update_attributes(referant_params) && @user.update_attribute(:inscription_terminee, true) && @personne.update_attribute(:enregistrement_termine, true)
+      if @user.update(user_params) && @user.referant.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         @user.referant.sync_from_user(@user) if @user.referant
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
@@ -152,11 +152,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params_pub
-      params.require(:user).permit(:first_name, :last_name, :gender)
+      params.require(:user).permit(:first_name, :last_name, :gender, :password, :password_confirmation)
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :gender, :uid)
+      params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation)
     end
 
     def referant_params
