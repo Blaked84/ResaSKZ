@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
+
+
+  before_action :check_register_workflow, except: [:cgu, :cgu_accept, :user_infos, :update_user_infos]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :check_workflow_register_user, only: [:dashboard]
 
   
 

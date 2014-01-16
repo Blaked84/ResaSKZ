@@ -220,3 +220,30 @@ fr:
   activerecord:
     errors:
       <<: *errors
+    attributes:
+      user:
+        first_name: "Prenom"
+        last_name: "Nom"
+        gender: "Sexe"
+        email: "E-mail"
+      personne:
+        prenom: "Prenom"
+        nom: "Nom"
+        naissance: "Date de naissance"
+        email: "E-mail"
+        genre_id: "Sexe"
+        phone: "Numéro de téléphone"
+        adresse: "Adresse"
+        complement: "Complément d'adresse"
+        codepostal: "Code postal"
+        taille: "Taille (cm)"
+        pointure: "Pointure"
+        pnom: "Nom de la personne à contacter"
+        pprenom: "Prénom de la personne à contacter"
+        plienparente: "Lien de parenté avec la personne à contacter"
+        pphone: "Numéro de téléphone de la personne à contacter"
+        padresse: "Adresse de la personne à contacter"
+        pville: "Ville de la personne à contacter"
+        pcodepostal: "Code postal de la personne à contacter"
+        pcomplement: "Complément d'adresse de la personne à contacter"
+        

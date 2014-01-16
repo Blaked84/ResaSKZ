@@ -33,20 +33,29 @@ class ApplicationController < ActionController::Base
 
 
   protected
+ 
+  def admin_only
+    authorize! :read_admin, User
+  end
 
-  def check_register_workflow(user)
+  def check_register_workflow
 
-    return redirect_to new_user_session_url, :notice => "Vous devez vous connecter pour continuer" unless user
+    if user=current_user
 
-    return redirect_to cgu_user_url(user), :notice => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
+      unless user.admin?
 
-    return redirect_to user_infos_user_url(user), :notice => "Veuillez renseigner vos informations d'inscription avant de continuer" unless user.inscription_terminee
+        return redirect_to cgu_user_url(user), :notice => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
 
-    user.personnes.each do |p|
-      return redirect_to personne_infos_personne_url(p), :alert => "Vous n'avez pas fini de remplir vos information d'inscription" unless p.enregistrement_termine
-    end
+        return redirect_to user_infos_user_url(user), :notice => "Veuillez renseigner vos informations d'inscription avant de continuer" unless user.inscription_terminee
 
-    nil
+        user.personnes.each do |p|
+          return redirect_to personne_infos_personne_url(p), :alert => "Vous n'avez pas fini de remplir vos information d'inscription" unless p.enregistrement_termine
+        end
+
+        nil
+      end
+
+      end
 
   end
 

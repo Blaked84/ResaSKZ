@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+
+  before_action :check_register_workflow
+
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products

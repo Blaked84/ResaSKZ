@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+
+  before_action :check_register_workflow
   
   load_and_authorize_resource
 

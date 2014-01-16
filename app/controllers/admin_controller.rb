@@ -1,7 +1,11 @@
 class AdminController < ApplicationController
+  before_action :admin_only
+  before_action :check_register_workflow
+
+
   def index
 
-  	authorize! :read_admin, User
+  	
 
   	@commandes=Commande.all
   	
@@ -30,5 +34,7 @@ class AdminController < ApplicationController
     authorize! :read_admin, User
     @event=Event.all
   end
+
+  
   
 end

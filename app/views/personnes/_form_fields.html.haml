@@ -5,115 +5,115 @@
     <br/>
     =f.email_field :email
   .field
-    =f.label :prenom, 'Prenom'
+    =f.label :prenom
     <br/>
     =f.text_field :prenom
   .field
-    =f.label :nom, 'Nom'
+    =f.label :nom
     <br/>
     =f.text_field :nom
   .field
-    =f.label :genre, 'Sexe'
+    =f.label :genre_id
     <br/>
-    =f.select :genre, Genre.all.map{|g| [g.nom_complet,g.id]}    
+    =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}    
 .field
-  =f.label :naissance, 'Date de naissance'
+  =f.label :naissance
   <br/>
   =f.date_field :naissance
 .field
-  =f.label :phone, 'Numero de téléphone'
+  =f.label :phone
   <br/>
   =f.text_field :phone
 .field
-  =f.label :adresse, 'Adresse'
+  =f.label :adresse
   <br/>
   =f.text_field :adresse
 .field
-  =f.label :complement, 'Complement d\'adresse'
+  =f.label :complement
   <br/>
   =f.text_area :complement
 .field
-  =f.label :codepostal, 'Code postal'
+  =f.label :codepostal
   <br/>
   =f.text_field :codepostal
 .field
-  =f.label :ville, 'Ville'
+  =f.label :ville
   <br/>
   =f.text_field :ville
 -if @personne.is_gadz?
   %h2 Informations Gadaziques
   .field
-    =f.label :bucque, 'Buque'
+    =f.label :bucque
     <br/>
     =f.text_field :bucque
   .field
-    =f.label :fams, 'Fam\'s'
+    =f.label :fams
     <br/>
     =f.text_field :fams
   .field
-    =f.label :promo, 'Promo'
+    =f.label :promo
     <br/>
     =f.text_field :promo
   -if can? :see_admin, User
     .field
-      =f.label :idGadzOrg, 'UID'
+      =f.label :idGadzOrg
       <br/>
       =f.text_field :idGadzOrg
 %h2 Mensurations
 .field
-  =f.label :taille, 'Taille (en cm)'
+  =f.label :taille
   <br/>
   =f.text_field :taille
 .field
-  =f.label :pointure, 'Pointure'
+  =f.label :pointure
   <br/>
   =f.text_field :pointure
 .field
-  =f.label :taillevetement_id, 'Taille de vetements'
+  =f.label :taillevetement_id
   <br/>
   =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}
 %h2 Personne a prévenir en cas d'urgence
 .field
-  =f.label :pprenom, 'Prenom'
+  =f.label :pprenom
   <br/>
   =f.text_field :pprenom
 .field
-  =f.label :pnom, 'Nom'
+  =f.label :pnom
   <br/>
   =f.text_field :pnom
 .field
-  =f.label :plienparente, 'Lien de parenté'
+  =f.label :plienparente
   <br/>
   =f.text_field :plienparente
 .field
-  =f.label :pphone, 'Numero de téléphone'
+  =f.label :pphone
   <br/>
   =f.text_field :pphone
 .field
-  =f.label :padresse, 'Adresse'
+  =f.label :padresse
   <br/>
   =f.text_field :padresse
 .field
-  =f.label :pcomplement, 'Complement d\'adresse'
+  =f.label :pcomplement
   <br/>
   =f.text_area :pcomplement
 .field
-  =f.label :pcodepostal, 'Code postal'
+  =f.label :pcodepostal
   <br/>
   =f.text_field :pcodepostal
 .field
-  =f.label :pville, 'Ville'
+  =f.label :pville
   <br/>
   =f.text_field :pville
 
 
 %h2 Informations complémentaires
 .field
-  =f.label :commentaires, 'Commentaires'
+  =f.label :commentaires
   <br/>
   =f.text_area :commentaires
 -if can? :see_admin, User
   .field
-    =f.label :commentaires_admin, 'Commentaire admin'
+    =f.label :commentaires_admin
     <br/>
     =f.text_area :commentaires_admin

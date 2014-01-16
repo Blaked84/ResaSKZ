@@ -1,5 +1,6 @@
 class PersonnesController < ApplicationController
   
+  before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
 
   def index
   	@personnes = Personne.all.sort_by{|a| a.nom}
@@ -32,7 +33,7 @@ private
     @personne = Personne.find(params[:id])
   end
 
-  def referant_params
+  def personne_params
   params.require(:personne).permit( :naissance,
                                     :phone,
                                     :adresse,
