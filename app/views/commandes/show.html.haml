@@ -81,6 +81,8 @@
           %strong Total
         %td=@totalpaiement_euro
 
+    %p=link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
+
   %h2
     Produits
   / # %p=link_to "Ajouter des produit à ma commande", personne_commande_event_products_path(@personne.id,@commande.id,1)

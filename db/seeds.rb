@@ -24,6 +24,7 @@ listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurance').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
 Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.to_s
+Configurable[:id_pack]=Categorie.find_by( nom: 'Pack').id.to_s
 
 # puts "UserTypes"
 # Usertype.create(:)
@@ -216,16 +217,18 @@ case Rails.env
 
 	puts "User & Personnes created"
 	
-	# while i<200
-	# 	com = georges.commandes.create(
-	# 	:assurance => 0,
-	# 	:status => 0,
-	# 	:caution => 1,
-	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-	# 	:tbk_id => SecureRandom.random_number(9)
-	# )
-	# 	i+=1
-	# end
+	i=1
+	while i<20
+		com = georges.commandes.create(
+		:assurance => 0,
+		:status => 0,
+		:caution => 1,
+		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+		:tbk_id => SecureRandom.random_number(9),
+		:event_id => [1,2].sample
+	)
+		i+=1
+	end
 	com = georges.commandes.create(
 		:assurance => 0,
 		:status => 0,
@@ -233,4 +236,10 @@ case Rails.env
 		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
 		:tbk_id => 1
 	)
+
+	com.add_product(Product.find(1))
+	com.add_product(Product.find(17))
+	com.add_product(Product.find(79))
+	# com.paiements.create(
+	# 	:amount_cents => 100)
 end

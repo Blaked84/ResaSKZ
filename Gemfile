@@ -67,6 +67,8 @@ gem 'will_paginate', '~> 3.0.0'
 
 gem 'actionpack-action_caching'
 
+gem 'addressable'
+
 group :development do
 
 	gem 'sqlite3'
@@ -74,5 +76,9 @@ group :development do
 	gem 'better_errors'
 
 	gem 'rails-erd' #pour les diagramme UML
+
+	gem 'rails-footnotes', '>= 3.7.9'
+
+	gem 'rack-mini-profiler'
 
 end

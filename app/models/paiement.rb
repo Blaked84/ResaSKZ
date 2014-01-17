@@ -18,7 +18,7 @@ class Paiement < ActiveRecord::Base
 
 
 	def amount_euro
-		return self.amount_cents / 100.0
+		return self.amount_cents.to_i / 100.0
 	end
 	def date
 		return self.created_at
