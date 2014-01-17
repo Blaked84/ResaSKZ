@@ -41,15 +41,15 @@ class PersonnesController < ApplicationController
 
   def personne_infos 
     set_personne
-    authorize! :user_infos, @personne
+    authorize! :update, @personne
   end
 
   def update_personne_infos 
     set_personne
-    authorize! :user_infos, @personne
+    # authorize! :update, @personne
 
     respond_to do |format|
-      if @personne.update_attributes(personne_params) && @personne.update_attribute(:enregistrement_termine, true)
+      if (@personne.update_attributes(personne_params) && @personne.update_attribute(:enregistrement_termine, true))
         format.html { redirect_to dashboard_user_url @personne.user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -59,13 +59,23 @@ class PersonnesController < ApplicationController
     end
   end
 
+  def destroy
+    authorize! :destroy, @personne
+    user = @personne.user
+    @personne.destroy
+    respond_to do |format|
+      format.html { redirect_to dashboard_user_url(user) }
+      format.json { head :no_content }
+    end
+  end
+
 private
 
   def set_personne
     @personne = Personne.find(params[:id])
   end
 
-  def personne_params options
+  def personne_params options=Hash.new
 
     perm_list=[:naissance,
               :phone,

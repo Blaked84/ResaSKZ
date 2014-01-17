@@ -209,23 +209,15 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params_pub opts
+    def user_params_pub opts=Hash.new
       
       permit_list = [:first_name,
                     :last_name,
                     :gender,
                     :password,
                     :password_confirmation]
-      permit_list << :email if opts[:registration]
-
-      perm = params.require(:user).permit( permit_list)
-
-
-      logger.debug "User params pub opts"
-      logger.debug opts.inspect
-      logger.debug perm
-
-      return perm
+      permit_list << :email if opts[:registration] || current_user.admin?
+      params.require(:user).permit( permit_list)
     end
 
     def user_params

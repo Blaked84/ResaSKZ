@@ -47,12 +47,16 @@ class Ability
     can :parrainer, user if user.has_role? :gadz
 
     can :create, Personne do |p|
-        p.user.id == user.id
+        p.user_id == user.id
     end
 
 
     can [:read, :update], Personne do |p|
-        user.personnes.include? p
+        p.user_id == user.id
+    end
+
+    can [:destroy], Personne do |p|
+        p.user_id == user.id && not(p.is_referant?)
     end
 
     can :read, Paiement do |p|
