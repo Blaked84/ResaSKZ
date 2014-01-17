@@ -46,7 +46,10 @@ class Ability
     can :dashboard, user
     can :parrainer, user if user.has_role? :gadz
 
-    can :create, Personne
+    can :create, Personne do |p|
+        p.user.id == user.id
+    end
+
 
     can [:read, :update], Personne do |p|
         user.personnes.include? p

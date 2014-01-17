@@ -22,6 +22,23 @@ class PersonnesController < ApplicationController
   def update
   end
 
+  def create
+    @personne = Personne.new(personne_params(registration: true))
+    authorize! :create, @personne
+
+    respond_to do |format|
+      if @personne.save && @personne.update_attribute(:enregistrement_termine, true)
+        format.html { redirect_to dashboard_user_url @personne.user, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        @user=User.find(@personne.user_id)
+        format.html { render 'users/new_personne' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   def personne_infos 
     set_personne
     authorize! :user_infos, @personne
@@ -48,33 +65,37 @@ private
     @personne = Personne.find(params[:id])
   end
 
-  def personne_params
-  params.require(:personne).permit( :naissance,
-                                    :phone,
-                                    :adresse,
-                                    :complement,
-                                    :codepostal,
-                                    :ville,
-                                    :bucque,
-                                    :fams,
-                                    :promo,
-                                    :pointure,
-                                    :taille,
-                                    :taillevetement_id,
-                                    :pprenom,
-                                    :pnom,
-                                    :plienparente,
-                                    :pphone,
-                                    :padresse,
-                                    :pcomplement,
-                                    :pcodepostal,
-                                    :pville,
-                                    :commentaires,
-                                    :nom,
-                                    :prenom,
-                                    :genre_id,
-                                    :email
-                                    )
+  def personne_params options
+
+    perm_list=[:naissance,
+              :phone,
+              :adresse,
+              :complement,
+              :codepostal,
+              :ville,
+              :bucque,
+              :fams,
+              :promo,
+              :pointure,
+              :taille,
+              :taillevetement_id,
+              :pprenom,
+              :pnom,
+              :plienparente,
+              :pphone,
+              :padresse,
+              :pcomplement,
+              :pcodepostal,
+              :pville,
+              :commentaires,
+              :nom,
+              :prenom,
+              :genre_id,
+              :email,
+              :user_id]
+    perm_list << :user_id if options[:registration] || current_user.admin?
+
+  params.require(:personne).permit( perm_list )
   end
 
 end

@@ -132,7 +132,7 @@ class UsersController < ApplicationController
     authorize! :user_infos, @user
 
     respond_to do |format|
-      if @user.update(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update_attributes(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         @user.referant.sync_from_user(@user) if @user.referant
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
@@ -153,9 +153,9 @@ class UsersController < ApplicationController
   end  
 
   def new_personne
-  end
-
-  def add_personne
+    set_user
+    @personne = @user.personnes.new
+    authorize! :create, @personne
   end
 
   def parrainer
