@@ -28,7 +28,7 @@ class PersonnesController < ApplicationController
 
     respond_to do |format|
       if @personne.save && @personne.update_attribute(:enregistrement_termine, true)
-        format.html { redirect_to dashboard_user_url @personne.user, notice: 'User was successfully updated.' }
+        format.html { redirect_to dashboard_user_url @personne.user, :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
         @user=User.find(@personne.user_id)
@@ -67,6 +67,11 @@ class PersonnesController < ApplicationController
       format.html { redirect_to dashboard_user_url(user) }
       format.json { head :no_content }
     end
+  end
+
+  def add_commande
+    set_personne
+    redirect_to  :controller => 'commandes', :action => 'new', :pers_id => @personne.id
   end
 
 private

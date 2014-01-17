@@ -3,7 +3,7 @@ class Commande < ActiveRecord::Base
 	# Les commandes réalisées par les users.
 	######## => #########################################
 
-	has_one :pack
+	belongs_to :pack
 	belongs_to :glisse
 	belongs_to :tbk
 	belongs_to :personne
@@ -17,8 +17,12 @@ class Commande < ActiveRecord::Base
 	attr_accessor :missings
 	attr_accessor :warnings
 
-	validate :personne, :presence => true
+	validates :tbk, :presence => true
+	validates :personne, :presence => true
+	validates :event, :presence => true
+	validates :event, uniqueness: { scope: :personne, message: "Une seule commande par evenement par personne" }
 	
+
 	def ok?
 		return false
 	end

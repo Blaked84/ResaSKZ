@@ -19,6 +19,7 @@ LooklaDev::Application.routes.draw do
     member do
       get 'personne_infos'
       post 'personne_infos' => "personnes#update_personne_infos"
+      get 'add_commande'
     end
     resources :commandes do
       resources :events do

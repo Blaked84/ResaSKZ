@@ -64,9 +64,9 @@ class Ability
     end
 
 
-    can :create, Commande
-    can [:read, :update], Commande do |c|
-        user.personnes.map{|p| p.commandes}.flatten.include?(c)
+    can [:create,:read, :update], Commande do |c|
+        pers = Personne.find_by_id(c.personne_id)
+        pers ? pers.user_id == user.id : false
     end
 
     can :read, Event
