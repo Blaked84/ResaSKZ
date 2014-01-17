@@ -8,8 +8,10 @@
         - @user.errors.full_messages.each do |msg|
           %li= msg
 
+  Vous avez la possibilité de parrainer un ami.
+
   = render :partial => "form_fields", :locals => {:f => f, :reg => true}
   .actions
     = f.submit 'Save'
 
-= link_to 'Back', dashboard_user_path(@parrain)
+= link_to 'Retour', dashboard_user_path(@parrain)

@@ -27,3 +27,15 @@
 %ul
   %li
     @user
+
+%h2 Personnes gérées par ce compte :
+= link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button"
+%ul
+  -@user.personnes.each do |p|
+    -if p.enregistrement_termine
+      %li
+        = link_to p.nom_complet, personne_path(p)
+        = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
+        -unless p.is_referant?
+          = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+

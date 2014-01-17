@@ -1,12 +1,51 @@
+# -*- encoding : utf-8 -*-
 class CommandesController < ApplicationController
 
   before_action :check_register_workflow
   
-  load_and_authorize_resource
-  
+
+  def new
+    @commande = Commande.new(:personne_id => params[:pers_id])
+    authorize! :create, @commande
+  end
+
   def create
     # pour la generation du code ean13 qui sert aussi d'id publique:
     # (SecureRandom.random_number *10**14).to_s[0,13]
+
+    @commande = Commande.new(commande_params)
+    authorize! :create, @commande
+
+    respond_to do |format|
+      if @commande.save
+        format.html { redirect_to dashboard_user_url @commande.personne.user, notice: 'Votre commande a bien été créée' }
+        format.json { head :no_content }
+      else
+        format.html { render 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
+  def edit
+    set_commande
+    authorize! :update, @commande
+  end
+
+  def update
+    set_commande
+    authorize! :create, @commande
+
+    respond_to do |format|
+      if @commande.update(commande_params)
+        format.html { redirect_to dashboard_user_url @commande.personne.user, notice: 'Votre commande a bien été créée' }
+        format.json { head :no_content }
+      else
+        format.html { render 'edit' }
+        format.json { render json: @commande.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def index
@@ -15,52 +54,63 @@ class CommandesController < ApplicationController
   end
 
   def show
-  	@commandes = Commande.find(params[:id])
+  	@commande = Commande.find(params[:id])
   	authorize! :show, @commande
 
- 	@personne = @commande.personne
+   	@personne = @commande.personne
 
- 	##### à definir quand les associations commande <-> produits seront faites
-	# liste des produit d'une commande
- 	@produits = @commande.products
+   	##### à definir quand les associations commande <-> produits seront faites
+  	# liste des produit d'une commande
+   	@produits = @commande.products
 
- 	# total du prix d'une commande
- 	# total = @produits.map{|p| p.price}.sum
- 	@total_euro = @commande.montant_total.to_i / 100.0
+   	# total du prix d'une commande
+   	# total = @produits.map{|p| p.price}.sum
+   	@total_euro = @commande.montant_total.to_i / 100.0
 
- 	# liste des paiements associés à une commande
- 	@paiements = @commande.paiements
- 	# total des paiements d'une commande pour préparer à la vérification
- 	@totalpaiement_euro = @commande.montant_paye / 100.0
+   	# liste des paiements associés à une commande
+   	@paiements = @commande.paiements
+   	# total des paiements d'une commande pour préparer à la vérification
+   	@totalpaiement_euro = @commande.montant_paye / 100.0
 
- 	@paiement_du_euro = @commande.montant_du.to_i / 100.0
- 	##### Vérification du statut d'une commande
- 	# status = true si:
- 	# @total = @totalpaiement ET
- 	# (la personne à une assurance ET a donné un justificatif) OU a dans sa commande un produit assurance 
- 	
- 	# if total_cents == totalpaiement_cents
- 	# 	@paiementok = true 
- 	# else
- 	# 	@paiementok = false
- 	# end
+   	@paiement_du_euro = @commande.montant_du.to_i / 100.0
+   	##### Vérification du statut d'une commande
+   	# status = true si:
+   	# @total = @totalpaiement ET
+   	# (la personne à une assurance ET a donné un justificatif) OU a dans sa commande un produit assurance 
+   	
+   	# if total_cents == totalpaiement_cents
+   	# 	@paiementok = true 
+   	# else
+   	# 	@paiementok = false
+   	# end
 
- 	# assurance_personne = @personne.assurance
- 	# assurance_document_personne = @personne.documentassurance
- 	# assurance_dans_produit = false #vlaur arbitraire pour test. à coder
+   	# assurance_personne = @personne.assurance
+   	# assurance_document_personne = @personne.documentassurance
+   	# assurance_dans_produit = false #vlaur arbitraire pour test. à coder
 
- 	# if ((@personne.assurance and @personne.documentassurance) or assurance_dans_produit)
- 	# 	@assuranceok = true
- 	# else
- 	# 	@assuranceok = false
- 	# end
+   	# if ((@personne.assurance and @personne.documentassurance) or assurance_dans_produit)
+   	# 	@assuranceok = true
+   	# else
+   	# 	@assuranceok = false
+   	# end
 
- 	# if @assuranceok && @paiementok
- 	# 	@status=true
- 	# else
- 	# 	@status=false
- 	# end
+   	# if @assuranceok && @paiementok
+   	# 	@status=true
+   	# else
+   	# 	@status=false
+   	# end
 
- 	@status = @commande.complete?
+   	@status = @commande.complete?
   end
+
+  private
+
+  def set_commande
+    @commande = Commande.find(params[:id])
+  end
+
+  def commande_params
+    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:pack_id)
+  end
+
 end

@@ -21,6 +21,7 @@ LooklaDev::Application.routes.draw do
     member do
       get 'personne_infos'
       post 'personne_infos' => "personnes#update_personne_infos"
+      get 'add_commande'
     end
     resources :commandes do
       resources :events do
@@ -42,6 +43,7 @@ LooklaDev::Application.routes.draw do
       get 'dashboard'
       get 'parrainer'
       post 'parrainer'=>"users#create_parrainer"
+      get 'new_personne'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.

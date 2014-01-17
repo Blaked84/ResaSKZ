@@ -1,0 +1,28 @@
+= form_for @commande do |f|
+  - if @commande.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@commande.errors.count, "error")} prohibited this commande from being saved:"
+      %ul
+        - @commande.errors.full_messages.each do |msg|
+          %li= msg
+  -if @commande.personne_id
+    =f.hidden_field :personne_id
+  -else
+    .field
+      =f.label :personne_id
+      =f.text_field :personne_id
+  .field
+    =f.label :event_id
+    =f.select :event_id, Event.all.map{|t| [t.name,t.id]}
+  .field
+    =f.label :tbk_id
+    =f.select :tbk_id, Tbk.all.map{|t| [t.nom_complet,t.id]}
+  .field
+    =f.label :glisse_id
+    =f.select :glisse_id, Glisse.all.map{|t| [t.nom,t.id]}
+  .field
+    =f.label :pack_id
+    =f.select :pack_id, Pack.all.map{|t| [t.nom,t.id]}
+
+  .actions
+    = f.submit 'Save'

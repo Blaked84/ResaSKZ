@@ -46,10 +46,17 @@ class Ability
     can :dashboard, user
     can :parrainer, user if user.has_role? :gadz
 
-    can :create, Personne
+    can :create, Personne do |p|
+        p.user_id == user.id
+    end
+
 
     can [:read, :update], Personne do |p|
-        user.personnes.include? p
+        p.user_id == user.id
+    end
+
+    can [:destroy], Personne do |p|
+        p.user_id == user.id && not(p.is_referant?)
     end
 
     can :read, Paiement do |p|
@@ -57,9 +64,9 @@ class Ability
     end
 
 
-    can :create, Commande
-    can [:read, :update], Commande do |c|
-        user.personnes.map{|p| p.commandes}.flatten.include?(c)
+    can [:create,:read, :update], Commande do |c|
+        pers = Personne.find_by_id(c.personne_id)
+        pers ? pers.user_id == user.id : false
     end
 
     can :read, Event

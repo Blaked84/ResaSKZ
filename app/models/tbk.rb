@@ -12,4 +12,8 @@ class Tbk < ActiveRecord::Base
 	def to_str
 		return self.nom
 	end
+
+	def nom_complet
+		return nom+" (#{nom_pecs})"
+	end
 end

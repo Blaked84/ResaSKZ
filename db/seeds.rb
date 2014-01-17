@@ -11,11 +11,11 @@
 # Prod
 puts "Evenements"
 Event.create(
-	:Name => "SKZ Semaine 1",
-	:Description => "ejfenbjbdjkcbkjvcbcjdc")
+	:name => "SKZ Semaine 1",
+	:description => "ejfenbjbdjkcbkjvcbcjdc")
 Event.create(
-	:Name => "SKZ Semaine 2",
-	:Description => "ejfenbjbdjkcbkjvcbcjdc")
+	:name => "SKZ Semaine 2",
+	:description => "ejfenbjbdjkcbkjvcbcjdc")
 
 
 puts "Categories"
@@ -29,6 +29,10 @@ Configurable[:id_pack]=Categorie.find_by( nom: 'Pack').id.to_s
 # puts "UserTypes"
 # Usertype.create(:)
 
+puts "Glisse"
+Glisse.create(nom: 'Ski')
+Glisse.create(nom: 'Snowboard')
+
 puts "Genres"
 Genre.create(:sexe => "H", :nom_cas => "male", :nom_complet => "Homme")
 Genre.create(:sexe => "F", :nom_cas => "female", :nom_complet => "Femme")
@@ -40,9 +44,9 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=["Siber's","Clun's","Chalon's","Bordel's","KIN","Boquette","Birse","Paris"].sort
+listet=[["Siber's","Metz"],["Clun's","Cluny"],["Chalon's","Chalon-en-Champagne"],["Bordel's","Bordeaux"],["KIN","Aix-en-Provence"],["Boquette","Angers"],["Birse","Lille"],["P3","Paris"]].sort
 listet.each do |c|
-	Tbk.create(:nom =>c)
+	Tbk.create(:nom =>c[0], :nom_pecs => c[1])
 end
 
 listeproduits=[["PG",30500,0,DateTime.new(2013,2,3),"De 213 à 211",1,1],
@@ -217,29 +221,22 @@ case Rails.env
 
 	puts "User & Personnes created"
 	
-	i=1
-	while i<20
-		com = georges.commandes.create(
-		:assurance => 0,
-		:status => 0,
-		:caution => 1,
-		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-		:tbk_id => SecureRandom.random_number(9),
-		:event_id => [1,2].sample
-	)
-		i+=1
-	end
-	com = georges.commandes.create(
-		:assurance => 0,
-		:status => 0,
-		:caution => 1,
-		:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-		:tbk_id => 1
-	)
 
-	com.add_product(Product.find(1))
-	com.add_product(Product.find(17))
-	com.add_product(Product.find(79))
-	# com.paiements.create(
-	# 	:amount_cents => 100)
+	# while i<200
+	# 	com = georges.commandes.create(
+	# 	:assurance => 0,
+	# 	:status => 0,
+	# 	:caution => 1,
+	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+	# 	:tbk_id => SecureRandom.random_number(9)
+	# )
+	# 	i+=1
+	# end
+	# com = georges.commandes.create(
+	# 	:assurance => 0,
+	# 	:status => 0,
+	# 	:caution => 1,
+	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
+	# 	:tbk_id => 1
+	# )
 end

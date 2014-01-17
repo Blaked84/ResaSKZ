@@ -132,7 +132,7 @@ class UsersController < ApplicationController
     authorize! :user_infos, @user
 
     respond_to do |format|
-      if @user.update(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update_attributes(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         @user.referant.sync_from_user(@user) if @user.referant
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
@@ -153,9 +153,9 @@ class UsersController < ApplicationController
   end  
 
   def new_personne
-  end
-
-  def add_personne
+    set_user
+    @personne = @user.personnes.new
+    authorize! :create, @personne
   end
 
   def parrainer
@@ -209,23 +209,15 @@ class UsersController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params_pub opts
+    def user_params_pub opts=Hash.new
       
       permit_list = [:first_name,
                     :last_name,
                     :gender,
                     :password,
                     :password_confirmation]
-      permit_list << :email if opts[:registration]
-
-      perm = params.require(:user).permit( permit_list)
-
-
-      logger.debug "User params pub opts"
-      logger.debug opts.inspect
-      logger.debug perm
-
-      return perm
+      permit_list << :email if opts[:registration] || current_user.admin?
+      params.require(:user).permit( permit_list)
     end
 
     def user_params
