@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   def index
     if params[:event_id]
       @products = Product.all.where(event_id: params[:event_id]).sort_by{|a| a.name}
-      @evenement = Event.find(params[:event_id]).Name
+      @evenement = Event.find(params[:event_id]).name
     else
       @products = Product.all.sort_by{|a| a.name}
     end
@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @evenement = @product.event.Name
+    @evenement = @product.event.name
   end
 
   # GET /products/new
