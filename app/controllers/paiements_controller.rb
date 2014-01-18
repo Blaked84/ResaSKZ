@@ -6,24 +6,24 @@ class PaiementsController < ApplicationController
   def create
 
   end
+
   def new
 
    com=Commande.find(params[:commande_id])
    if com.montant_du != 0
 
-    com.paiements.create(
+    p=com.paiements.create(
+      :idlong => (SecureRandom.random_number *10**14).to_s[0,13],
       :amount_cents => com.prochain_paiement,
-      :paiement_hash => "paiement en cours...")
+      :paiement_hash => "paiement en cours...",
+      :verif => false)
 
-
-
-    p=com.paiements.last
     p.paiement_hash=hashpaiement(p)
-    p.save
+    p.save if p.valid?
 
     respond_to do |format|
         #décommenter la ligne ci-dessous pour payer par gadz.org
-        # format.html{redirect_to urlpaiement(p).to_s}
+        format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
       end
     else
@@ -43,7 +43,7 @@ class PaiementsController < ApplicationController
    @personne=@commande.personne
    @referant=@personne.referant
    @url=urlpaiement(@paiement)
- end
+  end
 
  def update
  end
@@ -51,7 +51,7 @@ class PaiementsController < ApplicationController
  private
  def site
   return "PayResaSKZ"
-end
+ end
 def ref
   return 126
 end
@@ -83,7 +83,7 @@ end
         :phone => r.phone,
         :address => [r.adresse," " ,r.complement, " ",r.codepostal, " ",r.ville].join, #[current_user.address_1, current_user.address_2, current_user.postcode, current_user.city].join(" "),
         :op => "submit",
-        :order_id => paiement.commande.id,
+        :order_id => paiement.id,
         :site => site,
         :version => "1",
         :hash => hashpaiement(paiement),

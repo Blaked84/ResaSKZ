@@ -16,6 +16,7 @@ class Paiement < ActiveRecord::Base
 
 	belongs_to :commande
 
+	validate :idlong, uniqueness: true
 
 	def amount_euro
 		return self.amount_cents.to_i / 100.0

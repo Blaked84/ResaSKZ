@@ -1,2 +1,4 @@
 %h1 Paiement#New
-%p Find me in app/views/paiement/new.html.haml
+
+=simple_form_for @paiement do |f|
+	%span=f.button :submit

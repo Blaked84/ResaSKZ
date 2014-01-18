@@ -69,6 +69,8 @@ gem 'actionpack-action_caching'
 
 gem 'addressable'
 
+gem 'simple_form'
+
 group :development do
 
 	gem 'sqlite3'
