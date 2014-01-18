@@ -51,3 +51,8 @@ id_pack:
   name: Identifiant de la categorie de produit Pack            # sets the edit label
   default: 0               # sets the default value
   type: integer             # coerces the value to an integer
+
+secret_paiement:
+  name: Salt hash paiement            # sets the edit label
+  default: achanger               # sets the default value
+  type: string             # coerces the value to an integer
