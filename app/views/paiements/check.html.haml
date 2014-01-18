@@ -1,0 +1,6 @@
+%h1 Paiement#check
+%p Find me in app/views/paiement/create.html.haml
+
+= form_tag csv_import_path, :multipart => true do
+  = file_field_tag :file, :accept => "text/csv"
+  = submit_tag "Upload"

@@ -3,6 +3,8 @@ class PaiementsController < ApplicationController
   before_action :check_register_workflow  
   load_and_authorize_resource
 
+  require 'csv'
+
   def create
 
   end
@@ -43,15 +45,33 @@ class PaiementsController < ApplicationController
    @personne=@commande.personne
    @referant=@personne.referant
    @url=urlpaiement(@paiement)
-  end
+ end
 
  def update
  end
 
- private
- def site
-  return "PayResaSKZ"
+ def check
  end
+
+ def csv_import    
+  file_data = params[:file].read
+  csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n")
+
+  csv_rows.each do |row|
+    # do something with each row
+  end
+
+  respond_to do |format|
+    format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés"}
+  end
+ end
+
+
+
+private
+def site
+  return "PayResaSKZ"
+end
 def ref
   return 126
 end
