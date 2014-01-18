@@ -1,0 +1,9 @@
+%div.tree.pa3
+	%ul
+		%li
+			%a
+				Compte:
+				=@user.referant_show
+			%ul
+				- @user.personnes.each do |p|
+					%li=link_to p.nom_complet, personne_path(p.id)

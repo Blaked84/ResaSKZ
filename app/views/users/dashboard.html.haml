@@ -7,7 +7,7 @@
     -if can? :parrainer, @user
       = link_to "Parrainer", parrainer_user_path(@user)
   %li Lien pour modifier ses informations
-  %li
+  %li    
     liste des personnes gérées par cet user
     %ul
       %li Nom
@@ -39,3 +39,45 @@
         -unless p.is_referant?
           = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
 
+
+
+= render :partial => "personne_tree"
+
+%table.striped.alternate
+  %thead
+    %tr
+      %th Nom
+      %th Prénom
+      %th assurance
+  %tbody
+    - @user.personnes.each do |p| 
+      -if p.enregistrement_termine
+        %tr
+          %td=link_to p.nom, personne_path(p.id)
+          %td=p.prenom
+          %td=conditional_format(p.assurance)
+          %td
+            = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
+            -unless p.is_referant?
+              = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+%h2 Commandes
+%table.striped.alternate
+  %thead
+    %tr
+      %th Commande ID
+      %th Date de création
+      %th Evénement
+      %th Assurance
+      %th Statut
+      %th Montant
+    %tbody
+      -if @commandes
+        - @commandes.each do |c| 
+          %tr
+            / %td=c.id
+            %td=link_to c.ean, commande_path(c.id)
+            %td=c.created_at.to_s.gsub("UTC","")
+            %td=c.event.name
+            %td=conditional_format(c.assurance)
+            %td=conditional_format(c.status)
+            %td=c.montant_total

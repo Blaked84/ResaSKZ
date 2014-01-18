@@ -198,6 +198,7 @@ class UsersController < ApplicationController
   def dashboard
     set_user
     authorize! :dashboard, @user
+    @commandes=@user.personnes.map{ |p| p.commandes}[0]
 
   end
 
