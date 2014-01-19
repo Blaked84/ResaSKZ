@@ -12,7 +12,7 @@
 %div.pa1.fiche.brdr-b
   %p
     Né le:
-    =@personne.naissance.to_date
+    =@personne.naissance.to_s.gsub("00:00:00 UTC","")
   %p 
     Id gadz.org:
     =@personne.idGadzOrg

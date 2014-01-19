@@ -110,7 +110,7 @@ def taille_metre
 end
 
 def referant
-	return self.user.referant
+	return self.user.referant 
 end
 
 def is_referant?

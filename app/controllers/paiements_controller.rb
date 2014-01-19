@@ -49,7 +49,8 @@ class PaiementsController < ApplicationController
 
  def update
  end
-
+ 
+ require 'will_paginate/array'
  def check
   @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page])
   @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}

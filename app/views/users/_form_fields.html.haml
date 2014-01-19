@@ -1,39 +1,39 @@
 %h2 Informations personnelles
-.field
+.field.pure-control-group
   =f.label :email
-  <br/>
+  
   -if reg || can?(:see_admin, User)
     =f.email_field :email
   -else
     =f.email_field :email, readonly: true
     (Il ne peut etre modifier que sur demande aux admins et permet de vous identifier)
 / -unless can?(:see_admin, User)  || reg
-/   .field
+/   .field.pure-control-group
 /     =f.label :current_password, 'Mot de passe actuel :'
-/     <br/>
+/     
 /     =f.password_field :current_password
-.field
+.field.pure-control-group
   =f.label :password, 'Mot de passe'
-  <br/>
-  =f.password_field :password
-.field
+  
+  =f.password_field :password, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :password_confirmation, 'Confirmation'
-  <br/>
-  =f.password_field :password_confirmation
-.field
+  
+  =f.password_field :password_confirmation, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :first_name, 'Prenom'
-  <br/>
-  =f.text_field :first_name
-.field
+  
+  =f.text_field :first_name, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :last_name, 'Nom'
-  <br/>
-  =f.text_field :last_name
-.field
+  
+  =f.text_field :last_name, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :gender, 'Sexe'
-  <br/>
-  =f.select :gender, Genre.all.map{|g| [g.nom_complet,g.nom_cas]}
+  
+  =f.select :gender, Genre.all.map{|g| [g.nom_complet,g.nom_cas]}, :class => "pure-input-1-3"
 -if can? :see_admin, User
-  .field
+  .field.pure-control-group
     =f.label :inscription_terminee, 'Inscription terminee'
-    <br/>
+    
     =f.check_box :inscription_terminee

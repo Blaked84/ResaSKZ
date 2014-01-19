@@ -1,8 +1,10 @@
-%h1 Mes CGU
-%p CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU <br/> CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU
+%div.top-info.pa1
+  %h1 Mes CGU  
+%div.pa1.fiche.brdr-b	
+  %p CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU <br/> CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU CGU
 
-=form_tag( cgu_user_path(@user.id), :method => :post) do
-  =label_tag :cgu_accepted, "J'accepte les termes de la CGU"
-  =check_box_tag :cgu_accepted
-  <br\>
-  =submit_tag 'Valider'
+  =form_tag( cgu_user_path(@user.id), :method => :post) do
+    =label_tag :cgu_accepted, "J'accepte les termes de la CGU"
+    =check_box_tag :cgu_accepted
+    <br\>
+    =submit_tag 'Valider', :class => "pure-button pure-button-primary"
