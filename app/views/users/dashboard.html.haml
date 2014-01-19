@@ -20,13 +20,16 @@
       = link_to "Parrainer", parrainer_user_path(@user)
   %li Lien pour modifier ses informations
   %li    
-    liste des personnes gérées par cet user
+    %del liste des personnes gérées par cet user
     %ul
-      %li Nom
-      %li Lien pour modifier ses informations
+      %li 
+        %del Nom
+      %li 
+        %del Lien pour modifier ses informations
       %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
       %li Lien pour passer une commande
-      %li Lien pour ajouter une personne
+      %li 
+        %del Lien pour ajouter une personne
       %li
         Liste des commandes de chaque user
         %ul
@@ -41,7 +44,7 @@
     @user
 
 %h2 Personnes gérées par ce compte :
-= link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button"
+= link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button pure-button-success"
 %ul
   -@user.personnes.each do |p|
     -if p.enregistrement_termine
@@ -79,7 +82,6 @@
       %th Commande ID
       %th Date de création
       %th Evénement
-      %th Assurance
       %th Statut
       %th Montant
     %tbody
@@ -90,6 +92,5 @@
             %td=link_to c.ean, commande_path(c.id)
             %td=c.created_at.to_s.gsub("UTC","")
             %td=c.event.name
-            %td=conditional_format(c.assurance)
-            %td=conditional_format(c.status)
+            %td=conditional_format(c.complete?)
             %td=c.montant_total

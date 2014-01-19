@@ -1,120 +1,119 @@
 -if not reg
   %h2 Informations personnelles
-  .field
-    =f.label :email
-    <br/>
-    =f.email_field :email
-  .field
+  .field.pure-control-group
+    =f.label :email 
+    =f.email_field :email, :class => "pure-input-1-3"
+  .field.pure-control-group
     =f.label :prenom
-    <br/>
-    =f.text_field :prenom
-  .field
+    
+    =f.text_field :prenom, :class => "pure-input-1-3"
+  .field.pure-control-group
     =f.label :nom
-    <br/>
-    =f.text_field :nom
-  .field
+    
+    =f.text_field :nom, :class => "pure-input-1-3"
+  .field.pure-control-group
     =f.label :genre_id
-    <br/>
-    =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}    
-.field
+    
+    =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}    , :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :naissance
-  <br/>
-  =f.date_field :naissance
-.field
+  
+  =f.date_field :naissance, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :phone
-  <br/>
-  =f.text_field :phone
-.field
+  
+  =f.text_field :phone, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :adresse
-  <br/>
-  =f.text_field :adresse
-.field
+  
+  =f.text_field :adresse, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :complement
-  <br/>
-  =f.text_area :complement
-.field
+  
+  =f.text_area :complement, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :codepostal
-  <br/>
-  =f.text_field :codepostal
-.field
+  
+  =f.text_field :codepostal, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :ville
-  <br/>
-  =f.text_field :ville
+  
+  =f.text_field :ville, :class => "pure-input-1-3"
 -if @personne.is_gadz?
   %h2 Informations Gadaziques
-  .field
+  .field.pure-control-group
     =f.label :bucque
-    <br/>
-    =f.text_field :bucque
-  .field
+    
+    =f.text_field :bucque, :class => "pure-input-1-3"
+  .field.pure-control-group
     =f.label :fams
-    <br/>
-    =f.text_field :fams
-  .field
+    
+    =f.text_field :fams, :class => "pure-input-1-3"
+  .field.pure-control-group
     =f.label :promo
-    <br/>
-    =f.text_field :promo
+    
+    =f.text_field :promo, :class => "pure-input-1-3"
   -if can? :see_admin, User
-    .field
+    .field.pure-control-group
       =f.label :idGadzOrg
-      <br/>
-      =f.text_field :idGadzOrg
+      
+      =f.text_field :idGadzOrg, :class => "pure-input-1-3"
 %h2 Mensurations
-.field
+.field.pure-control-group
   =f.label :taille
-  <br/>
-  =f.text_field :taille
-.field
+  
+  =f.text_field :taille, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pointure
-  <br/>
-  =f.text_field :pointure
-.field
+  
+  =f.text_field :pointure, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :taillevetement_id
-  <br/>
-  =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}
+  
+  =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}, :class => "pure-input-1-3"
 %h2 Personne a prévenir en cas d'urgence
-.field
+.field.pure-control-group
   =f.label :pprenom
-  <br/>
-  =f.text_field :pprenom
-.field
+  
+  =f.text_field :pprenom, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pnom
-  <br/>
-  =f.text_field :pnom
-.field
+  
+  =f.text_field :pnom, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :plienparente
-  <br/>
-  =f.text_field :plienparente
-.field
+  
+  =f.text_field :plienparente, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pphone
-  <br/>
-  =f.text_field :pphone
-.field
+  
+  =f.text_field :pphone, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :padresse
-  <br/>
-  =f.text_field :padresse
-.field
+  
+  =f.text_field :padresse, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pcomplement
-  <br/>
-  =f.text_area :pcomplement
-.field
+  
+  =f.text_area :pcomplement, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pcodepostal
-  <br/>
-  =f.text_field :pcodepostal
-.field
+  
+  =f.text_field :pcodepostal, :class => "pure-input-1-3"
+.field.pure-control-group
   =f.label :pville
-  <br/>
-  =f.text_field :pville
+  
+  =f.text_field :pville, :class => "pure-input-1-3"
 
 
 %h2 Informations complémentaires
-.field
+.field.pure-control-group
   =f.label :commentaires
-  <br/>
-  =f.text_area :commentaires
+  
+  =f.text_area :commentaires, :class => "pure-input-1-3"
 -if can? :see_admin, User
-  .field
+  .field.pure-control-group
     =f.label :commentaires_admin
-    <br/>
-    =f.text_area :commentaires_admin
+    
+    =f.text_area :commentaires_admin, :class => "pure-input-1-3"
 =f.hidden_field :user_id

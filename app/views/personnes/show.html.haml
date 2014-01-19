@@ -1,5 +1,7 @@
 %div.top-info.pa1
   %h1=@personne.nom_complet
+
+  %p= link_to 'Editer', personne_infos_personne_path(@personne), :class => "pure-button pure-button-primary right"
   %p
     =@personne.bucque
     =@personne.fams
@@ -71,15 +73,16 @@
 
 
   
-  -@commandes.each do |commande|
-    %table.striped.alternate
-      %thead
-        %tr
-          %th Commande ID
-          %th Assurance
-          %th Statut
-        %tbody
+  
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Commande ID
+        %th Assurance
+        %th Statut
+      %tbody
+        -@commandes.each do |commande|
           %tr
-          %td=link_to commande.ean, personne_commande_path(@personne.id,commande.id)
-          %td=conditional_format(commande.assurance)
-          %td=conditional_format(commande.status)
+            %td=link_to commande.ean, personne_commande_path(@personne.id,commande.id)
+            %td=conditional_format(commande.assurance)
+            %td=conditional_format(commande.complete?)

@@ -1,4 +1,4 @@
-= form_for @personne, :url => personne_infos_personne_path(@personne), :method => :post do |f|
+= form_for @personne, :url => personne_infos_personne_path(@personne), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
   - if @personne.errors.any?
     #error_explanation
       %h2= "#{pluralize(@personne.errors.count, "error")} prohibited this personne from being saved:"
@@ -9,4 +9,4 @@
   = render :partial => "form_fields", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
 
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', :class => "pure-button pure-button-success"
