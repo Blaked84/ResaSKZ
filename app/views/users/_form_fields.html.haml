@@ -7,6 +7,11 @@
   -else
     =f.email_field :email, readonly: true
     (Il ne peut etre modifier que sur demande aux admins et permet de vous identifier)
+-unless can?(:see_admin, User)  || reg
+  .field
+    =f.label :current_password, 'Mot de passe actuel :'
+    <br/>
+    =f.password_field :current_password
 .field
   =f.label :password, 'Mot de passe'
   <br/>

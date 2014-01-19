@@ -162,6 +162,17 @@ case Rails.env
 				)
 	user_gorgu.add_role :gorgu
 
+	user_admin=User.create(
+			email:"admin@gadz.org",
+			password:"iresam157",
+			first_name: 'Admin',
+			last_name: 'Gadz',
+			gender: 'male',
+			cgu_accepted: true,
+			inscription_terminee: true,
+			)
+	user_admin.add_role :admin
+
 	puts "Erreurs gorgu" unless user_gorgu.errors.blank?
     user_gorgu.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
 
@@ -218,6 +229,8 @@ case Rails.env
 
 
 	user_georges.save
+
+	user_georges.add_role :gadz
 
 	puts "User & Personnes created"
 	

@@ -122,19 +122,22 @@ class UsersController < ApplicationController
 
   def user_infos
     set_user
+    redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
     authorize! :user_infos, @user
   end
 
   def update_user_infos
     set_user
+    redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
     authorize! :user_infos, @user
 
     respond_to do |format|
-      if @user.update_attributes(user_params) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         @user.referant.sync_from_user(@user) if @user.referant
+        sign_in(@user, :bypass => true)
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -181,15 +184,12 @@ class UsersController < ApplicationController
         pers.genre = Genre.from_cas(@user.gender)   
         if pers.save!(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)
-          format.html { redirect_to dashboard_user_path @user, notice: 'User was successfully created.' }
-          format.json { render action: 'dashboard', status: :created, location: @user }
+          format.html { redirect_to dashboard_user_path(@user), notice: 'User was successfully created.' }
         else
           format.html { redirect_to @user, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
         end
       else
         format.html { render action: 'parrainer' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
 
@@ -215,9 +215,11 @@ class UsersController < ApplicationController
       permit_list = [:first_name,
                     :last_name,
                     :gender,
+                    :current_password,
                     :password,
                     :password_confirmation]
-      permit_list << :email if opts[:registration] || current_user.admin?
+      permit_list += [:email] if opts[:registration] || current_user.admin?
+      permit_list += [:uid] if current_user.admin?
       params.require(:user).permit( permit_list)
     end
 

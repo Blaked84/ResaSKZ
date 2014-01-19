@@ -1,4 +1,16 @@
 %h1= @user.nom_complet
+-unless @user.parrain.nil?
+  .box
+    %p Votre compte est parrainé par :
+    =@user.parrain.referant.nom_complet
+-if can? :parrainer, @user
+  .box.parrainner
+    %p
+      Vous pouvez parrainer un ami, votre Za/Zon ou votre chien ! Cela lui permetra de se connecter au site ResaSKZ avec ses propres identifiants, de gérer lui même sa commande et de payer tout seul.
+    %p Fait profiter un de tes amis !
+    .btn
+      =link_to  "Je veux être Parrain !", parrainer_user_path(@user)
+
 
 %h2 Infos à afficher sur cette page :
 %ul
