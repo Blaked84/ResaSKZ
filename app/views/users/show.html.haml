@@ -4,16 +4,7 @@
 		=@user.referant_show
 
 %div.fiche.pa1.brdr-b
-
-	%div.tree.pa3
-		%ul
-			%li
-				%a
-					Compte:
-					=@user.referant_show
-				%ul
-					- @user.personnes.each do |p|
-						%li=link_to p.nom_complet, personne_path(p.id) 
+	= render :partial => "personne_tree"
 	%p
 		Nombre de personnes liées au compte:
 		=@user.personnes.count

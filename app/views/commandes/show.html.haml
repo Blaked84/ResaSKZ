@@ -67,19 +67,23 @@
         %th ID
         %th date
         %th Montant
+        %th Paiement reçu
         
     %tbody
       - @paiements.each do |p|
         %tr
-          %td=link_to p.paiement_hash, paiement_path(p.id)
+          %td=link_to p.idlong, paiement_path(p.id)
           %td=p.date
           %td=p.amount_euro
+          %td=conditional_format(p.verif)
       %tr 
         %td
           %hr
         %td
           %strong Total
         %td=@totalpaiement_euro
+
+    %p=link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
 
   %h2
     Produits

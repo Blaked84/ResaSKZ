@@ -27,3 +27,6 @@
 	%p
 		Référant: 
 		=link_to @referant.nom_complet, personne_path(@referant.id)
+
+	%p
+		=link_to @url, @url.to_s

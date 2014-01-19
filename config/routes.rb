@@ -3,7 +3,9 @@ LooklaDev::Application.routes.draw do
   get "admin/index"
   get "admin/graph"
   get "home/index"
-  resources :commandes
+  resources :commandes do 
+    resources :paiements   
+  end
 
   #charts
   get "chart/etatcommande" => "chart#etatcommande"
@@ -14,7 +16,10 @@ LooklaDev::Application.routes.draw do
   resources :events do
     resources :products
   end 
+  #paiements
   resources :paiements
+  get 'paiements-check' => 'paiements#check', as: :check_paiement
+  post 'paiements-import-csv' => 'paiements#csv_import', as: :csv_import
   resources :personnes do
     member do
       get 'personne_infos'

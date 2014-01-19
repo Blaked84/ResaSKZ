@@ -85,10 +85,59 @@ class Commande < ActiveRecord::Base
 
 	#Montant déjà payé (Somme des paiements)
 	def montant_paye
-		self.paiements.map{|p| p.amount_cents}.sum
+		self.paiements.map{|p| p.amount_cents.to_i}.sum
 	end
 
 	def montant_du
 		montant_total - montant_paye
+	end
+
+	def montant_pack
+		self.products.where(categorie_id: Configurable[:id_pack]).map{|p| p.price}.sum
+	end
+
+	def paiement_etape
+		# case montant_paye
+		# when 0
+			
+		# when montant_pack / 2
+		# 	# premier paiement réalisé
+		# 	return 1
+		# when montant_pack
+		# 	# second paiment réalisé
+		# 	return 2
+		# when montant_total
+		# 	# 3eme paiement réalisé
+		# 	return 3
+		# end
+
+		if montant_paye == 0
+			#aucun paiement
+			0
+		elsif montant_paye == montant_total
+			# 3eme paiement réalisé
+			3			
+		elsif montant_paye >= montant_pack
+			# second paiment réalisé
+			2
+		elsif montant_paye >= montant_pack / 2
+			# premier paiement réalisé
+			1
+
+		end
+	end
+
+	def prochain_paiement
+		p = self.paiement_etape
+		case p
+		when 0
+			montant_pack.to_i / 2
+		when 1
+			montant_pack.to_i / 2
+		when 2
+			montant_du
+		when 3
+			0
+		end		 	 
 	end
 end

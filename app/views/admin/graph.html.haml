@@ -2,6 +2,14 @@
 	%h1 Graph Admin
 
 
+-@event.each do |e|
+	%div.top-info.pa1
+		%h2=e.name
+	%div.fiche.pa1.brdr-b
+		%p
+			nombre de commandes
+			=e.commandes.count
+
 %div.top-info.pa1
 	%h2 Commandes
 %div.fiche.pa1.brdr-b
@@ -27,10 +35,10 @@
 			%div.col.w50
 				%h3
 					Bus aller
-					=e.Name
+					=e.name
 				=bar_chart statsbus_path(Configurable[:id_cat_busaller],e.id)
 			%div.col.w50
 				%h3
 					Bus retour
-					=e.Name
+					=e.name
 				=bar_chart statsbus_path(Configurable[:id_cat_busretour],e.id)
