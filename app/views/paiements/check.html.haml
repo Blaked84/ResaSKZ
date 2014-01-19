@@ -1,6 +1,49 @@
-%h1 Paiement#check
-%p Find me in app/views/paiement/create.html.haml
+%div.top-info.pa1
+  %h1 Vérification des paiements
+%div.fiche.pa1.brdr-b
+  %p La vérification de paiements se fait à partir du ficher fourni par la banque. Seuls les fichier CSV peuvent être téléchargé.
 
-= form_tag csv_import_path, :multipart => true do
-  = file_field_tag :file, :accept => "text/csv"
-  = submit_tag "Upload"
+  %p Le traitement peu être un peu long et il ne faut pas fermer le navigateur avant d'avoir le message de confirmation de l'opération.
+
+%div.fiche.pa1.brdr-b
+  = form_tag csv_import_path, :multipart => true do
+    .field= file_field_tag :file, :accept => "text/csv"
+    .field= submit_tag "Télécharger et le traiter le fichier ", :class => "pure-button pure-button-primary"
+
+%div.fiche.pa1.brdr-b
+  %h2 Derniers paiements vérifiés
+
+  %table.striped.alternate
+    %thead
+      %tr
+        %th ID
+        %th Date
+        %th Date de vérification
+        %th Montant
+        
+    %tbody
+      - @paiements_verified.each do |p|
+        %tr
+          %td=link_to p.idlong, paiement_path(p.id)
+          %td=p.date
+          %td=p.verified_at.to_s
+          %td=p.amount_euro
+
+    = will_paginate @paiements_verified
+
+%div.fiche.pa1.brdr-b
+  %h2 Paiements non vérifiés
+
+  %table.striped.alternate
+    %thead
+      %tr
+        %th ID
+        %th Date
+        %th Montant
+        
+    %tbody
+      - @paiements.each do |p|
+        %tr
+          %td=link_to p.idlong, paiement_path(p.id)
+          %td=p.date
+          %td=p.amount_euro
