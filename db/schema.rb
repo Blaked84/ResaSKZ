@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118111727) do
+ActiveRecord::Schema.define(version: 20140119165619) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 20140118111727) do
     t.string   "paiement_hash"
     t.boolean  "verif"
     t.integer  "idlong"
+    t.datetime "verified_at"
   end
 
   create_table "personnes", force: true do |t|
