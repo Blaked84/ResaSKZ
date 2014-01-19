@@ -55,14 +55,26 @@ class PaiementsController < ApplicationController
 
  def csv_import    
   file_data = params[:file].read
-  csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n")
+  csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n",:col_sep => ';')
 
-  csv_rows.each do |row|
-    # do something with each row
+
+  
+  csv_rows.each_with_index do |row,line|
+    case line
+    when 1
+      # useless
+    when 2
+      # header2
+    else
+      validate_paiement(row[21])
+
+      
+    end
+    
   end
 
   respond_to do |format|
-    format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés"}
+    format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés" + csv_rows[5][21].to_s}
   end
  end
 
@@ -112,6 +124,11 @@ end
       uri = template.expand({"ref" => ref.to_s, "amount" => paiement.amount_euro.to_s })
       uri.query_values = params
       uri
+    end
+
+    def validate_paiement(paiement_id_long)
+      paiement=Paiement.all.where(idlong: paiement_id_long)
+      paiement.set_verif if paiement.any?
     end
 
   end

@@ -24,4 +24,9 @@ class Paiement < ActiveRecord::Base
 	def date
 		return self.created_at
 	end
+
+	def set_verif
+		self.verif=true
+		self.save
+	end
 end
