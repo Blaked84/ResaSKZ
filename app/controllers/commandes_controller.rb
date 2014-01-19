@@ -103,10 +103,43 @@ class CommandesController < ApplicationController
    	@status = @commande.complete?
   end
 
+  def add_product
+    set_commande
+
+    authorize! :add_product, @commande
+
+    @product = Product.find_by_id(params[:product_id])
+
+    if @product
+      respond_to do |format|
+        if @commande.add_product @product
+          format.html { redirect_to @commande }
+          format.json { render json: '' }
+        else
+          format.json { render json: "Error : Can't add", status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: "Error", status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def catalogue
+    set_commande
+    authorize! :add_product, @commande    
+
+    @products=@commande.event.products
+
+  end
+
   private
 
   def set_commande
     @commande = Commande.find(params[:id])
+
+
   end
 
   def commande_params
