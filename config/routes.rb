@@ -3,7 +3,11 @@ LooklaDev::Application.routes.draw do
   get "admin/index"
   get "admin/graph"
   get "home/index"
-  resources :commandes do 
+  resources :commandes do
+    member do
+      get :add_product
+      get :catalogue
+    end
     resources :paiements   
   end
 

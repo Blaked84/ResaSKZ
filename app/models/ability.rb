@@ -64,7 +64,7 @@ class Ability
     end
 
 
-    can [:create,:read, :update], Commande do |c|
+    can [:create,:read, :update, :add_product, :destroy], Commande do |c|
         pers = Personne.find_by_id(c.personne_id)
         pers ? pers.user_id == user.id : false
     end
