@@ -9,5 +9,5 @@
     %tbody
       - @events.each do |e|
         %tr
-          %td=link_to e.Name, event_path(e.id)
+          %td=link_to e.name, event_path(e.id)
           %td=e.Description
