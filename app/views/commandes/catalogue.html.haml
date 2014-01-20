@@ -1,2 +1,4 @@
 -@products.each do |p|
-	%p=p.name
+	%p
+		=p.name
+		=button_to_function "AJOUTER" , "add_to_commande(#{@commande.id},#{p.id})"

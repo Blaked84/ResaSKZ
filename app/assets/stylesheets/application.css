@@ -11,8 +11,8 @@
  *= require toastr
  *= require_self
  *= require_tree .
- */
  *= require toastr
+ */
 
 @font-face {
     font-family: 'PTSansRegular';
