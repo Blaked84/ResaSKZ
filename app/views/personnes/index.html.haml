@@ -13,3 +13,5 @@
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
           %td=conditional_format(p.assurance)
+
+  = will_paginate @users

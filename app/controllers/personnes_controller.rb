@@ -3,8 +3,10 @@ class PersonnesController < ApplicationController
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
   before_action :set_personne, only: [:show, :edit, :update, :destroy]
 
+  require 'will_paginate/array'
+
   def index
-  	@personnes = Personne.all.sort_by{|a| a.nom}
+  	@personnes = Personne.all.sort_by{|a| a.nom}.paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @personnes
     @titre = "Personne"
   end
