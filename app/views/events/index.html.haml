@@ -1,13 +1,13 @@
-%h1
-  Evénements
-
-%table.striped.alternate
-  %thead
-    %tr
-      %th Evénement
-      %th Description
-    %tbody
-      - @events.each do |e|
-        %tr
-          %td=link_to e.name, event_path(e.id)
-          %td=e.description
+%div.top-info.pa1
+  %h1 Evénements
+%div.fiche.pa1.brdr-b
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Evénement
+        %th Description
+      %tbody
+        - @events.each do |e|
+          %tr
+            %td=link_to e.name, event_path(e.id)
+            %td=e.description
