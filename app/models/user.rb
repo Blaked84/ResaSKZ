@@ -120,10 +120,10 @@ class User < ActiveRecord::Base
   #Retrouve un user a partir du UID ou le crée
   def self.omniauth(auth_data, signed_in_resource=nil)
     
-    logger.debug "=================================="
-    logger.debug "Connexion depuis le CAS uid : "+auth_data[:uid]
-    logger.debug "Infos de connection !"
-    logger.debug auth_data.inspect
+    logger.info "=================================="
+    logger.info "Connexion depuis le CAS uid : "+auth_data[:uid]
+    logger.info "Infos de connection !"
+    logger.info auth_data.inspect
 
 
     # auth_data : take a look on Users::OmniauthCallbacksController
@@ -138,15 +138,14 @@ class User < ActiveRecord::Base
         last_name: auth_data[:extra][:lastname],
         gender: auth_data[:extra][:sex],
         inscription_terminee: false,
-        cgu_accepted: false
+        cgu_accepted: false,
+        moderated: true,
         )
       user.save!(:validate=>false)
 
       logger.debug user.inspect
       logger.debug "Erreurs"
       user.errors.each{|k,e| logger.debug k.to_s+" : "+e.to_s}
-
-      #AJOUTER Usertype = Gadz
 
       pers = user.personnes.new(
         :prenom => auth_data[:extra][:firstname],

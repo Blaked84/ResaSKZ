@@ -13,6 +13,7 @@ namespace :populate_rec do
 				gender: 'male',
 				cgu_accepted: true,
 				inscription_terminee: true,
+				moderated: true
 				)
 
 		puts "CREATION PERSONNE : Georges"
@@ -94,6 +95,7 @@ namespace :populate_rec do
 		gender: 'male',
 		cgu_accepted: false,
 		inscription_terminee: false,
+		moderated: false
 		)
 
 	puts "CREATION PERSONNE : Marcel"

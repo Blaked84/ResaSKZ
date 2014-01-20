@@ -178,11 +178,12 @@ class UsersController < ApplicationController
         :prenom => @user.first_name,
         :nom => @user.last_name,
         :email => @user.email,
-        enregistrement_termine: false
+        enregistrement_termine: false,
+        moderated: false
         )
 
         pers.genre = Genre.from_cas(@user.gender)   
-        if pers.save!(:validate=>false)
+        if pers.save(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)
           format.html { redirect_to dashboard_user_path(@user), notice: 'User was successfully created.' }
         else

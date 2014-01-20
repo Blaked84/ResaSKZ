@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120153532) do
+ActiveRecord::Schema.define(version: 20140120211912) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -206,6 +206,7 @@ ActiveRecord::Schema.define(version: 20140120153532) do
     t.boolean  "inscription_terminee"
     t.boolean  "cgu_accepted"
     t.integer  "parrain_id"
+    t.boolean  "moderated"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
