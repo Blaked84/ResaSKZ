@@ -28,32 +28,34 @@
       Bypass assurance:
       =@commande.bypassassurance
 
-  %table.striped.alternate
-    %thead
-      %tr
-        %th Assurance commandée
-        %th Personne assurée
-        %th Justificatif assurance
-        %th Récapitulatif assurance
-    %tbody
-      %tr
-        %td=conditional_format(@commande.assurance)
-        %td=conditional_format(@personne.assurance)
-        %td=conditional_format(@personne.documentassurance)
-        %td=conditional_format(@assuranceok)
+  / %table.striped.alternate
+  /   %thead
+  /     %tr
+  /       %th Assurance commandée
+  /       %th Personne assurée
+  /       %th Justificatif assurance
+  /       %th Récapitulatif assurance
+  /   %tbody
+  /     %tr
+  /       %td=conditional_format(@commande.assurance)
+  /       %td=conditional_format(@personne.assurance)
+  /       %td=conditional_format(@personne.documentassurance)
+  /       %td=conditional_format(@assuranceok)
 
   %table.striped.alternate
     %thead
       %tr
+        %th Justificatif assurance
         %th Cheque de caution donné
         %th Total commande (€)
         %th Commande payée totalement
         %th Reste à payer (€)
     %tbody
       %tr
+        %td=conditional_format(@personne.documentassurance)
         %td=conditional_format(@commande.caution)
         %td=@total_euro
-        %td=conditional_format(@paiementok)
+        %td=conditional_format(@commande.paiementok?)
         %td=@paiement_du_euro
 
 %div.fiche.pa1.brdr-b

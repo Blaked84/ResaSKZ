@@ -135,20 +135,22 @@ def is_gadz?
 end
 
 
-def assure?
-	return self.assurance 
-end
+# def assure?
+# 	return self.assurance 
+# end
 
 def document_assurance
-	if assure?
-		if self.documentassurance
-			return "Document fourni"
-		else
-			return "Document à fournir ou en cours de traitement"
-		end
+	if self.documentassurance
+		return "Document fourni"
 	else
-		return "Prendre l'assurance nécessaire."
-	end 
+		return "Document à fournir ou en cours de traitement"
+	end
+
+end
+
+def a_donne_justificatif_assurance
+	self.documentassurance=true
+	self.save
 end
 
 def p_nom_complet
