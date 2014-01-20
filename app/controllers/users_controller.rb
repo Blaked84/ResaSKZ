@@ -10,8 +10,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    authorize! :index, User
-    @users = User.all
+    @users = User.where(moderated: true)
+    authorize! :show, @users
+    @to_moderate_nbr = User.where(moderated: false).count
+  end
+
+  def to_moderate
+    @users = User.where(moderated: false)
+    authorize! :show, @users
   end
 
   # GET /users/1
@@ -29,6 +35,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     authorize! :edit, @user
+    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
   end
 
   # POST /users
@@ -36,6 +43,10 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     authorize! :create, @user
+
+    @roles=params[:roles]
+    raise @roles.ro_s
+
 
 
     respond_to do |format|
@@ -67,10 +78,19 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     authorize! :update, @user
+
+    @roles=params[:roles].to_a
+    
     respond_to do |format|
       if @user.update(user_params)
 
         @user.referant.sync_from_user(@user) if @user.referant
+
+          Role.all.each{|r| @user.remove_role r.name}
+
+          @roles.each do |r,ok|
+            @user.add_role r if ok
+          end
 
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
@@ -220,12 +240,12 @@ class UsersController < ApplicationController
                     :password,
                     :password_confirmation]
       permit_list += [:email] if opts[:registration] || current_user.admin?
-      permit_list += [:uid] if current_user.admin?
+      permit_list += [:uid,:moderated] if current_user.admin?
       params.require(:user).permit( permit_list)
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation)
+      params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation,:moderated)
     end
 
     def referant_params

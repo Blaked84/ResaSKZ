@@ -12,7 +12,7 @@
 /     =f.label :current_password, 'Mot de passe actuel :'
 /     
 /     =f.password_field :current_password
--if current_user.has_role?(:gadz) and not current_user.admin?
+-unless current_user.has_role?(:gadz) and not current_user.admin?
   .field.pure-control-group
     =f.label :password, 'Mot de passe'
     
@@ -36,5 +36,11 @@
 -if can? :see_admin, User
   .field.pure-control-group
     =f.label :inscription_terminee, 'Inscription terminee'
-    
     =f.check_box :inscription_terminee
+  .field.pure-control-group
+    =f.label :moderated, 'Inscription Valide'
+    =f.check_box :moderated
+  %h3 Roles
+  -Role.all.each do |r|
+    =label "roles[#{r.name}]",r.name
+    =check_box_tag "roles[#{r.name}]", "1", !!@roles[r.name]
