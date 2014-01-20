@@ -73,17 +73,21 @@ class Commande < ActiveRecord::Base
 
 
 		#Vérification de l'assurance
+		## Avec proposition d'une RC dans les produits
+		# produit_assurance=false
 
-		produit_assurance=false
+		# self.products.each{|p| produit_assurance = true if p.categorie_id == Configurable[:id_cat_assurance]}
 
-		self.products.each{|p| produit_assurance = true if p.categorie_id == Configurable[:id_cat_assurance]}
+		# unless produit_assurance || self.bypassassurance
+		# 	if self.personne.assurance
+		# 		self.missings << "Personne avec assurance personnelle mais pas de justificatif" unless self.personne.documentassurance
+		# 	else
+		# 		self.missings << "Personne non assuree"
+		# 	end
+		# end
 
-		unless produit_assurance || self.bypassassurance
-			if self.personne.assurance
-				self.missings << "Personne avec assurance personnelle mais pas de justificatif" unless self.personne.documentassurance
-			else
-				self.missings << "Personne non assuree"
-			end
+		unless self.personne.documentassurance
+			self.missings << "Commande sans caution"
 		end
 
 		# vérifie si une caution est donnée
@@ -114,6 +118,9 @@ class Commande < ActiveRecord::Base
 		self.products.where(categorie_id: Configurable[:id_pack]).map{|p| p.price}.sum
 	end
 
+	def paiementok?
+		montant_du == 0
+	end
 	def paiement_etape
 		# case montant_paye
 		# when 0
@@ -161,5 +168,10 @@ class Commande < ActiveRecord::Base
 
 	def gen_idlong
 		(SecureRandom.random_number *10**14).to_s[0,13]
+	end
+
+	def a_donne_caution
+	self.caution=true
+	self.save
 	end
 end

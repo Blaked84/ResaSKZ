@@ -6,10 +6,12 @@
       %tr
         %th Nom
         %th Prénom
-        %th assurance
+        %th Justificatif assurance (RC)
     %tbody
       - @personnes.each do |p|
         %tr
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
-          %td=conditional_format(p.assurance)
+          %td=conditional_format(p.documentassurance)
+
+  = will_paginate @users

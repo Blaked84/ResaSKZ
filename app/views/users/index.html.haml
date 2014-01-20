@@ -4,20 +4,23 @@
   %table.striped.alternate
     %thead
       %tr
-        %th Id
+        %th Id / Actif
         %th Nom référant
-        %th
         %th
     %tbody
       - @users.each do |user|
         %tr
-          %td= user.id
+          %td
+            = user.id
+            = conditional_badge(user.moderated)
           %td= user.referant_show
-          %td= link_to 'Show', user, :class => "pure-button"
-          %td= link_to 'Edit', edit_user_path(user), :class => "pure-button pure-button-primary"
-          %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
-
+          %td
+            = link_to 'Show', user, :class => "pure-button"
+            = link_to 'Edit', edit_user_path(user), :class => "pure-button pure-button-primary"
+            = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+  
+  = will_paginate @users
   %br
 
-= link_to 'New User', new_user_path
-= link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_users_path
+= link_to 'New User', new_user_path, :class => "pure-button pure-button-success"
+= link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_users_path, :class => "pure-button pure-button-primary"

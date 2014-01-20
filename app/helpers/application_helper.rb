@@ -5,6 +5,10 @@ def conditional_format(c)
     render :partial => "shared/conditional_format", :locals => { :c => c}
 end
 
+def conditional_badge(c)
+    render :partial => "shared/conditional_badge", :locals => { :c => c}
+end
+
 # https://coderwall.com/p/ximm8a
 # convert flash message to tostr
 def custom_bootstrap_flash

@@ -42,7 +42,7 @@ class PaiementsController < ApplicationController
 
   def index
     authorize! :read_admin, User
-    @paiements=Paiement.all
+    @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
   end
 
   def show
@@ -61,7 +61,8 @@ class PaiementsController < ApplicationController
  require 'will_paginate/array'
  def check
   authorize! :read_admin, User
-  @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page])
+  @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
+    authorize! :show, @personnes
   @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
   
  end
