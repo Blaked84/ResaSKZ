@@ -43,6 +43,20 @@ class Commande < ActiveRecord::Base
 		end
 	end
 
+	#enleve un produit à la commande en précisant le nombre de produits
+	def remove_product (product, nbr = 1)
+		if (cp=self.commande_products.find_by_product_id(product.id))
+			if cp.nombre > nbr
+				cp.nombre -= nbr
+				cp.save
+			else
+				cp.delete
+			end
+		else
+			false
+		end		
+	end
+
 	##### Vérification du statut d'une commande
  	# complete? => true si:
  	# total à payer =  total des paiement ET
