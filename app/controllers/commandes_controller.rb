@@ -140,6 +140,10 @@ class CommandesController < ApplicationController
 
   end
 
+  def productnmbr
+    render :json => DateTime.now
+  end
+
   private
 
   def set_commande

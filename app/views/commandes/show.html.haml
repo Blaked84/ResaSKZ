@@ -87,7 +87,7 @@
 
   %h2
     Produits
-  / # %p=link_to "Ajouter des produit à ma commande", personne_commande_event_products_path(@personne.id,@commande.id,1)
+  %p=link_to "Ajouter des produit à ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-success"
 
   %table.striped.alternate
     %thead
