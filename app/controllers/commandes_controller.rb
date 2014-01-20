@@ -7,6 +7,12 @@ class CommandesController < ApplicationController
   def new
     @commande = Commande.new(:personne_id => params[:pers_id])
     authorize! :create, @commande
+    @personne=Personne.find_by_id(params[:pers_id]) if params[:pers_id]
+    @packs=Pack.all
+    @events=Event.all.to_a
+    @personne.commandes.each{|c| @events.delete c.event} if @personne
+    logger.debug @events.to_s
+    redirect_to(personne_url(@personne), notice: "Vous êtes déjà inscrit à tout les évènements") if @events.blank?
   end
 
   def create
@@ -130,7 +136,7 @@ class CommandesController < ApplicationController
     set_commande
     authorize! :add_product, @commande    
 
-    @products=@commande.event.products
+    @categories=Categorie.all.map{|c| {nom: c.nom,products: c.products.where(event_id: @commande.event_id)}}
 
   end
 
