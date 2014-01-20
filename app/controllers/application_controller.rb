@@ -1,3 +1,4 @@
+#encoding: utf-8
 class ApplicationController < ActionController::Base
   
   before_filter :check_admin_mode
@@ -42,7 +43,8 @@ class ApplicationController < ActionController::Base
   def check_register_workflow
 
     if user=current_user
-
+      mod = check_moderated
+      return mod if mod
       unless user.admin?
 
         # return redirect_to cgu_user_url(user), :notice => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
@@ -69,6 +71,17 @@ class ApplicationController < ActionController::Base
        end
        
     end
-end
+  end
+
+  def check_moderated
+    if current_user
+      unless current_user.moderated
+        signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
+        return redirect_to root_path, alert: "Votre compte n'a pas encore été accépté par les administrateurs"
+    end
+    end
+
+    nil
+  end
 
 end

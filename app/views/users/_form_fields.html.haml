@@ -12,14 +12,15 @@
 /     =f.label :current_password, 'Mot de passe actuel :'
 /     
 /     =f.password_field :current_password
-.field.pure-control-group
-  =f.label :password, 'Mot de passe'
-  
-  =f.password_field :password, :class => "pure-input-1-3"
-.field.pure-control-group
-  =f.label :password_confirmation, 'Confirmation'
-  
-  =f.password_field :password_confirmation, :class => "pure-input-1-3"
+-if current_user.has_role?(:gadz) and not current_user.admin?
+  .field.pure-control-group
+    =f.label :password, 'Mot de passe'
+    
+    =f.password_field :password, :class => "pure-input-1-3"
+  .field.pure-control-group
+    =f.label :password_confirmation, 'Confirmation'
+    
+    =f.password_field :password_confirmation, :class => "pure-input-1-3"
 .field.pure-control-group
   =f.label :first_name, 'Prenom'
   
