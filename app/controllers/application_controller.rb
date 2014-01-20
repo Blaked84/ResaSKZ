@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
 
       unless user.admin?
 
-        return redirect_to cgu_user_url(user), :notice => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
+        # return redirect_to cgu_user_url(user), :notice => "Vous devez lire et accepter les CGU avant de pouvoir continuer" unless user.cgu_accepted
 
         return redirect_to user_infos_user_url(user), :notice => "Veuillez renseigner vos informations d'inscription avant de continuer" unless user.inscription_terminee
 

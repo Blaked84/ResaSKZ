@@ -145,111 +145,27 @@ listeproduits.each do |c|
 		)
 	a.save
 end
-# test only 
-case Rails.env
-	when "development"
 
-	puts "Seed dev"
-
-	user_gorgu=User.create(
-				email:"gorgu@gadz.org",
-				password:"iresam157",
-				first_name: 'Gorgu',
-				last_name: 'Gadz',
-				gender: 'male',
-				cgu_accepted: true,
-				inscription_terminee: true,
-				)
-	user_gorgu.add_role :gorgu
-
-	user_admin=User.create(
-			email:"admin@gadz.org",
+user_gorgu=User.create(
+			email:"gorgu@gadz.org",
 			password:"iresam157",
-			first_name: 'Admin',
+			first_name: 'Gorgu',
 			last_name: 'Gadz',
 			gender: 'male',
 			cgu_accepted: true,
 			inscription_terminee: true,
 			)
-	user_admin.add_role :admin
+user_gorgu.add_role :gorgu
+user_gorgu.add_role :gadz
 
-	puts "Erreurs gorgu" unless user_gorgu.errors.blank?
-    user_gorgu.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
-
-	user_georges=User.create!(
-				email:"mail@mail.fr",
-				password:"iresam157",
-				first_name: 'Georges',
-				last_name: 'Duchemin',
-				gender: 'male',
-				cgu_accepted: false,
-				inscription_terminee: false,
-				)
-
-	puts "Erreurs georges" unless user_georges.errors.blank?
-    user_georges.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
-
-	georges=user_georges.personnes.create!(
-		:nom => "Duchemin",
-		:prenom => "Georges",
-		:phone => "0612345678",
-		:assurance => 1,
-		:documentassurance => 0,
-		:adresse => "12 rue felix savart",
-		:complement => "RESAM",
-		:ville => "metz",
-		:codepostal => "57000",
-		:bucque => "bucquetrololo",
-		:email => "mail@mail.fr",
-		:fams => "84",
-		:promo => "211",
-		:naissance => DateTime.new(1990,2,3),
-		:idGadzOrg => "georges.duchemin.2011",
-		:taille => "184",
-		:pointure => "42",
-		:taillevetement_id => "2",
-		:pnom => "Duchemin",
-		:pprenom => "Robert",
-	    :plienparente => "Pere",
-	    :padresse => "84 rue du PG",
-	    :pcomplement => "Resid's du gorgu",
-	    :pville => "Paris",
-	    :pcodepostal=> 75001,
-	    :pphone => "0684848484",
-	    :genre_id => 1,
-	    :enregistrement_termine => false,
+user_admin=User.create(
+		email:"admin@gadz.org",
+		password:"iresam157",
+		first_name: 'Admin',
+		last_name: 'Gadz',
+		gender: 'male',
+		cgu_accepted: true,
+		inscription_terminee: true,
 		)
-	puts "Erreurs georges" if georges.errors
-    georges.errors.each{|k,e| puts k.to_s+" : "+e.to_s}
-
-	user_georges.referant=georges
-	
-	user_georges.save!
-
-
-
-	user_georges.save
-
-	user_georges.add_role :gadz
-
-	puts "User & Personnes created"
-	
-
-	# while i<200
-	# 	com = georges.commandes.create(
-	# 	:assurance => 0,
-	# 	:status => 0,
-	# 	:caution => 1,
-	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-	# 	:tbk_id => SecureRandom.random_number(9)
-	# )
-	# 	i+=1
-	# end
-	# com = georges.commandes.create(
-	# 	:assurance => 0,
-	# 	:status => 0,
-	# 	:caution => 1,
-	# 	:ean => (SecureRandom.random_number *10**14).to_s[0,13],
-	# 	:tbk_id => 1
-	# )
-end
+user_admin.add_role :admin
+user_admin.add_role :gadz

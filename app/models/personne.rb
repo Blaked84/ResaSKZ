@@ -16,6 +16,8 @@ class Personne < ActiveRecord::Base
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
+	@@types= %w(Pec's Gadz)
+
 #### VALIDATIONS ##############################################################
 
 ###### Attributs ##############################################################
@@ -45,11 +47,14 @@ class Personne < ActiveRecord::Base
 	validates :padresse , :presence => true
 	validates :pville , :presence => true
 	validates :pcodepostal , :presence => true
+	validates :type_pers, :inclusion => {  :in => @@types}
 
 	# validates :documentassurance, :inclusion => {  :in => [true,false]}
 	# validates :enregistrement_termine, :inclusion => {  :in => [true,false]}
-	
 
+	validates :bucque	,:presence => true, if: :is_gadz?
+	validates :fams	    ,:presence => true, if: :is_gadz?
+	validates :promo	,:format => { :with => /\A(ai|bo|cl|li|ch|me|an|ka)[1-9]{3}\Z/ }, if: :is_gadz?
 
 ###### Associations ###########################################################
 	validates :user, presence: true
@@ -126,8 +131,7 @@ def referant?
 end
 
 def is_gadz?
-	#A IMPLEMENTER
-	true
+	%w(Gadz).include? self.type_pers
 end
 
 
@@ -161,5 +165,8 @@ def sync_from_user(user)
   self.save(:validate => false)
 end
 
+def self.types
+	@@types
+end
 
 end
