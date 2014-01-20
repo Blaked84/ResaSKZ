@@ -1,7 +1,7 @@
 %div.top-info.pa1
   %h1
     Commande #
-    =@commande.ean
+    =@commande.idlong
 
 %div.fiche.pa1.brdr-b
 
@@ -15,18 +15,18 @@
         %th Etat
     %tbody
       %tr
-        %td=@commande.ean
+        %td=@commande.idlong
         %td=link_to @personne.user.referant.nom_complet, user_path(@personne.user.id)
         %td=link_to @personne.nom_complet, personne_path(@personne.id)
         %td=conditional_format(@commande.complete?)
         %td=@commande.status
-
-  %p
-    Bypass paiement:
-    =@commande.bypasspaiement
-  %p
-    Bypass assurance:
-    =@commande.bypassassurance
+  -if can? :read_admin, User
+    %p
+      Bypass paiement:
+      =@commande.bypasspaiement
+    %p
+      Bypass assurance:
+      =@commande.bypassassurance
 
   %table.striped.alternate
     %thead

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120153532) do
+ActiveRecord::Schema.define(version: 20140120204454) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140120153532) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
+    t.integer  "idlong"
   end
 
   create_table "configurables", force: true do |t|

@@ -1,7 +1,8 @@
-%h1 Edition de Personne
+%div.top-info.pa1
+	%h1 Edition de Personne
+%div.fiche.pa1.brdr-b
+	= render 'form'
 
-= render 'form'
-
-= link_to 'Show', @personne, :class => "pure-button pure-button-primary"
-\|
-= link_to 'Back', personnes_path, :class => "pure-button"
+	= link_to 'Show', @personne, :class => "pure-button pure-button-primary"
+	\|
+	= link_to 'Back', personnes_path, :class => "pure-button"
