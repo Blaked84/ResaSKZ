@@ -81,7 +81,7 @@ class User < ActiveRecord::Base
   end
 
   def gadz?
-
+    has_role? :gadz
   end
 
   private

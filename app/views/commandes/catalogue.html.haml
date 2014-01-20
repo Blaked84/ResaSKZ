@@ -1,6 +1,16 @@
 -@categories.each do |c|
-	%h2= c[:nom]
-	-c[:products].each do |p|
-		%p
-			=p.name
-			=button_to_function "AJOUTER" , "add_to_commande(#{@commande.id},#{p.id})"
+  %h2= c[:nom]
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Produit
+        %th Disponible
+        %th Prix (€)
+        %th Commander
+    %tbody
+      -c[:products].each do |p|
+        %tr
+          %td=p.name
+          %td=p.reste?
+          %td=p.price_euro
+          %td=button_to_function "AJOUTER" , "add_to_commande(#{@commande.id},#{p.id})"

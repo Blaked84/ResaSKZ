@@ -22,4 +22,18 @@ class Product < ActiveRecord::Base
 	def price_euro
 		return self.price / 100.0
 	end
+
+	def restant
+		return nil if self.stock == 0
+		stock - self.commande_products.map{|cp| cp.nombre}.sum
+	end
+
+	def reste? (nbr = 0)
+
+		return true if self.stock == 0
+
+		self.restant > 0
+
+	end
+
 end

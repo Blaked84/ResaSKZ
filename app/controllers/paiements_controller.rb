@@ -13,7 +13,7 @@ class PaiementsController < ApplicationController
     authorize! :create, @paiement
 
    com=Commande.find(params[:commande_id])
-   if com.montant_du != 0
+   if com.montant_du > 0
 
     p=com.paiements.create(
       :idlong => (SecureRandom.random_number *10**14).to_s[0,13],
@@ -21,10 +21,10 @@ class PaiementsController < ApplicationController
       :paiement_hash => "paiement en cours...",
       :verif => false)
 
-    p.paiement_hash=hashpaiement(p)
-    p.save if p.valid?
+      p.paiement_hash=hashpaiement(p)
+      p.save if p.valid?
 
-    respond_to do |format|
+      respond_to do |format|
         #décommenter la ligne ci-dessous pour payer par gadz.org
         format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
