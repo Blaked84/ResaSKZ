@@ -8,7 +8,7 @@ class PaiementsController < ApplicationController
   def create
     # attention les controleur create et new on été fait à l'arrache.
     # C'es sale mais ça marche. Mais ce serait mieux de modifier ça quand même.
-    com=Commande.find(params[:id])
+    com=Commande.find(params[:commande_id])
     p=com.paiements.new(
       :amount_cents => com.prochain_paiement,
       :paiement_hash => "paiement en cours...",
@@ -28,6 +28,9 @@ class PaiementsController < ApplicationController
 
   def new
     authorize! :create, @paiement
+    com=Commande.find(params[:commande_id])
+    @montant=com.prochain_paiement / 100.0
+    @etape=(com.paiement_etape + 1).to_s
 
    com=Commande.find(params[:commande_id])
    if com.montant_du > 0

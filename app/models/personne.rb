@@ -144,10 +144,10 @@ def document_assurance
 		if self.documentassurance
 			return "Document fourni"
 		else
-			return "Docuement à fournir ou en cours de traitement"
+			return "Document à fournir ou en cours de traitement"
 		end
 	else
-		return "Assurance à commander dans les produits"
+		return "Prendre l'assurance nécessaire."
 	end 
 end
 
