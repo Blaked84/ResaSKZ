@@ -1,4 +1,4 @@
 %h1 Paiement#New
 
 =simple_form_for @paiement do |f|
-	%span=f.button :submit
+	%span=f.button :submit, {:commande_id => params[:commande_id], :amount_cents => params[:amount_cents]}

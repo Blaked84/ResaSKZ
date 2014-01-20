@@ -7,20 +7,15 @@ class PaiementsController < ApplicationController
 
   def create
 
-  end
-
-  def new
-    authorize! :create, @paiement
-
-   com=Commande.find(params[:commande_id])
-   if com.montant_du != 0
-
-    p=com.paiements.create(
-      :idlong => (SecureRandom.random_number *10**14).to_s[0,13],
+    # attention les controleur create et new on été fait à l'arrache.
+    # C'es sale mais ça marche. Mais ce serait mieux de modifier ça quand même.
+    com=Commande.find(3)
+    p=com.paiements.new(
       :amount_cents => com.prochain_paiement,
       :paiement_hash => "paiement en cours...",
       :verif => false)
 
+    p.idlong=p.gen_idlong
     p.paiement_hash=hashpaiement(p)
     p.save if p.valid?
 
@@ -28,7 +23,15 @@ class PaiementsController < ApplicationController
         #décommenter la ligne ci-dessous pour payer par gadz.org
         format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
-      end
+    end
+  end
+
+  def new
+    authorize! :create, @paiement
+
+   com=Commande.find(params[:commande_id])
+   if com.montant_du != 0
+    
     else
       redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
     end
@@ -141,6 +144,10 @@ private
     else 
       return false   
     end
+  end
+
+  def paiement_params
+    params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif)
   end
 
 end
