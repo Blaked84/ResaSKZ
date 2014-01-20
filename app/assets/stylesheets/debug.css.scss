@@ -1,5 +1,18 @@
 #debug{
 	position: fixed;
 	bottom: 0;
-	background: rgba(2, 80, 17, 0.45);
+	left:-750px;
+	background: rgba(2, 80, 17, 0.90);
+	color: white;
+	font-weight: bold;
+	width: 800px;
+	transition: left 0.3s;
+	-webkit-transition: left 0.3s;
 }
+
+
+
+#debug:hover{
+	left:0px;
+}
+

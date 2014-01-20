@@ -13,42 +13,42 @@
       .btn
         =link_to  "Je veux être Parrain !", parrainer_user_path(@user)
 
-
-  %h2 Infos à afficher sur cette page :
-  %ul
-    %li
-      %del
-        Lien pour parrainer une personne :
-        -if can? :parrainer, @user
-          = link_to "Parrainer", parrainer_user_path(@user)
-    %li 
-      %del 
-        Lien pour modifier ses informations
-    %li    
-      %del liste des personnes gérées par cet user
-      %ul
-        %li 
-          %del Nom
-        %li 
-          %del Lien pour modifier ses informations
-        %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
-        %li 
-          %del Lien pour passer une commande
-        %li 
-          %del Lien pour ajouter une personne
+  -if Rails.env == 'development' && false
+    %h2 Infos à afficher sur cette page :
+    %ul
+      %li
+        %del
+          Lien pour parrainer une personne :
+          -if can? :parrainer, @user
+            = link_to "Parrainer", parrainer_user_path(@user)
+      %li 
         %del 
-          %li
-            Liste des commandes de chaque user
-            %ul
-              %li Event
-              %li montant total
-              %li Etat de la commande
-      %li Indicateur de l'état global des commande (toute les commande ok ?)
+          Lien pour modifier ses informations
+      %li    
+        %del liste des personnes gérées par cet user
+        %ul
+          %li 
+            %del Nom
+          %li 
+            %del Lien pour modifier ses informations
+          %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
+          %li 
+            %del Lien pour passer une commande
+          %li 
+            %del Lien pour ajouter une personne
+          %del 
+            %li
+              Liste des commandes de chaque user
+              %ul
+                %li Event
+                %li montant total
+                %li Etat de la commande
+        %li Indicateur de l'état global des commande (toute les commande ok ?)
 
-  %h2 Objets dispos sur cette page :
-  %ul
-    %li
-      @user
+    %h2 Objets dispos sur cette page :
+    %ul
+      %li
+        @user
 %div.fiche.pa1.brdr-b
   %h2 Personnes gérées par ce compte :
   = link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button pure-button-success"
@@ -73,6 +73,7 @@
               = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
               -unless p.is_referant?
                 = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+              = link_to 'Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success"
 %div.fiche.pa1.brdr-b                
   %h2 Commandes
   %table.striped.alternate
@@ -92,5 +93,5 @@
               %td=c.created_at.to_s.gsub("UTC","")
               %td=c.event.name
               %td=conditional_format(c.complete?)
-              %td=c.montant_total
-  = link_to 'Nouvelle commande', new_commande_path(@user), :class => "pure-button pure-button-success"
+              %td=c.montant_total/100.0
+ 
