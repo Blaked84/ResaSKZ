@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 	layout "landing"
   def index
-
+  	@maintenance=Configurable[:mode_maintenance]
 
   	redirect_to dashboard_user_path(current_user) if current_user
 

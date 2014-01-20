@@ -10,6 +10,7 @@ class PaiementsController < ApplicationController
   end
 
   def new
+    authorize! :create, @paiement
 
    com=Commande.find(params[:commande_id])
    if com.montant_du != 0
@@ -48,15 +49,19 @@ class PaiementsController < ApplicationController
  end
 
  def update
+  authorize! :read_admin, User
  end
-
+ 
+ require 'will_paginate/array'
  def check
+  authorize! :read_admin, User
   @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page])
   @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
   
  end
 
- def csv_import    
+ def csv_import
+  authorize! :read_admin, User    
   file_data = params[:file].read
   csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n",:col_sep => ';')
 

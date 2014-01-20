@@ -1,8 +1,9 @@
 class ApplicationController < ActionController::Base
+  
+  before_filter :check_admin_mode
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-
 
   rescue_from CanCan::AccessDenied do |exception|
     if current_user.nil?
@@ -55,8 +56,19 @@ class ApplicationController < ActionController::Base
         nil
       end
 
-      end
+    end
 
   end
+
+  def check_admin_mode
+    if Configurable[:mode_maintenance] && controller_name != 'devise/sessions' && controller_name != 'home' && !current_user.nil?
+       unless current_user.id==1
+         cookies.delete(:secureusertokens)
+         reset_session
+         redirect_to root_path
+       end
+       
+    end
+end
 
 end

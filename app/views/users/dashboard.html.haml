@@ -1,96 +1,96 @@
-%h1= @user.nom_complet
--unless @user.parrain.nil?
-  .box
-    %p Votre compte est parrainé par :
-    =@user.parrain.referant.nom_complet
--if can? :parrainer, @user
-  .box.parrainner
-    %p
-      Vous pouvez parrainer un ami, votre Za/Zon ou votre chien ! Cela lui permetra de se connecter au site ResaSKZ avec ses propres identifiants, de gérer lui même sa commande et de payer tout seul.
-    %p Fait profiter un de tes amis !
-    .btn
-      =link_to  "Je veux être Parrain !", parrainer_user_path(@user)
+%div.top-info.pa1
+  %h1= @user.nom_complet
+%div.fiche.pa1.brdr-b
+  -unless @user.parrain.nil?
+    .box.pa1.ma1
+      %p Votre compte est parrainé par :
+      =@user.parrain.referant.nom_complet
+  -if can? :parrainer, @user
+    .box.parrainner.pa1.ma1
+      %p
+        Vous pouvez parrainer un ami, votre Za/Zon ou votre chien ! Cela lui permetra de se connecter au site ResaSKZ avec ses propres identifiants, de gérer lui même sa commande et de payer tout seul.
+      %p Fait profiter un de tes amis !
+      .btn
+        =link_to  "Je veux être Parrain !", parrainer_user_path(@user)
 
 
-%h2 Infos à afficher sur cette page :
-%ul
-  %li
-    Lien pour parrainer une personne :
-    -if can? :parrainer, @user
-      = link_to "Parrainer", parrainer_user_path(@user)
-  %li Lien pour modifier ses informations
-  %li    
-    %del liste des personnes gérées par cet user
-    %ul
-      %li 
-        %del Nom
-      %li 
-        %del Lien pour modifier ses informations
-      %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
-      %li Lien pour passer une commande
-      %li 
-        %del Lien pour ajouter une personne
-      %li
-        Liste des commandes de chaque user
-        %ul
-          %li Event
-          %li montant total
-          %li Etat de la commande
-  %li Indicateur de l'état global des commande (toute les commande ok ?)
+  %h2 Infos à afficher sur cette page :
+  %ul
+    %li
+      %del
+        Lien pour parrainer une personne :
+        -if can? :parrainer, @user
+          = link_to "Parrainer", parrainer_user_path(@user)
+    %li 
+      %del 
+        Lien pour modifier ses informations
+    %li    
+      %del liste des personnes gérées par cet user
+      %ul
+        %li 
+          %del Nom
+        %li 
+          %del Lien pour modifier ses informations
+        %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
+        %li 
+          %del Lien pour passer une commande
+        %li 
+          %del Lien pour ajouter une personne
+        %del 
+          %li
+            Liste des commandes de chaque user
+            %ul
+              %li Event
+              %li montant total
+              %li Etat de la commande
+      %li Indicateur de l'état global des commande (toute les commande ok ?)
 
-%h2 Objets dispos sur cette page :
-%ul
-  %li
-    @user
-
-%h2 Personnes gérées par ce compte :
-= link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button pure-button-success"
-%ul
-  -@user.personnes.each do |p|
-    -if p.enregistrement_termine
-      %li
-        = link_to p.nom_complet, personne_path(p)
-        = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
-        -unless p.is_referant?
-          = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+  %h2 Objets dispos sur cette page :
+  %ul
+    %li
+      @user
+%div.fiche.pa1.brdr-b
+  %h2 Personnes gérées par ce compte :
+  = link_to 'Ajouter', new_personne_user_path(@user), :class => "pure-button pure-button-success"
 
 
+  = render :partial => "personne_tree"
 
-= render :partial => "personne_tree"
-
-%table.striped.alternate
-  %thead
-    %tr
-      %th Nom
-      %th Prénom
-      %th assurance
-  %tbody
-    - @user.personnes.each do |p| 
-      -if p.enregistrement_termine
-        %tr
-          %td=link_to p.nom, personne_path(p.id)
-          %td=p.prenom
-          %td=conditional_format(p.assurance)
-          %td
-            = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
-            -unless p.is_referant?
-              = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
-%h2 Commandes
-%table.striped.alternate
-  %thead
-    %tr
-      %th Commande ID
-      %th Date de création
-      %th Evénement
-      %th Statut
-      %th Montant
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Nom
+        %th Prénom
+        %th assurance
     %tbody
-      -if @commandes
-        - @commandes.each do |c| 
+      - @user.personnes.each do |p| 
+        -if p.enregistrement_termine
           %tr
-            / %td=c.id
-            %td=link_to c.ean, commande_path(c.id)
-            %td=c.created_at.to_s.gsub("UTC","")
-            %td=c.event.name
-            %td=conditional_format(c.complete?)
-            %td=c.montant_total
+            %td=link_to p.nom, personne_path(p.id)
+            %td=p.prenom
+            %td=conditional_format(p.assurance)
+            %td
+              = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
+              -unless p.is_referant?
+                = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+%div.fiche.pa1.brdr-b                
+  %h2 Commandes
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Commande ID
+        %th Date de création
+        %th Evénement
+        %th Statut
+        %th Montant
+      %tbody
+        -if @commandes
+          - @commandes.each do |c| 
+            %tr
+              / %td=c.id
+              %td=link_to c.ean, commande_path(c.id)
+              %td=c.created_at.to_s.gsub("UTC","")
+              %td=c.event.name
+              %td=conditional_format(c.complete?)
+              %td=c.montant_total
+  = link_to 'Nouvelle commande', new_commande_path(@user), :class => "pure-button pure-button-success"
