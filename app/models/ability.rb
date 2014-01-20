@@ -63,6 +63,7 @@ class Ability
         user.personnes.map{|p| p.commandes}.flatten.map{|c| c.paiements}.flatten.include?(p)
     end
 
+    can :create, Paiement
 
     can [:create,:read, :update, :add_product, :destroy], Commande do |c|
         pers = Personne.find_by_id(c.personne_id)
