@@ -1,16 +1,23 @@
--@categories.each do |c|
-  %h2= c[:nom]
-  %table.striped.alternate
-    %thead
-      %tr
-        %th Produit
-        %th Disponible
-        %th Prix (€)
-        %th Commander
-    %tbody
-      -c[:products].each do |p|
+%div.top-info.pa1
+  %h1 Ajouter des produit à ma commande
+%div.fiche.pa1.brdr-b
+  -@categories.each do |c|
+    %h2= c[:nom]
+    %table.striped.alternate
+      %thead
         %tr
-          %td=p.name
-          %td=p.reste?
-          %td=p.price_euro
-          %td=button_to_function "AJOUTER" , "add_to_commande(#{@commande.id},#{p.id})"
+          %th
+          %th Produit
+          %th Disponible
+          %th Prix (€)
+      %tbody
+        -c[:products].each do |p|
+          %tr
+            %td
+              =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success"
+              =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+              =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error"
+            %td=p.name
+            %td=conditional_format(p.reste?)
+            %td=p.price_euro
+            

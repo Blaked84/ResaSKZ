@@ -37,6 +37,7 @@ LooklaDev::Application.routes.draw do
     end
   end
   resources :products
+  get 'productnmbr' => 'comandes#productnmbr'
 
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

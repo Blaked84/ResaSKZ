@@ -1,5 +1,7 @@
-%h1 Ajouter une personne
-
-=render 'personnes/form'
-
-= link_to 'Retour', dashboard_user_path(@user)
+%div.top-info.pa1
+	%h1 Ajouter une personne
+%div.fiche.pa1.brdr-b
+	=render 'personnes/form'
+	
+	%br
+	= link_to 'Retour', dashboard_user_path(@user), :class => "pure-button"

@@ -158,4 +158,8 @@ class Commande < ActiveRecord::Base
 			0
 		end		 	 
 	end
+
+	def gen_idlong
+		(SecureRandom.random_number *10**14).to_s[0,13]
+	end
 end

@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20140120211912) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
+    t.integer  "idlong"
   end
 
   create_table "configurables", force: true do |t|

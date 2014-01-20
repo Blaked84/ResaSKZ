@@ -22,6 +22,8 @@ class CommandesController < ApplicationController
     @commande = Commande.new(commande_params)
     authorize! :create, @commande
 
+    @commande.idlong=@commande.gen_idlong
+
     respond_to do |format|
       if @commande.save
         format.html { redirect_to dashboard_user_url @commande.personne.user, notice: 'Votre commande a bien été créée' }
@@ -140,12 +142,14 @@ class CommandesController < ApplicationController
 
   end
 
+  def productnmbr
+    render :json => DateTime.now # bon ça c'était un test pour du json.
+  end
+
   private
 
   def set_commande
     @commande = Commande.find(params[:id])
-
-
   end
 
   def commande_params

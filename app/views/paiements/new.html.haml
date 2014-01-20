@@ -1,4 +1,9 @@
-%h1 Paiement#New
+%div.top-info.pa1
+	%h1 Nouveau paiement
+%div.fiche.pa1.brdr-b
+	%p Vous allez être redirigé vers gadz.org puis vers le site de la banque où vous pourrez effectuer le paiement en toute sécurité.
 
-=simple_form_for @paiement do |f|
-	%span=f.button :submit, {:commande_id => params[:commande_id], :amount_cents => params[:amount_cents]}
+	%p Vous allez effectuer notre paiement numéro #{@etape}, d'un montant de  #{@montant} €.
+%div.fiche.pa1.brdr-b
+	=form_for @paiement do |f|
+		=f.button :Payer, name: "commande_id",value: params[:commande_id], :class => "pure-button pure-button-success"
