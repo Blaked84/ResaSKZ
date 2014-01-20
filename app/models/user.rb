@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   # commandes de plusieurs personnes
   #################################################
 
-  has_one :parrain,  class_name: "User", foreign_key: "parrain_id", inverse_of: :filleuls
+  belongs_to :parrain,  class_name: "User", foreign_key: "parrain_id", inverse_of: :filleuls
   has_many :filleuls,  class_name: "User", foreign_key: "parrain_id", inverse_of: :parrain
 
   has_many :personnes,  class_name: "Personne", foreign_key: "user_id", dependent: :destroy
@@ -122,6 +122,9 @@ class User < ActiveRecord::Base
     
     logger.debug "=================================="
     logger.debug "Connexion depuis le CAS uid : "+auth_data[:uid]
+    logger.debug "Infos de connection !"
+    logger.debug auth_data.inspect
+
 
     # auth_data : take a look on Users::OmniauthCallbacksController
     if user = User.find_by_uid(auth_data[:uid])
@@ -152,6 +155,7 @@ class User < ActiveRecord::Base
         :bucque => nil ,
         :fams => nil ,
         :promo => nil,
+        :type_pers => 'PG',
         enregistrement_termine: false
         )
 

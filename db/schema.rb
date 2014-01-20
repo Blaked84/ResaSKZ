@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119165619) do
+ActiveRecord::Schema.define(version: 20140120153532) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20140119165619) do
     t.boolean  "enregistrement_termine"
     t.string   "commentaires"
     t.string   "commentaires_admin"
+    t.string   "type_pers"
   end
 
   create_table "products", force: true do |t|
@@ -216,11 +217,5 @@ ActiveRecord::Schema.define(version: 20140119165619) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id"
-
-  create_table "usertypes", force: true do |t|
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
