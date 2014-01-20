@@ -5,7 +5,7 @@ LooklaDev::Application.routes.draw do
   get "home/index"
   resources :commandes do
     member do
-      get :add_product
+      post :add_product
       get :catalogue
     end
     resources :paiements   

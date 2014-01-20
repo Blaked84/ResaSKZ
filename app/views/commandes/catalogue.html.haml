@@ -1,2 +1,6 @@
--@products.each do |p|
-	%p=p.name
+-@categories.each do |c|
+	%h2= c[:nom]
+	-c[:products].each do |p|
+		%p
+			=p.name
+			=button_to_function "AJOUTER" , "add_to_commande(#{@commande.id},#{p.id})"
