@@ -69,6 +69,8 @@ class Ability
         pers ? pers.user_id == user.id : false
     end
 
+    can :create, Commande
+
     can :read, Event
 
   end
