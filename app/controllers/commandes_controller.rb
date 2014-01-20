@@ -26,7 +26,7 @@ class CommandesController < ApplicationController
 
     respond_to do |format|
       if @commande.save
-        format.html { redirect_to dashboard_user_url @commande.personne.user, notice: 'Votre commande a bien été créée' }
+        format.html { redirect_to catalogue_commande_path(@commande.id), notice: 'Votre commande a bien été créée' }
         format.json { head :no_content }
       else
         format.html { render 'new' }
