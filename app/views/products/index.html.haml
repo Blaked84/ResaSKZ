@@ -5,30 +5,31 @@
 
 / # =form_tag( product_commande_path, :method => :post) do
 - @categories.each_with_index do |ca, i|
-  %div.pa1.fiche.brdr-b
-    %h2=ca.nom
-    %table.striped.alternate
-      %thead
-        %tr
-          %th Ajouter
-          %th Produit
-          %th Quantitée totale
-          %th Prix (€)
-          %th Date limite de réservation
-          -if not @evenement
-            %th Evenement
-        %tbody
-          - @products.each do |prd|
-            -if prd.categorie_id==i+1
-              %tr
-                %td
-                / # %td=check_box_tag "prd_" + pdr.id.to_s, "1", false
-                %td=link_to prd.name, product_path(prd.id)
-                %td=prd.stock
-                %td=prd.price_euro
-                %td=prd.echeance
-                -if not @evenement
-                  %td=prd.event.name
+  -unless ca.nom.blank?
+    %div.pa1.fiche.brdr-b
+      %h2=ca.nom
+      %table.striped.alternate
+        %thead
+          %tr
+            %th Ajouter
+            %th Produit
+            %th Quantitée totale
+            %th Prix (€)
+            %th Date limite de réservation
+            -if not @evenement
+              %th Evenement
+          %tbody
+            - @products.each do |prd|
+              -if prd.categorie_id==i+1
+                %tr
+                  %td
+                  / # %td=check_box_tag "prd_" + pdr.id.to_s, "1", false
+                  %td=link_to prd.name, product_path(prd.id)
+                  %td=prd.stock
+                  %td=prd.price_euro
+                  %td=prd.echeance
+                  -if not @evenement
+                    %td=prd.event.name
                   
 / #  =submit_tag 'Valider'
 
