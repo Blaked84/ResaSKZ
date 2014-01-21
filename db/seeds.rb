@@ -19,8 +19,7 @@ Event.create(
 
 
 puts "Categories"
-listecategorries=["Pack","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","Assurances","Animations complémentaires","Boulangerie","Assurances Complémentaires SKZ.
-Attestation Responsabilité à fournir obligatoirement même dans le cas ou une assurance SKZ est sélectionnée"]
+listecategorries=["Pack","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","","Animations complémentaires","Boulangerie","Assurances"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
