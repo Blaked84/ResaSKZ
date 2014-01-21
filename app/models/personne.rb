@@ -167,6 +167,40 @@ def sync_from_user(user)
   self.save(:validate => false)
 end
 
+def annee_promo
+
+	annee=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[2]
+
+	annee.insert(1,"9") if annee[0]=="1"
+	annee.insert(1,"0") if annee[0]=="2"
+
+	annee.to_i
+
+end
+
+
+def tbk_promo
+
+	tbk=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[1]
+
+	tbk = "me" if tbk =="ka"
+
+	Tbk.find_by_diminutif tbk
+
+end
+
+def type_gadz
+	if self.is_gadz?
+		last_proms=(Date.today-8.months).year
+
+		annee_gadz=last_proms - annee_promo
+
+		return 'PG' if annee_gadz <3
+		return 'JP' if annee_gadz <10
+		return 'Archi'
+	end
+end
+
 def self.types
 	@@types
 end

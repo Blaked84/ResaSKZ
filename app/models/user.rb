@@ -154,7 +154,7 @@ class User < ActiveRecord::Base
         :bucque => nil ,
         :fams => nil ,
         :promo => nil,
-        :type_pers => 'PG',
+        :type_pers => 'Gadz',
         enregistrement_termine: false
         )
 

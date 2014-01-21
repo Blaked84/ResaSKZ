@@ -44,9 +44,9 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=[["Siber's","Metz"],["Clun's","Cluny"],["Chalon's","Chalon-en-Champagne"],["Bordel's","Bordeaux"],["KIN","Aix-en-Provence"],["Boquette","Angers"],["Birse","Lille"],["P3","Paris"]].sort
+listet=[["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
-	Tbk.create(:nom =>c[0], :nom_pecs => c[1])
+	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
 
 listeproduits=[["PG",30500,0,DateTime.new(2013,2,3),"De 213 à 211",1,1],
