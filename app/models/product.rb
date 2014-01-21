@@ -30,7 +30,7 @@ class Product < ActiveRecord::Base
 
 	def reste? (nbr = 0)
 
-		return true if self.stock == 0
+		return true if self.stock == 0 || self.stock.blank?
 
 		self.restant > 0
 
