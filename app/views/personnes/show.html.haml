@@ -70,15 +70,15 @@
 
   
   
-  %table.striped.alternate
+  %table.striped.alternate#unfixedtable
     %thead
       %tr
         %th Commande ID
-        %th Assurance
+        / %th Assurance
         %th Statut
       %tbody
         -@commandes.each do |commande|
           %tr
             %td=link_to commande.idlong, personne_commande_path(@personne.id,commande.id)
-            %td=conditional_format(commande.assurance)
+            / %td=conditional_format(commande.assurance)
             %td=conditional_format(commande.complete?)

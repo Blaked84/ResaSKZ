@@ -14,11 +14,12 @@
         -c[:products].each do |p|
           %tr
             %td
-              =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success"
+              =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success pure-button-small"
               %span{ :id => 'product'+p.id.to_s}
                 =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-              =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error"
-            %td=p.name
+              =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error pure-button-small"
+            %td=link_to p.name, product_path(p.id)
             %td=conditional_format(p.reste?)
             %td=p.price_euro
             
+  =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"
