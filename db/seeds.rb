@@ -154,6 +154,7 @@ user_gorgu=User.create(
 			gender: 'male',
 			cgu_accepted: true,
 			inscription_terminee: true,
+			moderated: true
 			)
 user_gorgu.add_role :gorgu
 user_gorgu.add_role :gadz
@@ -166,6 +167,7 @@ user_admin=User.create(
 		gender: 'male',
 		cgu_accepted: true,
 		inscription_terminee: true,
+		moderated: true
 		)
 user_admin.add_role :admin
 user_admin.add_role :gadz

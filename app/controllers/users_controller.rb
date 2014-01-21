@@ -87,11 +87,15 @@ class UsersController < ApplicationController
 
         @user.referant.sync_from_user(@user) if @user.referant
 
+        
+        if current_user.admin?
+          @user.referant.sync_from_user(@user) if @user.referant
           Role.all.each{|r| @user.remove_role r.name}
 
-          @roles.each do |r,ok|
-            @user.add_role r if ok
-          end
+            @roles.each do |r,ok|
+              @user.add_role r if ok
+            end
+        end
 
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
@@ -145,6 +149,7 @@ class UsersController < ApplicationController
     set_user
     redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
+    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
     authorize! :user_infos, @user
   end
 
@@ -157,7 +162,14 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
-        @user.referant.sync_from_user(@user) if @user.referant
+        if current_user.admin?
+          @user.referant.sync_from_user(@user) if @user.referant
+          Role.all.each{|r| @user.remove_role r.name}
+
+            @roles.each do |r,ok|
+              @user.add_role r if ok
+            end
+        end
         sign_in(@user, :bypass => true)
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
@@ -186,21 +198,35 @@ class UsersController < ApplicationController
     @parrain=User.find(params[:id])
     authorize! :parrainer, @parrain
     @user=@parrain.filleuls.new
+    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
   end
 
   def create_parrainer
     @parrain=User.find(params[:id])
     authorize! :parrainer, @parrain
     @user=@parrain.filleuls.new(user_params_pub(:registration => true))
+    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
+
+    @user.moderated = true if current_user.admin?
 
     respond_to do |format|
       if @user.save
+
+
+        if current_user.admin?
+          @user.referant.sync_from_user(@user) if @user.referant
+          Role.all.each{|r| @user.remove_role r.name}
+
+            @roles.each do |r,ok|
+              @user.add_role r if ok
+            end
+        end
+
         pers = @user.personnes.new(
         :prenom => @user.first_name,
         :nom => @user.last_name,
         :email => @user.email,
-        enregistrement_termine: false,
-        moderated: false
+        enregistrement_termine: false
         )
 
         pers.genre = Genre.from_cas(@user.gender)   

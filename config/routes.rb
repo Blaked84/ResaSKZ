@@ -53,6 +53,9 @@ LooklaDev::Application.routes.draw do
       post 'parrainer'=>"users#create_parrainer"
       get 'new_personne'
     end
+    collection do
+      get 'to_moderate'
+    end
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
