@@ -232,9 +232,9 @@ class UsersController < ApplicationController
         pers.genre = Genre.from_cas(@user.gender)   
         if pers.save(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)
-          format.html { redirect_to dashboard_user_path(@user), notice: 'User was successfully created.' }
+          format.html { redirect_to dashboard_user_path(@parrain), notice: 'User was successfully created.' }
         else
-          format.html { redirect_to @user, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
+          format.html { redirect_to dashboard_user_path@parrain, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
         end
       else
         format.html { render action: 'parrainer' }

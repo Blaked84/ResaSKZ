@@ -134,6 +134,29 @@ class CommandesController < ApplicationController
     end
   end
 
+  def remove_product
+    set_commande
+
+    authorize! :add_product, @commande
+
+    @product = Product.find_by_id(params[:product_id])
+
+    if @product
+      respond_to do |format|
+        if @commande.remove_product @product
+          format.html { redirect_to @commande }
+          format.json { render json: '' }
+        else
+          format.json { render json: "Error : Can't add", status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: "Error", status: :unprocessable_entity }
+      end
+    end
+  end
+
   def catalogue
     set_commande
     authorize! :add_product, @commande    

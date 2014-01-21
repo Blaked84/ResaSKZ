@@ -196,7 +196,7 @@ def type_gadz
 		annee_gadz=last_proms - annee_promo
 
 		return 'PG' if annee_gadz <3
-		return 'JP' if annee_gadz <10
+		return 'JP' if annee_gadz <13
 		return 'Archi'
 	end
 end

@@ -1,11 +1,14 @@
 LooklaDev::Application.routes.draw do
 
+  get "commande_products/check_nombre"
+  post "commande_products/check_nombre"
   get "admin/index"
   get "admin/graph"
   get "home/index"
   resources :commandes do
     member do
       post :add_product
+      post :remove_product
       get :catalogue
     end
     resources :paiements   

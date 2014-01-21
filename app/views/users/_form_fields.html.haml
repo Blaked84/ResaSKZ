@@ -12,7 +12,7 @@
 /     =f.label :current_password, 'Mot de passe actuel :'
 /     
 /     =f.password_field :current_password
--unless current_user.has_role?(:gadz) and not current_user.admin?
+-unless @user.has_role?(:gadz) and not current_user.admin?
   .field.pure-control-group
     =f.label :password, 'Mot de passe'
     

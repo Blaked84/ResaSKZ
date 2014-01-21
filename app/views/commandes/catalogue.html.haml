@@ -15,7 +15,8 @@
           %tr
             %td
               =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success"
-              =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+              %span{ :id => 'product'+p.id.to_s}
+                =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
               =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error"
             %td=p.name
             %td=conditional_format(p.reste?)
