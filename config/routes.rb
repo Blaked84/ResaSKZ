@@ -9,6 +9,7 @@ LooklaDev::Application.routes.draw do
     member do
       post :add_product
       post :remove_product
+      post :maj_cat_product
       get :catalogue
     end
     resources :paiements   

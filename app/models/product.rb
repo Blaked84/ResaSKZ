@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
 	has_many :commandes, through: :commande_products
 	has_many :commande_products
 	has_many :pack
-	has_one :categorie
+	belongs_to :categorie
 	belongs_to :event
 
 	#attr_accessible :name, :price, :stock, :echeance
@@ -25,6 +25,7 @@ class Product < ActiveRecord::Base
 
 	def restant
 		return nil if self.stock == 0
+		stock ||=0
 		stock.to_i - self.commande_products.map{|cp| cp.nombre}.sum
 	end
 

@@ -21,25 +21,45 @@ class Commande < ActiveRecord::Base
 	validates :personne, :presence => true
 	validates :event, :presence => true
 	validates :event, uniqueness: { scope: :personne, message: "Une seule commande par evenement par personne" }
-	
 
 	def ok?
 		return false
 	end
 
 	#Ajoute un produit à la commande en précisant le nombre de produits
-	def add_product (product, nbr = 1)
-		if product.event_id == self.event_id
-			cp=self.commande_products.find_or_create_by(product_id: product.id) 
-			
-			if cp.nombre
-				cp.nombre += nbr
-			else
-				cp.nombre = nbr
+	def add_product (product, nbr = 1, options = Hash.new)
+		
+		product= Product.find(product)
+		can_add=true
+		unless options[:force] 
+			cat=product.categorie
+
+			cp = self.commande_products.find_by(product_id: product)
+
+			if product.max_par_personne
+				nombre = cp && cp.nombre || 0
+				can_add = false unless nombre < product.max_par_personne
 			end
-			cp.save
-		else
-			false
+			if cat.max_par_personne
+				nombre_cat = self.commande_products.select{|cp| cp.product.categorie_id == cat.id}.map{|cp| cp.nombre}.sum
+				can_add = false unless nombre_cat < cat.max_par_personne
+			end
+		end
+
+		
+
+		if can_add
+			if product.event_id == self.event_id
+				cp||=self.commande_products.find_or_create_by(product_id: product.id)
+				if cp.nombre
+					cp.nombre += nbr
+				else
+					cp.nombre = nbr
+				end
+				cp.save
+			else
+				false
+			end
 		end
 	end
 
@@ -95,10 +115,22 @@ class Commande < ActiveRecord::Base
 			self.missings << "Commande sans caution"
 		end
 
+		unless self.nbr_pack>0
+			self.missings << "Ne contient pas de pack"
+		end
+
+		if self.nbr_pack>1
+			self.missings << "Contient plusieurs packs"
+		end
+
+
 		missings.blank?
 
 	end
-
+	
+	def nbr_pack
+		self.products.select{|p| p.categorie_id == Configurable[:id_pack]}.count
+	end
 
 	#Montant total de la commande (Produits * quantités)
 	def montant_total

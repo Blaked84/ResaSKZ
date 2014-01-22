@@ -48,7 +48,7 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=[["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
+listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
@@ -150,6 +150,25 @@ listeproduits.each do |c|
 		)
 	a.save
 end
+
+puts "Configuration des max"
+Categorie.find_by( nom: 'Assurances').products.each do |p|
+	p.update_attribute(:max_par_personne,1)
+end
+
+Categorie.find_by( nom: 'Animations complémentaires').products.each do |p|
+	p.update_attribute(:max_par_personne,1)
+end
+
+Categorie.find_by( nom: 'Boulangerie').products.each do |p|
+	p.update_attribute(:max_par_personne,5)
+end
+
+Categorie.find_by( nom: 'Pack').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
+
 
 user_gorgu=User.create(
 			email:"gorgu@gadz.org",
