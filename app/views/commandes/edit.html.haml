@@ -1,5 +1,6 @@
-%h1 Création de commande
+%div.top-info.pa1
+	%h1 Edition de la commande # #{@commande.idlong}
+%div.pa1.fiche.brdr-b
+	=render 'form'
 
-=render 'form'
-
-=link_to "Retour", @commande
+	=link_to "Retour", @commande

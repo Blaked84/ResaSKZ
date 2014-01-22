@@ -24,5 +24,10 @@
     =f.label :pack_id
     =f.select :pack_id, @packs.map{|t| [t.nom,t.id]}, :class => "pure-input-1-3"
 
+  -if can? :see_admin, User
+    .field.pure-control-group
+      =f.label :caution, "Chéque de caution donné"
+      =f.check_box :caution
+
   .actions
     = f.submit 'Créer la commande!', :class => "pure-button pure-button-success"
