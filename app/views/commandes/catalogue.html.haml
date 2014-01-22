@@ -34,7 +34,7 @@
         %tbody
           -c[:products].each do |p|
             %tr
-              %td=p.name
+              %td=link_to p.name, product_path(p.id)
               %td=conditional_format(p.reste?)
               %td=p.price_euro
       Choix :
