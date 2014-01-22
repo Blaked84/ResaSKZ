@@ -170,7 +170,7 @@ Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
 
 
-user_gorgu=User.create(
+user_gorgu=User.create!(
 			email:"gorgu@gadz.org",
 			password:"iresam157",
 			first_name: 'Gorgu',
@@ -183,7 +183,7 @@ user_gorgu=User.create(
 user_gorgu.add_role :gorgu
 user_gorgu.add_role :gadz
 
-user_admin=User.create(
+user_admin=User.create!(
 		email:"admin@gadz.org",
 		password:"iresam157",
 		first_name: 'Admin',
