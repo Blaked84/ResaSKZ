@@ -31,7 +31,7 @@ class ChartController < ApplicationController
 
   def statsbus
     #params categorie_id, event_id 
-    b=Categorie.find(params[:categorie_id]).product.where(event_id: params[:event_id]).map{|p| [p.name, p.commande_products.map{|cp| cp.nombre}.sum]}
+    b=Categorie.find(params[:categorie_id]).products.where(event_id: params[:event_id]).map{|p| [p.name, p.commande_products.map{|cp| cp.nombre}.sum]}
     render :json => b
   end
 

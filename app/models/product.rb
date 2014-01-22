@@ -26,12 +26,12 @@ class Product < ActiveRecord::Base
 	def restant
 		return nil if self.stock == 0
 		stock ||=0
-		stock - self.commande_products.map{|cp| cp.nombre}.sum
+		stock.to_i - self.commande_products.map{|cp| cp.nombre}.sum
 	end
 
 	def reste? (nbr = 0)
 
-		return true if self.stock == 0
+		return true if self.stock == 0 || self.stock.blank?
 
 		self.restant > 0
 

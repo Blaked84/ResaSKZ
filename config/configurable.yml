@@ -61,3 +61,18 @@ mode_maintenance:
   name: passage du site en mod maintenance            # sets the edit label
   default: false             # sets the default value
   type: boolean             # coerces the value to an integer
+
+
+# date des paiements
+echeances_paiement1:
+  name: echeance des paiements  1          # sets the edit label
+  default:             # sets the default value
+  type: date
+echeances_paiement2:
+  name: echeance des paiements 2           # sets the edit label
+  default:             # sets the default value
+  type: date
+echeances_paiement3:
+  name: echeance des paiements 3           # sets the edit label
+  default:             # sets the default value
+  type: date

@@ -40,6 +40,8 @@ class CommandesController < ApplicationController
   def edit
     set_commande
     authorize! :update, @commande
+    @events=Event.all.to_a
+    @packs=Pack.all
   end
 
   def update
@@ -217,7 +219,7 @@ class CommandesController < ApplicationController
   end
 
   def commande_params
-    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id)
+    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution)
   end
 
 end

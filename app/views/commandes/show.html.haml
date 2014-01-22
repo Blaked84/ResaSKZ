@@ -59,6 +59,26 @@
         %td=@paiement_du_euro
 
 %div.fiche.pa1.brdr-b
+  %h2 Calendrier de paiement
+
+  %table.striped.alternate
+    %thead
+      %tr
+        %th date
+        %th 
+        
+    %tbody
+      %tr
+        %td=Configurable[:echeances_paiement1].gsub("00:00:00.000000","")
+        %td Moitié du pack de base
+      %tr
+        %td=Configurable[:echeances_paiement2].gsub("00:00:00.000000","")
+        %td Seconde moitié du pack de base
+      %tr
+        %td=Configurable[:echeances_paiement3].gsub("00:00:00.000000","")
+        %td Options
+
+%div.fiche.pa1.brdr-b
 
   %h2
     Paiements effectués pour cette commande
@@ -85,12 +105,17 @@
           %strong Total
         %td=@totalpaiement_euro
 
-    %p=link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
 
+  -unless @commande.paiement_etape == 3
+    %p
+      Le prochain paiement sera d'un montant de #{@commande.prochain_paiement / 100.0}€.
+    %br
+  =link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
+
+%div.fiche.pa1.brdr-b
   %h2
     Produits
-  %p=link_to "Ajouter des produit à ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-success"
-
+  
   %table.striped.alternate
     %thead
       %tr
@@ -109,3 +134,5 @@
         %td
           %strong Total
         %td=@total_euro
+
+  =link_to "Editer ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-primary"

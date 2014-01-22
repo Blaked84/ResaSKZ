@@ -26,6 +26,10 @@ Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_
 Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.to_s
 Configurable[:id_pack]=Categorie.find_by( nom: 'Pack').id.to_s
 
+puts "Date paiements"
+Configurable[:echeances_paiement1]=DateTime.new(2013,1,26)
+Configurable[:echeances_paiement2]=DateTime.new(2013,2,9)
+Configurable[:echeances_paiement3]=DateTime.new(2013,2,23)
 # puts "UserTypes"
 # Usertype.create(:)
 
