@@ -12,6 +12,7 @@ class CommandesController < ApplicationController
     @events=Event.all.to_a
     @personne.commandes.each{|c| @events.delete c.event} if @personne
     logger.debug @events.to_s
+    @commande.tbk = @personne.tbk_promo if @personne
     redirect_to(personne_url(@personne), notice: "Vous êtes déjà inscrit à tout les évènements") if @events.blank?
   end
 
@@ -161,13 +162,53 @@ class CommandesController < ApplicationController
     set_commande
     authorize! :add_product, @commande    
 
-    @categories=Categorie.all.map{|c| {nom: c.nom,products: c.products.where(event_id: @commande.event_id)}}
+    @categories=Categorie.all.map do|c|
+
+      prods = c.products.where(event_id: @commande.event_id)
+
+      select = @commande.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
+      select_id = select ? select.product_id : 0
+
+      {id: c.id,nom: c.nom, max: c.max_par_personne, selected: select_id ,products: prods }
+
+    end
 
   end
 
-  def productnmbr
-    render :json => DateTime.now # bon ça c'était un test pour du json.
+  def maj_cat_product
+    set_commande
+
+    authorize! :add_product, @commande
+
+    @product = Product.find_by_id(params[:product_id]||0)
+    @cat = Categorie.find(params[:categorie_id])
+
+    ok = true
+    ok = false unless (@cat.products.include?(@product)|| not(@product))
+
+    if ok
+
+      @cat.products.each do |p|
+        @commande.commande_products.where(product_id: p.id).delete_all
+      end
+
+
+      respond_to do |format|
+        if not(@product) || @commande.add_product(@product)
+          format.html { redirect_to @commande }
+          format.json { render json: '' }
+        else
+          format.json { render json: "Error : Can't add", status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.json { render json: "Error", status: :unprocessable_entity }
+      end
+    end
   end
+
+
 
   private
 
@@ -176,7 +217,7 @@ class CommandesController < ApplicationController
   end
 
   def commande_params
-    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:pack_id)
+    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id)
   end
 
 end

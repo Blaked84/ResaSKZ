@@ -3,22 +3,38 @@
 %div.fiche.pa1.brdr-b
   -@categories.each do |c|
     %h2= c[:nom]
-    %table.striped.alternate
-      %thead
-        %tr
-          %th
-          %th Produit
-          %th Disponible
-          %th Prix (€)
-      %tbody
-        -c[:products].each do |p|
+    -if not(c[:max]) || c[:max]>1
+      %table.striped.alternate
+        %thead
           %tr
-            %td
-              =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success"
-              %span{ :id => 'product'+p.id.to_s}
-                =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-              =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error"
-            %td=p.name
-            %td=conditional_format(p.reste?)
-            %td=p.price_euro
+            %th
+            %th Produit
+            %th Disponible
+            %th Prix (€)
+        %tbody
+          -c[:products].each do |p|
+            %tr
+              %td
+                =button_to_function "+" , "add_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-success"
+                %span{ :id => 'product'+p.id.to_s}
+                  =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+                =button_to_function "-" , "remove_to_commande(#{@commande.id},#{p.id})", :class => "pure-button pure-button-error"
+              %td=p.name
+              %td=conditional_format(p.reste?)
+              %td=p.price_euro
+    -else
+      %table.striped.alternate
+        %thead
+          %tr
+            %th Produit
+            %th Disponible
+            %th Prix (€)
+        %tbody
+          -c[:products].each do |p|
+            %tr
+              %td=p.name
+              %td=conditional_format(p.reste?)
+              %td=p.price_euro
+      Choix :
+      =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
             
