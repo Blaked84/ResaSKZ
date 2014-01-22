@@ -27,9 +27,9 @@ Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.t
 Configurable[:id_pack]=Categorie.find_by( nom: 'Pack').id.to_s
 
 puts "Date paiements"
-Configurable[:echeances_paiement1]=DateTime.new(2013,1,26)
-Configurable[:echeances_paiement2]=DateTime.new(2013,2,9)
-Configurable[:echeances_paiement3]=DateTime.new(2013,2,23)
+Configurable[:echeances_paiement1]=DateTime.new(2013,2,9)
+Configurable[:echeances_paiement2]=DateTime.new(2013,2,23)
+Configurable[:echeances_paiement3]=DateTime.new(2013,3,16)
 # puts "UserTypes"
 # Usertype.create(:)
 
@@ -62,14 +62,14 @@ listeproduits=[["Pack PG",30500,"",DateTime.new(2013,2,3),"De 213 à 211",1,1],
 ["Croissant",360,"",DateTime.new(2013,2,3),"Par jour du dimanche au vendredi",1,8],
 ["Pain au chocolat",420,"",DateTime.new(2013,2,3),"Par jour du dimanche au vendredi",1,8],
 ["Pack Saucisson",1000,"",DateTime.new(2013,2,3),"Pour 5 saucissons",1,2],
-["Paris",3900,"",DateTime.new(2013,2,3),"",1,3],
-["Lille",4900,"",DateTime.new(2013,2,3),"",1,3],
-["Cluny",2500,"",DateTime.new(2013,2,3),"",1,3],
-["Bordeaux",4800,"",DateTime.new(2013,2,3),"",1,3],
-["Paris",3900,"",DateTime.new(2013,2,3),"",1,4],
-["Lille",4900,"",DateTime.new(2013,2,3),"",1,4],
-["Cluny",2500,"",DateTime.new(2013,2,3),"",1,4],
-["Bordeaux",4800,"",DateTime.new(2013,2,3),"",1,4],
+["Paris",3900+200,"",DateTime.new(2013,2,3),"",1,3],
+["Lille",4900+200,"",DateTime.new(2013,2,3),"",1,3],
+["Cluny",2500+200,"",DateTime.new(2013,2,3),"",1,3],
+["Bordeaux",4800+200,"",DateTime.new(2013,2,3),"",1,3],
+["Paris",3900+200,"",DateTime.new(2013,2,3),"",1,4],
+["Lille",4900+200,"",DateTime.new(2013,2,3),"",1,4],
+["Cluny",2500+200,"",DateTime.new(2013,2,3),"",1,4],
+["Bordeaux",4800+200,"",DateTime.new(2013,2,3),"",1,4],
 ["Découverte - Pack Ski Complet",5200,"",DateTime.new(2013,2,3),"",1,5],
 ["Découverte - Chaussures ski seules",3300,"",DateTime.new(2013,2,3),"",1,5],
 ["Découverte - Skis seuls",4800,"",DateTime.new(2013,2,3),"",1,5],
@@ -102,16 +102,16 @@ listeproduits=[["Pack PG",30500,"",DateTime.new(2013,2,3),"De 213 à 211",1,1],
 ["Croissant",360,"",DateTime.new(2013,2,3),"Par jour du dimanche au vendredi",2,8],
 ["Pain au chocolat",420,"",DateTime.new(2013,2,3),"Par jour du dimanche au vendredi",2,8],
 ["Pack Saucisson",1000,"",DateTime.new(2013,2,3),"Pour 5 saucissons",2,2],
-["Paris",3900,"",DateTime.new(2013,2,3),"",2,3],
-["Metz",4100,"",DateTime.new(2013,2,3),"",2,3],
-["Châlons",3900,"",DateTime.new(2013,2,3),"",2,3],
-["Aix-en-Provence",3000,"",DateTime.new(2013,2,3),"",2,3],
-["Angers",4400,"",DateTime.new(2013,2,3),"",2,3],
-["Paris",3900,"",DateTime.new(2013,2,3),"",2,4],
-["Metz",4100,"",DateTime.new(2013,2,3),"",2,4],
-["Châlons",3900,"",DateTime.new(2013,2,3),"",2,4],
-["Aix-en-Provence",3000,"",DateTime.new(2013,2,3),"",2,4],
-["Angers",4400,"",DateTime.new(2013,2,3),"",2,4],
+["Paris",3900+200,"",DateTime.new(2013,2,3),"",2,3],
+["Metz",4100+200,"",DateTime.new(2013,2,3),"",2,3],
+["Châlons",3900+200,"",DateTime.new(2013,2,3),"",2,3],
+["Aix-en-Provence",3000+200,"",DateTime.new(2013,2,3),"",2,3],
+["Angers",4400+200,"",DateTime.new(2013,2,3),"",2,3],
+["Paris",3900+200,"",DateTime.new(2013,2,3),"",2,4],
+["Metz",4100+200,"",DateTime.new(2013,2,3),"",2,4],
+["Châlons",3900+200,"",DateTime.new(2013,2,3),"",2,4],
+["Aix-en-Provence",3000+200,"",DateTime.new(2013,2,3),"",2,4],
+["Angers",4400+200,"",DateTime.new(2013,2,3),"",2,4],
 ["Découverte - Pack Ski Complet",5200,"",DateTime.new(2013,2,3),"",2,5],
 ["Découverte - Chaussures ski seules",3300,"",DateTime.new(2013,2,3),"",2,5],
 ["Découverte - Skis seuls",4800,"",DateTime.new(2013,2,3),"",2,5],

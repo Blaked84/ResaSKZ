@@ -1,6 +1,9 @@
 %div.top-info.pa1
   %h1 Ajouter des produit à ma commande
 %div.fiche.pa1.brdr-b
+
+  .box.pa1
+    %p Attention, il est possible que le nombre de produits commandés ne s'actualise pas toujours correctement sur cette page. Rafraichir la page manuellement régle le problème (touche F5). Vérifiez bien votre récapitulatif de commande avant de payer!
   -@categories.each do |c|
 
     -unless c[:nom].blank?
