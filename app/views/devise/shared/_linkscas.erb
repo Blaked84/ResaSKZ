@@ -3,5 +3,6 @@
     <div class='center w50'>
     <%= link_to image_tag("logo_gadzorg.png"), omniauth_authorize_path(resource_name, provider) %>
     </div>  
+    <%= link_to "Connexion Gadz", omniauth_authorize_path(resource_name, provider), :class => "pure-button pure-button-primary w100" %>
   <% end -%>
 <% end -%>
