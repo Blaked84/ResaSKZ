@@ -70,7 +70,7 @@ class PaiementsController < ApplicationController
  def csv_import
   authorize! :read_admin, User    
   file_data = params[:file].read
-  csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n",:col_sep => ';')
+  csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\n",:col_sep => ';')
 
   nbre_paiements_valides = 0
   nbre_paiement=csv_rows.size - 2
