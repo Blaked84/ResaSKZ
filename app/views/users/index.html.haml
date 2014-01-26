@@ -20,7 +20,7 @@
             = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
   
   = will_paginate @users
-  %br
+%div.fiche.pa1.brdr-b
 
-= link_to 'New User', new_user_path, :class => "pure-button pure-button-success"
-= link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_users_path, :class => "pure-button pure-button-primary"
+  = link_to 'New User', new_user_path, :class => "pure-button pure-button-success"
+  = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_users_path, :class => "pure-button pure-button-primary"
