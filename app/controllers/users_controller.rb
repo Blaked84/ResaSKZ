@@ -262,6 +262,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params_pub opts=Hash.new
+
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
       
       permit_list = [:first_name,
                     :last_name,
@@ -274,20 +279,15 @@ class UsersController < ApplicationController
 
       params.require(:user).permit( permit_list)
 
-      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
-        params[:user].delete(:password)
-        params[:user].delete(:password_confirmation)
-      end
-
     end
 
     def user_params
-      params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation,:moderated)
-      
+
       if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
         params[:user].delete(:password)
         params[:user].delete(:password_confirmation)
       end
+      params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation,:moderated)
     end
 
     def referant_params
