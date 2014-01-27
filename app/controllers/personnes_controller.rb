@@ -28,6 +28,8 @@ class PersonnesController < ApplicationController
     @personne = Personne.new(personne_params(registration: true))
     authorize! :create, @personne
 
+    @personne.type_pers="Pec's"
+
     respond_to do |format|
       if @personne.save && @personne.update_attribute(:enregistrement_termine, true)
         format.html { redirect_to dashboard_user_url @personne.user, :notice => 'User was successfully updated.' }
