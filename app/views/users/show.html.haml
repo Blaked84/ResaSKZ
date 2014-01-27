@@ -3,6 +3,13 @@
 		Référant du compte:
 		=@user.referant_show
 
+-if @user.parrain
+	%div.fiche.pa1.brdr-b
+		%p
+			Parrain : 
+			=@user.parrain.referant.nom_complet
+	
+
 %div.fiche.pa1.brdr-b
 	= render :partial => "personne_tree"
 	%p

@@ -12,11 +12,11 @@ class UsersController < ApplicationController
   def index
     @users = User.where(moderated: true).paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @users
-    @to_moderate_nbr = User.where(moderated: false).count
+    @to_moderate_nbr = User.where(moderated: [false, nil]).count
   end
 
   def to_moderate
-    @users = User.where(moderated: false).paginate(:page => params[:page],:per_page => 50)
+    @users = User.where(moderated: [false, nil]).paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @users
 
   end
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     authorize! :edit, @user
-    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
+    @roles = Hash[Role.all.map{|r| [r.name, @user.has_role?(r.name)]}]
   end
 
   # POST /users
@@ -100,6 +100,9 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
+
+        @roles = Hash[Role.all.map{|r| [r.name, @user.has_role?(r.name)]}]
+
         format.html { render action: 'edit' }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -268,11 +271,23 @@ class UsersController < ApplicationController
                     :password_confirmation]
       permit_list += [:email] if opts[:registration] || current_user.admin?
       permit_list += [:uid,:moderated] if current_user.admin?
+
       params.require(:user).permit( permit_list)
+
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
+
     end
 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :gender, :uid, :email, :password, :password_confirmation,:moderated)
+      
+      if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
+        params[:user].delete(:password)
+        params[:user].delete(:password_confirmation)
+      end
     end
 
     def referant_params
