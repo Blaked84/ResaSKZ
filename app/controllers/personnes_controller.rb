@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class PersonnesController < ApplicationController
   
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]

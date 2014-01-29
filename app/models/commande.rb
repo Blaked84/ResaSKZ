@@ -139,7 +139,7 @@ class Commande < ActiveRecord::Base
 
 	#Montant déjà payé (Somme des paiements)
 	def montant_paye
-		self.paiements.map{|p| p.amount_cents.to_i}.sum
+		self.paiements.where(verif: true).map{|p| p.amount_cents.to_i}.sum
 	end
 
 	def montant_du
@@ -168,20 +168,23 @@ class Commande < ActiveRecord::Base
 		# 	return 3
 		# end
 
-		if montant_paye == 0
-			#aucun paiement
-			0
-		elsif montant_paye == montant_total
+		if montant_paye >= montant_total
 			# 3eme paiement réalisé
-			3			
+			return 3			
 		elsif montant_paye >= montant_pack
 			# second paiment réalisé
-			2
+			return 2
 		elsif montant_paye >= montant_pack / 2
 			# premier paiement réalisé
-			1
-
+			return 1
+		else
+			#aucun paiement
+		return 0
 		end
+	end
+
+	def etape_valide? (etape)
+		paiement_etape >= etape
 	end
 
 	def prochain_paiement

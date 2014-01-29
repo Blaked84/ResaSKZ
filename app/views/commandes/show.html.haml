@@ -116,6 +116,9 @@
     %br
   =link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
 
+  .box.alert
+    %p Les administrateurs peuvent mettrent jusqu'à 3 jours pour valider un paiement. Si vous avez eu un soucis lors de votre paiement (connexion perdue, ...), contactez les membres du support SKZ (skz.ue@gadz.org) en leur indiquant bien le numéro de paiement afin qu'ils vérifient l'état du paiement.
+
 %div.fiche.pa1.brdr-b
   %h2
     Produits

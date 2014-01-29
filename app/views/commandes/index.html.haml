@@ -9,7 +9,8 @@
         %th Commande ID
         %th Date de création
         %th Nom
-        %th Payée
+        %th Premier paiement
+        %th Payée entièrement
         %th Commande valide
       %tbody
         - @commandes.each do |c|
@@ -19,6 +20,7 @@
             %td=c.created_at.to_s.gsub("UTC","")
             %td=link_to c.personne.nom_complet, personne_path(c.personne.id) 
             / # Nom de la personne
+            %td=conditional_format(c.etape_valide? 1)
             %td=conditional_format(c.paiementok?)
             %td=conditional_format(c.complete?)
   = will_paginate @commande

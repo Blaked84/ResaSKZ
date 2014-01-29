@@ -1445,3 +1445,16 @@ body{background: #ecf0f1;}
 }
 
 .brdr-b{border-bottom: 1px solid #bbb;}
+
+.box{
+	
+	/*border: 2px solid #c0392b;*/
+	padding: 0.3em 1em;
+	border-radius: 3px;
+	color: #fff;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.alert{
+	background-color: #c0392b;
+}
