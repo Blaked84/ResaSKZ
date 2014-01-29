@@ -12,11 +12,11 @@ class Product < ActiveRecord::Base
 	#attr_accessible :name, :price, :stock, :echeance
 
 	def to_s
-		return self.nom
+		return self.name
 	end
 
 	def to_str
-		return self.nom
+		return self.name
 	end
 
 	def price_euro

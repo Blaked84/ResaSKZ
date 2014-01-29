@@ -246,4 +246,10 @@ fr:
         pville: "Ville de la personne à contacter"
         pcodepostal: "Code postal de la personne à contacter"
         pcomplement: "Complément d'adresse de la personne à contacter"
-        
+      product:
+        name: "Nom"
+        event_id: "Event"
+        categorie_id: "Categorie"
+        price: "Prix (en centimes !)"
+        stock: "Stock (vide si illimite)"
+        max_par_personne: "Quantité maximale par personne (Vide si illimite)"
