@@ -11,6 +11,7 @@
         %th Commande ID
         %th Compte référant
         %th Nom
+        %th TBK en charge
         %th Evénement
         %th Dossier complet
         %th Etat
@@ -19,6 +20,7 @@
         %td=@commande.idlong
         %td=link_to @personne.user.referant.nom_complet, user_path(@personne.user.id)
         %td=link_to @personne.nom_complet, personne_path(@personne.id)
+        %th=@commande.tbk
         %th=@commande.event.name
         %td=conditional_format(@commande.complete?)
         %td=@commande.status
