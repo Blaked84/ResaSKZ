@@ -171,7 +171,7 @@ def annee_promo
 
 	if self.is_gadz?
 
-		annee=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[2]
+		annee=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([0-9]{3})\Z/)[2]
 
 		annee.insert(1,"9") if annee[0]=="1"
 		annee.insert(1,"0") if annee[0]=="2"
@@ -187,7 +187,7 @@ end
 def tbk_promo
 	if self.is_gadz?
 
-		tbk=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[1]
+		tbk=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([0-9]{3})\Z/)[1]
 
 		tbk = "me" if tbk =="ka"
 
