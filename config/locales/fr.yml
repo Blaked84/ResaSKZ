@@ -246,6 +246,7 @@ fr:
         pville: "Ville de la personne à contacter"
         pcodepostal: "Code postal de la personne à contacter"
         pcomplement: "Complément d'adresse de la personne à contacter"
+        moderated: "Inscription validé par les administrateurs"
       product:
         name: "Nom"
         event_id: "Event"
