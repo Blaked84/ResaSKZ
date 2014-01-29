@@ -12,7 +12,7 @@ class CommandesController < ApplicationController
     @events=Event.all.to_a
     @personne.commandes.each{|c| @events.delete c.event} if @personne
     logger.debug @events.to_s
-    @commande.tbk = @personne.tbk_promo if @personne
+    @commande.tbk = @personne.default_tbk if @personne
     redirect_to(personne_url(@personne), notice: "Vous êtes déjà inscrit à tout les évènements") if @events.blank?
   end
 

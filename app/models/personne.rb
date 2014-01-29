@@ -169,23 +169,39 @@ end
 
 def annee_promo
 
-	annee=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[2]
+	if self.is_gadz?
 
-	annee.insert(1,"9") if annee[0]=="1"
-	annee.insert(1,"0") if annee[0]=="2"
+		annee=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[2]
 
-	annee.to_i
+		annee.insert(1,"9") if annee[0]=="1"
+		annee.insert(1,"0") if annee[0]=="2"
+
+		return annee.to_i
+	end
+
+	nil
 
 end
 
 
 def tbk_promo
+	if self.is_gadz?
 
-	tbk=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[1]
+		tbk=promo.match(/\A(ai|bo|cl|li|ch|me|an|ka)([1-9]{3})\Z/)[1]
 
-	tbk = "me" if tbk =="ka"
+		tbk = "me" if tbk =="ka"
 
-	Tbk.find_by_diminutif tbk
+		return Tbk.find_by_diminutif tbk
+
+	end
+
+	nil
+
+end
+
+def default_tbk
+
+	self.tbk_promo || referant.tbk_promo
 
 end
 
