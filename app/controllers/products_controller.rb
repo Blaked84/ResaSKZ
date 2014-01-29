@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ProductsController < ApplicationController
 
   before_action :check_register_workflow

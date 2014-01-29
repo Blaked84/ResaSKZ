@@ -9,7 +9,14 @@ class PersonnesController < ApplicationController
   def index
   	@personnes = Personne.all.sort_by{|a| a.nom}.paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @personnes
-    @titre = "Personne"
+    @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
+    @titre = "Personnes"
+  end
+
+  def to_moderate
+    @personnes = Personne.where(moderated: [false, nil]).sort_by{|a| a.nom}.paginate(:page => params[:page],:per_page => 50)
+    authorize! :show, @personne
+    @titre = "Personnes à moderer"
   end
 
   def show
@@ -119,6 +126,7 @@ private
               :user_id,
               :documentassurance]
     perm_list << :user_id if options[:registration] || current_user.admin?
+    perm_list << :moderated if current_user.admin?
 
   params.require(:personne).permit( perm_list )
   end

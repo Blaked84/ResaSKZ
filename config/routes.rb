@@ -34,6 +34,9 @@ LooklaDev::Application.routes.draw do
       post 'personne_infos' => "personnes#update_personne_infos"
       get 'add_commande'
     end
+    collection do
+      get 'to_moderate'
+    end
     resources :commandes do
       resources :events do
         resources :products

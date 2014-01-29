@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140122071146) do
+ActiveRecord::Schema.define(version: 20140129134106) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20140122071146) do
     t.string   "commentaires"
     t.string   "commentaires_admin"
     t.string   "type_pers"
+    t.boolean  "moderated"
   end
 
   create_table "products", force: true do |t|

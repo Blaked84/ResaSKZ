@@ -66,10 +66,13 @@
             %td=link_to p.nom_complet, personne_path(p.id)
             %td=conditional_format(p.assurance)
             %td
-              = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
-              -unless p.is_referant?
-                = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
-              = link_to 'Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success"
+              -if p.moderated || current_user.admin?
+                = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
+                -unless p.is_referant?
+                  = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+                = link_to 'Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success"
+              -else
+                Personne non validée par les administrateurs
 
   = link_to 'Ajouter une personne', new_personne_user_path(@user), :class => "pure-button pure-button-success"
   

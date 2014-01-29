@@ -15,4 +15,4 @@
           %td=conditional_format(p.documentassurance)
 
   = will_paginate @users
-  = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"
+  = link_to 'Retour', personnes_path
