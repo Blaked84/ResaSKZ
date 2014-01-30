@@ -76,6 +76,7 @@ class PersonnesController < ApplicationController
   end
 
   def destroy
+    set_personne
     authorize! :destroy, @personne
     user = @personne.user
     @personne.destroy
