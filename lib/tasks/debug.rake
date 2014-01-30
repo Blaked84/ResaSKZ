@@ -17,4 +17,23 @@ namespace :debug do
   	end
   end
 
+  desc "Liste les commandes qui n'ont pas de personne associé"
+  task list_commandes_without_user: :environment do
+
+  	Commande.where(personne_id: nil).each do |p|
+  		puts "===== commande n°#{p.id} ======================================================="
+  		puts p.inspect
+  	end
+
+  end
+
+  desc "Liste les commandes qui n'ont pas de user associé"
+  task del_commandes_without_user: :environment do
+
+  	Commande.where(personne_id: nil).each do |p|
+  		p.delete
+  	end
+
+  end
+
 end

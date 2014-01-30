@@ -17,7 +17,7 @@ class PaiementsController < ApplicationController
 
       p.idlong=p.gen_idlong
       p.paiement_hash=hashpaiement(p)
-      p.authorize :create, p
+      authorize! :create, p
       p.save if p.valid?
 
       respond_to do |format|
