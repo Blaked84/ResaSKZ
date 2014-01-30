@@ -53,4 +53,21 @@ namespace :debug do
   	end
   end
 
+  desc "Liste les paiements qui n'ont pas de commande associé"
+  task list_paiements_without_commande: :environment do
+
+  	Paiement.all.select{|p| not(p.commande)}.each do |p|
+  		puts "===== Paiement n°#{p.id} ======================================================="
+  		puts p.inspect
+  	end
+
+  end
+
+  desc "supprime les paiements qui n'ont pas de commande associé"
+  task del_paiements_without_commande: :environment do
+  	Paiement.all.select{|p| not(p.commande)}.each do |p|
+  		p.delete
+  	end
+  end
+
 end
