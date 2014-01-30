@@ -2,7 +2,6 @@
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow  
-  load_and_authorize_resource
 
   require 'csv'
 
@@ -29,8 +28,9 @@ class PaiementsController < ApplicationController
   end
 
   def new
-    authorize! :create, @paiement
     com=Commande.find(params[:commande_id])
+    @paiement = com.paiements.new
+    authorize! :create, @paiement
     @montant=com.prochain_paiement / 100.0
     @etape=(com.paiement_etape + 1).to_s
 
@@ -48,9 +48,9 @@ class PaiementsController < ApplicationController
   end
 
   def show
-   authorize! :show, @commandes
    @paiement=Paiement.find(params[:id])
    @commande=@paiement.commande
+   authorize! :show, @paiement
    @personne=@commande.personne
    @referant=@personne.referant
    @url=urlpaiement(@paiement)
