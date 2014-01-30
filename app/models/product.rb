@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 	# Les produits commandable
 	#################################################
 	has_many :commandes, through: :commande_products
-	has_many :commande_products
+	has_many :commande_products, dependent: :destroy
 	has_many :pack
 	belongs_to :categorie
 	belongs_to :event
