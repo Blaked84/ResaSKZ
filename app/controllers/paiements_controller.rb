@@ -15,51 +15,35 @@ class PaiementsController < ApplicationController
       :verif => false)
 
 
-<<<<<<< HEAD
     p.idlong=p.gen_idlong
     p.paiement_hash=hashpaiement(p)
     p.save if p.valid?
-=======
-      p.idlong=p.gen_idlong
-      p.paiement_hash=hashpaiement(p)
-      authorize! :create, p
-      p.save if p.valid?
->>>>>>> cbbe608419785c53a124316393966979e81e5cd2
-
     respond_to do |format|
         #décommenter la ligne ci-dessous pour payer par gadz.org
         format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
       end
-    end
+  end
 
-<<<<<<< HEAD
-    def new
-      authorize! :create, @paiement
-      com=Commande.find(params[:commande_id])
-      @montant=com.prochain_paiement / 100.0
-      @etape=(com.paiement_etape + 1).to_s
-=======
   def new
     com=Commande.find(params[:commande_id])
     @paiement = com.paiements.new
     authorize! :create, @paiement
     @montant=com.prochain_paiement / 100.0
     @etape=(com.paiement_etape + 1).to_s
->>>>>>> cbbe608419785c53a124316393966979e81e5cd2
 
-      com=Commande.find(params[:commande_id])
-      if com.montant_du > 0
+    com=Commande.find(params[:commande_id])
+    if com.montant_du > 0
 
-      else
-        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
-      end
+    else
+      redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
     end
+  end
 
-    def index
-      authorize! :read_admin, User
-      @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
-    end
+  def index
+    authorize! :read_admin, User
+    @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
+  end
 
   def show
      authorize! :show, @commandes
@@ -93,19 +77,19 @@ class PaiementsController < ApplicationController
     csv_rows.each_with_index do |row,line|
       case line
       when 1
-      # useless
-    when 2
-      # header2
-    else
-      nbre_paiements_valides +=1 if validate_paiement(row[21],row[4])
-    end
+        # useless
+      when 2
+        # header2
+      else
+        nbre_paiements_valides +=1 if validate_paiement(row[21],row[4])
+      end
     
-  end
+    end
 
-  respond_to do |format|
-    format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements validés sur " + nbre_paiement.to_s  + " présents dans le fichier.", :plop => "truc" }
+    respond_to do |format|
+      format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements validés sur " + nbre_paiement.to_s  + " présents dans le fichier.", :plop => "truc" }
+    end
   end
-end
 
 
 
@@ -156,9 +140,9 @@ end
   end
 
   def validate_paiement(paiement_id_long, csv_amount_cents)
-    if paiement_id_long..to_s.size < 4
+    if paiement_id_long.to_s.size < 4 && !paiement_id_long.nil?
       # ceci est necessaire poour valider les premiers paiement suite à l'erreur dans le hash généré avec id et non idlong
-      paiement=Paiement.find_by(id: paiement_id_long)
+      paiement=Paiement.find_by(id: paiement_id_long.to_i)
     else
       paiement=Paiement.find_by(idlong: paiement_id_long)
     end
