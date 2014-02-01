@@ -38,6 +38,11 @@ class PaiementsController < ApplicationController
     else
       redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
     end
+
+    if @montant == 0
+     redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
+    end
+
   end
 
   def index
