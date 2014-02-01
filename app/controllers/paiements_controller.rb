@@ -2,7 +2,6 @@
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow  
-  load_and_authorize_resource
 
   require 'csv'
 
@@ -16,9 +15,16 @@ class PaiementsController < ApplicationController
       :verif => false)
 
 
+<<<<<<< HEAD
     p.idlong=p.gen_idlong
     p.paiement_hash=hashpaiement(p)
     p.save if p.valid?
+=======
+      p.idlong=p.gen_idlong
+      p.paiement_hash=hashpaiement(p)
+      authorize! :create, p
+      p.save if p.valid?
+>>>>>>> cbbe608419785c53a124316393966979e81e5cd2
 
     respond_to do |format|
         #décommenter la ligne ci-dessous pour payer par gadz.org
@@ -27,11 +33,20 @@ class PaiementsController < ApplicationController
       end
     end
 
+<<<<<<< HEAD
     def new
       authorize! :create, @paiement
       com=Commande.find(params[:commande_id])
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
+=======
+  def new
+    com=Commande.find(params[:commande_id])
+    @paiement = com.paiements.new
+    authorize! :create, @paiement
+    @montant=com.prochain_paiement / 100.0
+    @etape=(com.paiement_etape + 1).to_s
+>>>>>>> cbbe608419785c53a124316393966979e81e5cd2
 
       com=Commande.find(params[:commande_id])
       if com.montant_du > 0
@@ -46,16 +61,16 @@ class PaiementsController < ApplicationController
       @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
     end
 
-    def show
+  def show
      authorize! :show, @commandes
      @paiement=Paiement.find(params[:id])
      @commande=@paiement.commande
      @personne=@commande.personne
      @referant=@personne.referant
      @url=urlpaiement(@paiement)
-   end
+  end
 
-   def update
+  def update
     authorize! :read_admin, User
   end
 

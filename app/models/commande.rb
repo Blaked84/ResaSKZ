@@ -9,7 +9,7 @@ class Commande < ActiveRecord::Base
 	belongs_to :personne
 	belongs_to :event
 	has_many :products, through: :commande_products
-	has_many :commande_products
+	has_many :commande_products, dependent: :destroy
 	has_many :paiements
 
 	#attr_accessible :assurance, :status
