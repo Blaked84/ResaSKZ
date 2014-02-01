@@ -31,6 +31,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     authorize! :new, @user
+    @roles = Hash[Role.all.map{|r| [r.name, @user.has_role?(r.name)]}]
   end
 
   # GET /users/1/edit
@@ -162,6 +163,8 @@ class UsersController < ApplicationController
     @personne = @user.referant
     authorize! :user_infos, @user
 
+    @personne.type_pers ||= "Pec's"
+
     respond_to do |format|
       if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
@@ -211,6 +214,8 @@ class UsersController < ApplicationController
     @roles = Hash[@user.roles.map{|r| [r.name, true]}]
 
     @user.moderated = true if current_user.admin?
+
+    @personne.type_pers = "Pec's"
 
     respond_to do |format|
       if @user.save
