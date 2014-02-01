@@ -167,19 +167,22 @@ class Commande < ActiveRecord::Base
 		# 	# 3eme paiement réalisé
 		# 	return 3
 		# end
-
-		if montant_paye >= montant_total
-			# 3eme paiement réalisé
-			return 3			
-		elsif montant_paye >= montant_pack
-			# second paiment réalisé
-			return 2
-		elsif montant_paye >= montant_pack / 2
-			# premier paiement réalisé
-			return 1
+		if montant_pack>0
+			if montant_paye >= montant_total
+				# 3eme paiement réalisé
+				return 3			
+			elsif montant_paye >= montant_pack
+				# second paiment réalisé
+				return 2
+			elsif montant_paye >= montant_pack / 2 
+				# premier paiement réalisé
+				return 1
+			else
+				#aucun paiement
+			return 0
+			end
 		else
-			#aucun paiement
-		return 0
+			return 0 
 		end
 	end
 
