@@ -81,9 +81,9 @@ class PaiementsController < ApplicationController
     nbre_paiement=csv_rows.size - 2
     csv_rows.each_with_index do |row,line|
       case line
-      when 1
+      when 0
         # useless
-      when 2
+      when 1 
         # header2
       else
         nbre_paiements_valides +=1 if validate_paiement(row[21],row[4])
