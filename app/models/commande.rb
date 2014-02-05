@@ -196,7 +196,7 @@ class Commande < ActiveRecord::Base
 		when 0
 			montant_pack.to_i / 2
 		when 1
-			montant_pack.to_i / 2
+			montant_pack.to_i - montant_paye
 		when 2
 			montant_du
 		when 3
