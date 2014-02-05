@@ -12,6 +12,7 @@
  *= require_self
  *= require_tree .
  *= require toastr
+ *= require layout
  */
 
 @font-face {
@@ -1438,13 +1439,22 @@ color: #fff;
 body{background: #ecf0f1;}
 
 .top-info{
+	margin-top:1em;
 	background: #f3f3f3;
+	border-top: 1px solid #F7F7F7;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
 }
 .fiche{
 	background: #FFF;
+	border-left: 1px solid #DDD;
+	border-right: 1px solid #DDD;
 }
 
-.brdr-b{border-bottom: 1px solid #bbb;}
+.brdr-b{
+	border-bottom: 1px solid #bbb;
+	margin-bottom: 0.7em;
+}
 
 .box{
 	
