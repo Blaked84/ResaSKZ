@@ -23,22 +23,26 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    authorize! :read_admin, User
     @product = Product.find(params[:id])
     @evenement = @product.event.name
   end
 
   # GET /products/new
   def new
+    authorize! :read_admin, User
     @product = Product.new
   end
 
   # GET /products/1/edit
   def edit
+    authorize! :read_admin, User
   end
 
   # POST /products
   # POST /products.json
   def create
+    authorize! :read_admin, User
     @product = Product.new(product_params)
 
     respond_to do |format|
@@ -55,6 +59,7 @@ class ProductsController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
+    authorize! :read_admin, User
     respond_to do |format|
       if @product.update(product_params)
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
@@ -69,11 +74,12 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url }
-      format.json { head :no_content }
-    end
+    authorize! :read_admin, User
+    # @product.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to products_url }
+    #   format.json { head :no_content }
+    # end
   end
 
   # def product_add_to_commande
