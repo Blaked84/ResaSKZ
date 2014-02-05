@@ -23,7 +23,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
-    authorize! :read_admin, User
     @product = Product.find(params[:id])
     @evenement = @product.event.name
   end

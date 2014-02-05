@@ -22,6 +22,7 @@
 	%p
 		Max par personne:
 		=@product.max_par_personne
-	%p
-		=link_to 'Editer', edit_product_path(@product), :class => "pure-button pure-button-primary"
-		/ =link_to 'Supprimer', @procut, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+	-if can? :see_admin, User
+		%p
+			=link_to 'Editer', edit_product_path(@product), :class => "pure-button pure-button-primary"
+			/ =link_to 'Supprimer', @procut, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
