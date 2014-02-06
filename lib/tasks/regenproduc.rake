@@ -30,12 +30,13 @@ namespace :incident030214 do
   desc "Retourne les id des commandes ayant des paiements de 15250cents"
   task paid_pg_command: :environment do
 
-  com_pg=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(15250)}.compact
+  com_pg=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(15250) && !(c.products.map{|p| p.categorie.id}).include?(Configurable[:id_pack])}.compact
   com_pg_s1=com_pg.map{|c| c if Commande.find(c).event.id==1}.compact
-  
-  com_archi=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(17500)}.compact
+
+  com_archi=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(17500) && !(c.products.map{|p| p.categorie.id}).include?(Configurable[:id_pack])}.compact  
   com_archi_s1=com_archi.map{|c| c if Commande.find(c).event.id==1}.compact
   com_archi_s2=com_archi.map{|c| c if Commande.find(c).event.id==2}.compact
+  
   puts "==================================================="
   puts "id des commandes ayant des paiements de 15250cents"
   puts "==================================================="
@@ -70,10 +71,10 @@ namespace :incident030214 do
   desc "restore l'association commande produit pour les commandes ayant des paiements de 15250cents"
   task paid_pg_command_restore: :environment do
 
-  com_pg=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(15250)}.compact
+  com_pg=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(15250) && !(c.products.map{|p| p.categorie.id}).include?(Configurable[:id_pack])}.compact
   com_pg_s1=com_pg.map{|c| c if Commande.find(c).event.id==1}.compact
-  
-  com_archi=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(17500)}.compact
+
+  com_archi=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(17500) && !(c.products.map{|p| p.categorie.id}).include?(Configurable[:id_pack])}.compact  
   com_archi_s1=com_archi.map{|c| c if Commande.find(c).event.id==1}.compact
   com_archi_s2=com_archi.map{|c| c if Commande.find(c).event.id==2}.compact
 
