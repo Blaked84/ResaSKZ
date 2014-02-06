@@ -81,9 +81,19 @@ namespace :incident030214 do
   com_pg_s1.map{|c| Commande.find(c).add_product(1)}
   com_archi_s1.map{|c| Commande.find(c).add_product(3)}
   com_archi_s2.map{|c| Commande.find(c).add_product(43)}
-
-
  
+  end
+
+  desc "find commande with product with id 85 86 87 88"
+  task check_wrong_products: :environment do
+
+    id=[85,86,87,88]
+
+    id.each do |i|
+      puts "==================================================="
+      puts "Commandes avec un produit ayant pour id " + i.to_s
+      puts Commande.all.map{|c| c.id if (c.products.map{|p| p.id}).include?(i)}.compact
+  end
   end
 
 end
