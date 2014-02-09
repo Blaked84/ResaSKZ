@@ -13,7 +13,7 @@ class ChartController < ApplicationController
   def paiement
   	@paiement=Paiement.all
   	@commandes=Commande.all
-  	@paiement_tot_euro=@paiement.all.map{ |p| p.amount_cents  }.sum / 100.0
+  	@paiement_tot_euro=@paiement.all.map{ |p| p.amount_cents  if p.verif?}.compact.sum / 100.0
   	@total_du_euro=@commandes.all.map { |c| c.montant_total }.sum / 100.0
   	a=[
   		["Total payé", @paiement_tot_euro],
