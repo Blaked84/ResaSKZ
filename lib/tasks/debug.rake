@@ -70,4 +70,9 @@ namespace :debug do
   	end
   end
 
+  desc "Attribut le type 'pec's' aux personnes sans type_pers"
+  task check_nil_type_pers_from_personnes: :environment do
+    Personne.all.select{|p| not(p.type_pers)}.each{|p| p.update_attribute(:type_pers,"Pec's")}
+  end
+
 end
