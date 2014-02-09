@@ -105,7 +105,7 @@ class Personne < ActiveRecord::Base
 #=== Méthodes publiques ==============================================
 
 def nom_complet
-    return self.prenom.to_s+" "+self.nom.to_s
+    return self.prenom.to_s+" "+self.nom.to_s if !self.prenom.nil? && !self.nom.nil?
 end
 
 def taille_metre
