@@ -36,7 +36,7 @@ namespace :incident030214 do
   com_archi=Commande.all.map{|c|  c.id if (c.paiements.map{|p| p.amount_cents}).include?(17500) && !(c.products.map{|p| p.categorie.id}).include?(Configurable[:id_pack])}.compact  
   com_archi_s1=com_archi.map{|c| c if Commande.find(c).event.id==1}.compact
   com_archi_s2=com_archi.map{|c| c if Commande.find(c).event.id==2}.compact
-  
+
   puts "==================================================="
   puts "id des commandes ayant des paiements de 15250cents"
   puts "==================================================="
@@ -95,6 +95,14 @@ namespace :incident030214 do
       puts "Commandes avec un produit ayant pour id " + i.to_s
       puts Commande.all.map{|c| c.id if (c.products.map{|p| p.id}).include?(i)}.compact
   end
+  end
+
+  desc "remove product with id 85 86 87 88"
+  task remove_wrong_products: :environment do
+    id=[85,86,87,88]   
+    id.each do |i|
+      Product.find(i).destroy
+    end
   end
 
 end
