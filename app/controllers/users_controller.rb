@@ -215,7 +215,7 @@ class UsersController < ApplicationController
 
     @user.moderated = true if current_user.admin?
 
-    @personne.type_pers = "Pec's"
+    
 
     respond_to do |format|
       if @user.save
@@ -236,6 +236,8 @@ class UsersController < ApplicationController
         :email => @user.email,
         enregistrement_termine: false
         )
+
+        pers.type_pers = "Pec's"
 
         pers.genre = Genre.from_cas(@user.gender)   
         if pers.save(:validate=>false)
