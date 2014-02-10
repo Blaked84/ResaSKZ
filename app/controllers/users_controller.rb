@@ -163,7 +163,7 @@ class UsersController < ApplicationController
     @personne = @user.referant
     authorize! :user_infos, @user
 
-    @personne.type_pers ||= "Pec's"
+    @personne.type_pers = "Pec's"
 
     respond_to do |format|
       if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
