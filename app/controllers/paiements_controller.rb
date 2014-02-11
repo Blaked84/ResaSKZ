@@ -3,7 +3,7 @@ class PaiementsController < ApplicationController
 
   before_action :check_register_workflow  
 
-  require 'csv'
+  
 
   def create
     # attention les controleur create et new on été fait à l'arrache.
@@ -72,11 +72,18 @@ class PaiementsController < ApplicationController
 
   end
 
+  require 'csv'
+
   def csv_import
     authorize! :read_admin, User    
     file_data = params[:file].read
-    csv_rows  = CSV.parse(file_data,encoding: "UTF-8", :row_sep => "\r\r\n",:col_sep => ';')
 
+    #handle the differents csv row sep
+    if file_data.include?("\r\r\n")
+     csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:row_sep=> "\r\r\n", :col_sep => ';')
+    else
+      csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:col_sep => ';')
+    end
     nbre_paiements_valides = 0
     nbre_paiement=csv_rows.size - 2
     csv_rows.each_with_index do |row,line|
