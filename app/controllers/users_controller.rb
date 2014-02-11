@@ -165,8 +165,9 @@ class UsersController < ApplicationController
 
     @personne.type_pers ||= "Pec's"
 
+
     respond_to do |format|
-      if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update(user_params_pub) && @personne.sync_from_user(@user, without_save: true) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         if current_user.admin?
           @user.referant.sync_from_user(@user) if @user.referant

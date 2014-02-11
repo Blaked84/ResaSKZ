@@ -157,14 +157,14 @@ def p_nom_complet
     return self.pprenom.to_s+" "+self.pnom.to_s
 end
 
-def sync_from_user(user)
+def sync_from_user(user, opt=Hash.new)
   self.prenom = user.first_name
   self.nom=user.last_name
   self.genre=Genre.from_cas(user.gender)
   self.email=user.email
   self.idGadzOrg=user.uid
 
-  self.save(:validate => false)
+  self.save(:validate => false) unless opt[:without_save]
 end
 
 def annee_promo
