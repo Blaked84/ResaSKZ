@@ -306,6 +306,7 @@ class UsersController < ApplicationController
                                                       :codepostal,
                                                       :ville,
                                                       :bucque,
+                                                      :gender_id,
                                                       :fams,
                                                       :promo,
                                                       :taille,
