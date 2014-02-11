@@ -163,8 +163,12 @@ def sync_from_user(user, opt=Hash.new)
   self.genre=Genre.from_cas(user.gender)
   self.email=user.email
   self.idGadzOrg=user.uid
+  if opt[:without_save]
+  	true
+  else
+  	self.save(:validate => false) 
+  end
 
-  self.save(:validate => false) unless opt[:without_save]
 end
 
 def annee_promo
