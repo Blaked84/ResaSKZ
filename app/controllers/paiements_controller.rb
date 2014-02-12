@@ -115,7 +115,7 @@ end
 
 def hashpaiement(paiement)
   secret = Configurable[:secret_paiement]
-  return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.email + '+' + ref.to_s + '+' + site + '+' + secret)
+  return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.user.referant.email + '+' + ref.to_s + '+' + site + '+' + secret)
 end
   ###################################################################
   # Copyright (c) 2012 Thomas Fuzeau
