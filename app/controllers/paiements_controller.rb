@@ -75,7 +75,13 @@ class PaiementsController < ApplicationController
   require 'csv'
 
   def csv_import
-    authorize! :read_admin, User    
+    authorize! :read_admin, User  
+
+    amount_cents_row = 4
+    id_long_row = 21
+    reponse_code_row = 12
+    banque_reponse_code_row = 29
+
     file_data = params[:file].read
 
     #handle the differents csv row sep
@@ -93,7 +99,7 @@ class PaiementsController < ApplicationController
       when 1 
         # header2
       else
-        nbre_paiements_valides +=1 if validate_paiement(row[21],row[4])
+        nbre_paiements_valides +=1 if validate_paiement(row[id_long_row],row[amount_cents_row],row[reponse_code_row],row[banque_reponse_code_row])
       end
     
     end
@@ -151,19 +157,21 @@ end
     uri
   end
 
-  def validate_paiement(paiement_id_long, csv_amount_cents)
-    if paiement_id_long.to_s.size < 4 && !paiement_id_long.nil?
-      # ceci est necessaire poour valider les premiers paiement suite à l'erreur dans le hash généré avec id et non idlong
-      paiement=Paiement.find_by(id: paiement_id_long.to_i)
-    else
-      paiement=Paiement.find_by(idlong: paiement_id_long)
-    end
-    if !paiement.nil? && !paiement.verif? && paiement.amount_cents.to_i ==  csv_amount_cents.to_i
-      paiement.set_verif
-      # logger.info "###########################Validation"
-      return true  
-    else 
-      return false   
+  def validate_paiement(paiement_id_long, csv_amount_cents, reponse_code, banque_reponse_code)
+    if reponse_code == "00" && banque_reponse_code == "00"
+      if paiement_id_long.to_s.size < 4 && !paiement_id_long.nil?
+        # ceci est necessaire poour valider les premiers paiement suite à l'erreur dans le hash généré avec id et non idlong
+        paiement=Paiement.find_by(id: paiement_id_long.to_i)
+      else
+        paiement=Paiement.find_by(idlong: paiement_id_long)
+      end
+      if !paiement.nil? && !paiement.verif? && paiement.amount_cents.to_i ==  csv_amount_cents.to_i
+        paiement.set_verif
+        # logger.info "###########################Validation"
+        return true  
+      else 
+        return false   
+      end
     end
   end
 
