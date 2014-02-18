@@ -31,6 +31,13 @@ class Paiement < ActiveRecord::Base
 		self.save
 	end
 
+	def set_unverif
+		self.verif=false
+		self.verified_at = DateTime.now
+		self.save
+	end
+
+
 	def verif?
 		self.verif
 	end
