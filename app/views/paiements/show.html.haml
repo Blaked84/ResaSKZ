@@ -1,7 +1,7 @@
 %div.top-info.pa1
 	%h1 
 		Paiement #
-		=@paiement.id
+		=@paiement.idlong
 
 
 %div.pa1.fiche.brdr-b
@@ -14,7 +14,7 @@
 
 		%tbody
 			%tr
-				%td=@paiement.paiement_hash
+				%td=@paiement.idlong
 				%td=@paiement.date
 				%td=@paiement.amount_euro
 
