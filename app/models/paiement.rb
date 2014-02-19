@@ -37,9 +37,21 @@ class Paiement < ActiveRecord::Base
 		self.save
 	end
 
+	def set_erreur(code)
+		self.erreur=code.to_i
+		self.save
+	end
+
+	def erreur?
+		if !self.erreur.nil? || !self.erreur==0 
+			return true 
+		else
+			return false
+		end
+	end
 
 	def verif?
-		self.verif
+		self.verif && !self.erreur?
 	end
 
 	def gen_idlong

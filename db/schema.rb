@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129134106) do
+ActiveRecord::Schema.define(version: 20140219194901) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20140129134106) do
     t.boolean  "verif"
     t.string   "idlong"
     t.datetime "verified_at"
+    t.integer  "erreur"
   end
 
   create_table "personnes", force: true do |t|

@@ -23,106 +23,109 @@ class PaiementsController < ApplicationController
         format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
       end
-  end
-
-  def new
-    com=Commande.find(params[:commande_id])
-    @paiement = com.paiements.new
-    authorize! :create, @paiement
-    @montant=com.prochain_paiement / 100.0
-    @etape=(com.paiement_etape + 1).to_s
-
-    com=Commande.find(params[:commande_id])
-    if com.montant_du > 0
-
-    else
-      redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
     end
 
-    if @montant == 0
-     redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
-    end
+    def new
+      com=Commande.find(params[:commande_id])
+      @paiement = com.paiements.new
+      authorize! :create, @paiement
+      @montant=com.prochain_paiement / 100.0
+      @etape=(com.paiement_etape + 1).to_s
 
-  end
+      com=Commande.find(params[:commande_id])
+      if com.montant_du > 0
 
-  def index
+      else
+        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
+      end
+
+      if @montant == 0
+       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
+     end
+
+   end
+
+   def index
     authorize! :read_admin, User
     @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
   end
 
   def show
-     authorize! :show, @commandes
-     @paiement=Paiement.find(params[:id])
-     @commande=@paiement.commande
-     @personne=@commande.personne
-     @referant=@personne.referant
-     @url=urlpaiement(@paiement)
-  end
+   authorize! :show, @commandes
+   @paiement=Paiement.find(params[:id])
+   @commande=@paiement.commande
+   @personne=@commande.personne
+   @referant=@personne.referant
+   @url=urlpaiement(@paiement)
+ end
 
-  def update
-    authorize! :read_admin, User
-  end
+ def update
+  authorize! :read_admin, User
+end
 
-  require 'will_paginate/array'
-  def check
-    authorize! :read_admin, User
-    @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
-    authorize! :show, @personnes
-    @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
+require 'will_paginate/array'
+def check
+  authorize! :read_admin, User
+  @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
+  authorize! :show, @personnes
+  @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
 
-  end
+end
 
-  require 'csv'
+require 'csv'
 
-  def csv_import
-    authorize! :read_admin, User  
+def csv_import
+  authorize! :read_admin, User  
 
-    amount_cents_row = 4
-    id_long_row = 21
-    reponse_code_row = 12
-    banque_reponse_code_row = 29
+  amount_cents_row = 4
+  id_long_row = 21
+  reponse_code_row = 12
+  banque_reponse_code_row = 29
 
-    file_data = params[:file].read
+  file_data = params[:file].read
 
     #handle the differents csv row sep
     if file_data.include?("\r\r\n")
      csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:row_sep=> "\r\r\n", :col_sep => ';')
-    else
-      csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:col_sep => ';')
-    end
-    nbre_paiements_valides = 0
-    nbre_paiement=csv_rows.size - 2
-    csv_rows.each_with_index do |row,line|
-      case line
-      when 0
+   else
+    csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:col_sep => ';')
+  end
+  nbre_paiements_valides = 0
+  nbre_paiements_refuses = 0
+  nbre_paiement=csv_rows.size - 2
+  csv_rows.each_with_index do |row,line|
+    case line
+    when 0
         # useless
       when 1 
         # header2
       else
-        nbre_paiements_valides +=1 if validate_paiement(row[id_long_row],row[amount_cents_row],row[reponse_code_row],row[banque_reponse_code_row])
+        valcode=validate_paiement(row[id_long_row],row[amount_cents_row],row[reponse_code_row],row[banque_reponse_code_row])
+        nbre_paiements_valides +=1 if valcode[0]
+        nbre_paiements_refuses +=1 if valcode[1]
       end
-    
+
     end
 
     respond_to do |format|
-      format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements validés sur " + nbre_paiement.to_s  + " présents dans le fichier.", :plop => "truc" }
+      format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements traités sur " + nbre_paiement.to_s  + " présents dans le fichier. " + nbre_paiements_refuses.to_s + " paiement ont été refusés pas la banque." , :plop => "truc" }
     end
   end
 
 
 
-private
-def site
-  return "PayResaSKZ"
-end
-def ref
-  return 126
-end
+  private
+  def site
+    return "PayResaSKZ"
+  end
+  def ref
+    return 126
+  end
 
-def hashpaiement(paiement)
-  secret = Configurable[:secret_paiement]
-  return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.user.referant.email + '+' + ref.to_s + '+' + site + '+' + secret)
-end
+  def hashpaiement(paiement)
+    secret = Configurable[:secret_paiement]
+    return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.user.referant.email + '+' + ref.to_s + '+' + site + '+' + secret)
+  end
   ###################################################################
   # Copyright (c) 2012 Thomas Fuzeau
   # Under MIT licence.
@@ -158,21 +161,29 @@ end
   end
 
   def validate_paiement(paiement_id_long, csv_amount_cents, reponse_code, banque_reponse_code)
-    if reponse_code == "00" && banque_reponse_code == "00"
-      if paiement_id_long.to_s.size < 4 && !paiement_id_long.nil?
+  # retrourne un array de booleen.
+  # [true si un paiement du site est validé, true si paiement refusé par la banque]
+
+
+    if paiement_id_long.to_s.size < 4 && !paiement_id_long.nil?
         # ceci est necessaire poour valider les premiers paiement suite à l'erreur dans le hash généré avec id et non idlong
         paiement=Paiement.find_by(id: paiement_id_long.to_i)
       else
         paiement=Paiement.find_by(idlong: paiement_id_long)
-      end
-      if !paiement.nil? && !paiement.verif? && paiement.amount_cents.to_i ==  csv_amount_cents.to_i
-        paiement.set_verif
-        # logger.info "###########################Validation"
-        return true  
-      else 
-        return false   
-      end
     end
+      if !paiement.nil? && !paiement.verif? && paiement.amount_cents.to_i ==  csv_amount_cents.to_i
+        if reponse_code == "00" && banque_reponse_code == "00"
+          paiement.set_verif
+          return [true,false]
+        else
+          paiement.set_erreur(reponse_code)
+          return [false,true]
+        end
+        # logger.info "###########################Validation"
+
+      else 
+        return [false,false]   
+      end
   end
 
   def paiement_params

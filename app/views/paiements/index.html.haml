@@ -9,13 +9,15 @@
 				%th date
 				%th Montant
 				%th Vérifié
+				%th Refusé Banque
 
 		%tbody
 			- @paiements.each do |p|
 				%tr
 					%td=link_to p.idlong, paiement_path(p.id)
-					%td=p.date
+					%td=p.date.to_s.gsub("UTC","")
 					%td=p.amount_euro
 					%td=conditional_format(p.verif)
+					%td=conditional_badge(!p.erreur?)
 
 	=will_paginate @paiements
