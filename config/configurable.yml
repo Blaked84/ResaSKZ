@@ -62,6 +62,11 @@ mode_maintenance:
   default: false             # sets the default value
   type: boolean             # coerces the value to an integer
 
+# date limite de création des commandes
+commandes_possibles:
+  name: possibilité de créer des commandes?
+  default: true
+  type: boolean
 
 # date des paiements
 echeances_paiement1:

@@ -5,15 +5,20 @@ class CommandesController < ApplicationController
   
 
   def new
-    @commande = Commande.new(:personne_id => params[:pers_id])
-    authorize! :create, @commande
-    @personne=Personne.find_by_id(params[:pers_id]) if params[:pers_id]
-    @packs=Pack.all
-    @events=Event.all.to_a
-    @personne.commandes.each{|c| @events.delete c.event} if @personne
-    logger.debug @events.to_s
-    @commande.tbk = @personne.default_tbk if @personne
-    redirect_to(personne_url(@personne), notice: "Vous êtes déjà inscrit à tout les évènements") if @events.blank?
+    if Configurable[:commandes_possibles] == true || @current_user.admin?
+
+      @commande = Commande.new(:personne_id => params[:pers_id])
+      authorize! :create, @commande
+      @personne=Personne.find_by_id(params[:pers_id]) if params[:pers_id]
+      @packs=Pack.all
+      @events=Event.all.to_a
+      @personne.commandes.each{|c| @events.delete c.event} if @personne
+      logger.debug @events.to_s
+      @commande.tbk = @personne.default_tbk if @personne
+      redirect_to(personne_url(@personne), notice: "Vous êtes déjà inscrit à tout les évènements") if @events.blank?
+    else
+      redirect_to dashboard_user_path(current_user), alert: "Les commandes sont désormais fermées"
+    end
   end
 
   def create
@@ -68,11 +73,11 @@ class CommandesController < ApplicationController
   	@commande = Commande.find(params[:id])
   	authorize! :show, @commande
 
-   	@personne = @commande.personne
+    @personne = @commande.personne
 
    	##### à definir quand les associations commande <-> produits seront faites
   	# liste des produit d'une commande
-   	@produits = @commande.products
+    @produits = @commande.products
 
    	# total du prix d'une commande
    	# total = @produits.map{|p| p.price}.sum
@@ -112,9 +117,9 @@ class CommandesController < ApplicationController
    	# end
 
    	@status = @commande.complete?
-  end
+   end
 
-  def add_product
+   def add_product
     set_commande
 
     authorize! :add_product, @commande
