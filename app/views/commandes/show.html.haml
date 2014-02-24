@@ -18,8 +18,10 @@
     %tbody
       %tr
         %td=@commande.idlong
-        %td=link_to @personne.user.referant.nom_complet, user_path(@personne.user.id)
-        %td=link_to @personne.nom_complet, personne_path(@personne.id)
+        %td
+          =link_to @personne.user.referant.nom_complet, user_path(@personne.user.id) if !@personne.nil?
+        %td
+          =link_to @personne.nom_complet, personne_path(@personne.id) if !@personne.nil?
         %th=@commande.tbk
         %th=@commande.event.name
         %td=conditional_format(@commande.complete?)
@@ -56,7 +58,8 @@
         %th Reste à payer (€)
     %tbody
       %tr
-        %td=conditional_format(@personne.documentassurance)
+        %td
+          =conditional_format(@personne.documentassurance) if !@personne.nil?
         %td=conditional_format(@commande.caution)
         %td=@total_euro
         %td=conditional_format(@commande.paiementok?)

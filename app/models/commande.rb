@@ -83,6 +83,9 @@ class Commande < ActiveRecord::Base
  	# (la personne à une assurance ET a donné un justificatif) OU a dans sa commande un produit assurance
 	def complete?
 
+		# ne revoie rie net quitte si la commande n'appartient à personne
+		return nil if self.personne.nil?
+
 
 		self.missings = []
 
