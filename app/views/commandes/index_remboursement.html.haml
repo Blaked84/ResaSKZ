@@ -1,0 +1,21 @@
+%div.top-info.pa1
+  %h1
+    Remboursements
+
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate#unfixedtable
+    %thead
+      %tr
+        %th= sortable "idlong", "Commande ID"
+        %th= sortable "created_at", "Date de création"
+        %th Nom
+        %th Montant à rembourser
+      %tbody
+        - @commandes_remb.each do |c|
+          %tr
+            / %td=c.ean
+            %td=link_to c.idlong, commande_path(c.id)
+            %td=c.created_at.to_s.gsub("UTC","")
+            %td=link_to c.personne.nom_complet, personne_path(c.personne.id) if !c.personne.nil?
+            / # Nom de la personne
+            %td=c.montant_du_euro

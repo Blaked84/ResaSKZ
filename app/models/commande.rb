@@ -149,6 +149,10 @@ class Commande < ActiveRecord::Base
 		montant_total - montant_paye
 	end
 
+	def montant_du_euro
+		montant_du / 100.0
+	end
+
 	def montant_pack
 		self.products.where(categorie_id: Configurable[:id_pack]).map{|p| p.price}.sum
 	end

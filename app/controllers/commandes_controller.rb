@@ -120,6 +120,11 @@ class CommandesController < ApplicationController
    	@status = @commande.complete?
    end
 
+   def index_remboursement
+    commandes=Commande.all
+    @commandes_remb=commandes.map{|c| c if c.montant_du < 0 }.compact
+   end
+
    def add_product
     set_commande
 
