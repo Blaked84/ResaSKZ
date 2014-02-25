@@ -9,9 +9,10 @@
         %th Commande ID
         %th Date de création
         %th Nom
-        %th Premier paiement
-        %th Payée entièrement
-        %th Commande valide
+        %th.w50p 1er paiement
+        %th.w50p 2ème paiement
+        %th.w50p Payée entièrement
+        %th.w50p Commande valide
       %tbody
         - @commandes.each do |c|
           %tr
@@ -21,6 +22,7 @@
             %td=link_to c.personne.nom_complet, personne_path(c.personne.id) if !c.personne.nil?
             / # Nom de la personne
             %td=conditional_format(c.etape_valide? 1)
+            %td=conditional_format(c.etape_valide? 2)
             %td=conditional_format(c.paiementok?)
             %td=conditional_format(c.complete?)
   = will_paginate @commande
