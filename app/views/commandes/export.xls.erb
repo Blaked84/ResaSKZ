@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Email</Data></Cell>
+        <Cell><Data ss:Type="String">Nom</Data></Cell>
+        <Cell><Data ss:Type="String">Prenom</Data></Cell>
+        <Cell><Data ss:Type="String">Bucque</Data></Cell>
+        <Cell><Data ss:Type="String">Num's</Data></Cell>
+        <Cell><Data ss:Type="String">Prom's</Data></Cell>
+        <Cell><Data ss:Type="String">Telephone</Data></Cell>
+        <Cell><Data ss:Type="String">Taille</Data></Cell>
+        <Cell><Data ss:Type="String">Pointure</Data></Cell>
+        <Cell><Data ss:Type="String">Taille vêtement</Data></Cell>
+        <Cell><Data ss:Type="String">TBK</Data></Cell>
+        <% @commandes.first[:products].each do |k,v| %>        
+          <Cell><Data ss:Type="String"><%= k %></Data></Cell>
+        <% end %>
+        <Cell><Data ss:Type="String">Paiement 1</Data></Cell>
+        <Cell><Data ss:Type="String">Paiement 2</Data></Cell>
+        <Cell><Data ss:Type="String">Paiement 3</Data></Cell>
+        <Cell><Data ss:Type="String">Complete</Data></Cell>
+      </Row>
+    <% @commandes.each do |c| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= c[:id] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:email] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:nom] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:prenom] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:bucque] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:nums] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:promo] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:tel] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:taille] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:pointure] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:vetement] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:tbk] %></Data></Cell>
+        <% c[:products].each do |k,v| %>
+          <Cell><Data ss:Type="String"><%= v %></Data></Cell>
+        <% end %>
+        <Cell><Data ss:Type="String"><%= c[:paiement1] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:paiement2] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:paiement3] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:complete] %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+
+

@@ -215,4 +215,47 @@ class Commande < ActiveRecord::Base
 	self.caution=true
 	self.save
 	end
+
+	def serialize
+		pers = self.personne
+		result = Hash.new
+		result[:id]=self.id
+
+		if pers
+			result[:email]=pers.email
+			result[:nom]=pers.nom
+			result[:prenom]=pers.prenom
+			result[:bucque]=pers.bucque
+			result[:nums]=pers.fams
+			result[:promo]=pers.promo
+			result[:tel]=pers.phone
+			result[:taille]=pers.taille
+			result[:pointure]=pers.pointure
+			result[:vetement]=pers.taillevetement.name if pers.taillevetement
+		end
+
+		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"
+
+		result[:paiement1]= self.paiement_etape > 0 ? "OUI" : "NON"
+		result[:paiement2]= self.paiement_etape > 0 ? "OUI" : "NON"
+		result[:paiement3]= self.paiement_etape > 0 ? "OUI" : "NON"
+
+		products= Hash.new
+		Categorie.all.each do|c|
+			if not(c.max_par_personne) || c.max_par_personne > 1
+				c.products.each do |p|
+					cp=self.commande_products.select{|cp| cp.product_id==p.id}.first
+					products[p.name]=cp ? cp.nombre : 0
+				end
+			else
+				cp = self.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
+				products[c.nom]= cp ? cp.product.name : 0
+			end
+		end
+
+		result[:products]=products
+		result[:complete]= complete? ? "OUI" : "NON"
+
+		return result
+	end
 end

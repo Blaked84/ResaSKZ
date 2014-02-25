@@ -12,6 +12,9 @@ LooklaDev::Application.routes.draw do
       post :maj_cat_product
       get :catalogue
     end
+    collection do
+      get :export
+    end
     resources :paiements   
   end
 

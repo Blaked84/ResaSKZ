@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20140219194901) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
-    t.string   "idlong"
+    t.integer  "idlong"
   end
 
   create_table "configurables", force: true do |t|
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(version: 20140219194901) do
     t.integer  "amount_cents"
     t.string   "paiement_hash"
     t.boolean  "verif"
-    t.string   "idlong"
+    t.integer  "idlong"
     t.datetime "verified_at"
     t.integer  "erreur"
   end

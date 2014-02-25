@@ -67,6 +67,21 @@ class CommandesController < ApplicationController
   def index
   	@commandes = Commande.paginate(:page => params[:page])
   	authorize! :show, @commandes
+
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+
+  end
+
+  def export
+    @commandes = Commande.all.map{|c| c.serialize}
+    authorize! :show, @commandes
+
+    respond_to do |format|
+      format.xls
+    end
   end
 
   def show
