@@ -2,6 +2,7 @@
 class CommandesController < ApplicationController
 
   before_action :check_register_workflow
+  helper_method :sort_column, :sort_direction
   
 
   def new
@@ -65,7 +66,7 @@ class CommandesController < ApplicationController
   end
 
   def index
-  	@commandes = Commande.paginate(:page => params[:page])
+  	@commandes = Commande.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   	authorize! :show, @commandes
 
     respond_to do |format|
@@ -132,6 +133,11 @@ class CommandesController < ApplicationController
    	# end
 
    	@status = @commande.complete?
+   end
+
+   def index_remboursement
+    commandes=Commande.all
+    @commandes_remb=commandes.map{|c| c if c.montant_du < 0 }.compact
    end
 
    def add_product
@@ -234,12 +240,20 @@ class CommandesController < ApplicationController
 
   private
 
-  def set_commande
-    @commande = Commande.find(params[:id])
-  end
+    def set_commande
+      @commande = Commande.find(params[:id])
+    end
 
-  def commande_params
-    params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution)
-  end
+    def commande_params
+      params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution)
+    end
+
+    def sort_column
+      Commande.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+    
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 
 end

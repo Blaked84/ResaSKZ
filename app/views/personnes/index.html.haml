@@ -4,12 +4,14 @@
   %table.striped.alternate
     %thead
       %tr
-        %th Nom
-        %th Prénom
-        %th Justificatif assurance (RC)
+        %th.w50p=sortable "id"
+        %th=sortable "nom", "Nom"
+        %th=sortable "prenom"
+        %th=sortable "documentassurance", "Justificatif assurance (RC)"
     %tbody
       - @personnes.each do |p|
         %tr
+          %td=link_to p.id, personne_path(p.id)
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
           %td=conditional_format(p.documentassurance)

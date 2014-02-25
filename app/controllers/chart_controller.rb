@@ -7,7 +7,7 @@ class ChartController < ApplicationController
 
   def etatcommande
     # expire_action :action => :etatcommande
-  	render :json => Tbk.all.map{|t| [t.nom,  t.commandes.all.map{|c| c.complete?}.count(false)]}
+  	render :json => Tbk.all.map{|t| [t.nom,  t.commandes.all.map{|c| c.complete? if !c.personne.nil?}.count(false)]}
   end
 
   def paiement

@@ -17,6 +17,8 @@ LooklaDev::Application.routes.draw do
     end
     resources :paiements   
   end
+  get 'remboursements' => 'commandes#index_remboursement', as: :remboursements
+
 
   #charts
   get "chart/etatcommande" => "chart#etatcommande"
