@@ -6,8 +6,8 @@
   %table.striped.alternate#unfixedtable
     %thead
       %tr
-        %th Commande ID
-        %th Date de création
+        %th= sortable "idlong", "Commande ID"
+        %th= sortable "created_at", "Date de création"
         %th Nom
         %th.w50p 1er paiement
         %th.w50p 2ème paiement

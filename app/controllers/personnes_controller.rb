@@ -3,11 +3,12 @@ class PersonnesController < ApplicationController
   
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
   before_action :set_personne, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
   require 'will_paginate/array'
 
   def index
-  	@personnes = Personne.all.sort_by{|a| a.nom}.paginate(:page => params[:page],:per_page => 50)
+  	@personnes = Personne.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @personnes
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
     @titre = "Personnes"
@@ -130,6 +131,14 @@ private
     perm_list << :moderated if current_user.admin?
 
   params.require(:personne).permit( perm_list )
+  end
+
+  def sort_column
+      Commande.column_names.include?(params[:sort]) ? params[:sort] : "nom"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end
