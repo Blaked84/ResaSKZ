@@ -77,7 +77,12 @@ class CommandesController < ApplicationController
   end
 
   def export
-    @commandes = Commande.all.map{|c| c.serialize}
+    pool_size=300
+    page_number=params[:page].to_i || 1
+    debut=(page_number-1)*pool_size
+    fin=(page_number)*pool_size-1
+    coms = Commande.all[debut..fin]
+    @commandes = coms.map{|c| c.serialize}
     authorize! :show, @commandes
 
     respond_to do |format|
