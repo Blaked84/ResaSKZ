@@ -251,7 +251,7 @@ class Commande < ActiveRecord::Base
 			if not(c.max_par_personne) || c.max_par_personne > 1
 				c.products.each do |p|
 					cp=self.commande_products.select{|cp| cp.product_id==p.id}.first
-					products[p.name]=cp ? cp.nombre : 0
+					products[p.name+"- semaine "+p.event_id.to_s]=cp ? cp.nombre : 0
 				end
 			else
 				cp = self.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
