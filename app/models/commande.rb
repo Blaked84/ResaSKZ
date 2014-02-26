@@ -241,8 +241,8 @@ class Commande < ActiveRecord::Base
 
 		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"
 
-		result[:paiement1]= self.etape_valide? 1 ? "OUI" : "NON"
-		result[:paiement2]= self.etape_valide? 2 ? "OUI" : "NON"
+		result[:paiement1]= self.etape_valide?(1.to_i) ? "OUI" : "NON"
+		result[:paiement2]= self.etape_valide?(2.to_i) ? "OUI" : "NON"
 		result[:paiement3]= self.paiementok? ? "OUI" : "NON"
 
 		products= Hash.new

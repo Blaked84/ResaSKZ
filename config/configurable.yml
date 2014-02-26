@@ -81,3 +81,8 @@ echeances_paiement3:
   name: echeance des paiements 3           # sets the edit label
   default:             # sets the default value
   type: date
+
+export__commande_pool_size:
+  name: Nombre d'éléments dans un export de commande
+  default: 300
+  type: integer

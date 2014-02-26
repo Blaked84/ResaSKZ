@@ -2,7 +2,7 @@ module CommandeHelper
 
 	def excel_block
 
-		pool_size=300
+		pool_size=Configurable[:export__commande_pool_size]
 
 		nbr_pages=(Commande.count/pool_size.to_f).ceil
 
