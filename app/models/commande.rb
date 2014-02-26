@@ -224,6 +224,7 @@ class Commande < ActiveRecord::Base
 		pers = self.personne
 		result = Hash.new
 		result[:id]=self.id
+		result[:idlong]=self.idlong
 
 		if pers
 			result[:email]=pers.email
@@ -240,9 +241,9 @@ class Commande < ActiveRecord::Base
 
 		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"
 
-		result[:paiement1]= self.paiement_etape > 0 ? "OUI" : "NON"
-		result[:paiement2]= self.paiement_etape > 0 ? "OUI" : "NON"
-		result[:paiement3]= self.paiement_etape > 0 ? "OUI" : "NON"
+		result[:paiement1]= self.etape_valide? 1 ? "OUI" : "NON"
+		result[:paiement2]= self.etape_valide? 2 ? "OUI" : "NON"
+		result[:paiement3]= self.paiementok? ? "OUI" : "NON"
 
 		products= Hash.new
 		Categorie.all.each do|c|

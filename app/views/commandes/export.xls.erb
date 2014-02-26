@@ -7,7 +7,8 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">ID Base</Data></Cell>
+        <Cell><Data ss:Type="String">Identifiant</Data></Cell>
         <Cell><Data ss:Type="String">Email</Data></Cell>
         <Cell><Data ss:Type="String">Nom</Data></Cell>
         <Cell><Data ss:Type="String">Prenom</Data></Cell>
@@ -30,6 +31,7 @@
     <% @commandes.each do |c| %>
       <Row>
         <Cell><Data ss:Type="String"><%= c[:id] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:idlong] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:email] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:nom] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:prenom] %></Data></Cell>
