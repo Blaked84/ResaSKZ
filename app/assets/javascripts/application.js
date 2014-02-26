@@ -15,3 +15,12 @@
 //= require turbolinks
 //= require_tree .
 
+$(document).ready(function() {
+
+ $('#hidden').hide(); //Initially form wil be hidden.
+
+  $('#showhidden').click(function() {
+   $('#hidden').show();//Form shows on button click
+
+   });
+ });

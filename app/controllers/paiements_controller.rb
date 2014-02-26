@@ -2,6 +2,8 @@
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow  
+  helper_method :sort_column, :sort_direction
+
 
   
 
@@ -23,31 +25,31 @@ class PaiementsController < ApplicationController
         format.html{redirect_to urlpaiement(p).to_s}
         format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
       end
+  end
+
+  def new
+    com=Commande.find(params[:commande_id])
+    @paiement = com.paiements.new
+    authorize! :create, @paiement
+    @montant=com.prochain_paiement / 100.0
+    @etape=(com.paiement_etape + 1).to_s
+
+    com=Commande.find(params[:commande_id])
+    if com.montant_du > 0
+
+    else
+      redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
     end
 
-    def new
-      com=Commande.find(params[:commande_id])
-      @paiement = com.paiements.new
-      authorize! :create, @paiement
-      @montant=com.prochain_paiement / 100.0
-      @etape=(com.paiement_etape + 1).to_s
+    if @montant == 0
+     redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
+  end
 
-      com=Commande.find(params[:commande_id])
-      if com.montant_du > 0
+ end
 
-      else
-        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
-      end
-
-      if @montant == 0
-       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
-     end
-
-   end
-
-   def index
+ def index
     authorize! :read_admin, User
-    @paiements=Paiement.all.paginate(:page => params[:page],:per_page => 50)
+    @paiements=Paiement.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
   end
 
   def show
@@ -69,6 +71,15 @@ def check
   @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
   authorize! :show, @personnes
   @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
+
+end
+
+def force_validation
+  authorize! :read_admin, User
+  paiement=Paiement.find(params[:paiementid])
+  paiement.force_valid(@current_user.id)
+  redirect_to :back, notice: "La validation à forcée"
+
 
 end
 
@@ -188,6 +199,14 @@ def csv_import
 
   def paiement_params
     params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif)
+  end
+
+  def sort_column
+      Paiement.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end

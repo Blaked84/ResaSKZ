@@ -54,6 +54,18 @@ class Paiement < ActiveRecord::Base
 		self.verif && !self.erreur?
 	end
 
+	def forced?
+		self.verif_forced
+	end
+
+	def force_valid(userid)
+		self.verif_forced=true
+		self.verified_by=userid
+		self.save
+
+		set_verif
+	end
+
 	def gen_idlong
 		(SecureRandom.random_number *10**14).to_s[0,13]
 	end

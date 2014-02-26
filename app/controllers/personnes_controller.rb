@@ -134,7 +134,7 @@ private
   end
 
   def sort_column
-      Commande.column_names.include?(params[:sort]) ? params[:sort] : "nom"
+      Personne.column_names.include?(params[:sort]) ? params[:sort] : "nom"
   end
   
   def sort_direction

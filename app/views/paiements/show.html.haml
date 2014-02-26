@@ -11,16 +11,30 @@
 				%th ID
 				%th date
 				%th Montant
+				%th.w100p Vérifié
+				%th.w100p Refusé banque
 
 		%tbody
 			%tr
 				%td=@paiement.idlong
 				%td=@paiement.date
 				%td=@paiement.amount_euro
+				%td=conditional_format(@paiement.verif)
+				%td=conditional_badge(!@paiement.erreur?)
+
+	-if can? :read_admin, User
+		-if @paiement.forced?
+			.box.alert
+				%p La validation de ce paiement a été forcée par #{link_to @paiement.verified_by, personne_path(@paiement.verified_by)}
+		
+		-else
+			%p=link_to "Forcer la validation", "javascript:void(0)", :class => "pure-button pure-button-error", id: "showhidden"
+
+			%p#hidden.pa3=link_to "Forcer", {:controller => :paiements, :action => :force_validation, :paiementid => @paiement.id}, {:method => :put ,:data => { :confirm => 'Attention, en cliquant sur ok, le paiement va être validé en outrepasant la banque.'}, :class => "pure-button pure-button-error"}
 
 	%p
 		Commande: 
-		=link_to @commande.id, commande_path(@commande.id)
+		=link_to @commande.idlong, commande_path(@commande.id)
 	%p
 		Personne: 
 		=link_to @personne.nom_complet, personne_path(@personne.id)

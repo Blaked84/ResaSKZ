@@ -30,9 +30,13 @@ LooklaDev::Application.routes.draw do
     resources :products
   end 
   #paiements
-  resources :paiements
+  resources :paiements do
+    put :force_validation, :on => :collection
+  end
+  
   get 'paiements-check' => 'paiements#check', as: :check_paiement
   post 'paiements-import-csv' => 'paiements#csv_import', as: :csv_import
+
   resources :personnes do
     member do
       get 'personne_infos'

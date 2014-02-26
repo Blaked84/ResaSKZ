@@ -5,11 +5,12 @@
 	%table.striped.alternate
 		%thead
 			%tr
-				%th ID
-				%th date
-				%th Montant
-				%th Vérifié
-				%th Refusé Banque
+				%th=sortable "idlong", "ID"
+				%th=sortable "created_at", "date"
+				%th=sortable 'amount_cents', "Montant"
+				%th.w100p=sortable "verif", "Vérifié"
+				%th.w100p=sortable "erreur" ,"Refusé Banque"
+				%th.w100p=sortable "verif_forced", "Forcé"
 
 		%tbody
 			- @paiements.each do |p|
@@ -19,5 +20,6 @@
 					%td=p.amount_euro
 					%td=conditional_format(p.verif)
 					%td=conditional_badge(!p.erreur?)
+					%td=conditional_badge(!p.forced?)
 
 	=will_paginate @paiements
