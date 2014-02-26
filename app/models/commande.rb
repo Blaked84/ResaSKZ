@@ -225,6 +225,7 @@ class Commande < ActiveRecord::Base
 		result = Hash.new
 		result[:id]=self.id
 		result[:idlong]=self.idlong
+		result[:event]=self.event ? self.event.name : "EVENT NON RENSEIGNE"
 
 		if pers
 			result[:email]=pers.email
