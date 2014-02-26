@@ -196,18 +196,22 @@ class CommandesController < ApplicationController
   end
 
   def catalogue
-    set_commande
-    authorize! :add_product, @commande    
+    if Configurable[:commandes_editables] == true || @current_user.admin?
+      set_commande
+      authorize! :add_product, @commande    
 
-    @categories=Categorie.all.map do|c|
+      @categories=Categorie.all.map do|c|
 
-      prods = c.products.where(event_id: @commande.event_id)
+        prods = c.products.where(event_id: @commande.event_id)
 
-      select = @commande.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
-      select_id = select ? select.product_id : 0
+        select = @commande.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
+        select_id = select ? select.product_id : 0
 
-      {id: c.id,nom: c.nom, max: c.max_par_personne, selected: select_id ,products: prods }
+        {id: c.id,nom: c.nom, max: c.max_par_personne, selected: select_id ,products: prods }
 
+      end
+    else
+      redirect_to :back, alert: "Les commandes sont désormais bloquées!"
     end
 
   end

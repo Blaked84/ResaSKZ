@@ -62,9 +62,15 @@ mode_maintenance:
   default: false             # sets the default value
   type: boolean             # coerces the value to an integer
 
-# date limite de création des commandes
+# blocage de la création des commandes
 commandes_possibles:
   name: possibilité de créer des commandes?
+  default: true
+  type: boolean
+
+# blocage de l'édition des commandes
+commandes_editables:
+  name: possibilité de modifier les commandes?
   default: true
   type: boolean
 
