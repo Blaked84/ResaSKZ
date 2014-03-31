@@ -1,0 +1,21 @@
+%div.top-info.pa1
+  %h1 Assurance RC
+%div.pa1.fiche.brdr-b
+  %h2 Rechercher une personne
+%div.pa1.fiche.brdr-b
+  %h2 Dernières assurances validées
+  %table.striped.alternate
+    %thead
+      %tr
+        %th.w50p=sortable "id"
+        %th=sortable "nom", "Nom"
+        %th=sortable "prenom"
+        %th=sortable "documentassurance", "Justificatif assurance (RC)"
+    %tbody
+      - @personnes.each do |p|
+        %tr
+          %td=link_to p.id, personne_path(p.id)
+          %td=link_to p.nom, personne_path(p.id)
+          %td=p.prenom
+          %td=p.assurance_uptated_at
+  

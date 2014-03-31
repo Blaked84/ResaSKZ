@@ -92,6 +92,13 @@ class PersonnesController < ApplicationController
     redirect_to  :controller => 'commandes', :action => 'new', :pers_id => @personne.id
   end
 
+  def add_assurance
+    @personnes = Personne.where(documentassurance: true).order("assurance_uptated_at").limit(5)
+    authorize! :show, @personnes
+    @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
+    @titre = "Personnes"
+  end
+
 private
 
   def set_personne

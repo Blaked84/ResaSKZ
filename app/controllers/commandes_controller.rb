@@ -249,7 +249,23 @@ class CommandesController < ApplicationController
     end
   end
 
+  def add_caution
+    @lastcautioncommandes = lasts_caution_update_commandes_path
+    authorize! :show, @commandes
 
+    respond_to do |format|
+      format.html
+      format.xls
+    end
+  end
+
+  def lasts_caution_update
+    authorize! :show, @commandes
+
+    co = Commande.all.map{|p| p}
+    render :json => co
+
+  end
 
   private
 

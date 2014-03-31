@@ -70,6 +70,12 @@ gem 'actionpack-action_caching'
 gem 'addressable'
 
 gem 'simple_form'
+#Autocompletion pour les form de recherche
+# gem 'rails3-jquery-autocomplete'
+gem 'rails4-autocomplete'
+
+
+#Ajouter gem de recherche pour active record
 
 group :development do
 
