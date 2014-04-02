@@ -4,6 +4,8 @@ class PersonnesController < ApplicationController
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
   before_action :set_personne, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
+  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
+
 
   require 'will_paginate/array'
 
@@ -94,9 +96,17 @@ class PersonnesController < ApplicationController
 
   def add_assurance
     @personnes = Personne.where(documentassurance: true).order("assurance_uptated_at").limit(5)
+    @personne = Personne.new
     authorize! :show, @personnes
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
     @titre = "Personnes"
+  end
+
+  def validate_assurance
+    authorize! :read_admin, User
+    personne=Personne.find(params[:id])
+    personne.a_donne_justificatif_assurance
+    redirect_to :back
   end
 
 private

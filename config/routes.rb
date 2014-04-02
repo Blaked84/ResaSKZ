@@ -54,7 +54,8 @@ LooklaDev::Application.routes.draw do
         resources :products
       end
     end
-
+  get :autocomplete_personne_nom, :on => :collection
+  post :validate_assurance, :on => :collection
   end
   resources :products
   get 'productnmbr' => 'comandes#productnmbr'
