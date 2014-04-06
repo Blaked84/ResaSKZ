@@ -1,0 +1,69 @@
+
+window.onload = function () {
+
+  $('.nom').bind('railsAutocomplete.select', function(event, data){
+    
+    var chambre = $( this ).closest(".chambre");
+    var chambre_cid=chambre.attr('id');
+    var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
+    var pers_id=data.item.id;
+    var url = "/chambres/"+chambre_id+"/add_personne";
+
+    $.post(url,{pers_id: pers_id})
+        .done(function(data) {
+          var place = chambre.find('.libre').first();
+
+          place.removeClass("libre").addClass("occupe");
+          place.attr('pers_id',data.id);
+          place.find('.infos').text(data.infos);
+          chambre.find('input.nom').val("");
+          chambre.find('input.nom').animate(
+          {
+            backgroundColor : "#00FF7F"
+          },10).delay(200).animate(
+          {
+            backgroundColor : "#FFFFFF"
+          },300);
+        })
+        .fail( function (data) {
+          chambre.find('input.nom').val("");
+          chambre.find('input.nom').animate(
+          {
+            backgroundColor : "#FF0000"
+          },10).delay(200).animate(
+          {
+            backgroundColor : "#FFFFFF"
+          },300);
+        });
+
+
+
+  });
+
+  $('.clear').bind("click", function(event) {
+    event.preventDefault();
+    var parent=$( this ).parent();
+
+    if(parent.hasClass('occupe')){
+      var chambre_cid=$( this ).closest(".chambre").attr('id');
+      var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
+      var pers_id = parent.attr('pers_id');
+      var url = "/chambres/"+chambre_id+"/remove_personne";
+      // alert("Chambre : " + chambre_id);
+      // alert('Suppression de la personne id n°'+pers_id);
+
+      $.post(url,{pers_id: pers_id})
+        .done(function() {
+          // alert("Succes");
+          parent.removeClass("occupe").addClass("libre");
+          parent.find('.infos').text("Libre");
+          parent.attr('pers_id','')
+        })
+        .fail( function () {
+          alert("Erreur");
+        });
+    }
+  });
+
+
+};

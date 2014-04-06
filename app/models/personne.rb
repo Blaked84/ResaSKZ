@@ -13,6 +13,7 @@ class Personne < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :taillevetement
 	has_many :commandes
+	has_and_belongs_to_many :chambres
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
@@ -106,6 +107,10 @@ class Personne < ActiveRecord::Base
 
 def nom_complet
     return self.prenom.to_s+" "+self.nom.to_s if !self.prenom.nil? && !self.nom.nil?
+end
+
+def infos_completes
+	return "[#{self.id}] #{self.prenom.to_s} #{self.nom.to_s}"
 end
 
 def taille_metre

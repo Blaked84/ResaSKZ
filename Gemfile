@@ -22,6 +22,7 @@ gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -68,6 +69,8 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'actionpack-action_caching'
 
 gem 'addressable'
+
+gem 'rails4-autocomplete'
 
 gem 'simple_form'
 

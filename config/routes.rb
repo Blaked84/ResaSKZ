@@ -1,5 +1,10 @@
 LooklaDev::Application.routes.draw do
 
+  get "chambres/index"
+  get "chambres/import"
+  get "chambres/import_validate"
+  get "chambres/create"
+  get "chambres/assign"
   get "commande_products/check_nombre"
   post "commande_products/check_nombre"
   get "admin/index"
@@ -73,6 +78,23 @@ LooklaDev::Application.routes.draw do
       get 'to_moderate'
     end
   end
+
+  resources :chambres, only: [:index, :create] do
+    get :autocomplete_personne_nom, :on => :collection
+    collection do
+      get 'import'
+      get 'import_validate'
+      get 'assign'
+    end
+    member do
+      get 'get_personnes_for'
+      get 'add_personne'
+      post 'add_personne'
+      get 'remove_personne'
+      post 'remove_personne'
+    end
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -13,6 +13,7 @@
  *= require_tree .
  *= require toastr
  *= require layout
+ *= require jquery.ui.all
  */
 
 @font-face {
@@ -1468,3 +1469,4 @@ body{background: #ecf0f1;}
 .alert{
 	background-color: #c0392b;
 }
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226200327) do
+ActiveRecord::Schema.define(version: 20140324165549) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -30,9 +30,16 @@ ActiveRecord::Schema.define(version: 20140226200327) do
   create_table "chambres", force: true do |t|
     t.string   "numero"
     t.integer  "nbrplace"
+    t.string   "zone"
+    t.integer  "tbk_id"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "event_id"
+  end
+
+  create_table "chambres_personnes", force: true do |t|
+    t.integer "chambre_id"
+    t.integer "personne_id"
   end
 
   create_table "commande_products", force: true do |t|
@@ -57,7 +64,7 @@ ActiveRecord::Schema.define(version: 20140226200327) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
-    t.string   "idlong"
+    t.integer  "idlong"
   end
 
   create_table "configurables", force: true do |t|
@@ -110,7 +117,7 @@ ActiveRecord::Schema.define(version: 20140226200327) do
     t.integer  "amount_cents"
     t.string   "paiement_hash"
     t.boolean  "verif"
-    t.string   "idlong"
+    t.integer  "idlong"
     t.datetime "verified_at"
     t.integer  "erreur"
     t.integer  "verified_by"
