@@ -70,6 +70,8 @@ gem 'actionpack-action_caching'
 
 gem 'addressable'
 
+gem 'rails4-autocomplete'
+
 gem 'simple_form'
 #Autocompletion pour les form de recherche
 # gem 'rails3-jquery-autocomplete'

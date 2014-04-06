@@ -4,6 +4,7 @@ class Tbk < ActiveRecord::Base
 	# Les TBK gérant les dossiers
 	#################################################
 	has_many :commandes
+	has_many :chambres
 
 	def to_s
 		return self.nom

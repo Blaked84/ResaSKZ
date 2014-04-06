@@ -1,0 +1,32 @@
+%div.fiche.pa1.brdr-b
+  -@chambres.each do |c|
+    .chambre{id:"c#{c.id}"}
+      %h1= "Chambres n° #{c.identifiant} "
+      .info
+        %table
+          %tr
+            %td Tabagn's
+            %td=c.tbk.nom
+          %tr
+            %td Zone
+            %td=c.zone
+          %tr
+            %td Nombre de places
+            %td=c.nbrplace
+
+      .pers_selection
+        .assign_pers_form{id: "c#{c.id}_p"}
+          =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_chambres_path, :size => 50,:update_elements => {:id => "#id"},id:"nom_c#{c.id}",class: 'nom waiting'
+          =hidden_field_tag "id_c#{c.id}"
+        -(0..c.nbrplace-1).each do |p_nbr|
+          .pers_box
+            %div{class: "pers_box",class: c.personnes[p_nbr] ? "occupe" : "libre",pers_id: c.personnes[p_nbr] ? c.personnes[p_nbr].id : nil}
+              .clear
+                =link_to image_tag("Button-Delete-icon.png", size: "20x20", alt: "Supprimer")
+              .infos
+                =  c.personnes[p_nbr] ? c.personnes[p_nbr].infos_completes : "LIBRE"
+        
+
+
+        
+

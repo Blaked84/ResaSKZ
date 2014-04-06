@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
+ActiveRecord::Schema.define(version: 20140324165549) do
+=======
 ActiveRecord::Schema.define(version: 20140330163004) do
+>>>>>>> e508cbb8ff8505318039c66f1e09a3f5fe26fb9c
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -30,9 +34,16 @@ ActiveRecord::Schema.define(version: 20140330163004) do
   create_table "chambres", force: true do |t|
     t.string   "numero"
     t.integer  "nbrplace"
+    t.string   "zone"
+    t.integer  "tbk_id"
+    t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "event_id"
+  end
+
+  create_table "chambres_personnes", force: true do |t|
+    t.integer "chambre_id"
+    t.integer "personne_id"
   end
 
   create_table "commande_products", force: true do |t|
@@ -57,8 +68,12 @@ ActiveRecord::Schema.define(version: 20140330163004) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
+<<<<<<< HEAD
+    t.integer  "idlong"
+=======
     t.string   "idlong"
     t.datetime "caution_updated_at"
+>>>>>>> e508cbb8ff8505318039c66f1e09a3f5fe26fb9c
   end
 
   create_table "configurables", force: true do |t|
@@ -111,7 +126,7 @@ ActiveRecord::Schema.define(version: 20140330163004) do
     t.integer  "amount_cents"
     t.string   "paiement_hash"
     t.boolean  "verif"
-    t.string   "idlong"
+    t.integer  "idlong"
     t.datetime "verified_at"
     t.integer  "erreur"
     t.integer  "verified_by"
