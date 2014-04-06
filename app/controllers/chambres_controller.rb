@@ -3,7 +3,7 @@ class ChambresController < ApplicationController
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:prenom, :nom]
 
   def index
-    @chambres=Chambres.all
+    @chambres=Chambre.all
   end
 
   def import
