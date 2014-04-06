@@ -4,15 +4,22 @@
 
 %div.pa1.fiche.brdr-b
   %h2 Rechercher une personne / commande
-  %span attention, il va falloir faire une table temporaire avec les commandes + personnes
+  %span Attention, en recherchant une personne dans cette liste, tu vas valider toutes les cautions de ses commandes si elle en a plusieurs.
+  %span La recherche se fait par le nom de famille
+  %div
+    =form_tag validate_caution_commandes_path :method => :post do
+      =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id", :size => 75
+      =hidden_field_tag "id"
+      = submit_tag 'caution reçue', :class => "pure-button pure-button-success pure-button-xsmall "
 %div.pa1.fiche.brdr-b
-  %h2 Dernière assurance validées
+  %h2 Dernière cautions validées
   %table.striped.alternate#unfixedtable
     %thead
       %tr
         %th= sortable "idlong", "Commande ID"
         %th= sortable "caution_updated_at", "Caution enegistrée le"
         %th Nom
+        %th 
         
       %tbody
         - @lastcautioncommandes.each do |c|
@@ -21,6 +28,7 @@
             %td=link_to c.idlong, commande_path(c.id)
             %td=c.caution_updated_at.to_s.gsub("UTC","")
             %td=link_to c.personne.nom_complet, personne_path(c.personne.id) if !c.personne.nil?
+            %td= link_to 'Edit', edit_commande_path(c.id), :class => "pure-button pure-button-xsmall" 
             / # Nom de la personne
            
 

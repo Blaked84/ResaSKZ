@@ -20,7 +20,7 @@ LooklaDev::Application.routes.draw do
     collection do
       get :export
       get :add_caution
-      get :lasts_caution_update
+      post :validate_caution
     end
     resources :paiements   
   end

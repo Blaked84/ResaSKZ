@@ -217,6 +217,7 @@ class Commande < ActiveRecord::Base
 
 	def a_donne_caution
 	self.caution=true
+	self.caution_updated_at = DateTime.now
 	self.save
 	end
 
