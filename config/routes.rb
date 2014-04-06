@@ -19,6 +19,8 @@ LooklaDev::Application.routes.draw do
     end
     collection do
       get :export
+      get :add_caution
+      get :lasts_caution_update
     end
     resources :paiements   
   end
@@ -50,12 +52,15 @@ LooklaDev::Application.routes.draw do
     end
     collection do
       get 'to_moderate'
+      get 'add_assurance'
     end
     resources :commandes do
       resources :events do
         resources :products
       end
     end
+  get :autocomplete_personne_nom, :on => :collection
+  post :validate_assurance, :on => :collection
   end
   resources :products
   get 'productnmbr' => 'comandes#productnmbr'

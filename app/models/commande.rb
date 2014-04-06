@@ -158,7 +158,7 @@ class Commande < ActiveRecord::Base
 	end
 
 	def paiementok?
-		montant_du == 0 && self.paiements.map{|p| p.verif?}.count(false)==0 && montant_paye > 0
+		montant_du == 0  && montant_paye > 0
 	end
 	def paiement_etape
 		# case montant_paye

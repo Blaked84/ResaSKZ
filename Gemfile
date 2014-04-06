@@ -22,7 +22,7 @@ gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-gem "jquery-ui-rails"
+gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
@@ -73,6 +73,12 @@ gem 'addressable'
 gem 'rails4-autocomplete'
 
 gem 'simple_form'
+#Autocompletion pour les form de recherche
+# gem 'rails3-jquery-autocomplete'
+gem 'rails4-autocomplete'
+
+
+#Ajouter gem de recherche pour active record
 
 group :development do
 

@@ -1,0 +1,31 @@
+%div.top-info.pa1
+  %h1 Assurance RC
+%div.pa1.fiche.brdr-b
+  %h2 Rechercher une personne
+  %div
+    =form_tag validate_assurance_personnes_path :method => :post do
+      =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id", :size => 75
+      =hidden_field_tag "id"
+      = submit_tag 'Assurance reçue', :class => "pure-button pure-button-success"
+  /   =simple_form_for @personne do |form|
+  /     =form.input :nom
+  /     =form.input :nom, :url => autocomplete_personne_nom_personnes_path, :as => :autocomplete
+
+      
+%div.pa1.fiche.brdr-b
+  %h2 Dernières assurances validées
+  %table.striped.alternate
+    %thead
+      %tr
+        %th.w50p=sortable "id"
+        %th=sortable "nom", "Nom"
+        %th=sortable "prenom"
+        %th=sortable "documentassurance", "Justificatif assurance (RC)"
+    %tbody
+      - @personnes.each do |p|
+        %tr
+          %td=link_to p.id, personne_path(p.id)
+          %td=link_to p.nom, personne_path(p.id)
+          %td=p.prenom
+          %td=p.assurance_uptated_at
+  

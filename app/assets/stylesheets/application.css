@@ -658,6 +658,7 @@ source https://github.com/stubbornella/oocss/blob/master/core/spacing/space.css
 	table-layout: auto;
 }
 
+
 table,
 .table {
 	max-width : 100%;
