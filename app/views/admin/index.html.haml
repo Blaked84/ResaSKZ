@@ -7,7 +7,12 @@
 	= link_to "Paiements", paiements_path, :class => "pure-button pure-button-primary"
 	= link_to "Validation paiements", check_paiement_path, :class => "pure-button pure-button-primary"
 	= link_to "Reboursements", remboursements_path, :class => "pure-button pure-button-primary"
+	%h2 Validation	
 	= link_to "Validation assurance", add_assurance_personnes_path, :class => "pure-button pure-button-primary"
+	= link_to "Validation cautions", add_caution_commandes_path, :class => "pure-button pure-button-primary"
+	%h2 Gestion des chambres
+	= link_to "Assignement des chambres", chambres_assign_path, :class => "pure-button pure-button-primary"
+
 %div.fiche.pa1.brdr-b
 	Nombre de personnes inscrites:
 	%span=@nbrPersonnes

@@ -3,6 +3,8 @@ class PersonnesController < ApplicationController
   
   before_action :check_register_workflow, except: [:personne_infos, :update_personne_infos]
   before_action :set_personne, only: [:show, :edit, :update, :destroy]
+  # Necessaire pour les permissions de l'autocomplete
+  before_action :admin_only, only: [:autocomplete_personne_nom]
   helper_method :sort_column, :sort_direction
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
 
@@ -95,7 +97,7 @@ class PersonnesController < ApplicationController
   end
 
   def add_assurance
-    @personnes = Personne.where(documentassurance: true).order("assurance_uptated_at").limit(5)
+    @personnes = Personne.where("assurance_uptated_at <> ''").where(documentassurance: true).order("assurance_uptated_at").limit(5)
     @personne = Personne.new
     authorize! :show, @personnes
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count

@@ -2,18 +2,19 @@
   %h1 Assurance RC
 %div.pa1.fiche.brdr-b
   %h2 Rechercher une personne
+  %span La recherche se fait par le nom de famille
   %div
     =form_tag validate_assurance_personnes_path :method => :post do
       =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id", :size => 75
       =hidden_field_tag "id"
-      = submit_tag 'Assurance reçue', :class => "pure-button pure-button-success"
-  /   =simple_form_for @personne do |form|
-  /     =form.input :nom
-  /     =form.input :nom, :url => autocomplete_personne_nom_personnes_path, :as => :autocomplete
+      = submit_tag 'Assurance reçue', :class => "pure-button pure-button-success pure-button-xsmall "
 
       
 %div.pa1.fiche.brdr-b
   %h2 Dernières assurances validées
+
+  %p Attention! cette liste affiche les 5 dernière assurances validées par date de validation.
+  %p 
   %table.striped.alternate
     %thead
       %tr
@@ -21,6 +22,7 @@
         %th=sortable "nom", "Nom"
         %th=sortable "prenom"
         %th=sortable "documentassurance", "Justificatif assurance (RC)"
+        %th 
     %tbody
       - @personnes.each do |p|
         %tr
@@ -28,4 +30,5 @@
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
           %td=p.assurance_uptated_at
+          %td= link_to 'Edit', edit_personne_path(p.id), :class => "pure-button pure-button-xsmall" 
   

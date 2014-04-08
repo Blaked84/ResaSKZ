@@ -1,7 +1,10 @@
-%div.fiche.pa1.brdr-b
-  -@chambres.each do |c|
+%div.top-info.pa1
+  %h1 Assignation des chambres
+    
+-@chambres.each do |c|
+  %div.fiche.pa1.brdr-b
     .chambre{id:"c#{c.id}"}
-      %h1= "Chambres n° #{c.identifiant} "
+      %h2= "Chambres n° #{c.identifiant} "
       .info
         %table
           %tr

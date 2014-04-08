@@ -155,6 +155,7 @@ end
 
 def a_donne_justificatif_assurance
 	self.documentassurance=true
+	self.assurance_uptated_at=DateTime.now
 	self.save
 end
 

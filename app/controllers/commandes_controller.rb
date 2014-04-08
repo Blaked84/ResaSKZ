@@ -3,6 +3,8 @@ class CommandesController < ApplicationController
 
   before_action :check_register_workflow
   helper_method :sort_column, :sort_direction
+  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
+
   
 
   def new
@@ -250,7 +252,7 @@ class CommandesController < ApplicationController
   end
 
   def add_caution
-    @lastcautioncommandes = lasts_caution_update_commandes_path
+    @lastcautioncommandes = Commande.where("caution_updated_at <> ''").where(caution: true)
     authorize! :show, @commandes
 
     respond_to do |format|
@@ -259,12 +261,11 @@ class CommandesController < ApplicationController
     end
   end
 
-  def lasts_caution_update
-    authorize! :show, @commandes
-
-    co = Commande.all.map{|p| p}
-    render :json => co
-
+def validate_caution
+    authorize! :read_admin, User
+    personne=Personne.find(params[:id])
+    personne.commandes.map { |c| c.a_donne_caution }
+    redirect_to :back
   end
 
   private
