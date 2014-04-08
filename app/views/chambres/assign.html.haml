@@ -16,6 +16,9 @@
       .field
         =label_tag :nom, 'Nom :'
         =text_field_tag :nom
+      .field
+        =label_tag :nbr_place_vides, 'Nombre minimum de places vides :'
+        =select_tag :nbr_place_vides, options_for_select((1..15).to_a,@nbr_place_vides), include_blank: true
       .action
         =submit_tag 'Filtrer'
     

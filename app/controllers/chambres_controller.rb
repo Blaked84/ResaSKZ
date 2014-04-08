@@ -31,6 +31,7 @@ class ChambresController < ApplicationController
     @event_id = params[:event_id]
     @zone = params[:zone]
     @nom = params[:nom]
+    @nbr_place_vides = params[:nbr_place_vides]
 
     @chambres=Chambre.all
     unless @nom.blank?
@@ -42,7 +43,7 @@ class ChambresController < ApplicationController
     @chambres=@chambres.where(tbk_id: @tbk_id) unless @tbk_id.blank?
     @chambres=@chambres.where(event_id: @event_id) unless @event_id.blank?
     @chambres=@chambres.where(zone: @zone) unless @zone.blank?
-
+    @chambres=@chambres.select{|c| c.nbrplace - c.personnes.count > @nbr_place_vides.to_i} unless @nbr_place_vides.blank?
   end
 
   def get_personnes_for
