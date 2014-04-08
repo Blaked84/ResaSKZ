@@ -15,8 +15,10 @@ class Chambre < ActiveRecord::Base
 
 	#attr_accessible :numero, :nbrplace, :zone
 
-	def to_s
-  	return self.numer
+	attr_accessor :pers_messages
+
+  def to_s
+  	return self.numero 
   end
 
   def to_str
@@ -49,6 +51,7 @@ class Chambre < ActiveRecord::Base
   end
 
   def add_personne (personne)
+
   	if self.personnes.count < self.nbrplace
   		unless self.personnes.include? personne
   			self.personnes << personne
@@ -62,4 +65,46 @@ class Chambre < ActiveRecord::Base
 	end
   end
   
+  def self.import_from_csv (csv_file)
+  	CSV.foreach(csv_file.path,headers: true) do |row|
+  		Chambre.create(
+  			event_id: row['event_id'],
+  			tbk_id: row['tbk_id'],
+  			zone: row['zone'],
+  			numero: row['numero'],
+  			nbr_place: row['nbr_place'],
+  			)
+  	end
+  end
+
+  def check_errors (personne)
+    commande=personne.commandes.where(event_id: self.event_id).first
+
+    errors=[]
+
+    errors << I18n.t('chambre.error.pers.wrong_event') unless commande
+    errors << I18n.t('chambre.error.pers.already_assigned') if personne.chambres.where(event_id: self.event_id).any?
+
+    return errors
+  end
+
+  def check_warnings (personne)
+    commande=personne.commandes.where(event_id: self.event_id).first
+
+    warnings=[]
+
+    if commande
+      warnings << I18n.t('chambre.warning.pers.wrong_tbk') unless commande.tbk_id == self.tbk_id
+    end
+
+    return warnings
+  end
+
+  def check (personne)
+  	result=Hash.new
+  	result[:errors]=self.check_errors
+  	result[:warnings]=self.check_warnings
+  	return result
+  end
+
 end

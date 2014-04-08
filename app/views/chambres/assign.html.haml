@@ -17,6 +17,8 @@
       .pers_selection
         .assign_pers_form{id: "c#{c.id}_p"}
           =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_chambres_path, :size => 50,:update_elements => {:id => "#id"},id:"nom_c#{c.id}",class: 'nom waiting'
+          #error_box
+            VIDE
           =hidden_field_tag "id_c#{c.id}"
         -(0..c.nbrplace-1).each do |p_nbr|
           .pers_box
@@ -25,6 +27,8 @@
                 =link_to image_tag("Button-Delete-icon.png", size: "20x20", alt: "Supprimer")
               .infos
                 =  c.personnes[p_nbr] ? c.personnes[p_nbr].infos_completes : "LIBRE"
+              .warning-box
+                
         
 
 

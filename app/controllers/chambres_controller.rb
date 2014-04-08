@@ -10,9 +10,15 @@ class ChambresController < ApplicationController
   end
 
   def import_validate
-  end
-
-  def create
+    authorize! :create, Chambre
+    file=params[:file]
+    if File.extname(file.original_filename) == '.csv'
+      Chambre.import_from_csv(file)
+      flash[:success] = I18n.t('chambre.success.import')
+    else
+      flash[:error] = I18n.t('chambre.error.wrong_ext')
+    end
+    redirect_to @chambres
   end
 
   def assign
@@ -30,10 +36,15 @@ class ChambresController < ApplicationController
   def add_personne
     chambre=Chambre.find(params[:id])    
     personne=Personne.find(params[:pers_id])
-    if chambre && chambre.add_personne(personne)
-      render json: {id: personne.id, infos: personne.infos_completes}
+
+
+    errors=chambre.check_errors(personne)
+    warnings=chambre.check_warnings(personne)
+
+    if errors.blank? && chambre && chambre.add_personne(personne)
+      render json: {id: personne.id, infos: personne.infos_completes, message: warnings.first}
     else
-      render json: {}, status: :unprocessable_entity
+      render json: {id: personne.id, infos: personne.infos_completes, message: errors.first}, status: :unprocessable_entity
     end
   end
 

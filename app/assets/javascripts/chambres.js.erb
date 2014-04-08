@@ -13,7 +13,7 @@ window.onload = function () {
         .done(function(data) {
           var place = chambre.find('.libre').first();
 
-          place.removeClass("libre").addClass("occupe");
+          place.removeClass("libre").removeClass("warning").addClass("occupe");
           place.attr('pers_id',data.id);
           place.find('.infos').text(data.infos);
           chambre.find('input.nom').val("");
@@ -24,16 +24,25 @@ window.onload = function () {
           {
             backgroundColor : "#FFFFFF"
           },300);
+          if(data.message){
+            place.addClass("warning")
+            place.find('.warning-box').text(data.message)
+          }
         })
         .fail( function (data) {
           chambre.find('input.nom').val("");
           chambre.find('input.nom').animate(
-          {
-            backgroundColor : "#FF0000"
-          },10).delay(200).animate(
-          {
-            backgroundColor : "#FFFFFF"
-          },300);
+            {
+              backgroundColor : "#FF0000"
+            },10).delay(200).animate(
+            {
+              backgroundColor : "#FFFFFF"
+            },300);
+          alert(data.id);
+          alert(data.infos);
+          alert(data.message);
+          chambre.find('#error_box').text(data.message);
+
         });
 
 
