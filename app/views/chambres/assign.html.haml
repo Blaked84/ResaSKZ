@@ -1,8 +1,23 @@
 %div.top-info.pa1
   %h1 Assignation des chambres
 
-.filter-form
-  =form_tag()  
+%div.fiche.pa1.brdr-b
+  .filter-form
+    =form_tag(assign_chambres_path, method: :get) do
+      .field
+        =label_tag :event_id, 'Evenement :'
+        =select_tag :event_id, options_from_collection_for_select(Event.all,'id','name',@event_id), include_blank: true
+      .field
+        =label_tag :tbk_id, 'Tabagn\'s :'
+        =select_tag :tbk_id, options_from_collection_for_select(Tbk.all,'id','nom_complet',@tbk_id), include_blank: true
+      .field
+        =label_tag :zone, 'Zone :'
+        =select_tag :zone, options_for_select(%w(A C),@zone), include_blank: true
+      .field
+        =label_tag :nom, 'Nom :'
+        =text_field_tag :nom
+      .action
+        =submit_tag 'Filtrer'
     
 -@chambres.each do |c|
   %div.fiche.pa1.brdr-b

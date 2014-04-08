@@ -26,7 +26,22 @@ class ChambresController < ApplicationController
 
   def assign
     authorize! :read_admin, User
+    
+    @tbk_id = params[:tbk_id]
+    @event_id = params[:event_id]
+    @zone = params[:zone]
+    @nom = params[:nom]
+
     @chambres=Chambre.all
+    unless @nom.blank?
+      @chambres=@chambres.select{|c| c.identifiant.upcase == @nom.upcase} 
+      @tbk_id = nil
+      @event_id = nil
+      @zone = nil
+    end
+    @chambres=@chambres.where(tbk_id: @tbk_id) unless @tbk_id.blank?
+    @chambres=@chambres.where(event_id: @event_id) unless @event_id.blank?
+    @chambres=@chambres.where(zone: @zone) unless @zone.blank?
 
   end
 
