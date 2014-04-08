@@ -64,9 +64,8 @@
 	-webkit-transition: all 0.2s;
 	transition: all 0.2s;
 
-	box-shadow:inset 0 0 10px orange;
-    -moz-box-shadow:inset 0 0 10px orange;
-    -webkit-box-shadow:inset 0 0 10px orange;
+	background-color: orange;
+
 }
 
 .pers_selection .pers_box{

@@ -254,3 +254,11 @@ fr:
         price: "Prix (en centimes !)"
         stock: "Stock (vide si illimite)"
         max_par_personne: "Quantité maximale par personne (Vide si illimite)"
+  chambre:
+    error:
+      pers:
+        wrong_event: "La personne n'est pas inscrite pour cette semaine"
+        already_assigned: "La personne est déjà inscrite dans une chambre pour cette semaine"
+    warning:
+      pers:
+        wrong_tbk: "La commande n'a pas été passée dans le même TBK que la chambre"

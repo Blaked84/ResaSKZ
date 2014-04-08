@@ -47,10 +47,12 @@ class ChambresController < ApplicationController
     errors=chambre.check_errors(personne)
     warnings=chambre.check_warnings(personne)
 
+    errors_li=errors.map{|c| '<li>'+c+'</li>'}.join(' ')
+
     if errors.blank? && chambre && chambre.add_personne(personne)
-      render json: {id: personne.id, infos: personne.infos_completes, message: warnings.first}
+      render json: {id: personne.id, infos: personne.infos_completes, message: warnings}
     else
-      render json: {id: personne.id, infos: personne.infos_completes, message: errors.first}, status: :unprocessable_entity
+      render json: errors_li.to_s, status: :unprocessable_entity
     end
   end
 
@@ -63,6 +65,13 @@ class ChambresController < ApplicationController
     else
       render json: {}, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def get_autocomplete_items(parameters)
+    authorize! :read_admin, User
+    super(parameters)
   end
 
 end

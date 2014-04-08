@@ -1,4 +1,3 @@
-
 window.onload = function () {
 
   $('.nom').bind('railsAutocomplete.select', function(event, data){
@@ -8,6 +7,8 @@ window.onload = function () {
     var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
     var pers_id=data.item.id;
     var url = "/chambres/"+chambre_id+"/add_personne";
+
+    chambre.find('#error_box').html('')
 
     $.post(url,{pers_id: pers_id})
         .done(function(data) {
@@ -24,10 +25,15 @@ window.onload = function () {
           {
             backgroundColor : "#FFFFFF"
           },300);
-          if(data.message){
-            place.addClass("warning")
-            place.find('.warning-box').text(data.message)
-          }
+          if(data.message.length>0){
+            place.addClass("warning");
+            place.find('.warning-box').html("<ul>");
+            $.each(data.message, function (index, value){
+              place.find('.warning-box').append('<li>'+value+'</li>');
+            });
+            place.find('.warning-box').append("</ul>");
+
+          };
         })
         .fail( function (data) {
           chambre.find('input.nom').val("");
@@ -38,11 +44,7 @@ window.onload = function () {
             {
               backgroundColor : "#FFFFFF"
             },300);
-          alert(data.id);
-          alert(data.infos);
-          alert(data.message);
-          chambre.find('#error_box').text(data.message);
-
+          chambre.find('#error_box').html('<ul>').append(data.responseText).append('</ul>'); 
         });
 
 
@@ -64,14 +66,14 @@ window.onload = function () {
       $.post(url,{pers_id: pers_id})
         .done(function() {
           // alert("Succes");
-          parent.removeClass("occupe").addClass("libre");
+          parent.removeClass("occupe").removeClass("warning").addClass("libre");
           parent.find('.infos').text("Libre");
           parent.attr('pers_id','')
         })
         .fail( function () {
           alert("Erreur");
         });
-    }
+    };
   });
 
 
