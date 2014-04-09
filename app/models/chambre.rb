@@ -3,6 +3,8 @@ class Chambre < ActiveRecord::Base
     # Les chambres: on leur attribue des personnes
 	#################################################
 
+	require 'csv'
+
 	belongs_to :event
 	belongs_to :tbk
 	has_and_belongs_to_many :personnes
@@ -26,7 +28,7 @@ class Chambre < ActiveRecord::Base
   end
 
   def identifiant
-  	return "#{self.event_id}#{self.nbrplace.to_s}#{self.tbk.nom_pecs[0..1]}#{self.numero}#{self.zone}"
+  	return "#{self.event_id}#{self.nbrplace.to_s}#{self.tbk.nom_pecs[0..1]}#{"0"*(3-self.numero.length)+self.numero}#{self.zone}"
   end
 
   def personnes_elligibles
@@ -66,13 +68,14 @@ class Chambre < ActiveRecord::Base
   end
   
   def self.import_from_csv (csv_file)
+
   	CSV.foreach(csv_file.path,headers: true) do |row|
   		Chambre.create(
   			event_id: row['event_id'],
   			tbk_id: row['tbk_id'],
   			zone: row['zone'],
   			numero: row['numero'],
-  			nbr_place: row['nbr_place'],
+  			nbrplace: row['nbr_place'],
   			)
   	end
   end

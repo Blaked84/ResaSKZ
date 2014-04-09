@@ -1,2 +1,9 @@
-%h1 Chambres#import
-%p Find me in app/views/chambres/import.html.haml
+%div.top-info.pa1
+  %h1 Assignation des chambres
+
+%div.fiche.pa1.brdr-b
+  =form_tag import_chambres_path, multipart: true do
+    .field
+      =file_field_tag :file, :accept => '.csv'
+    .action
+      =submit_tag "Importer les chambres", :id=>'import', :confirm => "Es-tu sur de vouloir faire ca ? \n En cliquant sur 'Oui', tu supprimera toutes les chambres enregistrées sur le site"

@@ -1,10 +1,5 @@
 LooklaDev::Application.routes.draw do
 
-  get "chambres/index"
-  get "chambres/import"
-  get "chambres/import_validate"
-  get "chambres/create"
-  get "chambres/assign"
   get "commande_products/check_nombre"
   post "commande_products/check_nombre"
   get "admin/index"
@@ -88,7 +83,7 @@ LooklaDev::Application.routes.draw do
     get :autocomplete_personne_nom, :on => :collection
     collection do
       get 'import'
-      get 'import_validate'
+      post 'import' => 'chambres#import_validate'
       get 'assign'
     end
     member do

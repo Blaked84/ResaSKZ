@@ -1,5 +1,6 @@
 class ChambresController < ApplicationController
   
+
   # Necessaire pour les permissions de l'autocomplete
   before_action :admin_only, only: [:autocomplete_personne_nom]
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:prenom, :nom]
@@ -10,18 +11,20 @@ class ChambresController < ApplicationController
   end
 
   def import
+    authorize! :create, Chambre
   end
 
   def import_validate
     authorize! :create, Chambre
     file=params[:file]
     if File.extname(file.original_filename) == '.csv'
+      Chambre.delete_all
       Chambre.import_from_csv(file)
       flash[:success] = I18n.t('chambre.success.import')
     else
       flash[:error] = I18n.t('chambre.error.wrong_ext')
     end
-    redirect_to @chambres
+    redirect_to assign_chambres_path
   end
 
   def assign

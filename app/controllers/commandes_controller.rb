@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class CommandesController < ApplicationController
-
+  
   before_action :check_register_workflow
   helper_method :sort_column, :sort_direction
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
@@ -252,7 +252,8 @@ class CommandesController < ApplicationController
   end
 
   def add_caution
-    @lastcautioncommandes = Commande.where("caution_updated_at <> ''").where(caution: true)
+    @lastcautioncommandes = Commande.where("caution_updated_at <> ''").where(caution: true).order(caution_updated_at: :desc).limit(10)
+
     authorize! :show, @commandes
 
     respond_to do |format|
