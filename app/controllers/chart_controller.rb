@@ -14,10 +14,11 @@ class ChartController < ApplicationController
   	@paiement=Paiement.all
   	@commandes=Commande.all
   	@paiement_tot_euro=@paiement.all.map{ |p| p.amount_cents  if p.verif?}.compact.sum / 100.0
-  	@total_du_euro=@commandes.all.map { |c| c.montant_total }.sum / 100.0
+  	total_euro=@commandes.all.map { |c| c.montant_total }.sum / 100.0
+    @total_du_euro=total_euro-@paiement_tot_euro
   	a=[
   		["Total payé", @paiement_tot_euro],
-  		["Total dû", @total_du_euro]]
+  		["Total dû", @total_du_euro.floor]]
   	render :json => a
   end
 
