@@ -97,7 +97,7 @@ class PersonnesController < ApplicationController
   end
 
   def add_assurance
-    @personnes = Personne.where("assurance_uptated_at <> ''").where(documentassurance: true).order("assurance_uptated_at").limit(5)
+    @personnes = Personne.where("assurance_uptated_at <> ''").where(documentassurance: true).order(assurance_uptated_at: :desc).limit(5)
     @personne = Personne.new
     authorize! :show, @personnes
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
