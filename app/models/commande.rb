@@ -222,6 +222,7 @@ class Commande < ActiveRecord::Base
 		# commande 	4
 		# random 	2
 
+		return nil if self.personne.nil?
 		head = 2.to_s
 		event = self.event_id[0.1].to_s # attention,l'event id doit etre à 1 chiffre
 		personneid = self.personne.id.to_s
