@@ -215,6 +215,31 @@ class Commande < ActiveRecord::Base
 		(SecureRandom.random_number *10**14).to_s[0,13]
 	end
 
+	def gen_ean13
+		# head 		1
+		# event 	1
+		# personne 	4
+		# commande 	4
+		# random 	2
+
+		head = 2.to_s
+		event = self.event_id[0.1].to_s # attention,l'event id doit etre à 1 chiffre
+		personneid = self.personne.id.to_s
+		personneid = "0"+personneid while personneid.length < 4 #on complete pour avoir toujours 4 chiffres dans le numero de commande
+		commandeid = self.id.to_s
+		commandeid = "0"+commandeid while commandeid.length < 4 #on complete pour avoir toujours 4 chiffres dans le numero de commande
+		rdm=(SecureRandom.random_number *10**14).to_s[0,2].to_s
+
+		ean_s= head + event + personneid + commandeid + rdm
+		EAN13.complete(ean_s)
+	end
+
+	def gen_and_record_ean13
+		self.ean=self.gen_ean13
+		self.save
+		
+	end
+
 	def a_donne_caution
 	self.caution=true
 	self.caution_updated_at = DateTime.now

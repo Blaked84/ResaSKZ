@@ -75,6 +75,9 @@ gem 'simple_form'
 #Autocompletion pour les form de recherche
 gem 'rails4-autocomplete'
 
+gem 'ean13'
+
+
 
 #Ajouter gem de recherche pour active record
 
