@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414181919) do
+ActiveRecord::Schema.define(version: 20140414192951) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -23,10 +23,12 @@ ActiveRecord::Schema.define(version: 20140414181919) do
     t.boolean  "quick_check"
   end
 
-  create_table "activites_personnes", id: false, force: true do |t|
-    t.integer "activite_id", null: false
-    t.integer "personne_id", null: false
-    t.boolean "checked"
+  create_table "activites_personnes", force: true do |t|
+    t.integer  "activite_id"
+    t.integer  "personne_id"
+    t.boolean  "checked"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "categories", force: true do |t|

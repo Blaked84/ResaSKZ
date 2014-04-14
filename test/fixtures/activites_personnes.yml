@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activite_id: 1
+  personne_id: 1
+  checked: false
+
+two:
+  activite_id: 1
+  personne_id: 1
+  checked: false

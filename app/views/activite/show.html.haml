@@ -21,3 +21,16 @@
 
 
 / :autofocus => true
+
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Nom
+        %th Inscrits
+
+    %tbody
+      - @personnes.each do |a|
+        %tr
+          %td=a.nom_complet
+          %td

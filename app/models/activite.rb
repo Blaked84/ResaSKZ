@@ -26,11 +26,24 @@ class Activite < ActiveRecord::Base
   	self.productid = product.id 
 
   	#ajout des personnes
-  	personnes.each{|p| self.add_personne(p.id)} unless personnes.any?
+  	personnes.each{|p| self.add_personne(p.id)} unless !personnes.any?
   end
 
   def add_personne(personneid)
-  	return personneid
+  	self.personnes << Personne.find(personneid)
   	#let's code baby!
+  end
+
+  def check_personne(personneid)
+    activiteid=self.id
+    ap=ActivitesPersonne.where(activite_id: activiteid ).find_by! personne_id: personneid
+    ap.checked=true
+    ap.save
+  end
+
+  def is_checked?(personneid)
+    activiteid=self.id
+    ap=ActivitesPersonne.where(activite_id: activiteid ).find_by! personne_id: personneid
+    return ap.checked
   end
 end
