@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414160847) do
+ActiveRecord::Schema.define(version: 20140414170407) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -21,6 +21,12 @@ ActiveRecord::Schema.define(version: 20140414160847) do
     t.integer  "productid"
     t.boolean  "open"
     t.boolean  "quick_check"
+  end
+
+  create_table "activites_commandes", id: false, force: true do |t|
+    t.integer "activite_id", null: false
+    t.integer "commande_id", null: false
+    t.boolean "checked"
   end
 
   create_table "categories", force: true do |t|

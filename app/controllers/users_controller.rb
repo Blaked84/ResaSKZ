@@ -60,7 +60,7 @@ class UsersController < ApplicationController
         enregistrement_termine: false
         )
 
-        pers.genre = Genre.from_cas(@user.gender)   
+        pers.genre = Genre.from_cas(@user.gender)
         if pers.save!(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)
           format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -165,9 +165,8 @@ class UsersController < ApplicationController
 
     @personne.type_pers ||= "Pec's"
 
-
     respond_to do |format|
-      if @user.update(user_params_pub) && @personne.sync_from_user(@user, without_save: true) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
+      if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         if current_user.admin?
           @user.referant.sync_from_user(@user) if @user.referant

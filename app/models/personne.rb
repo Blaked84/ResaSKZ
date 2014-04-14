@@ -7,7 +7,6 @@ class Personne < ActiveRecord::Base
 	# personne à contacter en cas de problème
 	#################################################
 	has_many :groupe
-	has_many :activite
 	belongs_to :genre
 	has_one :usertype
 	belongs_to :user

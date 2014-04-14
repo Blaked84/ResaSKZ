@@ -4,7 +4,7 @@ class Activite < ActiveRecord::Base
 	# s'inscrire
 	#################################################
 
-	has_many :personne
+	has_and_belongs_to_many :commandes
 
 	#attr_accessible :nom
 
