@@ -12,6 +12,11 @@
 	= link_to "Validation cautions", add_caution_commandes_path, :class => "pure-button pure-button-primary"
 	%h2 Gestion des chambres
 	= link_to "Assignement des chambres", assign_chambres_path, :class => "pure-button pure-button-primary"
+	%h2 Activitées
+	= link_to "Activités", activite_index_path, :class => "pure-button pure-button-primary"
+	
+	
+
 
 %div.fiche.pa1.brdr-b
 	Nombre de personnes inscrites:
@@ -46,3 +51,4 @@
 	%p Si tu cliques ici, c'est que tu sais ce que tu fais et que t'assume de tout casser.
 	%p=link_to "Configuration avancée", admin_configurable_path, :data => { :confirm => "Attention, tu vas toucher à des trucs que même Chuck Norris n'ose pas toucher. T'es bien certain?"}
 	%p=link_to "Import des chambres", import_chambres_path, :data => { :confirm => "Attention, tu vas toucher à des trucs que même Chuck Norris n'ose pas toucher. T'es bien certain?"}
+	%p=link_to "Import des produits vers les activites", import_activite_index_path, :data => { :confirm => "Attention, tu vas toucher à des trucs que même Chuck Norris n'ose pas toucher. T'es bien certain?"}

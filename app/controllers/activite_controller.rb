@@ -1,20 +1,7 @@
 class ActiviteController < ApplicationController
 
-  #
-  #
-  #
-  #
-  #
-  #
-  ## attention il faut faire les autorisations
-  #
-  #
-  #
-  #
-  #
-  #
-  #
-  #
+  before_action :admin_only
+
   def index
   	@activite=Activite.all
   end
