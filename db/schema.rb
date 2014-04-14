@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414170407) do
+ActiveRecord::Schema.define(version: 20140414181919) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -23,9 +23,9 @@ ActiveRecord::Schema.define(version: 20140414170407) do
     t.boolean  "quick_check"
   end
 
-  create_table "activites_commandes", id: false, force: true do |t|
+  create_table "activites_personnes", id: false, force: true do |t|
     t.integer "activite_id", null: false
-    t.integer "commande_id", null: false
+    t.integer "personne_id", null: false
     t.boolean "checked"
   end
 

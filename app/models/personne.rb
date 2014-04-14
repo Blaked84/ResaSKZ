@@ -13,6 +13,7 @@ class Personne < ActiveRecord::Base
 	belongs_to :taillevetement
 	has_many :commandes
 	has_and_belongs_to_many :chambres
+	has_and_belongs_to_many :activites
 
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 

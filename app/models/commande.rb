@@ -11,7 +11,6 @@ class Commande < ActiveRecord::Base
 	has_many :products, through: :commande_products
 	has_many :commande_products, dependent: :destroy
 	has_many :paiements
-	has_and_belongs_to_many :activites
 
 
 	#attr_accessible :assurance, :status
