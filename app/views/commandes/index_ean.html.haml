@@ -1,0 +1,24 @@
+%div.top-info.pa1
+  %h1
+    Code barre commandes
+
+
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate#unfixedtable
+    %thead
+      %tr
+        %th Ean
+        %th Nom
+        %th Evenement
+
+      %tbody
+        - @commandes.each do |c|
+          %tr
+            / %td=c.ean
+            %td=c.ean
+            %td=c.personne.nom_complet
+            %th=c.event_id
+
+
+
+

@@ -76,6 +76,10 @@ class CommandesController < ApplicationController
       format.xls
     end
 
+     def index_ean
+      @commandes = Commande.all.order :event_id
+     end
+
   end
 
   def export

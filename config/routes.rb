@@ -27,6 +27,7 @@ LooklaDev::Application.routes.draw do
       get :export
       get :add_caution
       post :validate_caution
+      get :index_ean
     end
     resources :paiements   
   end
