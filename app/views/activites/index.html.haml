@@ -2,17 +2,23 @@
 	%h1 Activitées
 
 	=link_to "Créer une activité", new_activite_path, :class => "pure-button pure-button-success"
-%div.pa1.fiche.brdr-b
-	%table.striped.alternate
-		%thead
-			%tr
-				%th Nom
-				%th Inscrits
-				%th Importée
-
-		%tbody
-			- @activite.each do |a|
+- @events.each do |e|
+	%div.pa1.fiche.brdr-b
+		%h2=e.name
+		%table.striped.alternate
+			%thead
 				%tr
-					%td=link_to a.nom,activite_path(a.id)
-					%td 
-					%td 
+					%th Nom
+					%th Inscrits
+					%th Inscription libre
+					%th Importée
+
+			%tbody
+				- @activite.each do |a| 
+					-if a.event_id==e.id
+						%tr
+							%td=link_to a.nom,activite_path(a.id)
+							%td=a.personnes.count
+							%td=a.open
+							%td=a.productid
+							%td=link_to "Edit", edit_activite_path(a.id), :class => "pure-button pure-button-primary pure-button-xsmall "

@@ -6,6 +6,7 @@ LooklaDev::Application.routes.draw do
       get :import
       put :import_product_as_activite , as: :ipap
       post :validate_personne_by_ean
+      post :validate_personne_by_name
     end
   end
 

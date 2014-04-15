@@ -5,6 +5,7 @@ class ActivitesController < ApplicationController
 
   def index
   	@activite=Activite.all
+    @events=Event.all
   end
 
   def new
@@ -62,8 +63,20 @@ class ActivitesController < ApplicationController
   def import_product_as_activite
   	activite= Activite.new
   	activite.import_from_product(params[:productid])
+    activite.open=false
   	activite.save!
   	redirect_to :back, notice: "Activitée ajoutée"
+  end
+
+  def validate_personne_by_name
+     activityid=params[:id]
+     activite=Activite.find(activityid)
+     eventid=activite.event_id
+     personneid=params[:id_pers]
+     commande=Personne.find(personneid).commandes.find_by event_id: eventid
+     ean=commande.ean
+     redirect_to validate_personne_by_ean_activites_path({:id => activityid, :ean => ean}) 
+
   end
 
   def validate_personne_by_ean
@@ -73,7 +86,7 @@ class ActivitesController < ApplicationController
 
     if !commandes.any?
       # si on ne trouve pas de commande avec cet EAN
-      redirect_to :back, alert: "Cette commande / personne n'existe pas"
+      redirect_to activite_path(activityid), alert: "Cette commande / personne n'existe pas"
     else
       personne=commandes.take!.personne
 
@@ -86,14 +99,14 @@ class ActivitesController < ApplicationController
         if activite.personnes.find_by(id: personneid).present?
           #si la personne existe bien dans la liste on vérifie que si elle est déjà passée
           if activite.is_checked?(personneid)
-            redirect_to :back, alert:  personne.nom_complet + " est déjà passé!"
+            redirect_to activite_path(activityid), alert:  personne.nom_complet + " est déjà passé!"
 
           else
             activite.check_personne(personneid)
-            redirect_to :back, notice: "Passage de "+ personne.nom_complet + " Validé!"
+            redirect_to activite_path(activityid), notice: "Passage de "+ personne.nom_complet + " Validé!"
           end
         else
-          redirect_to :back, alert:  personne.nom_complet + " N'est pas inscrit(e)!"
+          redirect_to activite_path(activityid), alert:  personne.nom_complet + " N'est pas inscrit(e)!"
         end
       end
     end
@@ -103,7 +116,7 @@ class ActivitesController < ApplicationController
   private
 
   def activite_params
-    params.require(:activite).permit(:nom,:event_id)
+    params.require(:activite).permit(:nom,:event_id,:open)
   end
 
   def set_activite
