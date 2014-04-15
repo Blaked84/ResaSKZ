@@ -67,37 +67,38 @@ class ActivitesController < ApplicationController
   end
 
   def validate_personne_by_ean
-  	ean=params[:ean]
-  	activityid=params[:id]
-  	activites=Activite.where(ean: ean )
+    ean=params[:ean]
+    activityid=params[:id]
+    commandes=Commande.where(ean: ean )
 
-  	if !activites.any?
-  		# si on ne trouve pas de activite avec cet EAN
-  		redirect_to :back, alert: "Cette activite n'existe pas"
-  	else
-  		personne=activites.take!.personne
+    if !commandes.any?
+      # si on ne trouve pas de commande avec cet EAN
+      redirect_to :back, alert: "Cette commande / personne n'existe pas"
+    else
+      personne=commandes.take!.personne
 
-  		personneid=personne.id
-  		activite=Activite.find(activityid)
-  		# si l'activité est open, on ajoute la personne à la liste. Sinon on la refuse.
-  		if activite.open
-  			#ah bah oui il faut le coder ça
-  		else
-  			if activite.personnes.find_by(id: personneid).present?
-  				#si la personne existe bien dans la liste on vérifie que si elle est déjà passée
-  				if activite.is_checked?(personneid)
-  					redirect_to :back, alert:  personne.nom_complet + " est déjà passé!"
+      personneid=personne.id
+      activite=Activite.find(activityid)
+      # si l'activité est open, on ajoute la personne à la liste. Sinon on la refuse.
+      if activite.open
+        #ah bah oui il faut le coder ça
+      else
+        if activite.personnes.find_by(id: personneid).present?
+          #si la personne existe bien dans la liste on vérifie que si elle est déjà passée
+          if activite.is_checked?(personneid)
+            redirect_to :back, alert:  personne.nom_complet + " est déjà passé!"
 
-  				else
-  					activite.check_personne(personneid)
-  					redirect_to :back, notice: "Passage de "+ personne.nom_complet + " Validé!"
-  				end
-  			else
-  				redirect_to :back, alert:  personne.nom_complet + " N'est pas inscrit(e)!"
-  			end
-  		end
-  	end
+          else
+            activite.check_personne(personneid)
+            redirect_to :back, notice: "Passage de "+ personne.nom_complet + " Validé!"
+          end
+        else
+          redirect_to :back, alert:  personne.nom_complet + " N'est pas inscrit(e)!"
+        end
+      end
+    end
   end
+
 
   private
 

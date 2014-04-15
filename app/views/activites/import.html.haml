@@ -20,7 +20,7 @@
             - @products.each do |prd|
               -if prd.categorie_id==i+1
                 %tr
-                  %td=link_to "Ajouter", {:controller => :activite, :action => :import_product_as_activite, :productid => prd.id}, {:method => :put, :class => "pure-button pure-button-error"}
+                  %td=link_to "Ajouter", {:controller => :activites, :action => :import_product_as_activite, :productid => prd.id}, {:method => :put, :class => "pure-button pure-button-error"}
                   %td=link_to prd.name, product_path(prd.id)
                   %td=prd.stock
                   %td=prd.price_euro

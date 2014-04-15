@@ -4,7 +4,7 @@ LooklaDev::Application.routes.draw do
   resources :activites do
     collection do
       get :import
-      put :import_product_as_activite
+      put :import_product_as_activite , as: :ipap
       post :validate_personne_by_ean
     end
   end
