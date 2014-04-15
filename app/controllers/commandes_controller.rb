@@ -150,6 +150,27 @@ class CommandesController < ApplicationController
    	@status = @commande.complete?
    end
 
+require 'barby'
+ require 'barby/barcode/ean_13'
+ require 'barby/outputter/svg_outputter'
+   def show_print
+
+    @commande = Commande.find(params[:commande_id])
+    authorize! :show, @commande
+    @personne = @commande.personne
+    @produits = @commande.products
+    @total_euro = @commande.montant_total.to_i / 100.0
+    @paiements = @commande.paiements
+    @totalpaiement_euro = @commande.montant_paye / 100.0
+    @paiement_du_euro = @commande.montant_du.to_i / 100.0
+    @barcode = Barby::EAN13.new(@commande.ean.to_s[0...12])
+    @outputter = Barby::SvgOutputter.new(@barcode)
+    @outputter.xdim = 2
+
+    render :layout => "print"
+   end
+
+
    def index_remboursement
     commandes=Commande.all
     @commandes_remb=commandes.map{|c| c if c.montant_du < 0 }.compact

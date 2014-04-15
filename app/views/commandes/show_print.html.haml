@@ -1,0 +1,65 @@
+%div.fiche.pa1
+  .row
+    .w50
+      %h1=@commande.idlong
+      %h1=@personne.nom_complet
+    .w50
+      .txtright=@outputter.to_svg.html_safe
+
+%div.fiche.pa1
+
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Nom
+        %th TBK en charge
+        %th Evénement
+        %th Code Barre
+    %tbody
+      %tr
+        %td=@personne.nom_complet
+        %th=@commande.tbk
+        %th=@commande.event.name
+        %td=@commande.ean
+
+
+  %table.striped.alternate
+    %thead
+      %tr
+        %th RC
+        %th Caution
+        %th Payée totalement
+        %th Reste à payer (€)
+    %tbody
+      %tr
+        %td
+          =conditional_format(@personne.documentassurance) if !@personne.nil?
+        %td=conditional_format(@commande.caution)
+        %td=conditional_format(@commande.paiementok?)
+        %td=@paiement_du_euro
+
+
+
+  %hr
+  %h2
+    Produits
+  
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Produit
+        %th Quantitée
+        %th Prix (€)
+    %tbody
+      - @commande.commande_products.each do |cprd|
+        %tr
+          %td=link_to cprd.product.name, product_path(cprd.product.id)
+          %td=cprd.nombre
+          %td=cprd.product.price_euro
+      %tr 
+        %td
+          %hr
+        %td
+          %strong Total
+        %td=@total_euro
+

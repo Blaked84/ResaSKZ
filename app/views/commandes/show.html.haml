@@ -1,7 +1,11 @@
 %div.top-info.pa1
-  %h1
-    Commande #
-    =@commande.idlong
+  .row
+    .w50
+      %h1
+        Commande #
+        =@commande.idlong
+    .w50.txtright    
+      =link_to "Version imprimable", commande_show_print_path(@commande.id), :class => "pure-button pure-button-primary"
 
 %div.fiche.pa1.brdr-b
 

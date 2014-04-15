@@ -29,7 +29,8 @@ LooklaDev::Application.routes.draw do
       post :validate_caution
       get :index_ean
     end
-    resources :paiements   
+    resources :paiements
+    get :show_print
   end
   get 'remboursements' => 'commandes#index_remboursement', as: :remboursements
 

@@ -76,6 +76,8 @@ gem 'simple_form'
 gem 'rails4-autocomplete'
 
 gem 'ean13'
+# generation des codes bare
+gem 'barby', '~> 0.5.1'
 
 
 
