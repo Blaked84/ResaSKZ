@@ -1,16 +1,12 @@
 LooklaDev::Application.routes.draw do
   
 
-  resources :activite do
+  resources :activites do
     collection do
-      get :index
       get :import
-      get :create
       put :import_product_as_activite
       post :validate_personne_by_ean
-      
     end
-
   end
 
 

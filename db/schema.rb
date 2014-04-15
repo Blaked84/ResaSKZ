@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20140414192951) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
-    t.string   "idlong"
+    t.integer  "idlong"
     t.datetime "caution_updated_at"
   end
 
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 20140414192951) do
     t.integer  "amount_cents"
     t.string   "paiement_hash"
     t.boolean  "verif"
-    t.string   "idlong"
+    t.integer  "idlong"
     t.datetime "verified_at"
     t.integer  "erreur"
     t.integer  "verified_by"
