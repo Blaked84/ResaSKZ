@@ -266,6 +266,8 @@ class Commande < ActiveRecord::Base
 			result[:taille]=pers.taille
 			result[:pointure]=pers.pointure
 			result[:vetement]=pers.taillevetement.name if pers.taillevetement
+			temp=pers.chambres.where(event_id: self.event_id).first
+			result[:chambre]=temp.identifiant if temp
 		end
 
 		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"
