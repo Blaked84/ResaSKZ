@@ -8,6 +8,9 @@ LooklaDev::Application.routes.draw do
       post :validate_personne_by_ean
       post :validate_personne_by_name
     end
+    member do
+      get :export
+    end
   end
 
 

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @activite[:id] %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Nom</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @activite[:nom] %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Event</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @activite[:event] %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Open</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @activite[:open] %></Data></Cell>
+      </Row>
+      <Row>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Personnes</Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Infos</Data></Cell>
+        <Cell><Data ss:Type="String">Commande ID</Data></Cell>
+        <Cell><Data ss:Type="String">Chambre ID</Data></Cell>
+        <Cell><Data ss:Type="String">Checked</Data></Cell>
+      </Row>
+
+    <% @activite[:personnes].each do |p| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= p[:infos] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= p[:commande] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= p[:chambre] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= p[:checked] %></Data></Cell>
+
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+
+

@@ -6,6 +6,7 @@ class Activite < ActiveRecord::Base
 
 	has_many :personnes, through: :activites_personnes
   has_many :activites_personnes, dependent: :destroy
+  belongs_to :event
 
 	#attr_accessible :nom
 
@@ -51,13 +52,22 @@ class Activite < ActiveRecord::Base
   def serialize
     result=Hash.new
 
+    result[:id]=self.id
     result[:nom]=self.nom
     result[:event]=self.event ? self.event.name : "EVENT NON RENSEIGNE"
     result[:open]=self.open ? "LIBRE" : "RESA"
-    result[:personnes]=self.personnes.map do |p|
-
+    result[:personnes]=self.activites_personnes.map do |ap|
+      personne=Hash.new
+      personne[:infos]=ap.personne.infos_completes
+      temp_com=ap.personne.commandes.where(event_id:self.event_id).first
+      personne[:commande]=temp_com.idlong if temp_com
+      temp_chambre=ap.personne.chambres.where(event_id:self.event_id).first
+      personne[:chambre]=temp_chambre.identifiant if temp_chambre
+      personne[:checked]=ap.checked ? "Oui" : "Non"
+      personne
     end
-
+    result
 
   end
+
 end

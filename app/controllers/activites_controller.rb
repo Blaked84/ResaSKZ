@@ -112,6 +112,18 @@ class ActivitesController < ApplicationController
     end
   end
 
+  def export
+    set_activite
+
+    @activite = @activite.serialize
+
+    respond_to do |format|
+      format.xls do
+        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_activite_"+Date.today.to_s+ '.xls"'
+      end
+    end
+
+  end
 
   private
 
