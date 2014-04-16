@@ -79,7 +79,8 @@ gem 'ean13'
 # generation des codes bare
 gem 'barby', '~> 0.5.1'
 
-
+# export db en yaml
+gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 
 #Ajouter gem de recherche pour active record
 
