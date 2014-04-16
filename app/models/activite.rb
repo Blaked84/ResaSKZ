@@ -4,7 +4,8 @@ class Activite < ActiveRecord::Base
 	# s'inscrire
 	#################################################
 
-	has_and_belongs_to_many :personnes
+	has_many :personnes, through: :activites_personnes
+  has_many :activites_personnes, dependent: :destroy
 
 	#attr_accessible :nom
 
@@ -45,5 +46,18 @@ class Activite < ActiveRecord::Base
     activiteid=self.id
     ap=ActivitesPersonne.where(activite_id: activiteid ).find_by! personne_id: personneid
     return ap.checked
+  end
+
+  def serialize
+    result=Hash.new
+
+    result[:nom]=self.nom
+    result[:event]=self.event ? self.event.name : "EVENT NON RENSEIGNE"
+    result[:open]=self.open ? "LIBRE" : "RESA"
+    result[:personnes]=self.personnes.map do |p|
+
+    end
+
+
   end
 end

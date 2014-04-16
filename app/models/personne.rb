@@ -13,8 +13,8 @@ class Personne < ActiveRecord::Base
 	belongs_to :taillevetement
 	has_many :commandes
 	has_and_belongs_to_many :chambres
-	has_and_belongs_to_many :activites
-
+	has_many :activites, through: :activites_personnes
+	has_many :activites_personnes, dependent: :destroy
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
 	@@types= %w(Pec's Gadz)
