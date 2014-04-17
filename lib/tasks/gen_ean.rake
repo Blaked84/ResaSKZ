@@ -25,8 +25,8 @@ namespace :gen_ean do
           barcode = Barby::EAN13.new(c.ean.to_s[0...12])
           
 
-          Dir.mkdir("codes_barres") unless File.exists?("codes_barres")
-          File.open("codes_barres/#{barcode.to_s}.png", 'w'){|f| f.write barcode.to_png }
+          Dir.mkdir("tmp/codes_barres") unless File.exists?("tmp/codes_barres")
+          File.open("tmp/codes_barres/#{barcode.to_s}.png", 'w'){|f| f.write barcode.to_png }
       end
     end
 
