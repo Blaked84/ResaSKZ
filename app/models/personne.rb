@@ -227,6 +227,27 @@ def type_gadz
 	end
 end
 
+def serialize
+	result=Hash.new
+
+    result[:id]=self.id
+    result[:nom]=self.nom_complet
+    result[:taillevetement]=self.taillevetement.name if self.taillevetement
+    result[:commandes]=self.commandes.map do |c|
+      commande=Hash.new
+      commande[:ean]=c.ean
+      temp=self.chambres.where(event_id: c.event_id).first
+	  commande[:chambre]=temp.identifiant if temp
+      commande[:event]=c.event ? c.event.name : "EVENT NON RENSEIGNE"
+      commande[:annulation]=c.products.any?{|p| p.name=="Annulation"} ? "Oui" : "Non"
+      commande[:inter_skipass]=c.products.any?{|p| p.name=="Inter Ski Pass"} ? "Oui" : "Non"
+      commande[:rapatriement]=c.products.any?{|p| p.name=="Assistance rapatriement bagages"} ? "Oui" : "Non"
+      commande[:tout_compris]=c.products.any?{|p| p.name=="Tout compris"} ? "Oui" : "Non"   
+      commande
+    end
+    result
+end
+
 def self.types
 	@@types
 end

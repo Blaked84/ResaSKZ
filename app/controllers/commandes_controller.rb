@@ -76,11 +76,11 @@ class CommandesController < ApplicationController
       format.xls
     end
 
-     def index_ean
-      @commandes = Commande.all.order :event_id
-     end
-
   end
+
+   def index_ean
+    @commandes = Commande.all.order(event_id: :asc)
+   end
 
   def export
     pool_size=Configurable[:export__commande_pool_size]

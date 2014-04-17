@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Nom</Data></Cell>
+        <Cell><Data ss:Type="String">Taille Vetement</Data></Cell>
+        <Cell><Data ss:Type="String">Semaine</Data></Cell>
+        <Cell><Data ss:Type="String">EAN</Data></Cell>
+        <Cell><Data ss:Type="String">Chambre</Data></Cell>
+        <Cell><Data ss:Type="String">Annulation</Data></Cell>
+        <Cell><Data ss:Type="String">Inter Ski Pass</Data></Cell>
+        <Cell><Data ss:Type="String">Rapatriement</Data></Cell>
+        <Cell><Data ss:Type="String">Tout compris</Data></Cell>
+      </Row>
+
+    <% @personnes.each do |p| %>
+      <% p[:commandes].each do |c| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= p[:id] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= p[:nom] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= p[:taillevetement] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:event] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:ean] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:chambre] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:annulation] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:inter_skipass] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:rapatriement] %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= c[:tout_compris] %></Data></Cell>
+
+        </Row>
+      <% end %>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
+
+
+
