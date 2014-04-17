@@ -13,6 +13,21 @@
 %div.top-info.pa1
 	%h2 Commandes
 %div.fiche.pa1.brdr-b
+	%div.row
+		%div.col.w50
+			%p
+				nombre de commande: 
+				=@nbrCommande
+			%p
+				nombre de commandes validées: 
+				=@nbrCommandeValidee
+		%div.col.w50
+			%span= pie_chart [["Commandes validées",@nbrCommandeValidee],["Commandes non validées",@nbrCommandesNonValidee ]]
+
+
+%div.top-info.pa1
+	%h2 Commandes
+%div.fiche.pa1.brdr-b
 	%h3 Commandes incomplètes
 	%span= bar_chart chart_etatcommande_path
 	%h3 Commandes gérées par chaque tbk

@@ -27,25 +27,6 @@
 
 
 %div.top-info.pa1
-	%h2 Commandes
-%div.fiche.pa1.brdr-b
-	%div.row
-		%div.col.w50
-			%p
-				nombre de commande: 
-				=@nbrCommande
-			%p
-				nombre de commandes validées: 
-				=@nbrCommandeValidee
-		%div.col.w50
-			%span= pie_chart [["Commandes validées",@nbrCommandeValidee],["Commandes non validées",@nbrCommandesNonValidee ]]
-
-%div.top-info.pa1
-	%h2 Paiements
-%div.fiche.pa1.brdr-b
-	%span= pie_chart chart_paiement_path
-
-%div.top-info.pa1
 	%h2 Configuration avancée
 %div.fiche.pa1.brdr-b
 	%p Si tu cliques ici, c'est que tu sais ce que tu fais et que t'assume de tout casser.
