@@ -2,14 +2,15 @@ LooklaDev::Application.routes.draw do
   
 
   resources :activites do
+    member do
+      get :export
+      post :validate_personne_by_name
+    end
     collection do
       get :import
       put :import_product_as_activite , as: :ipap
+      get :validate_personne_by_ean
       post :validate_personne_by_ean
-      post :validate_personne_by_name
-    end
-    member do
-      get :export
     end
   end
 

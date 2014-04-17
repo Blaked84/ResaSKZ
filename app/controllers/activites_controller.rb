@@ -75,7 +75,7 @@ class ActivitesController < ApplicationController
      personneid=params[:id_pers]
      commande=Personne.find(personneid).commandes.find_by event_id: eventid
      ean=commande.ean
-     redirect_to validate_personne_by_ean_activites_path({:id => activityid, :ean => ean}) 
+     redirect_to validate_personne_by_ean_activites_path(:id => activityid, :ean => ean), method: :post 
 
   end
 

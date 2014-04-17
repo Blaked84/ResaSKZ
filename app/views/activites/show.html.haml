@@ -6,10 +6,9 @@
   %h2 Rechercher une personne NE PAS UTILISER
   %span La recherche se fait par le nom de famille
   %div
-    =form_tag validate_personne_by_name_activites_path :method => :post do
+    =form_tag validate_personne_by_name_activite_path(@activite.id), :method => :post do
       =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id_pers", :size => 75
       =hidden_field_tag "id_pers"
-      =hidden_field_tag "id", params[:id]
       = submit_tag 'Check!', :class => "pure-button pure-button-success pure-button-xsmall "
 
 %div.pa1.fiche.brdr-b
