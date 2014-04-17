@@ -111,6 +111,19 @@ class PersonnesController < ApplicationController
     redirect_to :back
   end
 
+  def export
+    
+    @personnes = Personne.all
+
+    @personnes = @personnes.map{|p| p.serialize}
+
+    respond_to do |format|
+      format.xls do
+        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_personnes_"+Date.today.to_s+ '.xls"'
+      end
+    end
+  end
+
 private
 
   def set_personne

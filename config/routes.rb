@@ -63,6 +63,7 @@ LooklaDev::Application.routes.draw do
       get 'add_commande'
     end
     collection do
+      get 'export'
       get 'to_moderate'
       get 'add_assurance'
     end
