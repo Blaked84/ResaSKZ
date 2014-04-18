@@ -76,7 +76,7 @@ window.onload = function () {
     };
   });
 
-  $("input#ean").bind("keyup", function(){
+  $("input#ean").bind("change paste keyup", function(){
     var ean_val = $(this).val();
     if(ean_val != ""){
 
