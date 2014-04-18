@@ -96,10 +96,17 @@ window.onload = function () {
         })
         .fail( function (data) {
          
-        });      
+        });
+    $(this).val("");      
     };
 
   });
+
+  $(".no-enter").on("keypress", function (e) {
+    if (e.keyCode == 13) {
+        return false;
+    }
+});
 
 
 };
