@@ -287,7 +287,41 @@ require 'barby'
     end
   end
 
-def validate_caution
+  def check_in
+
+    @commande = Commande.find_by_ean params[:ean]
+
+    if @commande && @commande.check_in
+      redirect_to admin_check_in_path
+    else
+      redirect_to admin_check_in_path, alert: "Can't Check In"
+    end
+  end
+
+  def get_infos
+
+    @commande = Commande.find_by_ean params[:ean]
+
+
+    if @commande
+
+      infos = Hash.new
+
+      infos[:nom_complet]=@commande.personne.nom_complet
+      infos[:etat_paiement]=@commande.paiementok? ? "OK" : "NON"
+      infos[:etat_assurance]=@commande.personne.documentassurance? ? "OK" : "NON"
+      chambre=@commande.personne.chambres.where(event_id: @commande.event_id).first
+      infos[:chambre]=chambre.identifiant
+      infos[:chambree]=chambre.personnes.map{|p| p.nom_complet}
+
+      render json: infos.to_json
+    else
+      render json: "", status: :unprocessable_entity
+    end
+
+  end
+
+  def validate_caution
     authorize! :read_admin, User
     personne=Personne.find(params[:id])
     personne.commandes.map { |c| c.a_donne_caution }

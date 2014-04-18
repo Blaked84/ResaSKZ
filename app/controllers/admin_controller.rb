@@ -35,6 +35,8 @@ class AdminController < ApplicationController
     @event=Event.all
   end
 
-  
+  def check_in
+
+  end
   
 end

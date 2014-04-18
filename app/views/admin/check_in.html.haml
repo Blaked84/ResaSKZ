@@ -1,0 +1,33 @@
+%div.top-info.pa1
+  %h1 Check-In
+%div.fiche.pa1.brdr-b
+  .pers_selection
+    .assign_pers_form
+      
+      =form_tag check_in_commandes_path do
+        =text_field_tag 'ean', '' , :size => 13 ,:autofocus => true
+        =submit_tag "Check-In !"
+      #error_box
+        
+
+  .commande
+    %h2 Infos
+    .info
+      %strong Nom :
+      %span#nom_complet Nom Complet
+    .info
+      %strong Etat Paiement :
+      %span#etat_paiement Etat Paiement
+    .info
+      %strong Etat Assurance :
+      %span#etat_assurance Etat assurance
+
+  .chambre
+    %h2 Chambre
+    .infos
+      %h3 Identifiant :
+      #id_chambre
+    .personnes
+      %h3 Autre membres de la chambre
+      %ul#chambree
+

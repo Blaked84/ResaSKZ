@@ -18,6 +18,7 @@ LooklaDev::Application.routes.draw do
   get "commande_products/check_nombre"
   post "commande_products/check_nombre"
   get "admin/index"
+  get "admin/check_in"
   get "admin/graph"
   get "home/index"
   resources :commandes do
@@ -28,10 +29,13 @@ LooklaDev::Application.routes.draw do
       get :catalogue
     end
     collection do
+      post :check_in
       get :export
       get :add_caution
       post :validate_caution
       get :index_ean
+      post :get_infos
+      get :get_infos
     end
     resources :paiements
     get :show_print

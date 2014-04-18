@@ -294,4 +294,8 @@ class Commande < ActiveRecord::Base
 
 		return result
 	end
+
+	def check_in
+		true
+	end
 end
