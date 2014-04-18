@@ -308,11 +308,15 @@ require 'barby'
       infos = Hash.new
 
       infos[:nom_complet]=@commande.personne.nom_complet
-      infos[:etat_paiement]=@commande.paiementok? ? "OK" : "NON"
-      infos[:etat_assurance]=@commande.personne.documentassurance? ? "OK" : "NON"
       chambre=@commande.personne.chambres.where(event_id: @commande.event_id).first
       infos[:chambre]=chambre.identifiant
-      infos[:chambree]=chambre.personnes.map{|p| p.nom_complet}
+      infos[:chambree]=chambre.personnes.map{|p| {
+        nom: p.nom_complet,
+        etat_paiement: p.commandes.find_by_event_id(chambre.event_id).paiementok? ? "ok" : "NON",
+        etat_assurance: p.commandes.find_by_event_id(chambre.event_id).personne.documentassurance? ? "ok" : "NON",
+        etat_caution: p.commandes.find_by_event_id(chambre.event_id).caution ? "ok" : "NON"
+        }
+      }
 
       render json: infos.to_json
     else

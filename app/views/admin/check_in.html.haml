@@ -6,7 +6,7 @@
       
       =form_tag check_in_commandes_path do
         =text_field_tag 'ean', '' , :size => 13 ,:autofocus => true
-        =submit_tag "Check-In !"
+        =#submit_tag "Check-In !"
       #error_box
         
 
@@ -15,12 +15,7 @@
     .info
       %strong Nom :
       %span#nom_complet Nom Complet
-    .info
-      %strong Etat Paiement :
-      %span#etat_paiement Etat Paiement
-    .info
-      %strong Etat Assurance :
-      %span#etat_assurance Etat assurance
+
 
   .chambre
     %h2 Chambre
@@ -29,5 +24,14 @@
       #id_chambre
     .personnes
       %h3 Autre membres de la chambre
-      %ul#chambree
+      %table
+        %thead
+          %tr
+            %th Nom
+            %th Assurance
+            %th Caution
+            %th Paiement
+        %tbody#chambree
+
+
 

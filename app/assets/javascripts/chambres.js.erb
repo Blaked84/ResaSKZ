@@ -76,24 +76,21 @@ window.onload = function () {
     };
   });
 
-  $("input#ean").bind("change paste keyup", function(){
+  $("input#ean").bind("keyup", function(){
     var ean_val = $(this).val();
     if(ean_val != ""){
 
       $("span#nom_complet").text("");
-      $("span#etat_assurance").text("");
-      $("span#etat_paiement").text("");
       $("#id_chambre").text("");
       $("#chambree").html("");
 
       $.post("/commandes/get_infos",{ean: ean_val})
         .done(function(data) {
           $("span#nom_complet").text(data.nom_complet);
-          $("span#etat_paiement").text(data.etat_paiement);
-          $("span#etat_assurance").text(data.etat_assurance);
           $("#id_chambre").text(data.chambre);
+          $("#chambree").html("");
           $.each(data.chambree, function (index, value){
-            $("#chambree").append('<li>'+value+'</li>');
+            $("#chambree").append('<tr><td>'+value.nom+'</td><td>'+value.etat_assurance+'</td><td>'+value.etat_caution+'</td><td>'+value.etat_paiement+'</td></tr>');
           });
 
         })
