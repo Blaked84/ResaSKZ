@@ -107,6 +107,7 @@ LooklaDev::Application.routes.draw do
       get 'import'
       post 'import' => 'chambres#import_validate'
       get 'assign'
+      get 'recap_boulangerie'
     end
     member do
       get 'get_personnes_for'
