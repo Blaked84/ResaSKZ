@@ -1,7 +1,7 @@
 window.onload = function () {
 
   $('.nom').bind('railsAutocomplete.select', function(event, data){
-    
+
     var chambre = $( this ).closest(".chambre");
     var chambre_cid=chambre.attr('id');
     var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
@@ -11,72 +11,73 @@ window.onload = function () {
     chambre.find('#error_box').html('')
 
     $.post(url,{pers_id: pers_id})
-        .done(function(data) {
-          var place = chambre.find('.libre').first();
+    .done(function(data) {
+      var place = chambre.find('.libre').first();
 
-          place.removeClass("libre").removeClass("warning").addClass("occupe");
-          place.attr('pers_id',data.id);
-          place.find('.infos').text(data.infos);
-          chambre.find('input.nom').val("");
-          chambre.find('input.nom').animate(
-          {
-            backgroundColor : "#00FF7F"
-          },10).delay(200).animate(
-          {
-            backgroundColor : "#FFFFFF"
-          },300);
-          if(data.message.length>0){
-            place.addClass("warning");
-            place.find('.warning-box').html("<ul>");
-            $.each(data.message, function (index, value){
-              place.find('.warning-box').append('<li>'+value+'</li>');
-            });
-            place.find('.warning-box').append("</ul>");
-
-          };
-        })
-        .fail( function (data) {
-          chambre.find('input.nom').val("");
-          chambre.find('input.nom').animate(
-            {
-              backgroundColor : "#FF0000"
-            },10).delay(200).animate(
-            {
-              backgroundColor : "#FFFFFF"
-            },300);
-          chambre.find('#error_box').html('<ul>').append(data.responseText).append('</ul>'); 
+      place.removeClass("libre").removeClass("warning").addClass("occupe");
+      place.attr('pers_id',data.id);
+      place.find('.infos').text(data.infos);
+      chambre.find('input.nom').val("");
+      chambre.find('input.nom').animate(
+      {
+        backgroundColor : "#00FF7F"
+      },10).delay(200).animate(
+      {
+        backgroundColor : "#FFFFFF"
+      },300);
+      if(data.message.length>0){
+        place.addClass("warning");
+        place.find('.warning-box').html("<ul>");
+        $.each(data.message, function (index, value){
+          place.find('.warning-box').append('<li>'+value+'</li>');
         });
+        place.find('.warning-box').append("</ul>");
+
+      };
+    })
+    .fail( function (data) {
+      chambre.find('input.nom').val("");
+      chambre.find('input.nom').animate(
+      {
+        backgroundColor : "#FF0000"
+      },10).delay(200).animate(
+      {
+        backgroundColor : "#FFFFFF"
+      },300);
+      chambre.find('#error_box').html('<ul>').append(data.responseText).append('</ul>'); 
+    });
 
 
 
   });
 
-  $('.clear').bind("click", function(event) {
-    event.preventDefault();
-    var parent=$( this ).parent();
+$('.clear').bind("click", function(event) {
+  event.preventDefault();
+  var parent=$( this ).parent();
 
-    if(parent.hasClass('occupe')){
-      var chambre_cid=$( this ).closest(".chambre").attr('id');
-      var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
-      var pers_id = parent.attr('pers_id');
-      var url = "/chambres/"+chambre_id+"/remove_personne";
+  if(parent.hasClass('occupe')){
+    var chambre_cid=$( this ).closest(".chambre").attr('id');
+    var chambre_id= chambre_cid.substring(1,chambre_cid.length) ;
+    var pers_id = parent.attr('pers_id');
+    var url = "/chambres/"+chambre_id+"/remove_personne";
       // alert("Chambre : " + chambre_id);
       // alert('Suppression de la personne id n°'+pers_id);
 
       $.post(url,{pers_id: pers_id})
-        .done(function() {
+      .done(function() {
           // alert("Succes");
           parent.removeClass("occupe").removeClass("warning").addClass("libre");
           parent.find('.infos').text("Libre");
           parent.attr('pers_id','')
         })
-        .fail( function () {
-          alert("Erreur");
-        });
+      .fail( function () {
+        alert("Erreur");
+      });
     };
   });
 
-  $("input#ean").bind("change paste keyup", function(){
+$(".auto_submit").on("keypress", function (e) {
+  if (e.keyCode == 13) {
     var ean_val = $(this).val();
     if(ean_val != ""){
 
@@ -85,27 +86,23 @@ window.onload = function () {
       $("#chambree").html("");
 
       $.post("/commandes/get_infos",{ean: ean_val})
-        .done(function(data) {
-          $("span#nom_complet").text(data.nom_complet);
-          $("#id_chambre").text(data.chambre);
-          $("#chambree").html("");
-          $.each(data.chambree, function (index, value){
-            $("#chambree").append('<tr><td>'+value.nom+'</td><td>'+value.etat_assurance+'</td><td>'+value.etat_caution+'</td><td>'+value.etat_paiement+'</td></tr>');
-          });
-
-        })
-        .fail( function (data) {
-         
+      .done(function(data) {
+        $("span#nom_complet").text(data.nom_complet);
+        $("#id_chambre").text(data.chambre);
+        $("#chambree").html("");
+        $.each(data.chambree, function (index, value){
+          $("#chambree").append('<tr><td>'+value.nom+'</td><td>'+value.etat_assurance+'</td><td>'+value.etat_caution+'</td><td>'+value.etat_paiement+'</td></tr>');
         });
-    $(this).val("");      
+
+      })
+      .fail( function (data) {
+
+      });
+      $(this).val("");      
     };
+    return false;
+  }
 
-  });
-
-  $(".no-enter").on("keypress", function (e) {
-    if (e.keyCode == 13) {
-        return false;
-    }
 });
 
 

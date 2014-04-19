@@ -5,7 +5,7 @@
     .assign_pers_form
       
       =form_tag check_in_commandes_path, :class =>"no-enter" do
-        =text_field_tag 'ean', '' , :size => 13 ,:autofocus => true
+        =text_field_tag 'ean', '' , :size => 13 ,:autofocus => true, :class => 'auto_submit'
         =#submit_tag "Check-In !"
       #error_box
         

@@ -95,6 +95,14 @@ class ActivitesController < ApplicationController
       # si l'activité est open, on ajoute la personne à la liste. Sinon on la refuse.
       if activite.open
         #ah bah oui il faut le coder ça
+        if activite.personnes.find_by(id: personneid).present?
+          redirect_to activite_path(activityid), alert:  personne.nom_complet + " est déjà passé!"
+        else
+          activite.add_personne(personneid)
+          activite.check_personne(personneid)
+          redirect_to activite_path(activityid), notice: "Passage de "+ personne.nom_complet + " Validé!"
+
+        end
       else
         if activite.personnes.find_by(id: personneid).present?
           #si la personne existe bien dans la liste on vérifie que si elle est déjà passée
