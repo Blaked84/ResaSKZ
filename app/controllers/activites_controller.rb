@@ -122,7 +122,7 @@ class ActivitesController < ApplicationController
         #l'activité est forcement not open
         # on verifie si qq'un de la chanbre est déj) passé
 
-        if personnes.map{|p| ActivitesPersonne.where(activite_id:activityid, personne_id:p.id).take!.checked}.include? true
+        if personnes.map{|p| ActivitesPersonne.where(activite_id:activityid, personne_id:p.id).take!.checked unless ActivitesPersonne.where(activite_id:activityid, personne_id:p.id).empty?}.include? true
           redirect_to activite_path(activityid), alert: personnes.map { |p| p.nom_complet + " " }.to_s + " sont déjà passés"
 
        else
