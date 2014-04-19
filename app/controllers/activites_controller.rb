@@ -53,45 +53,79 @@ class ActivitesController < ApplicationController
   def show
   	@activite=Activite.find(params[:id])
   	@personnes=@activite.personnes
+    @nbtotal=@personnes.count
+    @nbcheck=ActivitesPersonne.where(activite_id: params[:id], checked: true).count
+
   end
 
   def import
   	@products=Product.all
   	@categories = Categorie.all
+    @events=Event.all
   end
 
   def import_product_as_activite
   	activite= Activite.new
   	activite.import_from_product(params[:productid])
     activite.open=false
-  	activite.save!
-  	redirect_to :back, notice: "Activitée ajoutée"
+    activite.save!
+    redirect_to :back, notice: "Activitée ajoutée"
+  end
+
+  def import_cat_product_as_activite
+    activite= Activite.new
+    activite.import_from_cat_product(params[:categorieid],params[:eventid])
+    activite.open=false
+    activite.save!
+    redirect_to :back, notice: "Activitée ajoutée"
   end
 
   def validate_personne_by_name
-     activityid=params[:id]
-     activite=Activite.find(activityid)
-     eventid=activite.event_id
-     personneid=params[:id_pers]
-     commande=Personne.find(personneid).commandes.find_by event_id: eventid
-     ean=commande.ean
-     redirect_to validate_personne_by_ean_activites_path(:id => activityid, :ean => ean), method: :post 
+   activityid=params[:id]
+   activite=Activite.find(activityid)
+   eventid=activite.event_id
+   personneid=params[:id_pers]
+   commande=Personne.find(personneid).commandes.find_by event_id: eventid
+   ean=commande.ean
+   redirect_to validate_personne_by_ean_activites_path(:id => activityid, :ean => ean), method: :post 
 
-  end
+ end
 
-  def validate_personne_by_ean
+ def validate_personne_by_ean
+    # 2 comportement différents en fonction de si c'est une catégorie importée où non.
+    # on verifie ça sur l'id produit. Si plus grand que 1000 c'est une categorie. c'est sale. je sais.
     ean=params[:ean]
-    activityid=params[:id]
+    activityid=params[:id].to_i
     commandes=Commande.where(ean: ean )
 
     if !commandes.any?
       # si on ne trouve pas de commande avec cet EAN
       redirect_to activite_path(activityid), alert: "Cette commande / personne n'existe pas"
     else
+
       personne=commandes.take!.personne
 
       personneid=personne.id
       activite=Activite.find(activityid)
+      
+      # on verifie que c'est une activite qui vient d'un produit ou categorie de produits
+      if activite.productid.to_i >= 1000
+        personnes=personne.chambres.take!.personnes
+        #l'activité est forcement not open
+        # on verifie si qq'un de la chanbre est déj) passé
+
+        if personnes.map{|p| ActivitesPersonne.where(activite_id:activityid, personne_id:p.id).take!.checked}.include? true
+          redirect_to activite_path(activityid), alert: personnes.map { |p| p.nom_complet + " " }.to_s + " sont déjà passés"
+
+       else
+
+        personnes.each{|p| activite.check_personne(p.id) unless (activite.personnes.find_by id: p.id).nil?}
+
+        redirect_to activite_path(activityid), notice: "Passage de "+ personnes.map { |p| p.nom_complet + " " }.to_s + " Validé!"
+      end
+      else
+
+
       # si l'activité est open, on ajoute la personne à la liste. Sinon on la refuse.
       if activite.open
         #ah bah oui il faut le coder ça
@@ -119,28 +153,29 @@ class ActivitesController < ApplicationController
       end
     end
   end
+end
 
-  def export
-    set_activite
+def export
+  set_activite
 
-    @activite = @activite.serialize
+  @activite = @activite.serialize
 
-    respond_to do |format|
-      format.xls do
-        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_activite_"+Date.today.to_s+ '.xls"'
-      end
+  respond_to do |format|
+    format.xls do
+      response.headers['Content-Disposition'] = 'attachment; filename="' +"export_activite_"+Date.today.to_s+ '.xls"'
     end
-
   end
 
-  private
+end
 
-  def activite_params
-    params.require(:activite).permit(:nom,:event_id,:open)
-  end
+private
 
-  def set_activite
-    @activite = Activite.find(params[:id])
-  end
+def activite_params
+  params.require(:activite).permit(:nom,:event_id,:open)
+end
+
+def set_activite
+  @activite = Activite.find(params[:id])
+end
 
 end

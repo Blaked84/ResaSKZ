@@ -6,6 +6,9 @@
   -unless ca.nom.blank?
     %div.pa1.fiche.brdr-b
       %h2=ca.nom
+      %div
+        - @events.each do |e|
+          =link_to "Importer catégorie event " + e.id.to_s, {:controller => :activites, :action => :import_cat_product_as_activite, :categorieid => ca.id , :eventid => e.id}, {:method => :put, :class => "pure-button pure-button-error"}
       %table.striped.alternate
         %thead
           %tr

@@ -31,9 +31,16 @@ class Activite < ActiveRecord::Base
   	personnes.each{|p| self.add_personne(p.id)} unless !personnes.any?
   end
 
+  def import_from_cat_product(categorieid,eventid)
+    categorie=Categorie.find(categorieid)
+    categorie.products.each{ |p|  self.import_from_product(p.id) if p.event_id=eventid}
+    self.nom = categorie.nom
+    self.event_id = eventid
+    self.productid = 1000 + categorieid.to_i
+  end
+
   def add_personne(personneid)
   	self.personnes << Personne.find(personneid)
-  	#let's code baby!
   end
 
   def check_personne(personneid)

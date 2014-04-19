@@ -9,6 +9,7 @@ LooklaDev::Application.routes.draw do
     collection do
       get :import
       put :import_product_as_activite , as: :ipap
+      put :import_cat_product_as_activite , as: :icpap
       get :validate_personne_by_ean
       post :validate_personne_by_ean
     end
