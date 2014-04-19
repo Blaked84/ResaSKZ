@@ -1,0 +1,22 @@
+%div.top-info.pa1
+  %h1
+    Activite: #{@activite.nom}
+  %h2
+
+%div.pa1.fiche.brdr-b
+  %h2 Recherche par code barre
+  =form_tag validate_personne_by_ean_activites_path :method => :post do
+    =text_field_tag 'ean', '' , :size => 13 ,:autofocus => true
+    =hidden_field_tag "id", params[:activityid]
+    = submit_tag 'Check!', :class => "pure-button pure-button-success pure-button-xsmall "
+
+
+%div.fiche.pa1.brdr-b
+  %h2= "Chambres n° #{@chambre.identifiant} "
+  -@chambre.personnes.each do |p|
+    %h3= p.nom_complet
+    %table
+      -p.commandes.find_by_event_id(@chambre.event_id).products.where(categorie_id: @categorie_id).each do |pr|
+        %tr
+          %td=pr.name
+          %td=p.commandes.find_by_event_id(@chambre.event_id).commande_products.find_by_product_id(pr.id).nombre

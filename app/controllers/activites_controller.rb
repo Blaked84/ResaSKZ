@@ -55,6 +55,13 @@ class ActivitesController < ApplicationController
   	@personnes=@activite.personnes
     @nbtotal=@personnes.count
     @nbcheck=ActivitesPersonne.where(activite_id: params[:id], checked: true).count
+    @parchambre=true if @activite.productid.to_i >= 1000
+  end
+
+  def recap
+    @chambre=Chambre.find(params[:chambreid])
+    @activite=Activite.find(params[:activityid])
+    @categorie_id=params[:categorieid].to_i
 
   end
 
@@ -110,7 +117,8 @@ class ActivitesController < ApplicationController
       
       # on verifie que c'est une activite qui vient d'un produit ou categorie de produits
       if activite.productid.to_i >= 1000
-        personnes=personne.chambres.take!.personnes
+        chambre=personne.chambres.take!
+        personnes=chambre.personnes
         #l'activité est forcement not open
         # on verifie si qq'un de la chanbre est déj) passé
 
@@ -120,8 +128,9 @@ class ActivitesController < ApplicationController
        else
 
         personnes.each{|p| activite.check_personne(p.id) unless (activite.personnes.find_by id: p.id).nil?}
-
-        redirect_to activite_path(activityid), notice: "Passage de "+ personnes.map { |p| p.nom_complet + " " }.to_s + " Validé!"
+        # on recalcule l'id de la categorie
+        categorieid=activite.productid.to_i - 1000
+        redirect_to recap_activites_path(:activityid => activityid, :chambreid => chambre.id, :categorieid => categorieid), notice: "Passage de "+ personnes.map { |p| p.nom_complet + " " }.to_s + " Validé!"
       end
       else
 

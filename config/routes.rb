@@ -12,6 +12,8 @@ LooklaDev::Application.routes.draw do
       put :import_cat_product_as_activite , as: :icpap
       get :validate_personne_by_ean
       post :validate_personne_by_ean
+      post :recap
+      get :recap
     end
   end
 
