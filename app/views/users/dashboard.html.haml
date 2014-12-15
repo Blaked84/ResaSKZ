@@ -5,14 +5,7 @@
     .box.pa1
       %p Votre compte est parrainé par :
       =@user.parrain.referant.nom_complet
-  -if can? :parrainer, @user
-    .box.parrainner.pa2
-      %p
-        Vous pouvez parrainer un ami, votre Za/Zon ou votre chien ! Cela lui permetra de se connecter au site ResaSKZ avec ses propres identifiants, de gérer lui même sa commande et de payer tout seul.
-      %p Fait profiter un de tes amis !
-      .btn
-        =link_to  "Je veux être Parrain !", parrainer_user_path(@user), :class => "pure-button ma1"
-
+  
   -if Rails.env == 'development' && false
     %h2 Infos à afficher sur cette page :
     %ul
@@ -49,7 +42,7 @@
     %ul
       %li
         @user
-%div.fiche.pa1.brdr-b
+
   %h2 Personnes gérées par ce compte :
 
   = render :partial => "personne_tree"
@@ -73,8 +66,14 @@
                 = link_to 'Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success"
               -else
                 Personne non validée par les administrateurs
+  %p Vous pouvez parrainer un ami ou votre Za/Zon. Vous payerez pour elle/lui et gérerez sa réservation depuis votre compte.
 
-  = link_to 'Ajouter une personne', new_personne_user_path(@user), :class => "pure-button pure-button-success"
+  = link_to "Parrainer un ami", new_personne_user_path(@user), :class => "pure-button pure-button-success"
+  -if can? :parrainer, @user
+    %p
+      Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander à ouvrir un compte. Cette demande est soumise à accepatation de la team SKZ.
+    
+    =link_to  "Demander à ouvrir un compte", parrainer_user_path(@user), :class => "pure-button"
   
 %div.fiche.pa1.brdr-b                
   %h2 Commandes
