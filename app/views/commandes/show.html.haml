@@ -70,6 +70,30 @@
         %td=@paiement_du_euro
 
 %div.fiche.pa1.brdr-b
+  %h2
+    Produits
+  
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Produit
+        %th Quantitée
+        %th Prix (€)
+    %tbody
+      - @commande.commande_products.each do |cprd|
+        %tr
+          %td=link_to cprd.product.name, product_path(cprd.product.id)
+          %td=cprd.nombre
+          %td=cprd.product.price_euro
+      %tr 
+        %td
+          %hr
+        %td
+          %strong Total
+        %td=@total_euro
+  =link_to "Editer ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-primary"
+
+%div.fiche.pa1.brdr-b
   %h2 Calendrier de paiement
 
   %table.striped.alternate
@@ -128,28 +152,3 @@
 
   .box.alert
     %p Les administrateurs peuvent mettrent jusqu'à 3 jours pour valider un paiement. Si vous avez eu un soucis lors de votre paiement (connexion perdue, ...), contactez les membres du support SKZ (skz.ue@gadz.org) en leur indiquant bien le numéro de paiement afin qu'ils vérifient l'état du paiement.
-
-%div.fiche.pa1.brdr-b
-  %h2
-    Produits
-  
-  %table.striped.alternate
-    %thead
-      %tr
-        %th Produit
-        %th Quantitée
-        %th Prix (€)
-    %tbody
-      - @commande.commande_products.each do |cprd|
-        %tr
-          %td=link_to cprd.product.name, product_path(cprd.product.id)
-          %td=cprd.nombre
-          %td=cprd.product.price_euro
-      %tr 
-        %td
-          %hr
-        %td
-          %strong Total
-        %td=@total_euro
-
-  =link_to "Editer ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-primary"
