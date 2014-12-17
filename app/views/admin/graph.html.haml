@@ -2,13 +2,18 @@
 	%h1 Graph Admin
 
 
--@event.each do |e|
-	%div.top-info.pa1
-		%h2=e.name
-	%div.fiche.pa1.brdr-b
-		%p
-			nombre de commandes
-			=e.commandes.count
+
+
+
+%div.fiche.pa1.brdr-b
+	.grid
+		.grid2
+			-@event.each do |e|
+				%div
+					%h2=e.name
+					%p
+						nombre de commandes
+						=e.commandes.count
 
 %div.top-info.pa1
 	%h2 Commandes

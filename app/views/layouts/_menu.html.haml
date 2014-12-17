@@ -2,23 +2,50 @@
   -if can? :see_admin, User
     %nav
       .mw960p.center
-        .pt2.pb2.pl0
+        .pl0
           %ul.inline.pl0
-            %il ResaSKZ
-            %il= link_to "Accueil", root_path
-            %il= link_to "Personnes", personnes_path
-            %il= link_to "Produits", products_path
-            %il= link_to "Evenements", events_path
-            %il= link_to "Commandes", commandes_path
-            %il= link_to "Comptes", users_path
-            %il= link_to "Paiements", paiements_path
-            %il= link_to "Admin", admin_index_path
+            //%il ResaSKZ
+            / %il= link_to "Accueil", root_path
+            / %il= link_to "Personnes", personnes_path
+            / %il= link_to "Produits", products_path
+            / %il= link_to "Evenements", events_path
+            / %il= link_to "Commandes", commandes_path
+            / %il= link_to "Comptes", users_path
+            / %il= link_to "Paiements", paiements_path
+            / %il= link_to "Admin", admin_index_path
             %il.right= render 'layouts/user_widget'
   -else
     %nav
       .mw960p.center
-        .pt2.pb2.pl0
+        .pl0
           %ul.inline.pl0
-            %il ResaSKZ
-            %il= link_to "Mon Dashboard", dashboard_user_path(current_user)
+            %il= link_to "ResaSKZ", dashboard_user_path(current_user)
             %il.right= render 'layouts/user_widget'
+
+  -if can? :see_admin, User
+    #sidebare 
+      #logo
+        .ml1
+          = link_to "ResaSKZ", dashboard_user_path(current_user)
+      .ma1
+        %ul.unstyled
+          %li=link_to "Admin panel", admin_index_path
+          %li= link_to "Personnes", personnes_path
+          %li= link_to "Produits", products_path
+          %li= link_to "Evenements", events_path
+          %li= link_to "Commandes", commandes_path
+          %li=link_to "Graphiques", admin_graph_path
+          %li= link_to "Comptes", users_path
+          %li= link_to "Paiements", paiements_path
+          %li= link_to "Validation paiements", check_paiement_path
+          %li= link_to "Remboursements", remboursements_path
+
+          %li= link_to "Assurance", add_assurance_personnes_path
+          %li= link_to "Cautions", add_caution_commandes_path
+
+          %li= link_to "Chambres", assign_chambres_path
+
+          %li= link_to "Activités", activites_path
+
+          %li= link_to "Check-In", admin_check_in_path
+          %li= link_to "Boulangerie", recap_boulangerie_chambres_path

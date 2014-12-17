@@ -1,7 +1,9 @@
 %div.top-info.pa1
-  %h1=@personne.nom_complet
+  %h1
+    =@personne.nom_complet
+    = link_to ' Editer', personne_infos_personne_path(@personne), :class => "icon-button md-create  icon-button-h-light icon-light right"
 
-  %p= link_to 'Editer', personne_infos_personne_path(@personne), :class => "pure-button pure-button-primary right"
+  %p
   %p
     =@personne.bucque
     =@personne.fams

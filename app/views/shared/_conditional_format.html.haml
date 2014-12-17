@@ -1,8 +1,12 @@
 /# Mise en forme conditionnelle pour les champs booleens
 /# Usage: =conditional_format(variable_booleene)
+/ - if c
+/   .green.tag
+/     Oui
+/ - else
+/   .red.tag
+/     Non
 - if c
-  .green.tag
-    Oui
+  .green.tag.md-done
 - else
-  .red.tag
-    Non
+  .red.tag.md-clear

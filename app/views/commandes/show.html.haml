@@ -5,11 +5,11 @@
         Commande #
         =@commande.idlong
     .w50.txtright    
-      =link_to "Version imprimable", commande_show_print_path(@commande.id), :class => "pure-button pure-button-primary"
+      =link_to " Imprimer", commande_show_print_path(@commande.id), :class => "icon-button icon-button-h-light icon-light right md-print"
 
 %div.fiche.pa1.brdr-b
 
-  %table.striped.alternate
+  %table.alternate
     %thead
       %tr
         %th Commande ID
@@ -52,7 +52,7 @@
   /       %td=conditional_format(@personne.documentassurance)
   /       %td=conditional_format(@assuranceok)
 
-  %table.striped.alternate
+  %table.alternate
     %thead
       %tr
         %th Justificatif Responsabilité Civile

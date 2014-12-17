@@ -47,7 +47,7 @@
 
   = render :partial => "personne_tree"
 
-  %table.striped.alternate#unfixedtable
+  %table.alternate#unfixedtable
     %thead
       %tr
         %th Prénom Nom 
@@ -56,28 +56,22 @@
       - @user.personnes.each do |p| 
         -if p.enregistrement_termine
           %tr
-            %td=link_to p.nom_complet, personne_path(p.id)
+            %td
+              =link_to p.nom_complet, personne_path(p.id)
+              -if p.moderated || current_user.admin?
+                = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
+                -unless p.is_referant?
+                  = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne et sa/ses commande(s) associées?' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
             %td=conditional_format(p.assurance)
             %td
               -if p.moderated || current_user.admin?
-                = link_to 'Editer', personne_infos_personne_path(p), :class => "pure-button pure-button-primary"
-                -unless p.is_referant?
-                  = link_to 'Supprimer', p, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
-                = link_to 'Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success"
+                = link_to ' Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success  md-add-circle-outline"
               -else
                 Personne non validée par les administrateurs
-  %p Vous pouvez parrainer un ami ou votre Za/Zon. Vous payerez pour elle/lui et gérerez sa réservation depuis votre compte.
 
-  = link_to "Parrainer un ami", new_personne_user_path(@user), :class => "pure-button pure-button-success"
-  -if can? :parrainer, @user
-    %p
-      Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander à ouvrir un compte. Cette demande est soumise à accepatation de la team SKZ.
-    
-    =link_to  "Demander à ouvrir un compte", parrainer_user_path(@user), :class => "pure-button"
-  
 %div.fiche.pa1.brdr-b                
   %h2 Commandes
-  %table.striped.alternate
+  %table.alternate
     %thead
       %tr
         %th Commande ID
@@ -95,4 +89,22 @@
               %td=c.event.name
               %td=conditional_format(c.complete?)
               %td=c.montant_total/100.0
+
+%div.fiche.pa1.brdr-b 
+  %h2 Parrainnage
+  .grid
+    .grid2
+      %div
+        %p Vous pouvez parrainer un ami ou votre Za/Zon. Vous payerez pour elle/lui et gérerez sa réservation depuis votre compte.
+
+        .pt1.pb1= link_to "Parrainer un ami", new_personne_user_path(@user), :class => "pure-button pure-button-success"
+        
+      %div
+        -if can? :parrainer, @user
+          %p
+            Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander à ouvrir un compte. Cette demande est soumise à accepatation de la team SKZ.
+          
+          .pt1.pb1=link_to  "Demander à ouvrir un compte", parrainer_user_path(@user), :class => "pure-button"
+  
+
  
