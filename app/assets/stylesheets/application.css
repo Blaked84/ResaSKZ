@@ -139,7 +139,7 @@ h1, .h1-like {
 	margin: 0.6563em 0 0 0;
 	font-size: 2.2857em; /* equiv 32px */
 	line-height: 1.3126;
-	color: #fff;
+	color: #333;
 	/*text-shadow: 1px 1px 0px #FFF;*/
 	font-family: "PTSansRegular";
 	font-weight: 100;
@@ -1446,13 +1446,14 @@ body{background: #ecf0f1;}
 
 .top-info{
 	margin-top:1em;
-	background: #3f51b5;
-	color: #e8eaf6;
+	/*background: #5264AE;*/
+	background: #fff;
+	color: #555;
 	border-top: 1px solid #F7F7F7;
 	border-left: 1px solid #DDD;
 	border-right: 1px solid #DDD;
 }
-.top-info h2{color: #e8eaf6;}
+/*.top-info h2{color: #e8eaf6;}*/
 
 .fiche{
 	background: #FFF;
@@ -1499,7 +1500,7 @@ body{background: #ecf0f1;}
 	color: #ddd;
 }
 .icon-button-h-blue:hover {
-	color: #3F51B5;
+	color: #5264AE;
 }
 .icon-button-h-red:hover {
 	color: #d32f2f;
