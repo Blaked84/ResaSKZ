@@ -8,6 +8,7 @@
         %th=sortable "nom", "Nom"
         %th=sortable "prenom"
         %th=sortable "documentassurance", "Justificatif assurance (RC)"
+        %th=sortable "disabled", "Supprimé"
     %tbody
       - @personnes.each do |p|
         %tr
@@ -15,6 +16,7 @@
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
           %td=conditional_format(p.documentassurance)
+          %td=conditional_format(p.disabled?)
 
   = will_paginate @users
   = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"

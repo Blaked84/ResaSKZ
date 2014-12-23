@@ -1,9 +1,13 @@
 %div.top-info.pa1
   %h1
     =@personne.nom_complet
-    = link_to ' Editer', personne_infos_personne_path(@personne), :class => "icon-button md-create  icon-button-h-light icon-dark right"
+    = link_to ' Editer', personne_infos_personne_path(@personne), :class => "pa1 icon-button md-create  icon-button-h-light icon-dark right"
+    -if @personne.moderated || current_user.admin?
+      = link_to ' Supprimer  ', @personne, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue.' }, :class => "pa1 icon-button icon-button-h-red icon-dark md-clear right"
 
   %p
+    -if @personne.disabled?
+      .red.tag PERSONNE SUPPRIMÉE
   %p
     =@personne.bucque
     =@personne.fams

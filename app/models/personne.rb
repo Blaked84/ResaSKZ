@@ -103,7 +103,19 @@ class Personne < ActiveRecord::Base
 	  #   t.boolean  "enregistrement_termine"
 	  # end
 
+#=== Valeur par défaut  ==============================================
+	after_initialize :init
+
+def init
+	self.disabled ||= false
+end
+
 #=== Méthodes publiques ==============================================
+def disabled?
+	if self.disabled
+		return true
+	end
+end
 
 def nom_complet
     return self.prenom.to_s+" "+self.nom.to_s if !self.prenom.nil? && !self.nom.nil?

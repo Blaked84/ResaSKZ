@@ -84,7 +84,8 @@ class PersonnesController < ApplicationController
     set_personne
     authorize! :destroy, @personne
     user = @personne.user
-    @personne.destroy
+    @personne.disabled = true
+    @personne.save
     respond_to do |format|
       format.html { redirect_to dashboard_user_url(user) }
       format.json { head :no_content }

@@ -53,7 +53,7 @@
         %th Prénom Nom 
         %th assurance
     %tbody
-      - @user.personnes.each do |p| 
+      - @user.personnes.where.not(:disabled =>  true).each do |p| 
         -if p.enregistrement_termine
           %tr
             %td
@@ -61,7 +61,7 @@
               -if p.moderated || current_user.admin?
                 = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
                 -unless p.is_referant?
-                  = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne et sa/ses commande(s) associées?' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
+                  = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
             %td=conditional_format(p.assurance)
             %td
               -if p.moderated || current_user.admin?
