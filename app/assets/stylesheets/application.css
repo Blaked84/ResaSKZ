@@ -18,11 +18,11 @@
 
 @font-face {
     font-family: 'PTSansRegular';
-    src: url('/assets/PTS55F.eot');
-    src: url('/assets/PTS55F.eot?#iefix') format('embedded-opentype'),
-         url('/assets/PTS55F.woff') format('woff'),
-         url('/assets/PTS55F.ttf') format('truetype'),
-         url('/assets/PTS55F.svg#PTSansRegular') format('svg');
+    src: font-url('PTS55F.eot');
+    src: font-url('PTS55F.eot?#iefix') format('embedded-opentype'),
+         font-url('PTS55F.woff') format('woff'),
+         font-url('PTS55F.ttf') format('truetype'),
+         font-url('PTS55F.svg#PTSansRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -30,11 +30,11 @@
 
  @font-face {
     font-family: 'NoticiaTextRegular';
-    src: url('/assets/noticia/NoticiaText-Regular-webfont.eot');
-    src: url('/assets/noticia/NoticiaText-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/noticia/NoticiaText-Regular-webfont.woff') format('woff'),
-         url('/assets/noticia/NoticiaText-Regular-webfont.ttf') format('truetype'),
-         url('/assets/noticia/NoticiaText-Regular-webfont.svg#NoticiaTextRegular') format('svg');
+    src: font-url('noticia/NoticiaText-Regular-webfont.eot');
+    src: font-url('noticia/NoticiaText-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('noticia/NoticiaText-Regular-webfont.woff') format('woff'),
+         font-url('noticia/NoticiaText-Regular-webfont.ttf') format('truetype'),
+         font-url('noticia/NoticiaText-Regular-webfont.svg#NoticiaTextRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -42,11 +42,11 @@
 
 @font-face {
     font-family: 'AsapRegular';
-    src: url('/assets/asap/Asap-Regular-webfont.eot');
-    src: url('/assets/asap/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/asap/Asap-Regular-webfont.woff') format('woff'),
-         url('/assets/asap/Asap-Regular-webfont.ttf') format('truetype'),
-         url('/assets/asap/Asap-Regular-webfont.svg#AsapRegular') format('svg');
+    src: font-url('asap/Asap-Regular-webfont.eot');
+    src: font-url('asap/Asap-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('asap/Asap-Regular-webfont.woff') format('woff'),
+         font-url('asap/Asap-Regular-webfont.ttf') format('truetype'),
+         font-url('asap/Asap-Regular-webfont.svg#AsapRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -54,11 +54,11 @@
 
 @font-face {
     font-family: 'AsapItalic';
-    src: url('/assets/asap/Asap-Italic-webfont.eot');
-    src: url('/assets/asap/Asap-Italic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/asap/Asap-Italic-webfont.woff') format('woff'),
-         url('/assets/asap/Asap-Italic-webfont.ttf') format('truetype'),
-         url('/assets/asap/Asap-Italic-webfont.svg#AsapItalic') format('svg');
+    src: font-url('asap/Asap-Italic-webfont.eot');
+    src: font-url('asap/Asap-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('asap/Asap-Italic-webfont.woff') format('woff'),
+         font-url('asap/Asap-Italic-webfont.ttf') format('truetype'),
+         font-url('asap/Asap-Italic-webfont.svg#AsapItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -66,11 +66,11 @@
 
 @font-face {
     font-family: 'AsapBold';
-    src: url('/assets/asap/Asap-Bold-webfont.eot');
-    src: url('/assets/asap/Asap-Bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/asap/Asap-Bold-webfont.woff') format('woff'),
-         url('/assets/asap/Asap-Bold-webfont.ttf') format('truetype'),
-         url('/assets/asap/Asap-Bold-webfont.svg#AsapBold') format('svg');
+    src: font-url('asap/Asap-Bold-webfont.eot');
+    src: font-url('asap/Asap-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('asap/Asap-Bold-webfont.woff') format('woff'),
+         font-url('asap/Asap-Bold-webfont.ttf') format('truetype'),
+         font-url('asap/Asap-Bold-webfont.svg#AsapBold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -78,11 +78,11 @@
 
 @font-face {
     font-family: 'AsapBoldItalic';
-    src: url('/assets/asap/Asap-BoldItalic-webfont.eot');
-    src: url('/assets/asap/Asap-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
-         url('/assets/asap/Asap-BoldItalic-webfont.woff') format('woff'),
-         url('/assets/asap/Asap-BoldItalic-webfont.ttf') format('truetype'),
-         url('/assets/asap/Asap-BoldItalic-webfont.svg#AsapBoldItalic') format('svg');
+    src: font-url('asap/Asap-BoldItalic-webfont.eot');
+    src: font-url('asap/Asap-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         font-url('asap/Asap-BoldItalic-webfont.woff') format('woff'),
+         font-url('asap/Asap-BoldItalic-webfont.ttf') format('truetype'),
+         font-url('asap/Asap-BoldItalic-webfont.svg#AsapBoldItalic') format('svg');
     font-weight: normal;
     font-style: normal;
 
