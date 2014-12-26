@@ -83,6 +83,9 @@ gem 'chunky_png'
 # export db en yaml
 gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 
+# pour gérer plus facilement les asset de fonts qui ne sont pas precompilés et qui ne changement jamais
+gem "non-stupid-digest-assets"
+
 #Ajouter gem de recherche pour active record
 
 group :development do
