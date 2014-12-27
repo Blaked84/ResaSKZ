@@ -1347,6 +1347,10 @@ right connector from last child*/
 	border-radius: 5px;
 padding: 5px;
 color: #fff;
+position: fixed;
+top: 10px;
+right: 10px;
+z-index: 100001;
 }
 .alert{
 	background: #c0392b;
