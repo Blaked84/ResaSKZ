@@ -13,7 +13,10 @@
     =@personne.fams
     =@personne.promo
   %p
-    =@personne.referant?
+    - if !@personne.is_referant?
+      .blue.tag=@personne.referant?
+    - else
+      =@personne.referant?
 
 %div.pa1.fiche.brdr-b
   %p

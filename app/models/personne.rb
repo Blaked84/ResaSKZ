@@ -143,7 +143,7 @@ def referant?
 	if self == self.user.referant 
 		return "Compte référent"
 	else
-		return "Lié au compte de :" + self.referant.nom_complet
+		return "Lié au compte de: " + self.referant.nom_complet
 	end
 end
 
