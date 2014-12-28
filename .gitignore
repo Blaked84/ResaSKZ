@@ -16,6 +16,7 @@
 /log/**
 /tmp
 Gemfile.lock
+/public/assets/**
 
 # Ignore file type
 
