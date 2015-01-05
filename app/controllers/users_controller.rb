@@ -60,10 +60,6 @@ class UsersController < ApplicationController
         enregistrement_termine: false
         )
 
-        if @user.gadz?
-          pers.moderated = true
-        end
-
         pers.genre = Genre.from_cas(@user.gender)
         if pers.save!(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)

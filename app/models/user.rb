@@ -155,6 +155,7 @@ class User < ActiveRecord::Base
         :fams => nil ,
         :promo => nil,
         :type_pers => 'Gadz',
+        :moderated => true,
         enregistrement_termine: false
         )
 
