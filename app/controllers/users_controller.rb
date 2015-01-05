@@ -60,10 +60,14 @@ class UsersController < ApplicationController
         enregistrement_termine: false
         )
 
+        if @user.gadz?
+          pers.moderated = true
+        end
+
         pers.genre = Genre.from_cas(@user.gender)
         if pers.save!(:validate=>false)
           @user.update_attribute(:referant_id,pers.id)
-          format.html { redirect_to @user, notice: 'User was successfully created.' }
+          format.html { redirect_to @user, notice: 'Compte créé!' }
           format.json { render action: 'show', status: :created, location: @user }
         else
           format.html { redirect_to @user, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
