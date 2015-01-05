@@ -13,6 +13,10 @@
             / %il= link_to "Comptes", users_path
             / %il= link_to "Paiements", paiements_path
             / %il= link_to "Admin", admin_index_path
+            %il.toggle-menu
+              = link_to "", :onclick => "togglemenu(); return false" do
+                %i.md-menu
+                Menu
             %il.right= render 'layouts/user_widget'
   -else
     %nav
@@ -23,7 +27,7 @@
             %il.right= render 'layouts/user_widget'
 
   -if can? :see_admin, User
-    #sidebare 
+    #sidebare.hidesidebare
       #logo
         .ml1
           = link_to "ResaSKZ", dashboard_user_path(current_user)
@@ -49,3 +53,7 @@
 
           %li= link_to "Check-In", admin_check_in_path
           %li= link_to "Boulangerie", recap_boulangerie_chambres_path
+
+= link_to "", :onclick => "togglemenu(); return false" do
+  #mask.hide-by-default
+

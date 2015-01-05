@@ -20,10 +20,31 @@
 $(document).ready(function() {
 
  $('#hidden').hide(); //Initially form wil be hidden.
+ $("#sidebare").addClass("hidesidebare");
+ $("#sidebare").removeClass("showsidebare");
+ $("#mask").hide();
 
   $('#showhidden').click(function() {
    $('#hidden').show();//Form shows on button click
 
    });
  });
+
+function togglemenu () {
+	if ($("#sidebare").hasClass("showsidebare")) {
+		$("#sidebare").addClass("hidesidebare");
+		$("#sidebare").removeClass("showsidebare");
+		 $("#mask").hide();
+
+	}
+	else	{
+		$("#sidebare").removeClass("hidesidebare");
+		$("#sidebare").addClass("showsidebare");
+		 $("#mask").show();
+
+	
+	};
+
+
+}
 
