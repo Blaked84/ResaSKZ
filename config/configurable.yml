@@ -57,6 +57,11 @@ secret_paiement:
   default: achanger               # sets the default value
   type: string             # coerces the value to an integer
 
+g_analytics:
+  name: id google analytics            # sets the edit label
+  default: achanger               # sets the default value
+  type: string   
+
 mode_maintenance:
   name: passage du site en mod maintenance            # sets the edit label
   default: false             # sets the default value
