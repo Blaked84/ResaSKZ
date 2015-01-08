@@ -6,7 +6,7 @@ class PersonnesController < ApplicationController
   # Necessaire pour les permissions de l'autocomplete
   before_action :admin_only, only: [:autocomplete_personne_nom]
   helper_method :sort_column, :sort_direction
-  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
+  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom, :disabled ] 
 
 
   require 'will_paginate/array'
