@@ -12,10 +12,10 @@
 puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
-	:description => "ejfenbjbdjkcbkjvcbcjdc")
+	:description => " Du 18 au 25 avril 2015, Boquette, Bordel'sss, Siber'sss, Kanak,P3 ")
 Event.create(
 	:name => "SKZ Semaine 2",
-	:description => "ejfenbjbdjkcbkjvcbcjdc")
+	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
 
 
 puts "Categories"
