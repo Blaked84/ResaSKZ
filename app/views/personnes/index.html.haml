@@ -18,6 +18,7 @@
         %th=sortable "type_pers", "Type"
         %th Referant
         %th=sortable "documentassurance", "Justificatif assurance (RC)"
+        %th=sortable "moderated", "Validé"
         %th=sortable "disabled", "Supprimé"
     %tbody
       - @personnes.each do |p|
@@ -28,6 +29,7 @@
           %td=p.type_pers
           %td=conditional_format(p.is_referant?)
           %td=conditional_format(p.documentassurance)
+          %td=conditional_format(p.moderated)
           %td=conditional_format(p.disabled?)
 
   = will_paginate @users
