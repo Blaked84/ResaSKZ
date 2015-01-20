@@ -25,7 +25,7 @@
                 %tr
                   %td=link_to prd.name, product_path(prd.id)
                   %td=prd.stock
-                  %td=prd.commande_products.map{|cp| cp.nombre}.count
+                  %td=prd.commande_products.map{|cp| cp.nombre}.sum
                   %td=prd.price_euro
                   %td=prd.echeance
                   -if not @evenement
