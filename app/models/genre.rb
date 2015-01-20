@@ -22,7 +22,8 @@ class Genre < ActiveRecord::Base
 	#Renvoie le genre Homme si 'male'
 	#Renvoie le genre Femme si 'female'
 	def self.from_cas(data)
-		self.find_by_nom_cas(data)
+		a = self.find_by_nom_cas(data)
+		return self.first if a.nil?
 	end
 
 	def to_cas
