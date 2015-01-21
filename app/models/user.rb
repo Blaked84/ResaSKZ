@@ -141,6 +141,9 @@ class User < ActiveRecord::Base
         cgu_accepted: false,
         moderated: true,
         )
+      # parce que le cas ne renvoit pas toujours le genre
+      user.gender="male" if user.gender.nil?
+
       user.save!(:validate=>false)
 
       logger.debug user.inspect

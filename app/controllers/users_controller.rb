@@ -164,6 +164,12 @@ class UsersController < ApplicationController
     authorize! :user_infos, @user
 
     @personne.type_pers ||= "Pec's"
+   
+   # parce que le cas ne renvoit pas toujours le genre. Et encore une fois, c'est un hotfix pas très beau mais ça devrait faire l'affaire
+    if @user.gender.nil?
+      @user.gender="male"
+      @user.save!(:validate=>false)
+    end
 
     respond_to do |format|
 
