@@ -20,20 +20,23 @@
 
 %div.pa1.fiche.brdr-b
   %p
-    Né le:
+    %b Né le:
     =@personne.naissance.to_s.gsub("00:00:00 UTC","")
+  %p
+    %b Genre:
+    =@personne.genre.nom_complet
   %p 
-    Id gadz.org:
+    %b Id gadz.org:
     =@personne.idGadzOrg
   %p
-    Tél: 
+    %b Tél: 
     =@personne.phone
   %p
-    email: 
+    %b email: 
     =@personne.email
 
   %p
-    Adresse:
+    %b Adresse:
     =@personne.adresse
     =@personne.codepostal
     =@personne.ville
@@ -41,17 +44,17 @@
 %div.pa1.fiche.brdr-b
   
   %p 
-    Taille (m):
+    %b Taille (m):
     =@personne.taille_metre
   %p
-    Taille vêtement:
+    %b Taille vêtement:
     =@taillevetement
   %p 
-    Pointure:
+    %b Pointure:
     =@personne.pointure
   
   %p
-    Attestation d'assurance (RC): 
+    %b Attestation d'assurance (RC): 
     =@personne.document_assurance
 
 %div.pa1.fiche.brdr-b
@@ -60,14 +63,14 @@
 
   %p=@personne.p_nom_complet
   %p
-    Lien de parenté: 
+    %b Lien de parenté: 
     =@personne.plienparente
 
   %p
-    Tél:
+    %b Tél:
     =@personne.pphone
   %p
-    Adresse:
+    %b Adresse:
     =@personne.padresse
     =@personne.pcomplement
     =@personne.pcodepostal
