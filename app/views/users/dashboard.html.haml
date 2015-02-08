@@ -58,6 +58,9 @@
           %tr
             %td
               =link_to p.nom_complet, personne_path(p.id)
+              -if p.fams=="84"||p.fams=="157"
+                .span.tag.green 
+                  Ho yeah un #{p.fams}!
               -if p.moderated || current_user.admin?
                 = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
                 -unless p.is_referant?

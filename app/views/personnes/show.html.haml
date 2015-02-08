@@ -12,6 +12,9 @@
     =@personne.bucque
     =@personne.fams
     =@personne.promo
+    -if @personne.fams=="84"||@personne.fams=="157"
+      .tag.green
+        Bel'eff's, tu es dans la fam's la plus stylée!
   %p
     - if !@personne.is_referant?
       .blue.tag=@personne.referant?
