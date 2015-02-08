@@ -65,6 +65,28 @@ class User < ActiveRecord::Base
     return self.first_name.to_s + " " + self.last_name.to_s
   end
 
+  def get_parrain_nom_complet
+    if !self.parrain.nil?
+      return self.parrain.referant.nom_complet
+    else
+      return "Crée par un admin"
+    end
+
+  end
+
+  def get_filleuls_number
+    if !self.parrain.nil?
+     return self.parrain.filleuls.where(moderated: true).count / self.parrain.filleuls.count
+    else
+      return "--"
+    end
+  end
+
+  def had_parrain?
+    !self.parrain.nil?
+  end
+
+
   def sync_from_personne(pers)
     self.first_name = pers.prenom
     self.last_name = pers.nom

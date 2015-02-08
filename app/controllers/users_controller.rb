@@ -17,6 +17,7 @@ class UsersController < ApplicationController
 
   def to_moderate
     @users = User.where(moderated: [false, nil]).paginate(:page => params[:page],:per_page => 50)
+
     authorize! :show, @users
 
   end
@@ -47,7 +48,7 @@ class UsersController < ApplicationController
     authorize! :create, @user
 
     @roles=params[:roles]
-    raise @roles.ro_s
+    #raise @roles.ro_s
 
 
 
