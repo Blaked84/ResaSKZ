@@ -17,7 +17,7 @@
         Bel'eff's, tu es dans la fam's la plus stylée!
   %p
     - if !@personne.is_referant?
-      .blue.tag=@personne.referant?
+      =link_to @personne.referant?, personne_path(@personne.referant.id), :class => "tag blue icon-button"
     - else
       =@personne.referant?
 
