@@ -91,7 +91,7 @@
               %td=c.montant_total/100.0
 
 %div.fiche.pa1.brdr-b 
-  %h2 Parrainnage
+  %h2 Parrainage
   .grid
     .grid2
       %div
@@ -102,9 +102,9 @@
       %div
         -if can? :parrainer, @user
           %p
-            Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander à ouvrir un compte. Cette demande est soumise à accepatation de la team SKZ.
+            Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander l'ouverture d'un compte. Cette demande est soumise à accepatation de la team SKZ.
           
-          .pt1.pb1=link_to  "Demander à ouvrir un compte", parrainer_user_path(@user), :class => "pure-button"
+          .pt1.pb1=link_to  "Demander l'ouverture d'un compte", parrainer_user_path(@user), :class => "pure-button"
   
 
  
