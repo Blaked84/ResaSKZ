@@ -39,6 +39,7 @@ class Ability
     if user.has_role? :admin
         can :manage, :all
         can :read_admin, User
+        cannot :destroy, User
     end
 
     can :cgu, user

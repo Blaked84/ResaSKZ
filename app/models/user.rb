@@ -102,6 +102,10 @@ class User < ActiveRecord::Base
     self.has_role?(:admin)|| self.has_role?(:gorgu)
   end
 
+  def gorgu?
+    self.has_role?(:gorgu)
+  end
+
   def gadz?
     has_role? :gadz
   end

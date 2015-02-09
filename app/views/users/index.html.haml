@@ -16,8 +16,9 @@
           %td= user.referant_show
           %td
             = link_to 'Show', user, :class => "pure-button"
-            = link_to 'Edit', edit_user_path(user), :class => "pure-button pure-button-primary"
-            = link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
+            = link_to 'Editer', edit_user_path(user), :class => "pure-button pure-button-primary"
+            -if @current_user.gorgu?
+              = link_to 'Supprimer', user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "pure-button pure-button-error"
   
   = will_paginate @users
 %div.fiche.pa1.brdr-b
