@@ -1384,6 +1384,12 @@ body{background: #ecf0f1;}
 	border-left: 1px solid #DDD;
 	border-right: 1px solid #DDD;
 }
+
+.top-buttons{
+	position: absolute;
+	top: 0;
+	right: 0;
+}
 /*.top-info h2{color: #e8eaf6;}*/
 
 .fiche{

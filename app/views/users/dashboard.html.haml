@@ -68,7 +68,10 @@
             %td=conditional_format(p.assurance)
             %td
               -if p.moderated || current_user.admin?
-                = link_to ' Nouvelle commande', new_commande_path(@user, pers_id: p.id), :class => "pure-button pure-button-success  md-add-circle-outline"
+                = link_to new_commande_path(@user, pers_id: p.id) do
+                  .pure-button.pure-button-success
+                    .md-add-circle-outline
+                    Nouvelle commande
               -else
                 Personne non validée par les administrateurs
 
