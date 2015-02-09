@@ -200,5 +200,10 @@ class User < ActiveRecord::Base
       user
     end
   end
+  
+public  
+  def group_by_date_sqlite
+    created_at.to_date.to_s(:db)
+  end
 
 end

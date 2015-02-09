@@ -50,6 +50,7 @@ LooklaDev::Application.routes.draw do
   get "chart/etatcommande" => "chart#etatcommande"
   get "chart/paiement" => "chart#paiement"
   get "chart/tbkcommandes" => "chart#tbkcommandes"
+  get "chart/statsinsctiptions" => "chart#statsinsctiptions"
   get "chart/statsbus/:categorie_id/:event_id" => "chart#statsbus", as: :statsbus 
   
   resources :events do

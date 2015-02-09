@@ -36,6 +36,11 @@ class ChartController < ApplicationController
     render :json => b
   end
 
+  def statsinsctiptions
+    b=User.all.group_by(&:group_by_date_sqlite).map {|k,v| [k, v.length]}.sort
+    render :json => b
+  end
+
   private
 
 end
