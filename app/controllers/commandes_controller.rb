@@ -5,6 +5,7 @@ class CommandesController < ApplicationController
   helper_method :sort_column, :sort_direction
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
 
+  require "prawn"
   
 
   def new
@@ -148,6 +149,16 @@ class CommandesController < ApplicationController
    	# end
 
    	@status = @commande.complete?
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = CommandePdf.new(@commande, @personne,@total_euro)
+        send_data pdf.render, filename: "facture.pdf",
+        type: "application/pdf",
+        disposition: "inline"
+      end
+    end
    end
 
 require 'barby'

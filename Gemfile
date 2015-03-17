@@ -80,6 +80,9 @@ gem 'ean13'
 gem 'barby', '~> 0.5.1'
 gem 'chunky_png'
 
+# pdf
+gem 'prawn'
+
 # export db en yaml
 gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba'
 
