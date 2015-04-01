@@ -153,8 +153,8 @@ class CommandesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = CommandePdf.new(@commande, @personne,@total_euro)
-        send_data pdf.render, filename: "facture.pdf",
+        pdf = CommandePdf.new(@commande, @personne,@total_euro, @paiements)
+        send_data pdf.render, filename: "facture #{@personne.nom_complet}.pdf",
         type: "application/pdf",
         disposition: "inline"
       end
