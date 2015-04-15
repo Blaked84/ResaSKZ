@@ -1,4 +1,7 @@
 class CommandePdf < Prawn::Document
+	    require 'barby'
+	        require 'barby/barcode/ean_13'
+require 'barby/outputter/prawn_outputter'
 
   SMALL=8
   NORMAL=12
@@ -13,7 +16,8 @@ def initialize(commande, personne,total_euro,paiements)
     super(:page_size=> "A4",:top_margin => 60)
 
     text "<b>Facture SKZ</b>", :size => LARGE,:inline_format => true
-   	draw_text "-> mettre le code barre", :at => [300,700]
+   	draw_text "#{commande.ean.to_s}", :at => [350,680]
+   	
     text "Commande # #{commande.idlong}"
    
     move_down PADDINGBX
@@ -22,6 +26,8 @@ def initialize(commande, personne,total_euro,paiements)
     options(commande,total_euro)
     move_down 2*PADDINGBX
     paiements(paiements)
+
+    barcode(commande) #position set in the function
 
     footer()
 
@@ -43,7 +49,7 @@ def options(commande,total_euro)
 	table(data) do
 		cells.padding = 5
 		row(0).font_style   = :bold
-		width = 500
+		self.width = 520
 		row(-1).font_style   = :bold
 	end
 	end
@@ -55,9 +61,16 @@ def paiements(paiements)
 	table(data.compact) do
 		cells.padding = 5
 		row(0).font_style   = :bold
-	
+		self.width = 520
 	end
+
 end
+
+def barcode(commande)
+  barcode = Barby::EAN13.new commande.ean.to_s[0...12]
+  barcode.annotate_pdf(self, :x => 350, :y =>700)
+end
+
 def footer()
 	draw_text "Document généré le #{DateTime.now.strftime("%F à %R")}",:at => [0, 0],:size => SMALL
 end

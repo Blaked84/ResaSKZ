@@ -5,7 +5,10 @@
         Commande #
         =@commande.idlong
     .w50.txtright    
-      =link_to " Imprimer", commande_show_print_path(@commande.id), :class => "icon-button icon-button-h-light icon-light right md-print"
+      =link_to commande_path(@commande.id, :format=>:pdf) do
+        .pure-button.pure-button-primary
+          .md-file-download.btn
+          Facture
 
 %div.fiche.pa1.brdr-b
 

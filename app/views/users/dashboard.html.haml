@@ -70,7 +70,7 @@
               -if p.moderated || current_user.admin?
                 = link_to new_commande_path(@user, pers_id: p.id) do
                   .pure-button.pure-button-success
-                    .md-add-circle-outline
+                    .md-add-circle-outline.btn
                     Nouvelle commande
               -else
                 Personne non validée par les administrateurs
