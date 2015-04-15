@@ -36,6 +36,7 @@ LooklaDev::Application.routes.draw do
       get :export
       get :add_caution
       post :validate_caution
+      post :validate_caution_batch
       get :index_ean
       post :get_infos
       get :get_infos
@@ -50,7 +51,7 @@ LooklaDev::Application.routes.draw do
   get "chart/etatcommande" => "chart#etatcommande"
   get "chart/paiement" => "chart#paiement"
   get "chart/tbkcommandes" => "chart#tbkcommandes"
-  get "chart/statsinsctiptions" => "chart#statsinsctiptions"
+  get "chart/statsinsctiptions" => "chart#statsinsctiptionsb"
   get "chart/statsbus/:categorie_id/:event_id" => "chart#statsbus", as: :statsbus 
   
   resources :events do

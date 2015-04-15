@@ -3,6 +3,15 @@
     Validation des cautions
 
 %div.pa1.fiche.brdr-b
+  %h2 Validation par lot (.csv)
+  %span Validation par numéro de commande. Le .csv doit comporter 1 collone dont la première case doit être "commande_id". Toutes les commandes dont le numéro figure dans le fichier auront leur caution validée.
+  =form_tag validate_caution_batch_commandes_path, multipart: true do
+    .field
+      =file_field_tag :file, :accept => '.csv'
+    .action
+      =submit_tag "Importer les chambres", :id=>'import', :confirm => "Es-tu sur de vouloir faire ca ? \n En cliquant sur 'Oui', tu vas valider des cautions!", :class => "pure-button pure-button-success pure-button-xsmall "
+
+%div.pa1.fiche.brdr-b
   %h2 Rechercher une personne / commande
   %span Attention, en recherchant une personne dans cette liste, tu vas valider toutes les cautions de ses commandes si elle en a plusieurs.
   %span La recherche se fait par le nom de famille

@@ -6,6 +6,7 @@ class CommandesController < ApplicationController
   autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:id, :prenom ] 
 
   require "prawn"
+  require 'csv'
   
 
   def new
@@ -342,6 +343,23 @@ require 'barby'
     personne.commandes.map { |c| c.a_donne_caution }
     redirect_to :back
   end
+
+  def validate_caution_batch
+    authorize! :read_admin, User
+    file=params[:file]
+    if File.extname(file.original_filename) == '.csv'
+      CSV.foreach(file.path,headers: true) do |row|
+        Commande.find(row['commande_id'].to_i).a_donne_caution
+      end
+      
+      flash[:success] = "Cautions validées avec succés!"
+      redirect_to :back
+    else
+      flash[:error] = I18n.t('chambre.error.wrong_ext')
+      redirect_to :back
+    end
+  end
+
 
   private
 
