@@ -13,7 +13,7 @@
  *= require_tree .
  *= require toastr
  *= require layout
- *= require jquery.ui.all
+ *= require jquery-ui
 
  */
 
