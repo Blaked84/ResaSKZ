@@ -3,7 +3,7 @@ class ChambresController < ApplicationController
 
   # Necessaire pour les permissions de l'autocomplete
   before_action :admin_only, only: [:autocomplete_personne_nom]
-  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:prenom, :nom]
+  autocomplete :personne, :nom, :full => true, :display_value => :nom_complet, extra_data: [:prenom, :nom ,:disabled]
 
   def index
     authorize! :read_admin, User
