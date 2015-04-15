@@ -346,16 +346,19 @@ require 'barby'
 
   def validate_caution_batch
     authorize! :read_admin, User
+    nbre_cautions_validee = 0
     file=params[:file]
     if File.extname(file.original_filename) == '.csv'
       CSV.foreach(file.path,headers: true) do |row|
         Commande.find(row['commande_id'].to_i).a_donne_caution
+        nbre_cautions_validee +=1
       end
       
-      flash[:success] = "Cautions validées avec succés!"
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to :back, :notice => nbre_cautions_validee.to_s + " cautions validées avec succés!"}
+      end
     else
-      flash[:error] = I18n.t('chambre.error.wrong_ext')
+      flash[:error] = "Erreur de validation"
       redirect_to :back
     end
   end

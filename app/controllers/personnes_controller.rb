@@ -113,6 +113,26 @@ class PersonnesController < ApplicationController
     redirect_to :back
   end
 
+  def validate_assurance_batch
+    authorize! :read_admin, User
+    file=params[:file]
+    nbre_assurance_validee = 0
+    if File.extname(file.original_filename) == '.csv'
+      CSV.foreach(file.path,headers: true) do |row|
+        Commande.find(row['commande_id'].to_i).personne.a_donne_justificatif_assurance
+        nbre_assurance_validee +=1
+      end
+
+      respond_to do |format|
+        format.html { redirect_to :back, :notice => nbre_assurance_validee.to_s + " assurances validées avec succés!"}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to :back, :notice => "Impossible de faire les validations"}
+      end
+    end
+  end
+
   def export
     
     @personnes = Personne.all

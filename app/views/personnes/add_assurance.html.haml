@@ -1,7 +1,17 @@
 %div.top-info.pa1
   %h1 Assurance RC
+
 %div.pa1.fiche.brdr-b
-  %h2 Rechercher une personne
+  %h2 Validation par lot (.csv)
+  %span Validation par numéro de commande. Le .csv doit comporter 1 collone dont la première case doit être "commande_id". Toutes personnes ayant une commandes dont le numéro figure dans le fichier auront leur assurance validée.
+  =form_tag validate_assurance_batch_personnes_path, multipart: true do
+    .field
+      =file_field_tag :file, :accept => '.csv'
+    .action
+      =submit_tag "Importer les assurances", :id=>'import', :confirm => "Es-tu sur de vouloir faire ca ? \n En cliquant sur 'Oui', tu vas valider des assurances!", :class => "pure-button pure-button-success pure-button-xsmall "
+
+%div.pa1.fiche.brdr-b
+  %h2 Validation unitaire
   %span La recherche se fait par le nom de famille
   %div
     =form_tag validate_assurance_personnes_path :method => :post do
@@ -30,5 +40,5 @@
           %td=link_to p.nom, personne_path(p.id)
           %td=p.prenom
           %td=p.assurance_uptated_at
-          %td= link_to 'Edit', edit_personne_path(p.id), :class => "pure-button pure-button-xsmall" 
+          %td= link_to 'Edit', personne_infos_personne_path(p.id), :class => "pure-button pure-button-xsmall" 
   
