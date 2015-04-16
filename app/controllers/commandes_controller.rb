@@ -165,7 +165,7 @@ class CommandesController < ApplicationController
 require 'barby'
  require 'barby/barcode/ean_13'
  require 'barby/outputter/svg_outputter'
-   def show_print
+   def show_recap
 
     @commande = Commande.find(params[:commande_id])
     authorize! :show, @commande
@@ -179,7 +179,7 @@ require 'barby'
     @outputter = Barby::SvgOutputter.new(@barcode)
     @outputter.xdim = 2
 
-    render :layout => "print"
+    # render :layout => "print"
    end
 
 

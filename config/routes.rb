@@ -42,7 +42,7 @@ LooklaDev::Application.routes.draw do
       get :get_infos
     end
     resources :paiements
-    get :show_print
+    get :show_recap
   end
   get 'remboursements' => 'commandes#index_remboursement', as: :remboursements
 

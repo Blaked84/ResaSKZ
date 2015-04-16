@@ -90,7 +90,9 @@
           - @commandes.each do |c| 
             %tr
               / %td=c.id
-              %td=link_to c.idlong, commande_path(c.id)
+              %td
+                =link_to c.idlong, commande_path(c.id)
+                =link_to "Recap", commande_show_recap_path(c.id), :class => "pure-button pure-button-primary"
               %td=c.created_at.to_s.gsub("UTC","")
               %td=c.event.name
               %td=conditional_format(c.complete?)

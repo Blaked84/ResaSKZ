@@ -11,7 +11,7 @@
 
 
 	<% flash.each do |key, value| %>
-	<div id="notif" class="mw960p center pa1">
+	<div id="notif" class="center pa1">
 		<div class="<%= key %> notif"><%= value %></div>
 	</div>
 	<% end %>
@@ -20,13 +20,13 @@
 	<%= custom_bootstrap_flash %> -->
 
 
-	<div id="wrapper" class="center mw960p">
+	<div id="wrapper" class="center">
 		<%= yield %>
 	</div>
 
-	<%if ENV['RAILS_ENV'] == "development"%>
+<!-- 	<%if ENV['RAILS_ENV'] == "development"%>
 	<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
-	<%end%>
+	<%end%> -->
 
 </body>
 </html>
