@@ -27,6 +27,7 @@ class ApplicationController < ActionController::Base
         admin_index_path
       else
         dashboard_user_path(current_user)
+        #request.env['omniauth.origin'] || stored_location_for(resource)
       end
     else
       root_path

@@ -1,8 +1,10 @@
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <div class='center w50'>
+    <div class='center w100 txtcenter'>
     <%= link_to image_tag("logo_gadzorg.png"), omniauth_authorize_path(resource_name, provider) %>
-    </div>  
-    <%= link_to "Connexion Gadz", omniauth_authorize_path(resource_name, provider), :class => "pure-button pure-button-primary w100" %>
+    </div> 
+    <div class='center w100 txtcenter pa1'>
+    <%= link_to "Authentification universelle", omniauth_authorize_path(resource_name, provider), :class => "pure-button pure-button-primary w100" %>
+    </div>
   <% end -%>
 <% end -%>

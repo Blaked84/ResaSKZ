@@ -1,8 +1,30 @@
-.center.mw960p.pa3
-	.div.center.w50=image_tag("logo_2015.png")
+.center.mw960p.pa3.txtcenter
+	.grid-2-small-1
 
--unless user_signed_in? || @maintenance
-	.center.txtcenter=link_to 'Connexion', new_user_session_path, :class => "pure-button pure-button-primary"
--else
-	.center.txtcenter
-		Le site est en cours de maintenance, veuillez vous connectez ultérieurement
+		.div.pl2.pr2
+			-unless user_signed_in? || @maintenance
+				.div.brdr-b.pl2.pr2.pb2
+					%h2 Connexion Arts et Métiers
+					=render "devise/shared/linkscas"
+				.div.pl2.pr2.pt2
+					%h2 Connexion invités
+					= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "pure-form"}) do |f|
+						%fieldset.pure-group
+							= f.email_field :email, :autofocus => true, :placeholder => "Email", :class => "pure-input-1"
+							= f.password_field :password, :placeholder => "Mot de passe", :class => "pure-input-1"
+							%div= f.submit "Connexion invité", :class => "pure-button pure-button-primary pure-input-1"
+							- if devise_mapping.rememberable?
+								%div.pt1.pure-form-message-inline
+									= f.check_box :remember_me
+									= f.label :remember_me, 'Se souvenir de moi'
+						.pure-form-message-inline= render "devise/shared/links"
+
+
+
+				-# .center.txtcenter=link_to 'Connexion', new_user_session_path, :class => "pure-button pure-button-primary"
+
+			-else
+				.center.txtcenter
+					Le site est en cours de maintenance, veuillez vous connectez ultérieurement
+
+		.div.small-hidden.center.pt2=image_tag("logo_2015.png")
