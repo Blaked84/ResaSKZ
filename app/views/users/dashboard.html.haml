@@ -1,118 +1,119 @@
-%div.top-info.pa1
-  %h1= @user.nom_complet
-%div.fiche.pa1.brdr-b
-  -unless @user.parrain.nil?
-    .box.pa1
-      %p Votre compte est parrainé par :
-      =@user.parrain.referant.nom_complet
-  
-  -if Rails.env == 'development' && false
-    %h2 Infos à afficher sur cette page :
-    %ul
-      %li
-        %del
-          Lien pour parrainer une personne :
-          -if can? :parrainer, @user
-            = link_to "Parrainer", parrainer_user_path(@user), :class => "pure-button ma1"
-      %li 
-        %del 
-          Lien pour modifier ses informations
-      %li    
-        %del liste des personnes gérées par cet user
-        %ul
-          %li 
-            %del Nom
-          %li 
-            %del Lien pour modifier ses informations
-          %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
-          %li 
-            %del Lien pour passer une commande
-          %li 
-            %del Lien pour ajouter une personne
+.shadow-1
+  %div.top-info.pa1
+    %h1= @user.nom_complet
+  %div.fiche.pa1.brdr-b
+    -unless @user.parrain.nil?
+      .box.pa1
+        %p Votre compte est parrainé par :
+        =@user.parrain.referant.nom_complet
+    
+    -if Rails.env == 'development' && false
+      %h2 Infos à afficher sur cette page :
+      %ul
+        %li
+          %del
+            Lien pour parrainer une personne :
+            -if can? :parrainer, @user
+              = link_to "Parrainer", parrainer_user_path(@user), :class => "pure-button ma1"
+        %li 
           %del 
-            %li
-              Liste des commandes de chaque user
-              %ul
-                %li Event
-                %li montant total
-                %li Etat de la commande
-        %li Indicateur de l'état global des commande (toute les commande ok ?)
+            Lien pour modifier ses informations
+        %li    
+          %del liste des personnes gérées par cet user
+          %ul
+            %li 
+              %del Nom
+            %li 
+              %del Lien pour modifier ses informations
+            %li Avertir si toute les informations ne sont pas enregistrée (il devrait normalement etre redirigé automatiquement vers la pour remplir ces infos mais on sait jamais) => utiliser maPersonne.enregistrement_termine (true si ok, false sinon)
+            %li 
+              %del Lien pour passer une commande
+            %li 
+              %del Lien pour ajouter une personne
+            %del 
+              %li
+                Liste des commandes de chaque user
+                %ul
+                  %li Event
+                  %li montant total
+                  %li Etat de la commande
+          %li Indicateur de l'état global des commande (toute les commande ok ?)
 
-    %h2 Objets dispos sur cette page :
-    %ul
-      %li
-        @user
+      %h2 Objets dispos sur cette page :
+      %ul
+        %li
+          @user
 
-  %h2 Personnes gérées par ce compte :
+    %h2 Personnes gérées par ce compte :
 
-  = render :partial => "personne_tree"
+    = render :partial => "personne_tree"
 
-  %table.alternate#unfixedtable
-    %thead
-      %tr
-        %th Prénom Nom 
-        %th assurance
-    %tbody
-      - @user.personnes.where.not(:disabled =>  true).each do |p| 
-        -if p.enregistrement_termine
-          %tr
-            %td
-              =link_to p.nom_complet, personne_path(p.id)
-              -if p.fams=="84"||p.fams=="157"
-                .span.tag.green 
-                  Ho yeah un #{p.fams}!
-              -if p.moderated || current_user.admin?
-                = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
-                -unless p.is_referant?
-                  = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
-            %td=conditional_format(p.assurance)
-            %td
-              -if p.moderated || current_user.admin?
-                = link_to new_commande_path(@user, pers_id: p.id) do
-                  .pure-button.pure-button-success
-                    .md-add-circle-outline.btn
-                    Nouvelle commande
-              -else
-                Personne non validée par les administrateurs
-
-%div.fiche.pa1.brdr-b                
-  %h2 Commandes
-  %table.alternate
-    %thead
-      %tr
-        %th Commande ID
-        %th Date de création
-        %th Evénement
-        %th Statut
-        %th Montant
+    %table.alternate#unfixedtable
+      %thead
+        %tr
+          %th Prénom Nom 
+          %th assurance
       %tbody
-        -if @commandes
-          - @commandes.each do |c| 
+        - @user.personnes.where.not(:disabled =>  true).each do |p| 
+          -if p.enregistrement_termine
             %tr
-              / %td=c.id
               %td
-                =link_to c.idlong, commande_path(c.id)
-                =link_to "Recap", commande_show_recap_path(c.id), :class => "pure-button pure-button-primary"
-              %td=c.created_at.to_s.gsub("UTC","")
-              %td=c.event.name
-              %td=conditional_format(c.complete?)
-              %td=c.montant_total/100.0
+                =link_to p.nom_complet, personne_path(p.id)
+                -if p.fams=="84"||p.fams=="157"
+                  .span.tag.green 
+                    Ho yeah un #{p.fams}!
+                -if p.moderated || current_user.admin?
+                  = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
+                  -unless p.is_referant?
+                    = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
+              %td=conditional_format(p.assurance)
+              %td
+                -if p.moderated || current_user.admin?
+                  = link_to new_commande_path(@user, pers_id: p.id) do
+                    .pure-button.pure-button-success
+                      .md-add-circle-outline.btn
+                      Nouvelle commande
+                -else
+                  Personne non validée par les administrateurs
 
-%div.fiche.pa1.brdr-b 
-  %h2 Parrainage
-  .grid
-    .grid2
-      %div
-        %p Vous pouvez parrainer un ami ou votre Za/Zon. Vous payerez pour elle/lui et gérerez sa réservation depuis votre compte.
+  %div.fiche.pa1.brdr-b                
+    %h2 Commandes
+    %table.alternate
+      %thead
+        %tr
+          %th Commande ID
+          %th Date de création
+          %th Evénement
+          %th Statut
+          %th Montant
+        %tbody
+          -if @commandes
+            - @commandes.each do |c| 
+              %tr
+                / %td=c.id
+                %td
+                  =link_to c.idlong, commande_path(c.id)
+                  =link_to "Recap", commande_show_recap_path(c.id), :class => "pure-button pure-button-primary"
+                %td=c.created_at.to_s.gsub("UTC","")
+                %td=c.event.name
+                %td=conditional_format(c.complete?)
+                %td=c.montant_total/100.0
 
-        .pt1.pb1= link_to "Parrainer un ami", new_personne_user_path(@user), :class => "pure-button pure-button-success"
-        
-      %div
-        -if can? :parrainer, @user
-          %p
-            Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander l'ouverture d'un compte. Cette demande est soumise à accepatation de la team SKZ.
+  %div.fiche.pa1.brdr-b 
+    %h2 Parrainage
+    .grid
+      .grid2
+        %div
+          %p Vous pouvez parrainer un ami ou votre Za/Zon. Vous payerez pour elle/lui et gérerez sa réservation depuis votre compte.
+
+          .pt1.pb1= link_to "Parrainer un ami", new_personne_user_path(@user), :class => "pure-button pure-button-success"
           
-          .pt1.pb1=link_to  "Demander l'ouverture d'un compte", parrainer_user_path(@user), :class => "pure-button"
-  
+        %div
+          -if can? :parrainer, @user
+            %p
+              Si vous voulez qu'il/elle puisse gérer son compte et payer directement, vous pouvez demander l'ouverture d'un compte. Cette demande est soumise à accepatation de la team SKZ.
+            
+            .pt1.pb1=link_to  "Demander l'ouverture d'un compte", parrainer_user_path(@user), :class => "pure-button"
+    
 
- 
+   

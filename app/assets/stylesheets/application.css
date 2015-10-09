@@ -1446,3 +1446,10 @@ body{background: #ecf0f1;}
 .icon-button-h-red:hover {
 	color: #d32f2f;
 }
+
+
+
+.shadow-1{box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);}
+.shadow-2{box-shadow: 0px 8px 17px 0px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 0, 0.19);}
+.shadow-3{box-shadow: 0px 12px 15px 0px rgba(0, 0, 0, 0.24), 0px 17px 50px 0px rgba(0, 0, 0, 0.19);}
+.shadow-4{box-shadow: 0px 16px 28px 0px rgba(0, 0, 0, 0.22), 0px 25px 55px 0px rgba(0, 0, 0, 0.21);}
