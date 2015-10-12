@@ -82,8 +82,8 @@ h2, .h2-like {
 h3, .h3-like {
 	margin: 0.875em 0 0 0;
 	font-size: 1.2em; /* equiv 24px */
-	line-height: 1.75;
-	font-family: "NoticiaTextRegular";
+	line-height: 1.3;
+	font-family: "PTSansRegular";
 
 }
 h4, .h4-like {
@@ -1367,7 +1367,7 @@ z-index: 100001;
 /**************************************************** Color tag *****************************************************/
 
 .green{ background:#2ecc71}
-.blue{ background:#5264AE}
+.blue{ background:#3498DB}
 .red{background:#c0392b}
 .tag{
 	padding:4px;
@@ -1404,6 +1404,10 @@ body{background: #ecf0f1;}
 
 .brdr-b{
 	border-bottom: 1px solid #ddd;
+	/*margin-bottom: 0.7em;*/
+}
+.brdr-l{
+	border-left: 1px solid #ddd;
 	/*margin-bottom: 0.7em;*/
 }
 

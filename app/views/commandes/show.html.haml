@@ -1,157 +1,158 @@
-%div.top-info.pa1
-  .row
-    .w50
-      %h1
-        Commande #
-        =@commande.idlong
-    .w50.txtright    
-      =link_to commande_path(@commande.id, :format=>:pdf) do
-        .pure-button.pure-button-primary
-          .md-file-download.btn
-          Facture
+.shadow-1
+  %div.top-info.pa1
+    .row
+      .w50
+        %h1
+          Commande #
+          =@commande.idlong
+      .w50.txtright    
+        =link_to commande_path(@commande.id, :format=>:pdf) do
+          .pure-button.pure-button-primary
+            .md-file-download.btn
+            Facture
 
-%div.fiche.pa1.brdr-b
+  %div.fiche.pa1.brdr-b
 
-  %table.alternate
-    %thead
-      %tr
-        %th Commande ID
-        %th Compte référant
-        %th Nom
-        %th TBK en charge
-        %th Evénement
-        %th Dossier complet
-        %th Etat
-    %tbody
-      %tr
-        %td=@commande.idlong
-        %td
-          =link_to @personne.user.referant.nom_complet, user_path(@personne.user.id) if !@personne.nil?
-        %td
-          =link_to @personne.nom_complet, personne_path(@personne.id) if !@personne.nil?
-        %th=@commande.tbk
-        %th=@commande.event.name
-        %td=conditional_format(@commande.complete?)
-        %td=@commande.status
-  -if can? :read_admin, User
-    %p
-      Bypass paiement:
-      =@commande.bypasspaiement
-    %p
-      Bypass assurance:
-      =@commande.bypassassurance
-
-  / %table.striped.alternate
-  /   %thead
-  /     %tr
-  /       %th Assurance commandée
-  /       %th Personne assurée
-  /       %th Justificatif assurance
-  /       %th Récapitulatif assurance
-  /   %tbody
-  /     %tr
-  /       %td=conditional_format(@commande.assurance)
-  /       %td=conditional_format(@personne.assurance)
-  /       %td=conditional_format(@personne.documentassurance)
-  /       %td=conditional_format(@assuranceok)
-
-  %table.alternate
-    %thead
-      %tr
-        %th Justificatif Responsabilité Civile
-        %th Cheque de caution donné
-        %th Total commande (€)
-        %th Commande payée totalement
-        %th Reste à payer (€)
-    %tbody
-      %tr
-        %td
-          =conditional_format(@personne.documentassurance) if !@personne.nil?
-        %td=conditional_format(@commande.caution)
-        %td=@total_euro
-        %td=conditional_format(@commande.paiementok?)
-        %td=@paiement_du_euro
-
-%div.fiche.pa1.brdr-b
-  %h2
-    Produits
-  
-  %table.striped.alternate
-    %thead
-      %tr
-        %th Produit
-        %th Quantitée
-        %th Prix (€)
-    %tbody
-      - @commande.commande_products.each do |cprd|
+    %table.alternate
+      %thead
         %tr
-          %td=link_to cprd.product.name, product_path(cprd.product.id)
-          %td=cprd.nombre
-          %td=cprd.product.price_euro
-      %tr 
-        %td
-          %hr
-        %td
-          %strong Total
-        %td=@total_euro
-  =link_to "Editer ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-primary"
-
-%div.fiche.pa1.brdr-b
-  %h2 Calendrier de paiement
-
-  %table.striped.alternate
-    %thead
-      %tr
-        %th date
-        %th 
-        
-    %tbody
-      %tr
-        %td=Configurable[:echeances_paiement1].gsub("00:00:00.000000","")
-        %td Moitié du pack de base
-      %tr
-        %td=Configurable[:echeances_paiement2].gsub("00:00:00.000000","")
-        %td Seconde moitié du pack de base
-      %tr
-        %td=Configurable[:echeances_paiement3].gsub("00:00:00.000000","")
-        %td Options
-
-%div.fiche.pa1.brdr-b
-
-  %h2
-    Paiements effectués pour cette commande
-
-  %table.striped.alternate
-    %thead
-      %tr
-        %th ID
-        %th date
-        %th Montant
-        %th Paiement reçu
-        %th Erreur banque
-        
-    %tbody
-      - @paiements.each do |p|
+          %th Commande ID
+          %th Compte référant
+          %th Nom
+          %th TBK en charge
+          %th Evénement
+          %th Dossier complet
+          %th Etat
+      %tbody
         %tr
-          %td=link_to p.idlong, paiement_path(p.id)
-          %td=p.date.to_s.gsub("UTC","")
-          %td=p.amount_euro
-          %td=conditional_format(p.verif)
-          %td=conditional_badge(!p.erreur?)
+          %td=@commande.idlong
+          %td
+            =link_to @personne.user.referant.nom_complet, user_path(@personne.user.id) if !@personne.nil?
+          %td
+            =link_to @personne.nom_complet, personne_path(@personne.id) if !@personne.nil?
+          %th=@commande.tbk
+          %th=@commande.event.name
+          %td=conditional_format(@commande.complete?)
+          %td=@commande.status
+    -if can? :read_admin, User
+      %p
+        Bypass paiement:
+        =@commande.bypasspaiement
+      %p
+        Bypass assurance:
+        =@commande.bypassassurance
 
-      %tr 
-        %td
-          %hr
-        %td
-          %strong Total
-        %td=@totalpaiement_euro
+    / %table.striped.alternate
+    /   %thead
+    /     %tr
+    /       %th Assurance commandée
+    /       %th Personne assurée
+    /       %th Justificatif assurance
+    /       %th Récapitulatif assurance
+    /   %tbody
+    /     %tr
+    /       %td=conditional_format(@commande.assurance)
+    /       %td=conditional_format(@personne.assurance)
+    /       %td=conditional_format(@personne.documentassurance)
+    /       %td=conditional_format(@assuranceok)
+
+    %table.alternate
+      %thead
+        %tr
+          %th Justificatif Responsabilité Civile
+          %th Cheque de caution donné
+          %th Total commande (€)
+          %th Commande payée totalement
+          %th Reste à payer (€)
+      %tbody
+        %tr
+          %td
+            =conditional_format(@personne.documentassurance) if !@personne.nil?
+          %td=conditional_format(@commande.caution)
+          %td=@total_euro
+          %td=conditional_format(@commande.paiementok?)
+          %td=@paiement_du_euro
+
+  %div.fiche.pa1.brdr-b
+    %h2
+      Produits
+    
+    %table.striped.alternate
+      %thead
+        %tr
+          %th Produit
+          %th Quantitée
+          %th Prix (€)
+      %tbody
+        - @commande.commande_products.each do |cprd|
+          %tr
+            %td=link_to cprd.product.name, product_path(cprd.product.id)
+            %td=cprd.nombre
+            %td=cprd.product.price_euro
+        %tr 
+          %td
+            %hr
+          %td
+            %strong Total
+          %td=@total_euro
+    =link_to "Editer ma commande", catalogue_commande_path(@commande.id), :class => "pure-button pure-button-primary"
+
+  %div.fiche.pa1.brdr-b
+    %h2 Calendrier de paiement
+
+    %table.striped.alternate
+      %thead
+        %tr
+          %th date
+          %th 
+          
+      %tbody
+        %tr
+          %td=Configurable[:echeances_paiement1].gsub("00:00:00.000000","")
+          %td Moitié du pack de base
+        %tr
+          %td=Configurable[:echeances_paiement2].gsub("00:00:00.000000","")
+          %td Seconde moitié du pack de base
+        %tr
+          %td=Configurable[:echeances_paiement3].gsub("00:00:00.000000","")
+          %td Options
+
+  %div.fiche.pa1.brdr-b
+
+    %h2
+      Paiements effectués pour cette commande
+
+    %table.striped.alternate
+      %thead
+        %tr
+          %th ID
+          %th date
+          %th Montant
+          %th Paiement reçu
+          %th Erreur banque
+          
+      %tbody
+        - @paiements.each do |p|
+          %tr
+            %td=link_to p.idlong, paiement_path(p.id)
+            %td=p.date.to_s.gsub("UTC","")
+            %td=p.amount_euro
+            %td=conditional_format(p.verif)
+            %td=conditional_badge(!p.erreur?)
+
+        %tr 
+          %td
+            %hr
+          %td
+            %strong Total
+          %td=@totalpaiement_euro
 
 
-  -unless @commande.paiement_etape == 3
-    %p
-      Le prochain paiement sera d'un montant de #{@commande.prochain_paiement / 100.0}€.
-    %br
-  =link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
+    -unless @commande.paiement_etape == 3
+      %p
+        Le prochain paiement sera d'un montant de #{@commande.prochain_paiement / 100.0}€.
+      %br
+    =link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
 
-  .box.alert
-    %p Les administrateurs peuvent mettrent jusqu'à 3 jours pour valider un paiement. Si vous avez eu un soucis lors de votre paiement (connexion perdue, ...), contactez les membres du support SKZ (skz.ue@gadz.org) en leur indiquant bien le numéro de paiement afin qu'ils vérifient l'état du paiement.
+    .box.alert
+      %p Les administrateurs peuvent mettrent jusqu'à 3 jours pour valider un paiement. Si vous avez eu un soucis lors de votre paiement (connexion perdue, ...), contactez les membres du support SKZ (skz.ue@gadz.org) en leur indiquant bien le numéro de paiement afin qu'ils vérifient l'état du paiement.

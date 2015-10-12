@@ -1,7 +1,7 @@
-.center.mw960p.pa3.txtcenter
+.center.mw960p.pa3
 	.grid-2-small-1
 
-		.div.pl2.pr2
+		.div.pl2.pr2.txtcenter
 			-unless user_signed_in? || @maintenance
 				.div.brdr-b.pl2.pr2.pb2
 					%h2 Connexion Arts et Métiers
@@ -27,4 +27,11 @@
 				.center.txtcenter
 					Le site est en cours de maintenance, veuillez vous connectez ultérieurement
 
-		.div.small-hidden.center.pl3.pt3=image_tag("logo_2016.png")
+		.div.small-hidden.pl3.brdr-l
+			-#=image_tag("logo_2016.png")
+			%h2 Inscriptions SKZ
+			%h3 Conscrits
+			%p Si tu es étudiant aux Arts Et Métiers en première année, tu as reçu un email avec un identifiant de connexion. En te rendant sur l'authentification universelle lance une récupération de mot de passe pour pouvoir te connecter ici.
+
+			%h3 Anciens, P3, Archis
+			Connecte-toi simplement via l'authentification universelle

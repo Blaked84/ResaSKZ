@@ -1,7 +1,7 @@
 nav{
 	height:64px;
 	width: 100%;
-	background: #5264AE;
+	background: #3498DB;
 	margin: 0;
 	/*box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);*/
 	position: fixed;
@@ -124,10 +124,10 @@ nav{
    	border-bottom: 1px solid #ccc;
    	line-height: 64px;
    	padding-left: 0.6em;
-   	color: #5264AE;
+   	color: #3498DB;
    }
    #logo a, #logo a:visited{
-   	color: #5264AE;
+   	color: #3498DB;
    }
 
 
