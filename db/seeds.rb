@@ -13,18 +13,18 @@ puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
 	:description => " Du 18 au 25 avril 2015, Boquette, Bordel'sss, Siber'sss, Kanak,P3 ")
-Event.create(
-	:name => "SKZ Semaine 2",
-	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
+# Event.create(
+# 	:name => "SKZ Semaine 2",
+# 	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
 
 
 puts "Categories"
-listecategorries=["Pack","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances","Supplément food"]
+listecategorries=["Pack de base","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
 Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.to_s
-Configurable[:id_pack]=Categorie.find_by( nom: 'Pack').id.to_s
+Configurable[:id_pack]=Categorie.find_by( nom: 'Pack de base').id.to_s
 
 puts "Date paiements"
 Configurable[:echeances_paiement1]=DateTime.new(2013,2,9)
@@ -53,96 +53,60 @@ listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
 
-listeproduits=[["Pack PG",29900,"",DateTime.new(2015,3,14),"De 214 à 212",1,1],
-["Pack Archi",35000,"",DateTime.new(2015,3,14),"A partir de 211",1,1],
-["Pack Extérieurs",35000,"",DateTime.new(2015,3,14),"Pour les non Gadz",1,1],
-["Food Pack avec Porc",0,"",DateTime.new(2015,3,14),"",1,2],
-["Food Pack sans Porc",0,"",DateTime.new(2015,3,14),"",1,2],
-["Baguette",522,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",1,8],
-["Croissant",390,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",1,8],
-["Pain au chocolat",450,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",1,8],
-["Pack Saucisson",1000,"",DateTime.new(2015,3,14),"Pour 5 saucissons",1,10],
-["Pack Fromage",1000,"",DateTime.new(2015,3,14),"Pour 5 fromages",1,10],
-["Angers A/R",9000,"",DateTime.new(2015,3,14),"",1,3],
-["Bordeaux A/R",9800,"",DateTime.new(2015,3,14),"",1,3],
-["Paris A/R",9000,"",DateTime.new(2015,3,14),"",1,3],
-["Metz A/R",9000,"",DateTime.new(2015,3,14),"",1,3],
-["Angers aller",4750,"",DateTime.new(2015,3,14),"",1,4],
-["Bordeaux  aller",5150,"",DateTime.new(2015,3,14),"",1,4],
-["Paris  aller",4750,"",DateTime.new(2015,3,14),"",1,4],
-["Metz  aller",4750,"",DateTime.new(2015,3,14),"",1,4],
-["Angers retour",4750,"",DateTime.new(2015,3,14),"",1,5],
-["Bordeaux retour",5150,"",DateTime.new(2015,3,14),"",1,5],
-["Paris retour",4750,"",DateTime.new(2015,3,14),"",1,5],
-["Metz retour",4750,"",DateTime.new(2015,3,14),"",1,5],
-["Eco - Pack Ski Complet",5300,"",DateTime.new(2015,3,14),"",1,6],
-["Eco - Chaussures ski seules",3300,"",DateTime.new(2015,3,14),"",1,6],
-["Eco - Skis seuls",4800,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Pack Complet Ski",6400,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Pack Complet Surf",6400,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Chaussures ski seules",4200,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Chaussures surf seules",4200,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Skis seuls",6000,"",DateTime.new(2015,3,14),"",1,6],
-["Découverte - Snow seul",6000,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Pack Complet Ski",7900,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Pack Complet Surf",7900,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Chaussures ski seules",5800,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Chaussures surf seules",5800,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Skis seuls",7400,"",DateTime.new(2015,3,14),"",1,6],
-["Sensation - Snow seul",7400,"",DateTime.new(2015,3,14),"",1,6],
-["Annulation",1700,"",DateTime.new(2015,3,14),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",1,9],
-["Assistance rapatriement bagages",1700,"",DateTime.new(2015,3,14),"Rapatriement sur les pistes, en dehors des pistes et rapatriement chez vous avec vos bagages si besoin",1,9],
-["Inter Ski Pass",1100,"",DateTime.new(2015,3,14),"En cas d'obligation de départ pour des raisons valables, remboursement de 35 euros par jour perdu (maximum remboursable 5 jours, voir précisions sur le site)",1,9],
-["Tout compris",3300,"",DateTime.new(2015,3,14),"Les trois précédentes cumulées",1,9],
-["Pas d'assurance",0,"",DateTime.new(2015,3,14),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",1,9],
-["RCC",1100,"",DateTime.new(2015,3,14),"Tournée des bars attaché par groupe",1,7],
-["Repas d'Altitude",2100,"",DateTime.new(2015,3,14),"Repas (fondue bourgignone 200g de viande, frites à volonté, 1/2 litre vin) + descente aux fambeaux + feu d'artifice",1,7],
-["Espace Killy",3500,"",DateTime.new(2015,3,14),"Extention de forfait à l'Espace Killy",1,7],
-["Pack PG",29900,"",DateTime.new(2015,3,14),"De 214 à 212",2,1],
-["Pack Archi",35000,"",DateTime.new(2015,3,14),"A partir de 211",2,1],
-["Pack Extérieurs",35000,"",DateTime.new(2015,3,14),"Pour les non Gadz",2,1],
-["Food Pack avec Porc",0,"",DateTime.new(2015,3,14),"",2,2],
-["Food Pack sans Porc",0,"",DateTime.new(2015,3,14),"",2,2],
-["Baguette",522,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",2,8],
-["Croissant",390,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",2,8],
-["Pain au chocolat",450,"",DateTime.new(2015,3,14),"Par jour du dimanche au vendredi",2,8],
-["Pack Saucisson",1000,"",DateTime.new(2015,3,14),"Pour 5 saucissons",2,10],
-["Pack Fromage",1000,"",DateTime.new(2015,3,14),"Pour 5 fromages",2,10],
-["Châlons",8400,"",DateTime.new(2015,3,14),"",2,3],
-["Cluny",7000,"",DateTime.new(2015,3,14),"",2,3],
-["Aix-en-Provence",7800,"",DateTime.new(2015,3,14),"",2,3],
-["Lille",9800,"",DateTime.new(2015,3,14),"",2,3],
-["Châlon aller",4450,"","","Supplément logistique",2,4],
-["Cluny aller",3750,"","","Supplément logistique",2,4],
-["Aix-en-Provence aller",4150,"","","Supplément logistique",2,4],
-["Lille aller",5150,"","","Supplément logistique",2,4],
-["Châlon retour",4450,"","","Supplément logistique",2,5],
-["Cluny retour",3750,"","","Supplément logistique",2,5],
-["Aix-en-Provence retour",4150,"","","Supplément logistique",2,5],
-["Lille retour",5150,"","","Supplément logistique",2,5],
-["Découverte - Pack Ski Complet",5300,"",DateTime.new(2015,3,14),"",2,6],
-["Découverte - Chaussures ski seules",3300,"",DateTime.new(2015,3,14),"",2,6],
-["Découverte - Skis seuls",4800,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Pack Complet Ski",6400,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Pack Complet Surf",6400,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Chaussures ski seules",4200,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Chaussures surf seules",4200,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Skis seuls",6000,"",DateTime.new(2015,3,14),"",2,6],
-["Eco - Snow seul",6000,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Pack Complet Ski",7900,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Pack Complet Surf",7900,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Chaussures ski seules",5800,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Chaussures surf seules",5800,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Skis seuls",7400,"",DateTime.new(2015,3,14),"",2,6],
-["Sensation - Snow seul",7400,"",DateTime.new(2015,3,14),"",2,6],
-["Annulation",1700,"",DateTime.new(2015,3,14),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",2,9],
-["Assistance rapatriement bagages",1700,"",DateTime.new(2015,3,14),"Rapatriement sur les pistes, en dehors des pistes et rapatriement chez vous avec vos bagages si besoin",2,9],
-["Inter Ski Pass",1100,"",DateTime.new(2015,3,14),"En cas d'obligation de départ pour des raisons valables, remboursement de 35 euros par jour perdu (maximum remboursable 5 jours, voir précisions sur le site)",2,9],
-["Tout compris",3300,"",DateTime.new(2015,3,14),"Les trois précédentes cumulées",2,9],
-["Pas d'assurance",0,"",DateTime.new(2015,3,14),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",2,9],
-["RCC",1100,"",DateTime.new(2015,3,14),"Tournée des bars attaché par groupe",2,7],
-["Repas d'Altitude",2100,"",DateTime.new(2015,3,14),"Repas (fondue bourgignone 200g de viande, frites à volonté, 1/2 litre vin) + descente aux fambeaux + feu d'artifice",2,7],
-["Espace Killy",3500,"",DateTime.new(2015,3,14),"Extention de forfait à l'Espace Killy",2,7]]
+listeproduits=[["Pack PG",29000,0,DateTime.new(2015,11,1),"De 215 à 213",1,1],
+["Pack Archi",34000,0,DateTime.new(2015,11,1),"A partir de 212",1,1],
+["Pack Extérieurs",34000,0,DateTime.new(2015,11,1),"Pour les non Gadz",1,1],
+["Food Pack sans Porc",0,0,DateTime.new(2015,11,1),"",1,2],
+["Baguette",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
+["Croissant",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
+["Chocolatine",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
+["Pack Saucisson",1000,0,DateTime.new(2015,11,1),"Pour 5 saucissons",1,2],
+["Pack Fromage",0,0,DateTime.new(2015,11,1),"",1,],
+["Paris aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
+["Paris aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
+["Lille aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
+["Lille aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
+["Cluny aller simple",3600,0,DateTime.new(2015,11,1),"",1,3],
+["Cluny aller-retour",6500,0,DateTime.new(2015,11,1),"",1,4],
+["Bordeaux aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
+["Bordeaux aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
+["Aix en provence aller simple",3100,0,DateTime.new(2015,11,1),"",1,3],
+["Aix en provence aller-retour",5500,0,DateTime.new(2015,11,1),"",1,4],
+["Metz aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
+["Metz aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
+["Angers aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
+["Angers aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
+["Châlons aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
+["Châlons aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
+["Eco - Pack Ski Complet",5300,0,DateTime.new(2015,11,1),"",1,5],
+["Eco - Chaussures ski seules",3300,0,DateTime.new(2015,11,1),"",1,5],
+["Eco - Skis seuls",4500,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Pack Complet Ski",6300,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Pack Complet Surf",6300,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Chaussures ski seules",4200,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Chaussures surf seules",4200,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Skis seuls",5800,0,DateTime.new(2015,11,1),"",1,5],
+["Découverte - Snow seul",5800,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Pack Complet Ski",7900,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Pack Complet Surf",7900,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Chaussures ski seules",5800,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Chaussures surf seules",5800,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Skis seuls",7200,0,DateTime.new(2015,11,1),"",1,5],
+["Sensation - Snow seul",7200,0,DateTime.new(2015,11,1),"",1,5],
+["Excellence - Pack Complet Ski",11300,0,DateTime.new(2015,11,1),"",1,5],
+["Excellence - Pack Complet Surf",11300,0,DateTime.new(2015,11,1),"",1,5],
+["Excellence - Chaussures ski seules",9400,0,DateTime.new(2015,11,1),"",1,5],
+["Excellence - Skis seuls",10900,0,DateTime.new(2015,11,1),"",1,5],
+["Excellence - Snow seul",10900,0,DateTime.new(2015,11,1),"",1,5],
+["Annulation",1800,0,DateTime.new(2015,11,1),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",1,8],
+["Assistance rapatriement bagages",1800,0,DateTime.new(2015,11,1),"Permet en cas de blessures lors du séjour d’être remboursé des frais de rapatriement jusqu’au lieu de soin et/ou de domicile",1,8],
+["Inter Ski Pass",1200,0,DateTime.new(2015,11,1),"Permet en cas de problème majeur (ex : blessure pendant votre semaine) justifié par un document officiel/médical de se faire rembourser le prix du forfait au pro rata des jours non-skiés.",1,8],
+["Tout compris",3500,0,DateTime.new(2015,11,1),"Les trois précédentes cumulées",1,8],
+["Pas d'assurance",0,0,DateTime.new(2015,11,1),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",1,8],
+["RCC",1050,0,DateTime.new(2015,11,1),"Pars faire le tour des bars de Risoul attaché à tes potes",1,6],
+["Carte Gold Grotte du Yéti",5000,0,DateTime.new(2015,11,1),"Charge ta Gold card de la Grotte du Yéti et accède à des prix incroyable pour tes consos",1,6],
+["Initiation Telemark",0,0,DateTime.new(2015,11,1),"Attention ne comprend que les cours ESF (pas la location du matériel)",1,6],
+["Initiation ARVA",0,0,DateTime.new(2015,11,1),"Initiation à l'utilisation du système ARVA encadrée par l'ESF",1,6]]
 
 listeproduits.each do |c|
 	a=Product.create(
@@ -162,9 +126,9 @@ Categorie.find_by( nom: 'Assurances').products.each do |p|
 	p.update_attribute(:max_par_personne,1)
 end
 
-Categorie.find_by( nom: 'Supplément food').products.each do |p|
-	p.update_attribute(:max_par_personne,1)
-end
+# Categorie.find_by( nom: 'Supplément food').products.each do |p|
+# 	p.update_attribute(:max_par_personne,1)
+# end
 
 Categorie.find_by( nom: 'Animations complémentaires').products.each do |p|
 	p.update_attribute(:max_par_personne,1)
@@ -175,8 +139,8 @@ Categorie.find_by( nom: 'Boulangerie').products.each do |p|
 end
 
 Categorie.find_by( nom: 'Options au food pack standard').update_attribute(:max_par_personne,1)
-Categorie.find_by( nom: 'Pack').update_attribute(:max_par_personne,1)
-Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Pack de base').update_attribute(:max_par_personne,1)
+# Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
