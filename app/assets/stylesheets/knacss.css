@@ -402,7 +402,7 @@ html {
 body {
   /* set body font-size in em (1.4em equiv "14px") */
   font-size: 1.4em;
-  background-color: #ffffff;
+  /*background-color: #ffffff;*/
   color: #000000;
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1.5;

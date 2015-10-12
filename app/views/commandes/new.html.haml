@@ -1,16 +1,17 @@
-%div.top-info.pa1
-	%h1 Création d'une nouvelle commande
-%div.fiche.pa1.brdr-b
-	%table.alternate
-		%thead
-			%tr
-				%th Evénement
-				%th Description
-			%tbody
-			- @events.each do |e|
+.shadow-1
+	%div.top-info.pa1
+		%h1 Création d'une nouvelle commande
+	%div.fiche.pa1.brdr-b
+		%table.alternate
+			%thead
 				%tr
-					%td=e.name
-					%td=e.description
+					%th Evénement
+					%th Description
+				%tbody
+				- @events.each do |e|
+					%tr
+						%td=e.name
+						%td=e.description
 
-%div.fiche.pa1.brdr-b
-	=render 'form'
+	%div.fiche.pa1.brdr-b
+		=render 'form'

@@ -1,106 +1,107 @@
-%div.top-info.pa1
-  %h1
-    =@personne.nom_complet
-  .top-buttons
-    = link_to personne_infos_personne_path(@personne) do
-      .pa1.icon-button.right.icon-dark.icon-button-h-light
-        .md-create
-        Editer
-    -if @personne.moderated || current_user.admin?
-      = link_to @personne, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue.' } do 
-        .pa1.icon-button.right.icon-dark.icon-button-h-red
-          .md-clear
-          Supprimer
+.shadow-1
+  %div.top-info.pa1
+    %h1
+      =@personne.nom_complet
+    .top-buttons
+      = link_to personne_infos_personne_path(@personne) do
+        .pa1.icon-button.right.icon-dark.icon-button-h-light
+          .md-create
+          Editer
+      -if @personne.moderated || current_user.admin?
+        = link_to @personne, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue.' } do 
+          .pa1.icon-button.right.icon-dark.icon-button-h-red
+            .md-clear
+            Supprimer
 
-  %p
-    -if @personne.disabled?
-      .red.tag PERSONNE SUPPRIMÉE
-  %p
-    =@personne.bucque
-    =@personne.fams
-    =@personne.promo
-    -if @personne.fams=="84"||@personne.fams=="157"
-      .tag.green
-        Bel'eff's, tu es dans la fam's la plus stylée!
-  %p
-    - if !@personne.is_referant?
-      =link_to @personne.referant?, personne_path(@personne.referant.id), :class => "tag blue icon-button"
-    - else
-      =@personne.referant?
+    %p
+      -if @personne.disabled?
+        .red.tag PERSONNE SUPPRIMÉE
+    %p
+      =@personne.bucque
+      =@personne.fams
+      =@personne.promo
+      -if @personne.fams=="84"||@personne.fams=="157"
+        .tag.green
+          Bel'eff's, tu es dans la fam's la plus stylée!
+    %p
+      - if !@personne.is_referant?
+        =link_to @personne.referant?, personne_path(@personne.referant.id), :class => "tag blue icon-button"
+      - else
+        =link_to @personne.referant?, user_path(@personne.user.id)
 
-%div.pa1.fiche.brdr-b
-  %p
-    %b Né le:
-    =@personne.naissance.to_s.gsub("00:00:00 UTC","")
-  %p
-    %b Genre:
-    =@personne.genre.nom_complet
-  %p 
-    %b Id gadz.org:
-    =@personne.idGadzOrg
-  %p
-    %b Tél: 
-    =@personne.phone
-  %p
-    %b email: 
-    =@personne.email
+  %div.pa1.fiche.brdr-b
+    %p
+      %b Né le:
+      =@personne.naissance.to_s.gsub("00:00:00 UTC","")
+    %p
+      %b Genre:
+      =@personne.genre.nom_complet
+    %p 
+      %b Id gadz.org:
+      =@personne.idGadzOrg
+    %p
+      %b Tél: 
+      =@personne.phone
+    %p
+      %b email: 
+      =@personne.email
 
-  %p
-    %b Adresse:
-    =@personne.adresse
-    =@personne.codepostal
-    =@personne.ville
+    %p
+      %b Adresse:
+      =@personne.adresse
+      =@personne.codepostal
+      =@personne.ville
 
-%div.pa1.fiche.brdr-b
-  
-  %p 
-    %b Taille (m):
-    =@personne.taille_metre
-  %p
-    %b Taille vêtement:
-    =@taillevetement
-  %p 
-    %b Pointure:
-    =@personne.pointure
-  
-  %p
-    %b Attestation d'assurance (RC): 
-    =@personne.document_assurance
+  %div.pa1.fiche.brdr-b
+    
+    %p 
+      %b Taille (m):
+      =@personne.taille_metre
+    %p
+      %b Taille vêtement:
+      =@taillevetement
+    %p 
+      %b Pointure:
+      =@personne.pointure
+    
+    %p
+      %b Attestation d'assurance (RC): 
+      =@personne.document_assurance
 
-%div.pa1.fiche.brdr-b
-  %h2
-    Personne à contacter en cas de problème
+  %div.pa1.fiche.brdr-b
+    %h2
+      Personne à contacter en cas de problème
 
-  %p=@personne.p_nom_complet
-  %p
-    %b Lien de parenté: 
-    =@personne.plienparente
+    %p=@personne.p_nom_complet
+    %p
+      %b Lien de parenté: 
+      =@personne.plienparente
 
-  %p
-    %b Tél:
-    =@personne.pphone
-  %p
-    %b Adresse:
-    =@personne.padresse
-    =@personne.pcomplement
-    =@personne.pcodepostal
-    =@personne.pville
+    %p
+      %b Tél:
+      =@personne.pphone
+    %p
+      %b Adresse:
+      =@personne.padresse
+      =@personne.pcomplement
+      =@personne.pcodepostal
+      =@personne.pville
 
-%div.pa1.fiche
-  %h2 Commandes
+  %div.pa1.fiche
+    %h2 Commandes
 
 
-  
-  
-  %table.striped.alternate#unfixedtable
-    %thead
-      %tr
-        %th Commande ID
-        / %th Assurance
-        %th Statut
-      %tbody
-        -@commandes.each do |commande|
-          %tr
-            %td=link_to commande.idlong, personne_commande_path(@personne.id,commande.id)
-            / %td=conditional_format(commande.assurance)
-            %td=conditional_format(commande.complete?)
+    
+    
+    %table.striped.alternate#unfixedtable
+      %thead
+        %tr
+          %th Commande ID
+          / %th Assurance
+          %th Statut
+        %tbody
+          -@commandes.each do |commande|
+            %tr
+              %td=link_to commande.idlong, personne_commande_path(@personne.id,commande.id)
+              / %td=conditional_format(commande.assurance)
+              %td=conditional_format(commande.complete?)

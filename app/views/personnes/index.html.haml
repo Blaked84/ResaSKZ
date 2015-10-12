@@ -1,36 +1,37 @@
-%div.top-info.pa1
-  %h1
-    Personnes
+.shadow-1
+  %div.top-info.pa1
+    %h1
+      Personnes
 
-    .right
-      - @nb_by_type.each do |type, nb|
-        .tag.blue.ma1
-          =nb
-          =type
-%div.pa1.fiche.brdr-b
-  
-  %table.striped.alternate
-    %thead
-      %tr
-        %th.w50p=sortable "id"
-        %th=sortable "nom", "Nom"
-        %th=sortable "prenom"
-        %th=sortable "type_pers", "Type"
-        %th Referant
-        %th=sortable "documentassurance", "Justificatif assurance (RC)"
-        %th=sortable "moderated", "Validé"
-        %th=sortable "disabled", "Supprimé"
-    %tbody
-      - @personnes.each do |p|
+      .right
+        - @nb_by_type.each do |type, nb|
+          .tag.blue.ma1
+            =nb
+            =type
+  %div.pa1.fiche.brdr-b
+    
+    %table.striped.alternate
+      %thead
         %tr
-          %td=link_to p.id, personne_path(p.id)
-          %td=link_to p.nom, personne_path(p.id)
-          %td=p.prenom
-          %td=p.type_pers
-          %td=conditional_format(p.is_referant?)
-          %td=conditional_format(p.documentassurance)
-          %td=conditional_format(p.moderated)
-          %td=conditional_format(p.disabled?)
+          %th.w50p=sortable "id"
+          %th=sortable "nom", "Nom"
+          %th=sortable "prenom"
+          %th=sortable "type_pers", "Type"
+          %th Referant
+          %th=sortable "documentassurance", "Justificatif assurance (RC)"
+          %th=sortable "moderated", "Validé"
+          %th=sortable "disabled", "Supprimé"
+      %tbody
+        - @personnes.each do |p|
+          %tr
+            %td=link_to p.id, personne_path(p.id)
+            %td=link_to p.nom, personne_path(p.id)
+            %td=p.prenom
+            %td=p.type_pers
+            %td=conditional_format(p.is_referant?)
+            %td=conditional_format(p.documentassurance)
+            %td=conditional_format(p.moderated)
+            %td=conditional_format(p.disabled?)
 
-  = will_paginate @users
-  = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"
+    = will_paginate @users
+    = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"

@@ -1,69 +1,69 @@
-%div.top-info.pa1
-	%h1 Graph Admin
+.shadow-1
+	%div.top-info.pa1
+		%h1 Graph Admin
 
 
 
 
 
-%div.fiche.pa1.brdr-b
-	.grid
-		.grid2
-			-@event.each do |e|
-				%div
-					%h2=e.name
-					%p
-						nombre de commandes
-						=e.commandes.count
+	%div.fiche.pa1.brdr-b
+		.grid
+			.grid2
+				-@event.each do |e|
+					%div
+						%h2=e.name
+						%p
+							nombre de commandes
+							=e.commandes.count
 
-%div.top-info.pa1
-	%h2 Inscriptions
-%div.fiche.pa1.brdr-b
-	%span= column_chart chart_statsinsctiptions_path
-
-%div.top-info.pa1
-	%h2 Commandes
-%div.fiche.pa1.brdr-b
-	%div.row
-		%div.col.w50
-			%p
-				nombre de commande: 
-				=@nbrCommande
-			%p
-				nombre de commandes validées: 
-				=@nbrCommandeValidee
-		%div.col.w50
-			%span= pie_chart [["Commandes validées",@nbrCommandeValidee],["Commandes non validées",@nbrCommandesNonValidee ]]
-
-
-%div.top-info.pa1
-	%h2 Commandes
-%div.fiche.pa1.brdr-b
-	%h3 Commandes incomplètes
-	%span= bar_chart chart_etatcommande_path
-	%h3 Commandes gérées par chaque tbk
-	%span= pie_chart chart_tbkcommandes_path
-
-
-
-%div.top-info.pa1
-	%h2 Paiements
-%div.fiche.pa1.brdr-b
-	%span= pie_chart chart_paiement_path
-	
-
-%div.top-info.pa1
-	%h2 Produits
-%div.fiche.pa1.brdr-b
-	-@event.each do |e|
+	%div.fiche.pa1.brdr-b
+		%h2 Inscriptions
+		%span= column_chart chart_statsinsctiptions_path
+.shadow-1
+	%div.top-info.pa1
+		%h2 Commandes
+	%div.fiche.pa1.brdr-b
 		%div.row
-			 
 			%div.col.w50
-				%h3
-					Bus aller
-					=e.name
-				=bar_chart statsbus_path(Configurable[:id_cat_busaller],e.id)
+				%p
+					nombre de commande: 
+					=@nbrCommande
+				%p
+					nombre de commandes validées: 
+					=@nbrCommandeValidee
 			%div.col.w50
-				%h3
-					Bus retour
-					=e.name
-				=bar_chart statsbus_path(Configurable[:id_cat_busretour],e.id)
+				%span= pie_chart [["Commandes validées",@nbrCommandeValidee],["Commandes non validées",@nbrCommandesNonValidee ]]
+
+.shadow-1
+	%div.top-info.pa1
+		%h2 Commandes
+	%div.fiche.pa1.brdr-b
+		%h3 Commandes incomplètes
+		%span= bar_chart chart_etatcommande_path
+		%h3 Commandes gérées par chaque tbk
+		%span= pie_chart chart_tbkcommandes_path
+
+
+.shadow-1
+	%div.top-info.pa1
+		%h2 Paiements
+	%div.fiche.pa1.brdr-b
+		%span= pie_chart chart_paiement_path
+	
+.shadow-1
+	%div.top-info.pa1
+		%h2 Produits
+	%div.fiche.pa1.brdr-b
+		-@event.each do |e|
+			%div.row
+				 
+				%div.col.w50
+					%h3
+						Bus aller
+						=e.name
+					=bar_chart statsbus_path(Configurable[:id_cat_busaller],e.id)
+				%div.col.w50
+					%h3
+						Bus retour
+						=e.name
+					=bar_chart statsbus_path(Configurable[:id_cat_busretour],e.id)
