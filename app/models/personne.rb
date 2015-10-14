@@ -53,8 +53,8 @@ class Personne < ActiveRecord::Base
 	# validates :documentassurance, :inclusion => {  :in => [true,false]}
 	# validates :enregistrement_termine, :inclusion => {  :in => [true,false]}
 
-	validates :bucque	,:presence => true, if: :is_gadz?
-	validates :fams	    ,:presence => true, if: :is_gadz?
+	#validates :bucque	,:presence => true, if: :is_gadz?
+	#validates :fams	    ,:presence => true, if: :is_gadz?
 	validates :promo	,:format => { :with => /\A(ai|bo|cl|li|ch|me|an|ka)[0-9]{3}\Z/ }, if: :is_gadz?
 
 ###### Associations ###########################################################

@@ -5,11 +5,12 @@
         %h1
           Commande #
           =@commande.idlong
-      .w50.txtright    
-        =link_to commande_path(@commande.id, :format=>:pdf) do
-          .pure-button.pure-button-primary
-            .md-file-download.btn
-            Facture
+      -if Configurable[:facture_visible]    
+        .w50.txtright    
+          =link_to commande_path(@commande.id, :format=>:pdf) do
+            .pure-button.pure-button-primary
+              .md-file-download.btn
+              Facture
 
   %div.fiche.pa1.brdr-b
 
