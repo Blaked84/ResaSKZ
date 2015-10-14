@@ -349,14 +349,14 @@ optgroup {
 /**
  * Remove most spacing between table cells.
  */
-table {
+/*table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 td,
 th {
   padding: 0;
-}
+}*/
 /* ----------------------------- */
 /* == soft reset                 */
 /* ----------------------------- */
@@ -367,10 +367,10 @@ html {
 * {
   box-sizing: inherit;
 }
-ul,
+/*ul,
 ol {
   padding-left: 2em;
-}
+}*/
 ul.unstyled {
   list-style: none;
 }
@@ -407,14 +407,14 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   line-height: 1.5;
 }
-a {
+/*a {
   color: #333333;
 }
 a:hover,
 a:focus,
 a:active {
   color: #000000;
-}
+}*/
 /* font-sizing for content */
 p,
 .p-like,
@@ -564,9 +564,9 @@ svg {
   max-width: 100%;
 }
 /* margin-bottom on tables */
-table {
+/*table {
   margin-bottom: 2rem;
-}
+}*/
 /* ----------------------------- */
 /* ==layout and modules          */
 /* ----------------------------- */
@@ -923,7 +923,7 @@ http://www.alsacreations.com/tuto/lire/1493-css3-flexbox-layout-module.html
 /* ----------------------------- */
 /* ==tables                      */
 /* ----------------------------- */
-table,
+/*table,
 .table {
   width: 100%;
   max-width: 100%;
@@ -943,7 +943,7 @@ th {
   vertical-align: top;
   min-width: 2rem;
   cursor: default;
-}
+}*/
 /* ----------------------------- */
 /* ==forms                       */
 /* ----------------------------- */
