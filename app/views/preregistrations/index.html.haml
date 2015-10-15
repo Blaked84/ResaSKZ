@@ -1,0 +1,25 @@
+.fiche.shadow-1.pa1
+  %h1 Listing preregistrations
+  %p http://localhost:3000/users/register/7brdpE8ARCYRST6otBp6VQ
+
+  %table
+    %thead
+      %tr
+        %th token
+        %th email
+        %th used
+
+    %tbody
+      - @preregistrations.each do |preregistration|
+        %tr
+          %td=preregistration.token
+          %td=preregistration.email
+          %td=preregistration.used?
+          %td
+            = link_to 'Show', preregistration
+            = link_to 'Edit', edit_preregistration_path(preregistration)
+            = link_to 'Destroy', preregistration, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+  %br
+
+  = link_to 'New Preregistration', new_preregistration_path

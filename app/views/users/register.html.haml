@@ -1,0 +1,19 @@
+%div.top-info.pa1
+  %h1 Inscription 1ère année
+%div.pa1.fiche.brdr-b
+  = form_for @user, :url => register_users_path(), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
+    - if @user.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |msg|
+            %li= msg
+
+    -#Vous avez la possibilité de parrainer un ami.
+    %p=@token
+
+    = render :partial => "form_fields", :locals => {:f => f, :reg => true}
+    .actions
+      = f.submit 'Save', :class => "pure-button pure-button-success"
+
+  -#= link_to 'Retour', dashboard_user_path(@parrain)

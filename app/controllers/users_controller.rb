@@ -216,6 +216,71 @@ class UsersController < ApplicationController
     @roles = Hash[@user.roles.map{|r| [r.name, true]}]
   end
 
+  def register
+    @token = params[:token]
+    @token_account = Preregistration.find_by(token: @token)
+    #on vérifie que le token existe et n'a pas été utilisé
+    unless @token_account == nil || @token_account.used?
+      #authorize! :parrainer, @parrain
+      @user=User.new
+      @user.email = @token_account.email
+      @roles = Hash[@user.roles.map{|r| [r.name, true]}]
+    else
+      respond_to do |format|
+        format.html { redirect_to root_path, alert: 'Inscription déjà réalisée par ce lien' }
+      end
+    end 
+
+  end
+
+  def create_register
+    # @parrain=User.find(params[:id])
+    # authorize! :parrainer, @parrain
+    @token = params[:token]
+    @token_account = Preregistration.find_by(token: @token)
+    @user=User.new(user_params_pub(:registration => true))
+    @roles = Hash[@user.roles.map{|r| [r.name, true]}]
+
+    @user.moderated = true #if current_user.admin?
+    respond_to do |format|
+      if @user.save
+        unless current_user.nil?
+          if current_user.admin?
+            @user.referant.sync_from_user(@user) if @user.referant
+            Role.all.each{|r| @user.remove_role r.name}
+
+            @roles.each do |r,ok|
+              @user.add_role r if ok
+            end
+          end
+        end
+
+        pers = @user.personnes.new(
+        :prenom => @user.first_name,
+        :nom => @user.last_name,
+        :email => @user.email,
+        enregistrement_termine: false
+        )
+
+        pers.type_pers = "Pec's"
+
+        #pers.genre = Genre.from_cas(@user.gender)   
+        if pers.save(:validate=>false)
+          @user.update_attribute(:referant_id,pers.id)
+          # indique que le token a été utilisé
+          @token_account.set_used
+
+          format.html { redirect_to root_path, notice: 'Nouveau compte créé!' }
+        else
+          format.html { redirect_to root_path, alert: 'Le user a été créé mais un problème à eu lieu lors de la sauveragrde de la personne.' }
+        end
+      else
+        format.html { render action: 'register' }
+      end
+    end
+
+  end
+
   def create_parrainer
     @parrain=User.find(params[:id])
     authorize! :parrainer, @parrain
@@ -291,7 +356,9 @@ class UsersController < ApplicationController
                     :password,
                     :password_confirmation]
       permit_list += [:email] if opts[:registration] || current_user.admin?
-      permit_list += [:uid,:moderated] if current_user.admin?
+      unless current_user.nil?
+        permit_list += [:uid,:moderated] if current_user.admin?
+      end
 
       params.require(:user).permit( permit_list)
 

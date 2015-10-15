@@ -104,6 +104,9 @@ LooklaDev::Application.routes.draw do
     end
     collection do
       get 'to_moderate'
+      # get 'register', as: :register
+      get 'register/:token', to: "users#register", as: :register
+      post 'register/:token'=>"users#create_register"
     end
   end
 
@@ -123,6 +126,8 @@ LooklaDev::Application.routes.draw do
       post 'remove_personne'
     end
   end
+
+  resources :preregistrations
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

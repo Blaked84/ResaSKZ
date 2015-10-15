@@ -1,0 +1,10 @@
+= form_for @preregistration do |f|
+  - if @preregistration.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@preregistration.errors.count, "error")} prohibited this preregistration from being saved:"
+      %ul
+        - @preregistration.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'
