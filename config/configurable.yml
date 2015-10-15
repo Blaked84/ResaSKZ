@@ -102,3 +102,13 @@ facture_visible:
   name: bouton facture visible           # sets the edit label
   default: false             # sets the default value
   type: boolean  
+
+serveur_mail:
+  name: serveur mail           # sets the edit label
+  default: ip             # sets the default value
+  type: string
+
+sender_mail:
+  name: sender mail           # sets the edit label
+  default: test@test.fr            # sets the default value
+  type: string  
