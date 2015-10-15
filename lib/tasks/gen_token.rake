@@ -9,7 +9,7 @@ namespace :gen_token do
   task all: :environment do
     require 'csv'
 
-    path = ""
+    path = "mail_to_send/"
     bath_file = "sendmail.sh"
     csv_path ="listemails.csv"
 
