@@ -1,19 +1,20 @@
-%div.top-info.pa1
-  %h1 Inscription 1ère année
-%div.pa1.fiche.brdr-b
-  = form_for @user, :url => register_users_path(), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
-    - if @user.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |msg|
-            %li= msg
+.shadow-1
+  %div.top-info.pa1
+    %h1 Inscription 1ère année
+    %p Sal's et bienvenue sur le système d'inscription. Une fois ton compte crée, tu seras redirigé vers la page de connexion où tu pourras t'identifier et poursuivre ton inscription.
+  %div.pa1.fiche.brdr-b
+    = form_for @user, :url => register_users_path(), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
+      - if @user.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
 
-    -#Vous avez la possibilité de parrainer un ami.
-    %p=@token
+      -#Vous avez la possibilité de parrainer un ami.
 
-    = render :partial => "form_fields", :locals => {:f => f, :reg => true}
-    .actions
-      = f.submit 'Save', :class => "pure-button pure-button-success"
+      = render :partial => "form_fields", :locals => {:f => f, :reg => true}
+      .actions
+        = f.submit 'Save', :class => "pure-button pure-button-success"
 
-  -#= link_to 'Retour', dashboard_user_path(@parrain)
+    -#= link_to 'Retour', dashboard_user_path(@parrain)

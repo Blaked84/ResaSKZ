@@ -29,7 +29,7 @@ namespace :gen_token do
       a.generate_token
       a.save
 
-      content = "From:SKZ <" + Configurable[:sender_mail].to_s + ">\nSubject: Inscriptions SKZ\nSal's!\nNous venons de t'ouvrir un accès sur le site de résevation de SKZ! Pour t'inscrire, clique sur le lien suivant ou copie le dans ton navigateur: https://resaskz.gadz.org/users/register/" + a.token + "\n\nÀ bientôt,\nLa Team SKZ"
+      content = "From:SKZ <" + Configurable[:sender_mail].to_s + ">\nSubject: Inscriptions SKZ\nSal's!\n\nNous venons de t'ouvrir un accès sur le site de réservation de SKZ! Pour t'inscrire, clique sur le lien suivant ou copie-le dans ton navigateur: https://resaskz.gadz.org/users/register/" + a.token + "\n\nÀ bientôt,\nLa Team SKZ"
 
       filename= "mail"+i.to_s+".eml"
       File.open(path+filename, "w+") do |f|

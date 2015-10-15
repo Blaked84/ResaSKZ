@@ -259,10 +259,11 @@ class UsersController < ApplicationController
         :prenom => @user.first_name,
         :nom => @user.last_name,
         :email => @user.email,
+        :moderated => true,
         enregistrement_termine: false
         )
 
-        pers.type_pers = "Pec's"
+        pers.type_pers = "Gadz"
 
         #pers.genre = Genre.from_cas(@user.gender)   
         if pers.save(:validate=>false)

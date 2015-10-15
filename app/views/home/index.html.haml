@@ -7,7 +7,7 @@
 					%h2 Connexion Arts et Métiers
 					=render "devise/shared/linkscas"
 				.div.pl2.pr2.pt2
-					%h2 Connexion invités
+					%h2 Conscrits et invités
 					= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "pure-form"}) do |f|
 						%fieldset.pure-group
 							= f.email_field :email, :autofocus => true, :placeholder => "Email", :class => "pure-input-1"
@@ -31,7 +31,7 @@
 			-#=image_tag("logo_2016.png")
 			%h2 Inscriptions SKZ
 			%h3 Conscrits
-			%p Si tu es étudiant aux Arts Et Métiers en première année, tu as reçu un email avec un identifiant de connexion. En te rendant sur l'authentification universelle lance une récupération de mot de passe pour pouvoir te connecter ici.
+			%p Si tu es étudiant aux Arts Et Métiers en première année, tu as reçu ou va recevoir très bientôt un email avec un lien pour t'inscrire.
 
-			%h3 Anciens, P3, Archis
-			Connecte-toi simplement via l'authentification universelle
+			%h3 Anciens, P3 et Archis
+			Connecte-toi simplement via l'authentification universelle.
