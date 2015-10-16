@@ -35,7 +35,8 @@
       =@personne.naissance.to_s.gsub("00:00:00 UTC","")
     %p
       %b Genre:
-      =@personne.genre.nom_complet
+      -if !@personne.genre.nil?
+        =@personne.genre.nom_complet
     %p 
       %b Id gadz.org:
       =@personne.idGadzOrg
