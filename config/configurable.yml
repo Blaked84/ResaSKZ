@@ -111,4 +111,9 @@ serveur_mail:
 sender_mail:
   name: sender mail           # sets the edit label
   default: test@test.fr            # sets the default value
-  type: string  
+  type: string
+
+max_commamdes_payables:
+  name: nombre maxi de commades qu'on peut payer           # sets the edit label
+  default: 1300            # sets the default value
+  type: integer  
