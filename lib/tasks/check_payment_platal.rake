@@ -40,7 +40,7 @@ namespace :check_payment do
 
 	puts transations.count.to_s + " transations à analyser"
 	transations.each do |t|
-		valcode = validate_paiement(t.order_id, t.amount.to_i / 100, t.result, t.result)
+		valcode = validate_paiement(t.order_id, t.amount.to_i * 100, t.result, t.result)
 		nbre_paiements_valides +=1 if valcode[0]
         nbre_paiements_refuses +=1 if valcode[1]
 	end
