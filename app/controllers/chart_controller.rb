@@ -10,6 +10,12 @@ class ChartController < ApplicationController
   	render :json => Tbk.all.map{|t| [t.nom,  t.commandes.all.map{|c| c.complete? if !c.personne.nil?}.count(false)]}
   end
 
+  def etapepaiement
+    a = Commande.all.map{|c| c.paiement_etape}
+    etapes = a.each_with_object(Hash.new(0)) { |word,counts| counts[word] += 1 }
+    render :json => etapes
+  end
+
   def paiement
   	@paiement=Paiement.all
   	@commandes=Commande.all
