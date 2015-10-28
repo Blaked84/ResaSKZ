@@ -23,8 +23,12 @@
 
 
 	%div.fiche.pa1.brdr-b
-		Nombre de personnes inscrites:
-		%span=@nbrPersonnes
+		%p
+			Nombre de personnes inscrites:
+			%span=@nbrPersonnes
+		%p
+			Nombre de commandes avec au moins un paiement:
+			%span=@nombre_commande_avec_paiement
 		/ Nombre de personnes non assurées:
 		/ %span=@nbrPersonnesNonAssuree
 
