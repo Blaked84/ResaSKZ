@@ -34,8 +34,8 @@ class PaiementsController < ApplicationController
     # on vérifie si le nombre de commande maxi est atteint ET qu'on est au premier paiement
     # la méthode utilisée ici n'utilise pas les fonction pour vérifier le montant total car ce serait trop long
     
-    #nombre_commande_avec_paiement = Paiement.where(verif: true).map{|p| p.commande}.uniq.count
-    #if nombre_commande_avec_paiement <= Configurable[:max_commamdes_payables] || com.paiement_etape >= 0 
+    nombre_commande_avec_paiement = Paiement.where(verif: true).map{|p| p.commande}.uniq.count
+    if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0 
 
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
@@ -50,9 +50,9 @@ class PaiementsController < ApplicationController
       if @montant == 0
        redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
      end
-   #else
-    #redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrit atteint."
-   #end
+   else
+    redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
+   end
 
  end
 
