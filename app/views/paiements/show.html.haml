@@ -42,5 +42,7 @@
 		Référant: 
 		=link_to @referant.nom_complet, personne_path(@referant.id)
 
-	%p
-		=link_to @url, @url.to_s
+	-if can? :read_admin, User
+		%p 
+			Lien de paiement ( visible uniquement pour les administrateurs) :
+			=link_to @url, @url.to_s
