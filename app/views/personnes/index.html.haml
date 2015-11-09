@@ -9,6 +9,11 @@
             =nb
             =type
   %div.pa1.fiche.brdr-b
+    %p
+      =form_tag search_personnes_path :method => :post do
+        =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id", :size => 30, :placeholder => "Recherche par nom"
+        =hidden_field_tag "id"
+        = submit_tag 'Recherche', :class => "pure-button pure-button-success pure-button-xsmall "
     
     %table.striped.alternate
       %thead

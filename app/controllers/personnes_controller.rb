@@ -12,7 +12,16 @@ class PersonnesController < ApplicationController
   require 'will_paginate/array'
 
   def index
-  	@personnes = Personne.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
+    # si appellé en post on recupere les param et on resteind la recherche
+    search = params[:nom]
+    id = params[:id]
+    if id != "" and !id.nil?
+      redirect_to personne_path(id)
+    elsif search.nil?
+      @personnes = Personne.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
+    else
+      @personnes = Personne.all.where('nom LIkE ?','%' +search+'%').order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
+    end
     authorize! :show, @personnes
     @nb_by_type = Personne.all.map { |p| p.type_pers  }.each_with_object(Hash.new(0)) { |type,counts| counts[type] += 1 }
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
