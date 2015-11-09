@@ -45,8 +45,8 @@
           @user
 
     %h2 Personnes gérées par ce compte :
-
-    = render :partial => "personne_tree"
+    -if @user.personnes.count > 1
+      = render :partial => "personne_tree"
 
     %table.alternate#unfixedtable
       %thead
@@ -82,8 +82,11 @@
       %thead
         %tr
           %th Commande ID
-          %th Date de création
+          / %th Date de création
           %th Evénement
+          %th Paiement 1
+          %th Paiement 2
+          %th Paiement 3
           %th Statut
           %th Montant
         %tbody
@@ -94,8 +97,11 @@
                 %td
                   =link_to c.idlong, commande_path(c.id)
                   -#=link_to "Recap", commande_show_recap_path(c.id), :class => "pure-button pure-button-primary"
-                %td=c.created_at.to_s.gsub("UTC","")
+                / %td=c.created_at.to_s.gsub("UTC","")
                 %td=c.event.name
+                %td=conditional_format(c.etape_valide? 1)
+                %td=conditional_format(c.etape_valide? 2)
+                %td=conditional_format(c.paiementok?)
                 %td=conditional_format(c.complete?)
                 %td=c.montant_total/100.0
 
