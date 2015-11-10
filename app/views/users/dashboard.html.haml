@@ -44,40 +44,52 @@
         %li
           @user
 
-    %h2 Personnes gérées par ce compte :
-    -if @user.personnes.count > 1
+    
+    -if @user.personnes.where.not(:disabled =>  true).count > 1 #|| current_user.admin?
+      %h2 Personnes gérées par ce compte :
       = render :partial => "personne_tree"
 
-    %table.alternate#unfixedtable
-      %thead
-        %tr
-          %th Prénom Nom 
-          %th assurance
-      %tbody
-        - @user.personnes.where.not(:disabled =>  true).each do |p| 
-          -if p.enregistrement_termine
-            %tr
-              %td
-                =link_to p.nom_complet, personne_path(p.id)
-                -if p.fams=="84"||p.fams=="157"
-                  .span.tag.green 
-                    Ho yeah un #{p.fams}!
-                -if p.moderated || current_user.admin?
-                  = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
-                  -unless p.is_referant?
-                    = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
-              %td=conditional_format(p.assurance)
-              %td
-                -if p.moderated || current_user.admin?
-                  = link_to new_commande_path(@user, pers_id: p.id) do
-                    .pure-button.pure-button-success
-                      .md-add-circle-outline.btn
-                      Nouvelle commande
-                -else
-                  Personne non validée par les administrateurs
+      %table.alternate#unfixedtable
+        %thead
+          %tr
+            %th Prénom Nom 
+            %th assurance
+        %tbody
+          - @user.personnes.where.not(:disabled =>  true).each do |p| 
+            -if p.enregistrement_termine
+              %tr
+                %td
+                  =link_to p.nom_complet, personne_path(p.id)
+                  -if p.fams=="84"||p.fams=="157"
+                    .span.tag.green 
+                      Ho yeah un #{p.fams}!
+                  -if p.moderated || current_user.admin?
+                    = link_to '', personne_infos_personne_path(p), :class => "icon-button md-create  icon-button-h-blue icon-dark right"
+                    -unless p.is_referant?
+                      = link_to '', p, :method => :delete, :data => { :confirm => 'Êtes-vous certain de supprimer cette personne? La commande associée sera perdue' }, :class => "icon-button icon-button-h-red icon-dark md-clear right"
+                %td=conditional_format(p.assurance)
+                %td
+                  -if p.moderated || current_user.admin?
+                    = link_to new_commande_path(@user, pers_id: p.id) do
+                      .pure-button.pure-button-success
+                        .md-add-circle-outline.btn
+                        Nouvelle commande
+                  -else
+                    Personne non validée par les administrateurs
+    -else
+      - @user.personnes.where.not(:disabled =>  true).each do |p| 
+        -if p.enregistrement_termine
+          -if p.moderated || current_user.admin?
+            = link_to new_commande_path(@user, pers_id: p.id) do
+              .pure-button.pure-button-success
+                .md-add-circle-outline.btn
+                Nouvelle commande
 
   %div.fiche.pa1.brdr-b                
-    %h2 Commandes
+    -if @commandes.count > 1
+      %h2 Mes commandes
+    -else
+      %h2 Ma commande
     %table.alternate
       %thead
         %tr
