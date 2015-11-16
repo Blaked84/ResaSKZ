@@ -90,6 +90,12 @@ class PersonnesController < ApplicationController
     end
   end
 
+  def typeresids
+        set_personne
+        authorize! :update, @personne
+        @typeresids = Typeresid.all
+  end
+
   def destroy
     set_personne
     authorize! :destroy, @personne

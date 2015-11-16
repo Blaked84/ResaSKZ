@@ -15,6 +15,7 @@ class Personne < ActiveRecord::Base
 	has_and_belongs_to_many :chambres
 	has_many :activites, through: :activites_personnes
 	has_many :activites_personnes, dependent: :destroy
+	belongs_to :typeresid
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
 
 	@@types= %w(Pec's Gadz)

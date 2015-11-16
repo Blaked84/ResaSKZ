@@ -69,7 +69,9 @@ LooklaDev::Application.routes.draw do
   resources :personnes do
     member do
       get 'personne_infos'
+      get 'typeresids'
       post 'personne_infos' => "personnes#update_personne_infos"
+      post 'typeresids' => "personnes#update_personne_infos"
       get 'add_commande'
     end
     collection do
@@ -130,6 +132,7 @@ LooklaDev::Application.routes.draw do
   end
 
   resources :preregistrations
+  resources :typeresids
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -117,3 +117,8 @@ max_commamdes_payables:
   name: nombre maxi de commades qu'on peut payer           # sets the edit label
   default: 1300            # sets the default value
   type: integer  
+
+type_resids:
+  name: type resids
+  default: Calme Anim's
+  type: string
