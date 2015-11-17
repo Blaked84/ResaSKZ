@@ -1,3 +1,45 @@
+
+.grid-2-small-1.mt1
+  .shadow-1.fiche
+    %div.pa1
+      .row
+        .w70
+          %h1= @user.nom_complet
+        .w30.txtright
+          -if @first_personne.moderated || current_user.admin?
+            = link_to personne_infos_personne_path(@first_personne), :class => "icon-button right" do
+              .icon-button-h-blue.icon-dark
+                Editer
+                .md-create
+
+    %div.fiche.pa1.brdr-b
+      %p
+        =@first_personne.bucque unless @first_personne.nil?
+  -if @commandes
+    - @commandes.each do |c| 
+      .shadow-1.fiche
+        %div.pa1
+          .row
+            .w50
+              %h1 Ma commande
+            .w50.txtright
+              %h1
+                =c.montant_total/100.0
+                €
+        %div.pa1.brdr-b
+          %p
+            =conditional_format(c.etape_valide? 1)
+            1er Paiement
+          %p
+            =conditional_format(c.etape_valide? 2)
+            2ème Paiement
+          %p
+            =conditional_format(c.paiementok?)
+            3ème Paiement
+          .txtright
+            =link_to "Payer #{c.prochain_paiement / 100.0}€", new_commande_paiement_path(c.id), :class => "pure-button pure-button-success"
+            =link_to "Voir", commande_path(c.id), :class => "pure-button pure-button-primary"
+
 .shadow-1
   %div.top-info.pa1
     %h1= @user.nom_complet

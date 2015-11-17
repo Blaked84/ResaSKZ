@@ -332,7 +332,7 @@ class UsersController < ApplicationController
     set_user
     authorize! :dashboard, @user
     @commandes=@user.personnes.map{ |p| p.commandes}.flatten
-
+    @first_personne = @user.personnes.first
   end
 
 
