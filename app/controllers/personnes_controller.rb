@@ -74,13 +74,12 @@ class PersonnesController < ApplicationController
   def update_personne_infos 
     set_personne
     # authorize! :update, @personne
-
     respond_to do |format|
       if (@personne.update_attributes(personne_params) && @personne.update_attribute(:enregistrement_termine, true))
         if @current_user.admin?
           format.html { redirect_to personnes_path , notice: 'User was successfully updated.' }
         else
-          format.html { redirect_to dashboard_user_url @personne.user, notice: 'User was successfully updated.' }
+          format.html { redirect_to dashboard_user_url @personne.user, notice: 'Compte mis à jour!' }
         end
         format.json { head :no_content }
       else
@@ -195,7 +194,8 @@ private
               :genre_id,
               :email,
               :user_id,
-              :documentassurance]
+              :documentassurance,
+              :typeresid_id]
     perm_list << :user_id if options[:registration] || current_user.admin?
     perm_list << :moderated if current_user.admin?
 
