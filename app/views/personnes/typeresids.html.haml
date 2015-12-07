@@ -12,6 +12,9 @@
 							=r.name
 						%td=r.description
 
+		.box.alert
+			%p Attention une fois validé, ce choix est définitif
+
 		= form_for @personne, :url => typeresids_personne_path(@personne), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
 			- if @personne.errors.any?
 				#error_explanation
