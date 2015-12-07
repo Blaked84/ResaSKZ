@@ -1,29 +1,36 @@
 class TyperesidsController < ApplicationController
   before_action :set_typeresid, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only
 
   # GET /typeresids
   # GET /typeresids.json
   def index
+    authorize! :read_admin, User
     @typeresids = Typeresid.all
   end
 
   # GET /typeresids/1
   # GET /typeresids/1.json
   def show
+    authorize! :read_admin, User
+
   end
 
   # GET /typeresids/new
   def new
+    authorize! :read_admin, User
     @typeresid = Typeresid.new
   end
 
   # GET /typeresids/1/edit
   def edit
+    authorize! :read_admin, User
   end
 
   # POST /typeresids
   # POST /typeresids.json
   def create
+    authorize! :read_admin, User
     @typeresid = Typeresid.new(typeresid_params)
 
     respond_to do |format|
@@ -40,6 +47,7 @@ class TyperesidsController < ApplicationController
   # PATCH/PUT /typeresids/1
   # PATCH/PUT /typeresids/1.json
   def update
+    authorize! :read_admin, User
     respond_to do |format|
       if @typeresid.update(typeresid_params)
         format.html { redirect_to @typeresid, notice: 'Typeresid was successfully updated.' }
@@ -54,6 +62,7 @@ class TyperesidsController < ApplicationController
   # DELETE /typeresids/1
   # DELETE /typeresids/1.json
   def destroy
+    authorize! :read_admin, User
     @typeresid.destroy
     respond_to do |format|
       format.html { redirect_to typeresids_url }
