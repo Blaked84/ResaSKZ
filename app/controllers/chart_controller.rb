@@ -47,6 +47,11 @@ class ChartController < ApplicationController
     render :json => b
   end
 
+  def choix_resids
+    b=Paiement.where(verif: true).map{|p| p.commande}.uniq.map{|c| c.personne}.map{|p| p.typeresid.name if p.typeresid}.inject(Hash.new(0)) { |h, e| h[e] += 1 ; h }
+    render :json => b
+  end
+
   private
 
 end
