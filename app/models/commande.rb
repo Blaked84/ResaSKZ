@@ -268,6 +268,7 @@ class Commande < ActiveRecord::Base
 			result[:vetement]=pers.taillevetement.name if pers.taillevetement
 			temp=pers.chambres.where(event_id: self.event_id).first
 			result[:chambre]=temp.identifiant if temp
+			result[:typeresid]=pers.typeresid.name if pers.typeresid.present?
 		end
 
 		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"

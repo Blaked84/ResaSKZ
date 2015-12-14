@@ -21,6 +21,7 @@
         <Cell><Data ss:Type="String">Pointure</Data></Cell>
         <Cell><Data ss:Type="String">Taille vêtement</Data></Cell>
         <Cell><Data ss:Type="String">TBK</Data></Cell>
+        <Cell><Data ss:Type="String">Type resid's</Data></Cell>
         <Cell><Data ss:Type="String">Chambre</Data></Cell>
         <% @commandes.first[:products].each do |k,v| %>        
           <Cell><Data ss:Type="String"><%= k %></Data></Cell>
@@ -46,6 +47,7 @@
         <Cell><Data ss:Type="String"><%= c[:pointure] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:vetement] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:tbk] %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= c[:typeresid] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:chambre] %></Data></Cell>
         <% c[:products].each do |k,v| %>
           <Cell><Data ss:Type="String"><%= v %></Data></Cell>
