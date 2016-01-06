@@ -71,6 +71,8 @@ LooklaDev::Application.routes.draw do
     member do
       get 'personne_infos'
       get 'typeresids'
+      get 'choix_chambre'
+      post 'choix_lit'
       post 'personne_infos' => "personnes#update_personne_infos"
       post 'typeresids' => "personnes#update_personne_infos"
       get 'add_commande'

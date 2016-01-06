@@ -1,5 +1,6 @@
 class LitsController < ApplicationController
   before_action :set_lit, only: [:show, :edit, :update, :destroy]
+  before_action :admin_only
 
   # GET /lits
   # GET /lits.json

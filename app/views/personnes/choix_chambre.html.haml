@@ -1,0 +1,22 @@
+.shadow-1
+	%div.top-info.pa1
+		%h1 Choix de la chambre
+	%div.pa1.fiche.brdr-b
+		%p Choisis où tu préfère séjourner:
+
+		%table.alternate
+			%tbody
+				-@lits.each do |l|
+					%tr
+						%td
+							=l.name
+						%td
+							-if l.personne.present?
+								=l.personne.nom_complet
+								-if l.personne == @personne
+									(C'est toi)
+									= link_to choix_lit_personne_path(:lit_id => l.id, :choix => 0) , :method=> :post, title: "Choisir", :class => "bouton bouton_bleu" do
+										Quitter le lit
+							-else
+								= link_to choix_lit_personne_path(:lit_id => l.id, :choix => 1) , :method=> :post, title: "Choisir", :class => "bouton bouton_bleu" do
+									go!

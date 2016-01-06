@@ -95,6 +95,43 @@ class PersonnesController < ApplicationController
         @typeresids = Typeresid.all
   end
 
+  #affiche les liste des lits par chambre pour le choix effectué par les utilisateurs
+  def choix_chambre
+    set_personne
+    authorize! :update, @personne
+    @lits = @personne.lits
+  end
+
+  #appellé en POST uniquement pour attribuer le lit
+  def choix_lit
+    set_personne
+    authorize! :update, @personne
+    lit = Lit.find(params[:lit_id])
+    choix = params[:choix].to_i # 1 quand on prend un lit, 0 quand on le rend
+    #si le lit est bien accéssible on l'attibue
+    if @personne.lits.include? lit
+      if choix == 1
+        if lit.personne.blank?
+          @personne.lit = lit
+        end
+      else
+        @personne.lit = nil
+      end
+      if @personne.save
+        respond_to do |format|
+          format.html { redirect_to :back}
+        end
+      end
+    else
+      respond_to do |format|
+          format.html { redirect_to :back, :notice => "tu n'as pas accès à cette chambre" }
+        end
+      #sinon on renvoie à la page avec un message d'erreur 
+
+
+    end
+  end
+
   def destroy
     set_personne
     authorize! :destroy, @personne
