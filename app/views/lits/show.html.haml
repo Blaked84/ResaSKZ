@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @lit.name
+%p
+  %b Personne:
+  = @lit.personne_id
+%p
+  %b Chambre:
+  = @lit.chambre_id
+
+= link_to 'Edit', edit_lit_path(@lit)
+\|
+= link_to 'Back', lits_path

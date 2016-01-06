@@ -1,0 +1,25 @@
+%h1 Listing lits
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Personne
+      %th Chambre
+      %th
+      %th
+      %th
+
+  %tbody
+    - @lits.each do |lit|
+      %tr
+        %td= lit.name
+        %td= lit.personne_id
+        %td= lit.chambre_id
+        %td= link_to 'Show', lit
+        %td= link_to 'Edit', edit_lit_path(lit)
+        %td= link_to 'Destroy', lit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Lit', new_lit_path
