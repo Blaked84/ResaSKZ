@@ -62,6 +62,23 @@ class LitsController < ApplicationController
     end
   end
 
+  def import
+    authorize! :create, Lit
+  end
+
+  def import_validate
+    authorize! :create, Lit
+    file=params[:file]
+    event_id=params[:event_id]
+    if File.extname(file.original_filename) == '.csv'
+      Lit.import_from_csv(file,event_id)
+      flash[:success] = I18n.t('lits.success.import')
+    else
+      flash[:error] = I18n.t('lits.error.wrong_ext')
+    end
+    redirect_to back
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_lit

@@ -1,0 +1,12 @@
+%div.top-info.pa1
+  %h1 Création / import des lits et chambres
+
+%div.fiche.pa1.brdr-b
+  =form_tag import_lits_path, multipart: true do
+    .field
+      =file_field_tag :file, :accept => '.csv'
+    .field
+      =label_tag :event_id, 'Evenement :'
+      =select_tag :event_id, options_from_collection_for_select(Event.all,'id','name',@event_id), include_blank: true
+    .action
+      =submit_tag "Importer les lits", :id=>'import', :confirm => "Es-tu sur de vouloir faire ca ? \n En cliquant sur 'Oui', tu supprimera toutes les chambres enregistrées sur le site"

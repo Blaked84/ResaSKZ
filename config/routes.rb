@@ -137,7 +137,12 @@ LooklaDev::Application.routes.draw do
 
   resources :preregistrations
   resources :typeresids
-  resources :lits
+  resources :lits do
+    collection do
+      get 'import'
+      post 'import' => 'chambres#import_validate'
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
