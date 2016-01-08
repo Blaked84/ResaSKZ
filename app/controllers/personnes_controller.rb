@@ -100,6 +100,7 @@ class PersonnesController < ApplicationController
     set_personne
     authorize! :update, @personne
     @lits = @personne.lits
+    gon.personne_id = @personne.id
   end
 
   #appellé en POST uniquement pour attribuer le lit
@@ -129,6 +130,15 @@ class PersonnesController < ApplicationController
       #sinon on renvoie à la page avec un message d'erreur 
 
 
+    end
+  end
+
+  def refresh_list_lits
+    set_personne
+    authorize! :update, @personne
+    @lits = @personne.lits
+    respond_to do |format|
+      format.js
     end
   end
 

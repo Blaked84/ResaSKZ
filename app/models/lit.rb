@@ -32,7 +32,7 @@ class Lit < ActiveRecord::Base
   	# 		numero: row['numero'],
   	# 		nbrplace: row['nbr_place'],
   	# 		)
-  	end
+  	#end
   end
 
 end
