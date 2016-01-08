@@ -1,16 +1,22 @@
-%table.alternate
-  %tbody
-    -lits.each do |l|
+-chambres.each do |c|
+  %table.alternate
+    %tbody
       %tr
-        %td
-          =l.name
-        %td
-          -if l.personne.present?
-            =l.personne.nom_complet
-            -if l.personne == @personne
-              (C'est toi)
-              = link_to choix_lit_personne_path(:lit_id => l.id, :choix => 0) , :method=> :post, title: "Choisir", :class => "bouton bouton_bleu" do
-                Quitter le lit
-          -else
-            = link_to choix_lit_personne_path(:lit_id => l.id, :choix => 1) , :method=> :post, title: "Choisir", :class => "bouton bouton_bleu" do
-              go!
+        %th 
+          Chambre
+          =c.numero
+        %th Occupant
+      -c.lits.each do |l|
+        %tr
+          %td
+            =l.name
+          %td
+            -if l.personne.present?
+              =l.personne.nom_complet
+              -if l.personne == @personne
+                (C'est toi)
+                = link_to choix_lit_personne_path(:lit_id => l.id, :choix => 0) , :method=> :post, title: "Choisir", remote:true, :class => "bouton bouton_bleu" do
+                  Quitter le lit
+            -else
+              = link_to choix_lit_personne_path(:lit_id => l.id, :choix => 1) , :method=> :post,remote:true, title: "Choisir", :class => "pure-button pure-button-success" do
+                Choisir ce lit

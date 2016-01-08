@@ -70,6 +70,6 @@ class LitsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lit_params
-      params.require(:lit).permit(:name, :personne_id, :chambre_id)
+      params.require(:lit).permit(:name, :chambre_id)
     end
 end

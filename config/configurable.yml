@@ -122,3 +122,8 @@ type_resids:
   name: type resids
   default: Calme Anim's
   type: string
+
+choix_chambre:
+  name: Activer le choix des chambres pour les utilisateurs
+  default: false
+  type: boolean

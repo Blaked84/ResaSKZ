@@ -5,7 +5,7 @@
   = @lit.name
 %p
   %b Personne:
-  = @lit.personne_id
+  = @lit.personne.nom_complet if @lit.personne.present?
 %p
   %b Chambre:
   = @lit.chambre_id

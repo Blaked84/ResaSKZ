@@ -137,6 +137,7 @@ class PersonnesController < ApplicationController
     set_personne
     authorize! :update, @personne
     @lits = @personne.lits
+    @chambres = @lits.map{|l| l.chambre}.flatten.compact.uniq
     respond_to do |format|
       format.js
     end

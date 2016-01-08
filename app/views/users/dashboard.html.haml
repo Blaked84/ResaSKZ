@@ -30,6 +30,9 @@
             -else 
               Résidence :
               =p.typeresid.name.to_s
+          -if Configurable[:choix_chambre] == true
+            %p=link_to "Choisir ma chambre", choix_chambre_personne_path(p), :class => "pure-button pure-button-success"
+
           .mt1
             -if @events.count > p.commandes.count
               -if p.moderated || current_user.admin?

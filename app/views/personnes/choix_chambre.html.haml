@@ -2,6 +2,7 @@
 	%div.top-info.pa1
 		%h1 Choix de la chambre
 	%div.pa1.fiche.brdr-b
-		%p Choisis où tu préfère séjourner:
-		#list_lits=render :partial => "shared/lits", locals: {lits: @lits}
+		%p Choisis où tu préfères séjourner:
+		#list_lits
+		-#=render :partial => "shared/lits", locals: {chambres: @chambres}
 		-#=sync partial: "lits", resource: @lits
