@@ -73,6 +73,7 @@ LooklaDev::Application.routes.draw do
       get 'typeresids'
       get 'choix_chambre'
       post 'choix_lit'
+      get 'refresh_list_lits'
       post 'personne_infos' => "personnes#update_personne_infos"
       post 'typeresids' => "personnes#update_personne_infos"
       get 'add_commande'

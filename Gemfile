@@ -90,6 +90,17 @@ gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1
 # pour gérer plus facilement les asset de fonts qui ne sont pas precompilés et qui ne changement jamais
 #gem "non-stupid-digest-assets"
 
+# pour passer des variables ruby dans un js
+gem 'gon'
+
+#accès au routes depuis js
+gem "js-routes"
+
+# Pour faire du temps réél
+#gem 'faye'
+#gem 'thin', require: false
+#gem 'sync'
+
 #Ajouter gem de recherche pour active record
 
 group :development do

@@ -3,5 +3,5 @@
 		%h1 Choix de la chambre
 	%div.pa1.fiche.brdr-b
 		%p Choisis où tu préfère séjourner:
-		=render :partial => "shared/lits", locals: {lits: @lits}
+		#list_lits=render :partial => "shared/lits", locals: {lits: @lits}
 		-#=sync partial: "lits", resource: @lits
