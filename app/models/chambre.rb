@@ -8,10 +8,11 @@ class Chambre < ActiveRecord::Base
 	belongs_to :event
 	belongs_to :tbk
 	has_and_belongs_to_many :personnes
+  has_many :lits
 	
 	@@zones= %w(A C)
 
-	validates :zone, :inclusion => {  :in => @@zones}
+	#validates :zone, :inclusion => {  :in => @@zones}
 	validates :numero, :presence => true
 	validates :nbrplace, :presence => true
 
