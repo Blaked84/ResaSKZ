@@ -18,7 +18,7 @@ class Lit < ActiveRecord::Base
         possibilities={}
 
         csv.each do |r|
-            possibilities[r['Commande']]=r.to_h.select{|k,v| v=='1'}.keys
+            possibilities[r['Commande']]=r.to_hash.select{|k,v| v=='1'}.keys
         end
 
 
@@ -30,15 +30,15 @@ class Lit < ActiveRecord::Base
 
         Chambre.where(event_id: event).map{|c|  c.id}
 
-        lits_ids=Lit.where(chambre_id: Chambre.where(event_id: event).map{|c|  c.id}).map{|l|[l.name, l.id]}.to_h
-
+        lits_ids=Lit.where(chambre_id: Chambre.where(event_id: event).map{|c|  c.id}).map{|l|[l.name, l.id]}
+        lits_ids= Hash[lits_ids.map {|key, value| [key, value]}]
         inserts_possibilities=[]
         # INSERT INTO `lits_personnes` ("lit_id", "personne_id") VALUES
         possibilities.each do |commande_id,lits|
             raise "Commande #{commande_id} inconnue" unless commande=Commande.find_by_idlong(commande_id)
             raise "Personne inconnue" unless personne=commande.personne
             lits.each do |l_s|
-                l=lits_ids[l_s]
+                l=lits_ids[l_s.to_i]
                 inserts_possibilities << "(#{l}, #{personne.id})"
             end
         end

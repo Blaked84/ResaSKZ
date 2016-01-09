@@ -71,12 +71,12 @@ class LitsController < ApplicationController
     file=params[:file]
     event_id=params[:event_id]
     if File.extname(file.original_filename) == '.csv'
-      Lit.import_from_csv(file,event_id)
+      Lit.import_from_csv(file,Envent.find(event_id))
       flash[:success] = I18n.t('lits.success.import')
     else
       flash[:error] = I18n.t('lits.error.wrong_ext')
     end
-    redirect_to back
+    redirect_to backCham
   end
 
   private
