@@ -12,6 +12,7 @@ class Lit < ActiveRecord::Base
 
     # import des lits et chambres depuis un csv
     # atribution des chambres accèssibles au personne à partir des numéros de commande 
+    # debut=Time.now;require 'csv';Lit.import_from_csv(CSV.open(File.join(Rails.root,"tmp","skz_traite.csv"), :headers => true),Event.last);fin=Time.now;puts fin-debut
     def self.import_from_csv (csv,event)
         require 'csv'
 
@@ -38,7 +39,7 @@ class Lit < ActiveRecord::Base
             raise "Commande #{commande_id} inconnue" unless commande=Commande.find_by_idlong(commande_id)
             raise "Personne inconnue" unless personne=commande.personne
             lits.each do |l_s|
-                l=lits_ids[l_s.to_i]
+                l=lits_ids[l_s]
                 inserts_possibilities << "(#{l}, #{personne.id})"
             end
         end
