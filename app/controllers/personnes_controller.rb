@@ -136,7 +136,7 @@ class PersonnesController < ApplicationController
   def refresh_list_lits
     set_personne
     authorize! :update, @personne
-    @lits = @personne.lits
+    @lits = @personne.lits.includes(:chambre).all
     @chambres = @lits.map{|l| l.chambre}.flatten.compact.uniq
     respond_to do |format|
       format.js

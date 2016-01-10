@@ -2,6 +2,8 @@
 	%div.top-info.pa1
 		%h1 Choix de la chambre
 	%div.pa1.fiche.brdr-b
+		.box.alert
+			Merci de quitter cette page dès que tu as fini pour ne pas surcharger le serveur!
 		%p Choisis où tu préfères séjourner:
 		#list_lits
 		-#=render :partial => "shared/lits", locals: {chambres: @chambres}
