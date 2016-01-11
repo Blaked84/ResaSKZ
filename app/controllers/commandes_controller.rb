@@ -103,7 +103,7 @@ class CommandesController < ApplicationController
   end
 
   def show
-  	@commande = Commande.find(params[:id])
+  	@commande = Commande.includes(:personne, :event, :paiements, :products).find(params[:id])
   	authorize! :show, @commande
 
     @personne = @commande.personne

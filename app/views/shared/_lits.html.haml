@@ -6,7 +6,7 @@
           Chambre
           =c.numero
         %th Occupant
-      -c.lits.each do |l|
+      -c.lits.includes(:personne).each do |l|
         %tr
           %td
             =l.name
