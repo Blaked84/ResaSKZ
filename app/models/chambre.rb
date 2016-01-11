@@ -29,7 +29,11 @@ class Chambre < ActiveRecord::Base
   end
 
   def identifiant
-  	return "#{self.event_id}#{self.nbrplace.to_s}#{self.tbk.nom_pecs[0..1]}#{"0"*(3-self.numero.length)+self.numero}#{self.zone}"
+  	begin
+      return "#{self.event_id}#{self.nbrplace.to_s}#{self.tbk.nom_pecs[0..1]}#{"0"*(3-self.numero.length)+self.numero}#{self.zone}"
+    rescue
+      return ""
+    end
   end
 
   def personnes_elligibles

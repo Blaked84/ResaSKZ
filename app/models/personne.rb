@@ -12,7 +12,7 @@ class Personne < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :taillevetement
 	has_many :commandes
-	has_and_belongs_to_many :chambres
+	#has_and_belongs_to_many :chambres
 	has_many :activites, through: :activites_personnes
 	has_many :activites_personnes, dependent: :destroy
 	belongs_to :typeresid
@@ -20,6 +20,7 @@ class Personne < ActiveRecord::Base
 	#has_many :lits, through: :lits_personnes
 	has_and_belongs_to_many :lits
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
+	has_many :chambres, :through => :lit  
 
 	@@types= %w(Pec's Gadz)
 
