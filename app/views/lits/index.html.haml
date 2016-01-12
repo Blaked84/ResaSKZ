@@ -4,7 +4,7 @@
   %thead
     %tr
       %th
-      %th
+      %th Occupant
       %th
       %th
 
@@ -12,9 +12,10 @@
     - @lits.each do |lit|
       %tr
         %td=lit.name
+        %th=lit.personne.nom_complet if lit.personne.present?
         %td= link_to 'Show', lit
         %td= link_to 'Edit', edit_lit_path(lit)
-        %td= link_to 'Destroy', lit, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        -#%td= link_to 'Destroy', lit, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

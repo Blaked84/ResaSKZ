@@ -5,7 +5,7 @@ class LitsController < ApplicationController
   # GET /lits
   # GET /lits.json
   def index
-    @lits = Lit.all
+    @lits = Lit.includes(:personne).all
   end
 
   # GET /lits/1
