@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141223212659) do
+ActiveRecord::Schema.define(version: 20160110150808) do
 
   create_table "activites", force: true do |t|
     t.string   "nom"
@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(version: 20141223212659) do
     t.integer  "event_id"
     t.integer  "pack_id"
     t.integer  "glisse_id"
-    t.integer  "idlong"
+    t.string   "idlong"
     t.datetime "caution_updated_at"
   end
 
@@ -115,6 +115,21 @@ ActiveRecord::Schema.define(version: 20141223212659) do
     t.datetime "updated_at"
   end
 
+  create_table "lits", force: true do |t|
+    t.string   "name"
+    t.integer  "chambre_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "lits_personnes", force: true do |t|
+    t.integer "lit_id"
+    t.integer "personne_id"
+  end
+
+  add_index "lits_personnes", ["lit_id"], name: "index_lits_personnes_on_lit_id"
+  add_index "lits_personnes", ["personne_id"], name: "index_lits_personnes_on_personne_id"
+
   create_table "packs", force: true do |t|
     t.string   "nom"
     t.datetime "created_at"
@@ -129,12 +144,14 @@ ActiveRecord::Schema.define(version: 20141223212659) do
     t.integer  "amount_cents"
     t.string   "paiement_hash"
     t.boolean  "verif"
-    t.integer  "idlong"
+    t.string   "idlong"
     t.datetime "verified_at"
     t.integer  "erreur"
     t.integer  "verified_by"
     t.boolean  "verif_forced"
   end
+
+  add_index "paiements", ["idlong"], name: "index_paiements_on_idlong"
 
   create_table "personnes", force: true do |t|
     t.string   "nom"
@@ -174,6 +191,18 @@ ActiveRecord::Schema.define(version: 20141223212659) do
     t.boolean  "moderated"
     t.datetime "assurance_uptated_at"
     t.boolean  "disabled"
+    t.integer  "typeresid_id"
+    t.integer  "lit_id"
+  end
+
+  add_index "personnes", ["lit_id"], name: "index_personnes_on_lit_id"
+
+  create_table "preregistrations", force: true do |t|
+    t.string   "token"
+    t.string   "email"
+    t.boolean  "used"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "products", force: true do |t|
@@ -212,6 +241,13 @@ ActiveRecord::Schema.define(version: 20141223212659) do
     t.datetime "updated_at"
     t.string   "nom_pecs"
     t.string   "diminutif"
+  end
+
+  create_table "typeresids", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

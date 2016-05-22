@@ -115,6 +115,8 @@ group :development do
 
 	gem 'rack-mini-profiler'
 
+	gem 'flamegraph' 
+
 	gem 'hirb' #better cli table view for db
 
 end
