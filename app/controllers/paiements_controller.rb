@@ -1,7 +1,8 @@
 # -*- encoding : utf-8 -*-
 class PaiementsController < ApplicationController
 
-  before_action :check_register_workflow  
+  before_action :check_register_workflow
+  before_action :get_order_ref, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
 
 
@@ -130,6 +131,21 @@ def csv_import
     respond_to do |format|
       format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements traités sur " + nbre_paiement.to_s  + " présents dans le fichier. " + nbre_paiements_refuses.to_s + " paiement ont été refusés pas la banque." , :plop => "truc" }
     end
+end
+
+  def check_lydia_ok
+    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement.set_verif
+  end
+
+  def check_lydia_nok
+    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement.set_erreur(0)
+  end
+
+  def check_lydia_expire
+    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement.set_erreur(1)
   end
 
 
@@ -216,6 +232,10 @@ def csv_import
   
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def get_order_ref
+    @order_ref = param[:order_ref]
   end
 
 end
