@@ -6,7 +6,7 @@ class PaiementsController < ApplicationController
   helper_method :sort_column, :sort_direction
 
 
-  
+
 
   def create
     # attention les controleur create et new on été fait à l'arrache.
@@ -34,9 +34,9 @@ class PaiementsController < ApplicationController
       authorize! :create, @paiement
     # on vérifie si le nombre de commande maxi est atteint ET qu'on est au premier paiement
     # la méthode utilisée ici n'utilise pas les fonction pour vérifier le montant total car ce serait trop long
-    
+
     nombre_commande_avec_paiement = Paiement.where(verif: true).map{|p| p.commande}.uniq.count
-    if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0 
+    if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0
 
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
@@ -45,11 +45,11 @@ class PaiementsController < ApplicationController
       if com.montant_du > 0
 
       else
-        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
+        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
       end
 
       if @montant == 0
-       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
+       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
      end
    else
     redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
@@ -96,7 +96,7 @@ end
 require 'csv'
 
 def csv_import
-  authorize! :read_admin, User  
+  authorize! :read_admin, User
 
   amount_cents_row = 4
   id_long_row = 21
@@ -118,7 +118,7 @@ def csv_import
     case line
     when 0
         # useless
-      when 1 
+      when 1
         # header2
       else
         valcode=validate_paiement(row[id_long_row],row[amount_cents_row],row[reponse_code_row],row[banque_reponse_code_row])
@@ -173,8 +173,8 @@ end
     require 'addressable/uri'
     require 'addressable/template'
 
-    
-    
+
+
     template = Addressable::Template.new("https://www.gadz.org/external/payment/{ref}/montant/{amount}")
 
     params = {
@@ -217,8 +217,8 @@ end
         end
         # logger.info "###########################Validation"
 
-      else 
-        return [false,false]   
+      else
+        return [false,false]
       end
   end
 
@@ -229,7 +229,7 @@ end
   def sort_column
       Paiement.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
