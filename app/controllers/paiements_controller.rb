@@ -2,7 +2,7 @@
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow
-  before_action :get_order_ref, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
+  before_action :get_lydia_data, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
 
 
@@ -35,7 +35,7 @@ class PaiementsController < ApplicationController
       vendorToken = "57bc18c509986214481295"
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
-      baseURL = 'http://glorious-vroom-211457.nitrousapp.com:3000'
+      baseURL = 'http://resaskz-matthieugicquel168682.codeanyapp.com:3000'
       params = {
         'vendor_token'    => vendorToken,
         'recipient'       => com.personne.referant.phone,
@@ -170,6 +170,7 @@ def csv_import
 end
 
   def check_lydia_ok
+    logger.debug "Validation du paieemnt #{@request_id}"
     paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_verif
   end
@@ -270,8 +271,9 @@ end
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-  def get_order_ref
-    @order_ref = param[:order_ref]
+  def get_lydia_data
+    @order_ref = params[:order_ref]
+    @request_id = params[:request_id]
   end
 
 end
