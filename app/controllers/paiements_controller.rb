@@ -4,7 +4,10 @@ class PaiementsController < ApplicationController
   before_action :check_register_workflow
   before_action :get_lydia_data, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
-
+  
+  # TODO :vérifier que c'est pas dangereurx de faire ça
+  # Ligne ajoutée parce que sinon les appels de lydia font une erreur
+  skip_before_action :verify_authenticity_token, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
 
 
 
@@ -53,7 +56,7 @@ class PaiementsController < ApplicationController
 
       response = Net::HTTP.post_form(lydiaURI, params)
       responseHash = JSON.parse(response.body())
-
+      
       # Permet d'identifier le paiement pour le valider lors du retour de lydia
       # cf fonctions check_lydia_* plus bas
       p.paiement_hash = responseHash['request_id']
@@ -170,7 +173,6 @@ def csv_import
 end
 
   def check_lydia_ok
-    logger.debug "Validation du paieemnt #{@request_id}"
     paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_verif
   end
