@@ -22,10 +22,46 @@ class PaiementsController < ApplicationController
     p.paiement_hash=hashpaiement(p)
     p.save if p.valid?
     respond_to do |format|
-        #décommenter la ligne ci-dessous pour payer par gadz.org
-        format.html{redirect_to urlpaiement(p).to_s}
-        format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
-      end
+      # décommenter la ligne ci-dessous pour payer par gadz.org
+      # format.html{redirect_to urlpaiement(p).to_s}
+      # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
+
+      # TODO : changer pour la production
+      lydiaURI = URI('http://homologation.lydia-app.com/api/request/do.json')
+      # uri = URI('http://lydia-app.com/api/request/do.json')
+
+      # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
+      # TODO : changer pour la production
+      vendorToken = "57bc18c509986214481295"
+
+      # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
+      baseURL = 'http://glorious-vroom-211457.nitrousapp.com:3000'
+      params = {
+        'vendor_token'    => vendorToken,
+        'recipient'       => com.personne.referant.phone,
+        'type'            => 'phone',
+        'message'         => "SKZ – Paiement #{com.paiement_etape + 1}",
+        'amount'          => "#{p.amount_euro}",
+        'currency'        => 'EUR',
+        'order_ref'       => "#{p.idlong}",
+        'confirm_url'     => "#{baseURL}/paiement-check-lydia-ok",
+        'cancel_url'      => "#{baseURL}/paiement-check-lydia-nok",
+        'expire_url'      => "#{baseURL}/paiement-check-lydia-expire",
+        'end_mobile_url'  => "#{baseURL}", # URL sur laquelle le PG sera redirigé
+        'threeDSecure'    => 'no'
+       }
+
+      response = Net::HTTP.post_form(lydiaURI, params)
+      responseHash = JSON.parse(response.body())
+
+      # Permet d'identifier le paiement pour le valider lors du retour de lydia
+      # cf fonctions check_lydia_* plus bas
+      p.paiement_hash = responseHash['request_id']
+      p.save()
+
+      # Redirection vers la page de paiement lydia
+      format.html{redirect_to responseHash['mobile_url']}
+    end
   end
 
   def new
@@ -134,17 +170,17 @@ def csv_import
 end
 
   def check_lydia_ok
-    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_verif
   end
 
   def check_lydia_nok
-    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_erreur(0)
   end
 
   def check_lydia_expire
-    paiement = Paiement.find_by(idlong: @order_ref)
+    paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_erreur(1)
   end
 
