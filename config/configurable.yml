@@ -128,7 +128,10 @@ choix_chambre:
   default: false
   type: boolean
 
-lydia_token:
+lydia_url:
+  name: Lydia URL
+  type: string
+
+lydia_vendor_token:
   name: Token pour lydia
-  default: ""
   type: string
