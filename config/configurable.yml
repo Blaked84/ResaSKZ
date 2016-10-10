@@ -127,3 +127,8 @@ choix_chambre:
   name: Activer le choix des chambres pour les utilisateurs
   default: false
   type: boolean
+
+lydia_token:
+  name: Token pour lydia
+  default: ""
+  type: string
