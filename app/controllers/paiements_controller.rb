@@ -30,15 +30,15 @@ class PaiementsController < ApplicationController
       # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
 
       # TODO : changer pour la production
-      lydiaURI = URI('http://homologation.lydia-app.com/api/request/do.json')
+      lydiaURI = URI(Configurable[:lydia_vendor_token].to_s)
       # uri = URI('http://lydia-app.com/api/request/do.json')
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
       # TODO : changer pour la production
-      vendorToken = "57bc18c509986214481295"
+      vendorToken = Configurable[:lydia_url]
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
-      baseURL = 'http://resaskz-matthieugicquel168682.codeanyapp.com:3000'
+      baseURL = root_url
       params = {
         'vendor_token'    => vendorToken,
         'recipient'       => com.personne.referant.phone,
