@@ -7,7 +7,7 @@
 					%h2 Connexion Arts et Métiers
 					=render "devise/shared/linkscas"
 				.div.pl2.pr2.pt2
-					%h2 Conscrits et invités
+					%h2 Invités
 					= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "pure-form"}) do |f|
 						%fieldset.pure-group
 							= f.email_field :email, :autofocus => true, :placeholder => "Email", :class => "pure-input-1"
@@ -28,10 +28,8 @@
 					Le site est en cours de maintenance, veuillez vous connectez ultérieurement
 
 		.div.small-hidden.pl3.brdr-l
-			-#=image_tag("logo_2016.png")
+			-#=image_tag("logo_2017.png")
 			%h2 Inscriptions SKZ
-			%h3 Conscrits
-			%p Si tu es étudiant aux Arts Et Métiers en première année, tu as reçu ou va recevoir très bientôt un email avec un lien pour t'inscrire.
 
 			%h3 Anciens, P3 et Archis
 			Connecte-toi simplement via l'authentification universelle.
