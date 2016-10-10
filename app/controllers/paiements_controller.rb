@@ -2,9 +2,12 @@
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow
-  before_action :get_order_ref, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
+  before_action :get_lydia_data, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
-
+  
+  # TODO :vérifier que c'est pas dangereurx de faire ça
+  # Ligne ajoutée parce que sinon les appels de lydia font une erreur
+  skip_before_action :verify_authenticity_token, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
 
 
 
@@ -27,15 +30,15 @@ class PaiementsController < ApplicationController
       # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
 
       # TODO : changer pour la production
-      lydiaURI = URI('http://homologation.lydia-app.com/api/request/do.json')
+      lydiaURI = URI(Configurable[:lydia_vendor_token].to_s)
       # uri = URI('http://lydia-app.com/api/request/do.json')
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
       # TODO : changer pour la production
-      vendorToken = "57bc18c509986214481295"
+      vendorToken = Configurable[:lydia_url]
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
-      baseURL = 'http://glorious-vroom-211457.nitrousapp.com:3000'
+      baseURL = root_url
       params = {
         'vendor_token'    => vendorToken,
         'recipient'       => com.personne.referant.phone,
@@ -44,16 +47,16 @@ class PaiementsController < ApplicationController
         'amount'          => "#{p.amount_euro}",
         'currency'        => 'EUR',
         'order_ref'       => "#{p.idlong}",
-        'confirm_url'     => "#{baseURL}/paiement-check-lydia-ok",
-        'cancel_url'      => "#{baseURL}/paiement-check-lydia-nok",
-        'expire_url'      => "#{baseURL}/paiement-check-lydia-expire",
+        'confirm_url'     => "#{baseURL}paiement-check-lydia-ok",
+        'cancel_url'      => "#{baseURL}paiement-check-lydia-nok",
+        'expire_url'      => "#{baseURL}paiement-check-lydia-expire",
         'end_mobile_url'  => "#{baseURL}", # URL sur laquelle le PG sera redirigé
         'threeDSecure'    => 'no'
        }
 
       response = Net::HTTP.post_form(lydiaURI, params)
       responseHash = JSON.parse(response.body())
-
+      
       # Permet d'identifier le paiement pour le valider lors du retour de lydia
       # cf fonctions check_lydia_* plus bas
       p.paiement_hash = responseHash['request_id']
@@ -270,8 +273,9 @@ end
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
-  def get_order_ref
-    @order_ref = param[:order_ref]
+  def get_lydia_data
+    @order_ref = params[:order_ref]
+    @request_id = params[:request_id]
   end
 
 end
