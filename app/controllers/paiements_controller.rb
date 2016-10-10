@@ -4,7 +4,7 @@ class PaiementsController < ApplicationController
   before_action :check_register_workflow
   before_action :get_lydia_data, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
-  
+
   # TODO :vérifier que c'est pas dangereurx de faire ça
   # Ligne ajoutée parce que sinon les appels de lydia font une erreur
   skip_before_action :verify_authenticity_token, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
@@ -30,18 +30,20 @@ class PaiementsController < ApplicationController
       # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
 
       # TODO : changer pour la production
-      lydiaURI = URI(Configurable[:lydia_vendor_token].to_s)
+      lydiaURI = URI(Configurable[:lydia_url].to_s)
       # uri = URI('http://lydia-app.com/api/request/do.json')
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
       # TODO : changer pour la production
-      vendorToken = Configurable[:lydia_url]
+      vendorToken = Configurable[:lydia_vendor_token]
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
       baseURL = root_url
+      logger.debug("debuglydia1")
+
       params = {
         'vendor_token'    => vendorToken,
-        'recipient'       => com.personne.referant.phone,
+        'recipient'       => com.personne.phone,
         'type'            => 'phone',
         'message'         => "SKZ – Paiement #{com.paiement_etape + 1}",
         'amount'          => "#{p.amount_euro}",
@@ -53,10 +55,12 @@ class PaiementsController < ApplicationController
         'end_mobile_url'  => "#{baseURL}", # URL sur laquelle le PG sera redirigé
         'threeDSecure'    => 'no'
        }
+      logger.debug("debuglydia")
+      logger.debug(params)
 
       response = Net::HTTP.post_form(lydiaURI, params)
       responseHash = JSON.parse(response.body())
-      
+
       # Permet d'identifier le paiement pour le valider lors du retour de lydia
       # cf fonctions check_lydia_* plus bas
       p.paiement_hash = responseHash['request_id']
@@ -199,7 +203,7 @@ end
 
   def hashpaiement(paiement)
     secret = Configurable[:secret_paiement]
-    return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.user.referant.email + '+' + ref.to_s + '+' + site + '+' + secret)
+    return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.email + '+' + ref.to_s + '+' + site + '+' + secret)
   end
   ###################################################################
   # Copyright (c) 2012 Thomas Fuzeau
