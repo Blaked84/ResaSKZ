@@ -47,9 +47,9 @@ class PaiementsController < ApplicationController
         'amount'          => "#{p.amount_euro}",
         'currency'        => 'EUR',
         'order_ref'       => "#{p.idlong}",
-        'confirm_url'     => "#{baseURL}/paiement-check-lydia-ok",
-        'cancel_url'      => "#{baseURL}/paiement-check-lydia-nok",
-        'expire_url'      => "#{baseURL}/paiement-check-lydia-expire",
+        'confirm_url'     => "#{baseURL}paiement-check-lydia-ok",
+        'cancel_url'      => "#{baseURL}paiement-check-lydia-nok",
+        'expire_url'      => "#{baseURL}paiement-check-lydia-expire",
         'end_mobile_url'  => "#{baseURL}", # URL sur laquelle le PG sera redirigé
         'threeDSecure'    => 'no'
        }
