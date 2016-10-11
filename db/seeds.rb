@@ -17,7 +17,7 @@ Event.create(
 
 
 puts "Categories"
-listecategorries=["Pack de base","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
+listecategorries=["Pack de base","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
@@ -46,7 +46,7 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
+listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
@@ -140,7 +140,7 @@ end
 
 Categorie.find_by( nom: 'Options au food pack standard').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Pack de base').update_attribute(:max_par_personne,1)
-# Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
