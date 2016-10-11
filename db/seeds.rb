@@ -12,14 +12,12 @@
 puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
-	:description => " Du 18 au 25 avril 2015, Boquette, Bordel'sss, Siber'sss, Kanak,P3 ")
-# Event.create(
-# 	:name => "SKZ Semaine 2",
-# 	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
+	:description => " Du 14 au 21 janvier 2017, tous les TBK ")
+
 
 
 puts "Categories"
-listecategorries=["Pack de base","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
+listecategorries=["Pack de base","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
@@ -27,9 +25,9 @@ Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.t
 Configurable[:id_pack]=Categorie.find_by( nom: 'Pack de base').id.to_s
 
 puts "Date paiements"
-Configurable[:echeances_paiement1]=DateTime.new(2013,2,9)
-Configurable[:echeances_paiement2]=DateTime.new(2013,2,23)
-Configurable[:echeances_paiement3]=DateTime.new(2013,3,16)
+Configurable[:echeances_paiement1]=DateTime.new(2016,10,31)
+Configurable[:echeances_paiement2]=DateTime.new(2016,11,10)
+Configurable[:echeances_paiement3]=DateTime.new(2016,11,20)
 # puts "UserTypes"
 # Usertype.create(:)
 
@@ -48,7 +46,7 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
+listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
@@ -67,14 +65,26 @@ listeproduits=[["Pack PG",29900,0,DateTime.new(2016,10,30),".onscrit et de 215 �
 ["Bordeaux A/R",9000,0,DateTime.new(2016,10,30),"",1,3],
 ["Paris A/R",8500,0,DateTime.new(2016,10,30),"",1,3],
 ["Metz A/R",8500,0,DateTime.new(2016,10,30),"",1,3],
+["Cluny A/R",7000,0,DateTime.new(2016,10,30),"",1,3],
+["Aix-en-Provence A/R",6000,0,DateTime.new(2016,10,30),"",1,3],
+["Chalons A/R",8000,0,DateTime.new(2016,10,30),"",1,3],
+["Lille A/R",9500,0,DateTime.new(2016,10,30),"",1,3],
+["Lille aller",4750,0,DateTime.new(2016,10,30),"",1,4],
 ["Angers aller",4500,0,DateTime.new(2016,10,30),"",1,4],
 ["Bordeaux  aller",4500,0,DateTime.new(2016,10,30),"",1,4],
 ["Paris  aller",4250,0,DateTime.new(2016,10,30),"",1,4],
 ["Metz  aller",4250,0,DateTime.new(2016,10,30),"",1,4],
+["Cluny aller",3500,0,DateTime.new(2016,10,30),"",1,4],
+["Aix-en-Provence aller",3000,0,DateTime.new(2016,10,30),"",1,4],
+["Chalons aller",4000,0,DateTime.new(2016,10,30),"",1,4],
+["Lille retour",4750,0,DateTime.new(2016,10,30),"",1,5],
 ["Angers retour",4500,0,DateTime.new(2016,10,30),"",1,5],
 ["Bordeaux retour",4500,0,DateTime.new(2016,10,30),"",1,5],
 ["Paris retour",4250,0,DateTime.new(2016,10,30),"",1,5],
 ["Metz retour",4250,0,DateTime.new(2016,10,30),"",1,5],
+["Cluny retour",3500,0,DateTime.new(2016,10,30),"",1,5],
+["Aix-en-Provence retour",3000,0,DateTime.new(2016,10,30),"",1,5],
+["Chalons retour",4000,0,DateTime.new(2016,10,30),"",1,5],
 ["Bronze - Pack Ski Complet",5400,0,DateTime.new(2016,10,30),"",1,6],
 ["Bronze - Chaussures ski seules",2200,0,DateTime.new(2016,10,30),"",1,6],
 ["Bronze - Skis seuls",4400,0,DateTime.new(2016,10,30),"",1,6],
@@ -130,7 +140,7 @@ end
 
 Categorie.find_by( nom: 'Options au food pack standard').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Pack de base').update_attribute(:max_par_personne,1)
-# Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
