@@ -12,10 +12,8 @@
 puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
-	:description => " Du 18 au 25 avril 2015, Boquette, Bordel'sss, Siber'sss, Kanak,P3 ")
-# Event.create(
-# 	:name => "SKZ Semaine 2",
-# 	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
+	:description => " Du 14 au 21 janvier 2017, tous les TBK ")
+
 
 
 puts "Categories"
@@ -27,9 +25,9 @@ Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.t
 Configurable[:id_pack]=Categorie.find_by( nom: 'Pack de base').id.to_s
 
 puts "Date paiements"
-Configurable[:echeances_paiement1]=DateTime.new(2013,2,9)
-Configurable[:echeances_paiement2]=DateTime.new(2013,2,23)
-Configurable[:echeances_paiement3]=DateTime.new(2013,3,16)
+Configurable[:echeances_paiement1]=DateTime.new(2016,10,31)
+Configurable[:echeances_paiement2]=DateTime.new(2016,11,10)
+Configurable[:echeances_paiement3]=DateTime.new(2016,11,20)
 # puts "UserTypes"
 # Usertype.create(:)
 
