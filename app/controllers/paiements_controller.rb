@@ -1,11 +1,15 @@
 # -*- encoding : utf-8 -*-
 class PaiementsController < ApplicationController
 
-  before_action :check_register_workflow  
+  before_action :check_register_workflow
+  before_action :get_lydia_data, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
   helper_method :sort_column, :sort_direction
 
+  # TODO :vérifier que c'est pas dangereurx de faire ça
+  # Ligne ajoutée parce que sinon les appels de lydia font une erreur
+  skip_before_action :verify_authenticity_token, only: [:check_lydia_ok, :check_lydia_nok, :check_lydia_expire]
 
-  
+
 
   def create
     # attention les controleur create et new on été fait à l'arrache.
@@ -21,10 +25,50 @@ class PaiementsController < ApplicationController
     p.paiement_hash=hashpaiement(p)
     p.save if p.valid?
     respond_to do |format|
-        #décommenter la ligne ci-dessous pour payer par gadz.org
-        format.html{redirect_to urlpaiement(p).to_s}
-        format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
-      end
+      # décommenter la ligne ci-dessous pour payer par gadz.org
+      # format.html{redirect_to urlpaiement(p).to_s}
+      # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
+
+      # TODO : changer pour la production
+      lydiaURI = URI(Configurable[:lydia_url].to_s)
+      # uri = URI('http://lydia-app.com/api/request/do.json')
+
+      # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
+      # TODO : changer pour la production
+      vendorToken = Configurable[:lydia_vendor_token]
+
+      # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
+      baseURL = root_url
+      logger.debug("debuglydia1")
+
+      params = {
+        'vendor_token'    => vendorToken,
+        'recipient'       => com.personne.phone,
+        'type'            => 'phone',
+        'message'         => "SKZ – Paiement #{com.paiement_etape + 1}",
+        'amount'          => "#{p.amount_euro}",
+        'currency'        => 'EUR',
+        'order_ref'       => "#{p.idlong}",
+        'confirm_url'     => "#{baseURL}paiement-check-lydia-ok",
+        'cancel_url'      => "#{baseURL}paiement-check-lydia-nok",
+        'expire_url'      => "#{baseURL}paiement-check-lydia-expire",
+        'end_mobile_url'  => "#{baseURL}", # URL sur laquelle le PG sera redirigé
+        'threeDSecure'    => 'no'
+       }
+      logger.debug("debuglydia")
+      logger.debug(params)
+
+      response = Net::HTTP.post_form(lydiaURI, params)
+      responseHash = JSON.parse(response.body())
+
+      # Permet d'identifier le paiement pour le valider lors du retour de lydia
+      # cf fonctions check_lydia_* plus bas
+      p.paiement_hash = responseHash['request_id']
+      p.save()
+
+      # Redirection vers la page de paiement lydia
+      format.html{redirect_to responseHash['mobile_url']}
+    end
   end
 
   def new
@@ -33,9 +77,9 @@ class PaiementsController < ApplicationController
       authorize! :create, @paiement
     # on vérifie si le nombre de commande maxi est atteint ET qu'on est au premier paiement
     # la méthode utilisée ici n'utilise pas les fonction pour vérifier le montant total car ce serait trop long
-    
+
     nombre_commande_avec_paiement = Paiement.where(verif: true).map{|p| p.commande}.uniq.count
-    if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0 
+    if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0
 
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
@@ -44,11 +88,11 @@ class PaiementsController < ApplicationController
       if com.montant_du > 0
 
       else
-        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité." 
+        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
       end
 
       if @montant == 0
-       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€." 
+       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
      end
    else
     redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
@@ -95,7 +139,7 @@ end
 require 'csv'
 
 def csv_import
-  authorize! :read_admin, User  
+  authorize! :read_admin, User
 
   amount_cents_row = 4
   id_long_row = 21
@@ -117,7 +161,7 @@ def csv_import
     case line
     when 0
         # useless
-      when 1 
+      when 1
         # header2
       else
         valcode=validate_paiement(row[id_long_row],row[amount_cents_row],row[reponse_code_row],row[banque_reponse_code_row])
@@ -130,6 +174,21 @@ def csv_import
     respond_to do |format|
       format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements traités sur " + nbre_paiement.to_s  + " présents dans le fichier. " + nbre_paiements_refuses.to_s + " paiement ont été refusés pas la banque." , :plop => "truc" }
     end
+end
+
+  def check_lydia_ok
+    paiement = Paiement.find_by(paiement_hash: @request_id)
+    paiement.set_verif
+  end
+
+  def check_lydia_nok
+    paiement = Paiement.find_by(paiement_hash: @request_id)
+    paiement.set_erreur(0)
+  end
+
+  def check_lydia_expire
+    paiement = Paiement.find_by(paiement_hash: @request_id)
+    paiement.set_erreur(1)
   end
 
 
@@ -144,7 +203,7 @@ def csv_import
 
   def hashpaiement(paiement)
     secret = Configurable[:secret_paiement]
-    return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.user.referant.email + '+' + ref.to_s + '+' + site + '+' + secret)
+    return Digest::SHA1.hexdigest( paiement.amount_euro.to_s + '+' + paiement.commande.personne.email + '+' + ref.to_s + '+' + site + '+' + secret)
   end
   ###################################################################
   # Copyright (c) 2012 Thomas Fuzeau
@@ -157,8 +216,8 @@ def csv_import
     require 'addressable/uri'
     require 'addressable/template'
 
-    
-    
+
+
     template = Addressable::Template.new("https://www.gadz.org/external/payment/{ref}/montant/{amount}")
 
     params = {
@@ -201,8 +260,8 @@ def csv_import
         end
         # logger.info "###########################Validation"
 
-      else 
-        return [false,false]   
+      else
+        return [false,false]
       end
   end
 
@@ -213,9 +272,14 @@ def csv_import
   def sort_column
       Paiement.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
-  
+
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
+  def get_lydia_data
+    @order_ref = params[:order_ref]
+    @request_id = params[:request_id]
   end
 
 end

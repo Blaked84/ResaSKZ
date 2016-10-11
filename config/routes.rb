@@ -63,7 +63,11 @@ LooklaDev::Application.routes.draw do
   resources :paiements do
     put :force_validation, :on => :collection
   end
-  
+
+  post 'paiement-check-lydia-ok' => 'paiements#check_lydia_ok'
+  post 'paiement-check-lydia-nok' => 'paiements#check_lydia_nok'
+  post 'paiement-check-lydia-expire' => 'paiements#check_lydia_expire'
+
   get 'paiements-check' => 'paiements#check', as: :check_paiement
   post 'paiements-import-csv' => 'paiements#csv_import', as: :csv_import
 

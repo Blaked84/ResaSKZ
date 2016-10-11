@@ -1,5 +1,5 @@
 %div.top-info.pa1
-	%h1 
+	%h1
 		Paiement #
 		=@paiement.idlong
 
@@ -26,23 +26,18 @@
 		-if @paiement.forced?
 			.box.alert
 				%p La validation de ce paiement a été forcée par #{link_to @paiement.verified_by, personne_path(@paiement.verified_by)}
-		
+
 		-else
 			%p=link_to "Forcer la validation", "javascript:void(0)", :class => "pure-button pure-button-error", id: "showhidden"
 
 			%p#hidden.pa3=link_to "Forcer", {:controller => :paiements, :action => :force_validation, :paiementid => @paiement.id}, {:method => :put ,:data => { :confirm => 'Attention, en cliquant sur ok, le paiement va être validé en outrepasant la banque.'}, :class => "pure-button pure-button-error"}
 
 	%p
-		Commande: 
+		Commande:
 		=link_to @commande.idlong, commande_path(@commande.id)
 	%p
-		Personne: 
+		Personne:
 		=link_to @personne.nom_complet, personne_path(@personne.id)
 	%p
-		Référant: 
+		Référant:
 		=link_to @referant.nom_complet, personne_path(@referant.id)
-
-	-if can? :read_admin, User
-		%p 
-			Lien de paiement ( visible uniquement pour les administrateurs) :
-			=link_to @url, @url.to_s

@@ -12,14 +12,12 @@
 puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
-	:description => " Du 18 au 25 avril 2015, Boquette, Bordel'sss, Siber'sss, Kanak,P3 ")
-# Event.create(
-# 	:name => "SKZ Semaine 2",
-# 	:description => " Du 25 avril au 2 mai 2015, Birse, Chalon'sss, Clun'sss,KIN")
+	:description => " Du 14 au 21 janvier 2017, tous les TBK ")
+
 
 
 puts "Categories"
-listecategorries=["Pack de base","Options au food pack standard","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
+listecategorries=["Pack de base","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
@@ -27,9 +25,9 @@ Configurable[:id_cat_busretour]=Categorie.find_by( nom: 'Transport Retour').id.t
 Configurable[:id_pack]=Categorie.find_by( nom: 'Pack de base').id.to_s
 
 puts "Date paiements"
-Configurable[:echeances_paiement1]=DateTime.new(2013,2,9)
-Configurable[:echeances_paiement2]=DateTime.new(2013,2,23)
-Configurable[:echeances_paiement3]=DateTime.new(2013,3,16)
+Configurable[:echeances_paiement1]=DateTime.new(2016,10,31)
+Configurable[:echeances_paiement2]=DateTime.new(2016,11,10)
+Configurable[:echeances_paiement3]=DateTime.new(2016,11,20)
 # puts "UserTypes"
 # Usertype.create(:)
 
@@ -48,65 +46,67 @@ listevet.each do |c|
 end
 
 puts "tbk"
-listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalon-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
+listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
 
-listeproduits=[["Pack PG",29000,0,DateTime.new(2015,11,1),"De 215 à 213",1,1],
-["Pack Archi",34000,0,DateTime.new(2015,11,1),"A partir de 212",1,1],
-["Pack Extérieurs",34000,0,DateTime.new(2015,11,1),"Pour les non Gadz",1,1],
-["Food Pack sans Porc",0,0,DateTime.new(2015,11,1),"",1,2],
-["Baguette",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
-["Croissant",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
-["Chocolatine",0,0,DateTime.new(2015,11,1),"1 par jour (du dimanche au vendredi)",1,7],
-["Pack Saucisson",1000,0,DateTime.new(2015,11,1),"Pour 5 saucissons",1,2],
-["Pack Fromage",0,0,DateTime.new(2015,11,1),"",1,],
-["Paris aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
-["Paris aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
-["Lille aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
-["Lille aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
-["Cluny aller simple",3600,0,DateTime.new(2015,11,1),"",1,3],
-["Cluny aller-retour",6500,0,DateTime.new(2015,11,1),"",1,4],
-["Bordeaux aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
-["Bordeaux aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
-["Aix en provence aller simple",3100,0,DateTime.new(2015,11,1),"",1,3],
-["Aix en provence aller-retour",5500,0,DateTime.new(2015,11,1),"",1,4],
-["Metz aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
-["Metz aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
-["Angers aller simple",5300,0,DateTime.new(2015,11,1),"",1,3],
-["Angers aller-retour",9500,0,DateTime.new(2015,11,1),"",1,4],
-["Châlons aller simple",4700,0,DateTime.new(2015,11,1),"",1,3],
-["Châlons aller-retour",8500,0,DateTime.new(2015,11,1),"",1,4],
-["Eco - Pack Ski Complet",5300,0,DateTime.new(2015,11,1),"",1,5],
-["Eco - Chaussures ski seules",3300,0,DateTime.new(2015,11,1),"",1,5],
-["Eco - Skis seuls",4500,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Pack Complet Ski",6300,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Pack Complet Surf",6300,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Chaussures ski seules",4200,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Chaussures surf seules",4200,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Skis seuls",5800,0,DateTime.new(2015,11,1),"",1,5],
-["Découverte - Snow seul",5800,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Pack Complet Ski",7900,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Pack Complet Surf",7900,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Chaussures ski seules",5800,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Chaussures surf seules",5800,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Skis seuls",7200,0,DateTime.new(2015,11,1),"",1,5],
-["Sensation - Snow seul",7200,0,DateTime.new(2015,11,1),"",1,5],
-["Excellence - Pack Complet Ski",11300,0,DateTime.new(2015,11,1),"",1,5],
-["Excellence - Pack Complet Surf",11300,0,DateTime.new(2015,11,1),"",1,5],
-["Excellence - Chaussures ski seules",9400,0,DateTime.new(2015,11,1),"",1,5],
-["Excellence - Skis seuls",10900,0,DateTime.new(2015,11,1),"",1,5],
-["Excellence - Snow seul",10900,0,DateTime.new(2015,11,1),"",1,5],
-["Annulation",1800,0,DateTime.new(2015,11,1),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",1,8],
-["Assistance rapatriement bagages",1800,0,DateTime.new(2015,11,1),"Permet en cas de blessures lors du séjour d’être remboursé des frais de rapatriement jusqu’au lieu de soin et/ou de domicile",1,8],
-["Inter Ski Pass",1200,0,DateTime.new(2015,11,1),"Permet en cas de problème majeur (ex : blessure pendant votre semaine) justifié par un document officiel/médical de se faire rembourser le prix du forfait au pro rata des jours non-skiés.",1,8],
-["Tout compris",3500,0,DateTime.new(2015,11,1),"Les trois précédentes cumulées",1,8],
-["Pas d'assurance",0,0,DateTime.new(2015,11,1),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",1,8],
-["RCC",1050,0,DateTime.new(2015,11,1),"Pars faire le tour des bars de Risoul attaché à tes potes",1,6],
-["Carte Gold Grotte du Yéti",5000,0,DateTime.new(2015,11,1),"Charge ta Gold card de la Grotte du Yéti et accède à des prix incroyable pour tes consos",1,6],
-["Initiation Telemark",0,0,DateTime.new(2015,11,1),"Attention ne comprend que les cours ESF (pas la location du matériel)",1,6],
-["Initiation ARVA",0,0,DateTime.new(2015,11,1),"Initiation à l'utilisation du système ARVA encadrée par l'ESF",1,6]]
+listeproduits=[["Pack PG",29900,0,DateTime.new(2016,10,30),".onscrit et de 215 à 213",1,1],
+["Pack Archi",35000,0,DateTime.new(2016,10,30),"A partir de 212",1,1],
+["Pack Extérieurs",35000,0,DateTime.new(2016,10,30),"Pour les non Gadz",1,1],
+["Food Pack avec Porc",0,0,DateTime.new(2016,10,30),"",1,2],
+["Food Pack sans Porc",0,0,DateTime.new(2016,10,30),"",1,2],
+["Baguette",330,0,DateTime.new(2016,10,30),"Pour un pack baguettes",1,8],
+["Croissant",330,0,DateTime.new(2016,10,30),"Pour un pack croissants",1,8],
+["Pain au chocolat",360,0,DateTime.new(2016,10,30),"Pour un pack pain au chocolat",1,8],
+["Pack Saucisson",1000,0,DateTime.new(2016,10,30),"Pour X saucissons",1,8],
+["Pack Fromage",800,0,DateTime.new(2016,10,30),"Pour 3 fromages de 200g",1,8],
+["Angers A/R",9000,0,DateTime.new(2016,10,30),"",1,3],
+["Bordeaux A/R",9000,0,DateTime.new(2016,10,30),"",1,3],
+["Paris A/R",8500,0,DateTime.new(2016,10,30),"",1,3],
+["Metz A/R",8500,0,DateTime.new(2016,10,30),"",1,3],
+["Cluny A/R",7000,0,DateTime.new(2016,10,30),"",1,3],
+["Aix-en-Provence A/R",6000,0,DateTime.new(2016,10,30),"",1,3],
+["Chalons A/R",8000,0,DateTime.new(2016,10,30),"",1,3],
+["Lille A/R",9500,0,DateTime.new(2016,10,30),"",1,3],
+["Lille aller",4750,0,DateTime.new(2016,10,30),"",1,4],
+["Angers aller",4500,0,DateTime.new(2016,10,30),"",1,4],
+["Bordeaux  aller",4500,0,DateTime.new(2016,10,30),"",1,4],
+["Paris  aller",4250,0,DateTime.new(2016,10,30),"",1,4],
+["Metz  aller",4250,0,DateTime.new(2016,10,30),"",1,4],
+["Cluny aller",3500,0,DateTime.new(2016,10,30),"",1,4],
+["Aix-en-Provence aller",3000,0,DateTime.new(2016,10,30),"",1,4],
+["Chalons aller",4000,0,DateTime.new(2016,10,30),"",1,4],
+["Lille retour",4750,0,DateTime.new(2016,10,30),"",1,5],
+["Angers retour",4500,0,DateTime.new(2016,10,30),"",1,5],
+["Bordeaux retour",4500,0,DateTime.new(2016,10,30),"",1,5],
+["Paris retour",4250,0,DateTime.new(2016,10,30),"",1,5],
+["Metz retour",4250,0,DateTime.new(2016,10,30),"",1,5],
+["Cluny retour",3500,0,DateTime.new(2016,10,30),"",1,5],
+["Aix-en-Provence retour",3000,0,DateTime.new(2016,10,30),"",1,5],
+["Chalons retour",4000,0,DateTime.new(2016,10,30),"",1,5],
+["Bronze - Pack Ski Complet",5400,0,DateTime.new(2016,10,30),"",1,6],
+["Bronze - Chaussures ski seules",2200,0,DateTime.new(2016,10,30),"",1,6],
+["Bronze - Skis seuls",4400,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Pack Complet Ski",6500,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Pack Complet Surf",6500,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Chaussures ski seules",2900,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Chaussures surf seules",2900,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Skis seuls",5500,0,DateTime.new(2016,10,30),"",1,6],
+["Argent - Snow seul",5500,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Pack Complet Ski",7900,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Pack Complet Surf",7900,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Chaussures ski seules",2900,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Chaussures surf seules",2900,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Skis seuls",7000,0,DateTime.new(2016,10,30),"",1,6],
+["Or - Snow seul",7000,0,DateTime.new(2016,10,30),"",1,6],
+["Annulation",1900,0,DateTime.new(2016,10,30),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",1,9],
+["Assistance rapatriement bagages",1700,0,DateTime.new(2016,10,30),"Rapatriement sur les pistes, en dehors des pistes et rapatriement chez vous avec vos bagages si besoin",1,9],
+["Bris et Vol",1200,0,DateTime.new(2016,10,30),"Pour couvrir les bris et vols",1,9],
+["Tout compris",3300,0,DateTime.new(2016,10,30),"Les trois précédentes cumulées",1,9],
+["Pas d'assurance",0,0,DateTime.new(2016,10,30),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",1,9],
+["RCC",1000,0,DateTime.new(2016,10,30),"Tournée des bars attaché par groupe",1,7],
+["Pack Chill",2500,0,DateTime.new(2016,10,30),"Un Lamzac à un prix PG !",1,7]]
 
 listeproduits.each do |c|
 	a=Product.create(
@@ -140,7 +140,7 @@ end
 
 Categorie.find_by( nom: 'Options au food pack standard').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Pack de base').update_attribute(:max_par_personne,1)
-# Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
@@ -171,3 +171,33 @@ user_admin=User.create!(
 		)
 user_admin.add_role :admin
 user_admin.add_role :gadz
+
+personne_gorgu=Personne.create!(
+	nom:"Gorgu",
+	prenom:"Gadz",
+	phone:"+33601803255",
+	email:"gorgu@gadz.org",
+	assurance: false,
+	created_at: DateTime.now,
+	updated_at: DateTime.now,
+	user_id: 1,
+	adresse: "Foy'sss",
+	ville: "Birse",
+	codepostal: "60214",
+	bucque: "The gorgu",
+	fams: "0",
+	promo: "li214",
+	idGadzOrg: "",
+	taille: 214,
+	pointure: 60,
+	taillevetement_id: 2,
+	complement: "",
+	pnom: "Maman gorgu",
+	pprenom: "Gadz",
+	plienparente: "mère",
+	padresse: "Kfet",
+	pville: "KIN",
+	pcodepostal: "00000",
+	type_pers: "Gadz",
+	genre_id: 1,
+	)
