@@ -103,9 +103,6 @@ gem "js-routes"
 
 #Ajouter gem de recherche pour active record
 
-# Fix error on running
-gem 'stackprof'
-
 group :development do
 
 	gem 'sqlite3'
