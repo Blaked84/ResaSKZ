@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
 
   def check_admin_mode
     if Configurable[:mode_maintenance] && controller_name != 'devise/sessions' && controller_name != 'home' && !current_user.nil?
-       unless current_user.id==1
+       unless current_user.has_role? :admin || current_user.has_role? :gorgu
          cookies.delete(:secureusertokens)
          reset_session
          redirect_to root_path
