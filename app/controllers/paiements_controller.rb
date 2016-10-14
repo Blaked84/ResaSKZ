@@ -1,4 +1,7 @@
 # -*- encoding : utf-8 -*-
+
+require 'net/http'
+
 class PaiementsController < ApplicationController
 
   before_action :check_register_workflow
