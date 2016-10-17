@@ -4,7 +4,7 @@
 		.div.pl2.pr2.txtcenter
 			-unless user_signed_in? || @maintenance
 				.div.brdr-b.pl2.pr2.pb2
-					%h2 Connexion Arts et Métiers
+					%h2 Gadzarts et Conscrits
 					=render "devise/shared/linkscas"
 				.div.pl2.pr2.pt2
 					%h2 Invités
@@ -31,5 +31,10 @@
 			-#=image_tag("logo_2017.png")
 			%h2 Inscriptions SKZ
 
-			%h3 Conscrits, Anciens, P3 et Archis
+			%h3 Conscrits
+			Si tu ne l'as pas déjà fait, tu dois t'inscrire à
+			=link_to "Arts et Métier Alumni", "https://www.arts-et-metiers.asso.fr/index.php/user/inscriptionEleve"
+			Tu pourras alors te connecter via l'authentification universelle
+
+			%h3 Anciens, P3 et Archis
 			Connecte-toi simplement via l'authentification universelle.
