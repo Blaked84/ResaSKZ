@@ -34,7 +34,7 @@ class Personne < ActiveRecord::Base
 	validates :nom , :length => { :in => 2..30 }
 	# validates :prenom, presence: true
 	validates :prenom , :length => { :in => 2..30 }
-	validates :phone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }
+	validates :phone, :format => { :with => /\A((0|\+[1-9]{2})[1-9][0-9]{8})?\Z/ }, presence: true
 	# validates :assurance ,:inclusion => {  :in => [true,false]}
 	validates :adresse , :presence => true
 	validates :ville , :presence => true
