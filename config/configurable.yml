@@ -135,3 +135,8 @@ lydia_url:
 lydia_vendor_token:
   name: Token pour lydia
   type: string
+
+display_button_type_residence:
+  name: Afficher le bouton de choix du type de résidence
+  default: false
+  type: boolean

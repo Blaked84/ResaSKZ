@@ -25,11 +25,12 @@
             =conditional_format(p.assurance)
             Assurance RC
           %p
-            -if p.typeresid.nil?
-              =link_to "Choisir le type de résidence", typeresids_personne_path(p), :class => "pure-button pure-button-success"
-            -else 
-              Résidence :
-              =p.typeresid.name.to_s
+            -if Configurable[:display_button_type_residence]
+              -if p.typeresid.nil?
+                =link_to "Choisir le type de résidence", typeresids_personne_path(p), :class => "pure-button pure-button-success"
+              -else
+                Résidence :
+                =p.typeresid.name.to_s
           -if Configurable[:choix_chambre] == true
             %p=link_to "Choisir ma chambre", choix_chambre_personne_path(p), :class => "pure-button pure-button-success"
 
