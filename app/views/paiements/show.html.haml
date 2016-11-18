@@ -28,9 +28,8 @@
 				%p La validation de ce paiement a été forcée par #{link_to @paiement.verified_by, personne_path(@paiement.verified_by)}
 
 		-else
-			%p=link_to "Forcer la validation", "javascript:void(0)", :class => "pure-button pure-button-error", id: "showhidden"
 
-			%p#hidden.pa3=link_to "Forcer", {:controller => :paiements, :action => :force_validation, :paiementid => @paiement.id}, {:method => :put ,:data => { :confirm => 'Attention, en cliquant sur ok, le paiement va être validé en outrepasant la banque.'}, :class => "pure-button pure-button-error"}
+			%p=link_to "Forcer la validation du pa", {:controller => :paiements, :action => :force_validation, :paiementid => @paiement.id}, {:method => :put ,:data => { :confirm => 'Attention, en cliquant sur ok, le paiement va être validé en outrepasant la banque.'}, :class => "pure-button pure-button-error"}
 
 	%p
 		Commande:
