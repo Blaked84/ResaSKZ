@@ -15,11 +15,14 @@ require 'barby/outputter/prawn_outputter'
 def initialize(commande, personne,total_euro,paiements)
     super(:page_size=> "A4",:top_margin => 60)
 
-    text "<b>Facture SKZ</b>", :size => LARGE,:inline_format => true
+    text "<b>Reçu SKZ</b>", :size => LARGE,:inline_format => true
    	draw_text "#{commande.ean.to_s}", :at => [350,680]
-   	
-    text "Commande # #{commande.idlong}"
-   
+
+		text "UE ENSAM SKZ 1 avenue Pierre Masse 75014 PARIS", :size => SMALL
+
+		move_down PADDINGBX
+		text "Commande # #{commande.idlong}"
+
     move_down PADDINGBX
     info(personne)
     move_down 2*PADDINGBX
