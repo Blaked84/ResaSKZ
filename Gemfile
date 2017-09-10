@@ -10,6 +10,11 @@ gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
+# Assets
+gem 'material-icons-rails'
+#gem 'rails-assets-materialize', source: 'https://rails-assets.org'
+
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -21,11 +26,11 @@ gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', "~> 2.3.0"
+gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-# gem 'turbolinks'
+gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
@@ -72,6 +77,7 @@ gem 'addressable'
 
 gem 'simple_form'
 
+
 #Autocompletion pour les form de recherche
 gem 'rails4-autocomplete'
 
@@ -116,6 +122,8 @@ group :development do
 	gem 'rack-mini-profiler'
 
 	gem 'flamegraph' 
+
+	gem 'stackprof'
 
 	gem 'hirb' #better cli table view for db
 

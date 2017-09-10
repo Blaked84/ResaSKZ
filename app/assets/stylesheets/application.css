@@ -8,297 +8,54 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require toastr
  *= require_self
  *= require_tree .
- *= require toastr
- *= require layout
- *= require jquery-ui
-
  */
-
-
-
-
-/*!
-* www.KNACSS.com V2.9 (2013-10) @author: Raphael Goetter, Alsacreations
-* Licence WTFPL http://www.wtfpl.net/ 
-*/
-
-/* ----------------------------- */
-/* ==reset                       */
-/* ----------------------------- */
-
-/* base font-size corresponds to 10px and is adapted to rem unit */
-
-/***************************************************** Knacss *****************************************************/
-html {
-	font-size: 62.5%;
-}
-body {
-	background-color: #fff;
-	color: #000;
-	font-family: helvetica, arial, sans-serif;
-	font-size: 1.4em; /* equiv 14px */
-	line-height: 1.5; /* adapt to your design */
-}
 
 /* font-sizing for content */
 /* preserves vertical-rythm, thanks to http://soqr.fr/vertical-rhythm/ */
-p,
-ul,
-ol,
-dl,
-blockquote,
-pre,
-td,
-th,
-label,
-textarea,
-caption,
-details,
-figure {
-	margin: .75em 0 0;
-	line-height: 1.5;
-}
+
 h1, .h1-like {
-	margin: 0.6563em 0 0 0;
-	font-size: 2.2857em; /* equiv 32px */
-	line-height: 1.3126;
-	color: #333;
-	/*text-shadow: 1px 1px 0px #FFF;*/
-	font-family: "PTSansRegular";
-	font-weight: 100;
+        margin: 0.6563em 0 0 0;
+        font-size: 2.2857em; /* equiv 32px */
+        line-height: 1.3126;
+        color: #333;
+        /*text-shadow: 1px 1px 0px #FFF;*/
+        font-weight: 100;
 }
 h2, .h2-like {
-	margin: 0.75em 0 0 0;
-	font-size: 1.5em; /* equiv 28px */
-	line-height: 1.5;
-	font-family: "PTSansRegular";
-	font-weight: 100;
-	color: #555;
+        margin: 0.75em 0 0 0;
+        font-size: 1.5em; /* equiv 28px */
+        line-height: 1.5;
+        font-weight: 100;
+        color: #555;
 
 }
 h3, .h3-like {
-	margin: 0.875em 0 0 0;
-	font-size: 1.2em; /* equiv 24px */
-	line-height: 1.3;
-	font-family: "PTSansRegular";
+        margin: 0.875em 0 0 0;
+        font-size: 1.2em; /* equiv 24px */
+        line-height: 1.3;
 
 }
 h4, .h4-like {
-	margin: 1.05em 0 0 0;
-	font-size: 1.4286em; /* equiv 20px */
-	line-height: 1.05;
-	font-family: "NoticiaTextRegular";
+        margin: 1.05em 0 0 0;
+        font-size: 1.4286em; /* equiv 20px */
+        line-height: 1.05;
 
 }
 h5, .h5-like {
-	margin: 1.1667em 0 0 0;
-	font-size: 1.2857em; /* equiv 18px */
-	line-height: 1.1667;
-	font-family: "NoticiaTextRegular";
+        margin: 1.1667em 0 0 0;
+        font-size: 1.2857em; /* equiv 18px */
+        line-height: 1.1667;
 
 }
 h6, .h6-like {
-	margin: 1.3125em 0 0 0;
-	font-size: 1.1429em; /* equiv 16px */
-	line-height: 1.3125;
-	font-family: "NoticiaTextRegular";
+        margin: 1.3125em 0 0 0;
+        font-size: 1.1429em; /* equiv 16px */
+        line-height: 1.3125;
 
 }
 
-/* alternate font-sizing */
-.smaller {
-	font-size: .7143em; /* equiv 10px */
-}
-.small {
-	font-size: .8571em; /* equiv 12px */
-}
-.big {
-	font-size: 1.1429em; /* equiv 16px */
-}
-.bigger {
-	font-size: 1.2857em; /* equiv 18px */
-}
-.biggest {
-	font-size: 1.4286em; /* equiv 20px */
-}
-
-/* soft reset */
-html,
-body {
-	margin: 0;
-	padding: 0;
-	font-family: "PTSansRegular","Lucida Sans","Lucida Sans Unicode","Lucida Grande",Lucida,Verdana,Arial,sans-serif;
-
-}
-ul,
-ol {
-	padding-left: 2em;
-}
-ul.unstyled {
-	list-style: none;
-}
-code, 
-pre,
-samp,
-kbd {
-	white-space: pre-wrap;
-	font-family: consolas, 'DejaVu Sans Mono', courier, monospace;
-	line-height: 1em;
-}
-code, kbd, mark {
-	border-radius: 2px;
-}
-em {
-	font-style: italic;
-}
-strong {
-	font-weight: bold;
-}
-kbd {
-	padding: 0 2px;
-	border: 1px solid #999;
-}
-code {
-	padding: 2px 4px;
-	background: rgba(0,0,0,.04);
-	color: #b11; 
-}
-mark {
-	padding:2px 4px;
-	background: #ff0;
-}
-sup,
-sub {
-	vertical-align: 0;
-	position: relative;
-}
-sup {
-	bottom: 1ex;
-}
-sub {
-	top: .5ex;
-}
-table { margin-bottom: 1.5em; }
-
-/* avoid top margins on first content element */
-p:first-child,
-ul:first-child,
-ol:first-child,
-dl:first-child,
-blockquote:first-child,
-pre:first-child,
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-	margin-top: 0;
-}
-
-/* avoid margins on nested elements */
-li p,
-li ul,
-li ol {
-	margin-top: 0;
-	margin-bottom: 0;
-}
-
-/* max values */
-img, table, td, blockquote, code, pre, textarea, input, video {
-	max-width: 100%;
-}
-/* pictures */
-img {
-	vertical-align: middle;
-}
-/* Google Gmap3 bug fix on images */
-:not(.gm-style) img {
-	height: auto !important;
-}
-.ie678 .gm-style img {
-	height: 100%;  /* IE678 hack */
-}
-.gm-style img,
-.gmnoscreen img,
-.gmnoprint img {
-	max-width: none !important;
-}
-
-a img { border: 0; }
-
-/* scripts */
-body > script {display: none !important;}
-
-/* skip-links */
-.skip-links {
-	position: absolute;
-}
-.skip-links a {
-	position: absolute;
-	left: -7000px;
-	padding: 0.5em;
-	background: #000;
-	color:#fff;
-	text-decoration: none;
-}
-.skip-links a:focus {
-	position: static;
-}
-
-/* ----------------------------- */
-/* ==layout and modules          */
-/* ----------------------------- */
-
-/* switching box model for all elements */
-* {
-	-webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-}
-
-/* float layout */
-/* module, gains superpower "BFC" Block Formating Context */
-.mod { 
-	overflow: hidden;
-}
-
-/* blocks that needs to be placed under floats */
-.clear,
-.line,
-.row {
-	clear: both;
-}
-
-/* blocks that must contain floats */
-.clearfix:after,
-.line:after,
-.mod:after {
-	content: "";
-	display: table;
-	clear: both;
-}
-
-/* table layout */
-.row {
-	display: table;
-	table-layout: fixed;
-	width: 100%;
-}
-.row > *,
-.col {
-	display: table-cell;
-	vertical-align: top;
-}
-
-/* inline-block */
-.inbl {
-	display: inline-block;
-	vertical-align: top;
-}
 
 /* alignments (blocks and inline) */
 /* ------------------------------ */
@@ -502,82 +259,6 @@ source https://github.com/stubbornella/oocss/blob/master/core/spacing/space.css
 /* @import url(my-styles.css); */
 
 
-/* ----------------------------- */
-/* ==grids                       */
-/* ----------------------------- */
-
-/* grids inspired from SUIT https://github.com/suitcss/suit */
-/* font-family hack explained here : https://github.com/raphaelgoetter/KNACSS/issues/37 */
-
-.grid {
-	overflow: hidden;
-	font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
-}
-.grid > * {
-	display: block;
-	padding: 0;
-	margin-left: -20px; /* gutter value */
-	text-align: left;
-	letter-spacing: -0.31em;
-	text-rendering: optimizespeed;
-}
-/* Opera hack */
-.opera:-o-prefocus,
-.grid > * {
-	word-spacing: -0.43em;
-}
-.grid > * > * {
-	display: inline-block;
-	width: 100%;	
-	padding-left: 20px; /* gutter value */
-	margin-left: 0;
-	vertical-align: top;
-	text-align: left;
-	letter-spacing: normal;
-	word-spacing: normal;
-	text-rendering: auto;
-	*display: inline; *zoom: 1; /* IE67 hack */
-	font-family: helvetica, arial, sans-serif;
-}
-.grid2 > * {width: 50%;}
-.grid3 > * {width: 33.333%;}
-.grid4 > * {width: 25%;}
-.grid5 > * {width: 20%;}
-.grid6 > * {width: 16.667%;}
-.grid8 > * {width: 12.5%;}
-.grid10 > * {width: 10%;}
-.grid12 > * {width: 8.333%;}
-
-/* unequal grids (1-2, 2-1, 1-3 and 3-1) for 2 blocks */
-.grid2-1 > *:first-child,
-.grid1-2 > * + * { width: 66.666%; }
-.grid1-2 > *:first-child,
-.grid2-1 > * + * { width: 33.333%; }
-.grid1-3 > *:first-child,
-.grid3-1 > * + * { width: 25%; }
-.grid3-1 > *:first-child,
-.grid1-3 > * + * { width: 75%; }
-
-/* Responsiv-o-matic */
-@media (max-width: 1024px) {
-	.grid5 > *,
-	.grid6 > *,
-	.grid8 > *,
-	.grid10 > *,
-	.grid12 > * {width: 33.333%}
-}
-@media (max-width: 768px) {
-	.grid3 > *,
-	.grid4 > *,
-	.grid5 > *,
-	.grid6 > *,
-	.grid8 > *,
-	.grid10 > *,
-	.grid12 > * {width: 50%}
-}
-@media (max-width: 640px) {
-	.grid > * > * {width: 100% !important}
-}
 
 /* ----------------------------- */
 /* ==tables                      */
@@ -1424,36 +1105,3 @@ body{background: #ecf0f1;}
 	background-color: #c0392b;
 }
 
-/**************************************************** icons buttons *****************************************************/
-
-.icon-dark {color: #333;}
-.icon-light {color: #fff;}
-
-
-/*.icon-button , .icon-button :visited{color: #fff;}*/
-/*.icon-button{	font-size: 1.2em;}*/
-.icon-button, .icon-button:visited, .icon-button:hover{
-	text-decoration: none;
-	-webkit-transition:.2s linear all;
-	-moz-transition:.2s linear all;
-	-o-transition:.2s linear all;
-	transition:.2s linear all;
-	/*font-size: 1.2em;*/
-
-}
-.icon-button-h-light:hover {
-	color: #ddd;
-}
-.icon-button-h-blue:hover {
-	color: #5264AE;
-}
-.icon-button-h-red:hover {
-	color: #d32f2f;
-}
-
-
-
-.shadow-1{box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16), 0px 2px 10px 0px rgba(0, 0, 0, 0.12);}
-.shadow-2{box-shadow: 0px 8px 17px 0px rgba(0, 0, 0, 0.2), 0px 6px 20px 0px rgba(0, 0, 0, 0.19);}
-.shadow-3{box-shadow: 0px 12px 15px 0px rgba(0, 0, 0, 0.24), 0px 17px 50px 0px rgba(0, 0, 0, 0.19);}
-.shadow-4{box-shadow: 0px 16px 28px 0px rgba(0, 0, 0, 0.22), 0px 25px 55px 0px rgba(0, 0, 0, 0.21);}

@@ -1,0 +1,54 @@
+.navbar.hide-on-large-only
+  %nav{:role => "navigation"}
+    .nav-wrapper.container
+      %a#logo-container.brand-logo.center.white-text{:href => "index.html"}
+        %img{:height => "113px", :src => "images/skz_2018_logo.png"}/
+      %ul#nav-mobile.side-nav
+        %li
+          %a.dropdown-button{:href => "index.html"} L'évènement
+        %ul
+          %li
+            %a{:href => "evenement.html"} La Station
+          %li
+            %a{:href => "histoire.html"} Un peu d'histoire
+          %li
+            %a{:href => "pistes.html"} Les Anim's Pistes
+          %li
+            %a{:href => "soirees.html"} Les Soirées
+        %li
+          %a{:href => "lepack.html"} Le Pack
+        %li
+          %a{:href => "signin.html"} Inscription
+        %li
+          %a{:href => "lateam.html"} La Team
+      %a.button-collapse{"data-activates" => "nav-mobile", :href => "#"}
+        %i.material-icons menu
+.section.sfullscreen
+  .container.centrer{:style => "margin-top:70px;"}
+    .row
+      %ul
+        %li
+          %h3{:style => "color: #f99c43;"} Le Pack de base (390€ pour les PGs) contient :
+        %li
+          %h6 1. Le logement dans la résidence au pied des pistes. Taxes de séjour comprises.
+        %li
+          %h6 2. Le Pack Food pour 7 jours (matin, midi et soir) quelques soit ton régime alimentaire.
+          %p Si tu ne manges pas de porc, nous avons aussi pensé à toi ! Tu pourras le préciser lors de ton inscription.
+        %li
+          %h6
+            3. Le forfait domaine
+            %i Les Sybelles
+            pour skier pendant tout le séjour sur plusde 310 km de pistes !
+          %p Il te sera remis une fois arrivée pour que tu puisse t'éclater toute la semaine !
+        %li
+          %h6 4. Les animations sur les pistes : compétitions, barbecue... (hors activités spéciales payantes)
+          %p
+            Plus d'infos ici :
+            %a{:href => "pistes.html"} Les Anim's pistes
+        %li
+          %h6 5. Les animations soirées (hors RCC).
+          %p
+            Plus d'infos ici :
+            %a{:href => "pistes.html"} Les Anim's soirées
+        %li
+          %h6 6. Les Goodies ! Surprise...

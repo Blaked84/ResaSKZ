@@ -7,11 +7,24 @@ class HomeController < ApplicationController
   	resource_name
   	devise_mapping
 
-  	redirect_to dashboard_user_path(current_user) if current_user
+#  	redirect_to dashboard_user_path(current_user) if current_user
 
-  	# flash.now[:notice] = 'Ceci est un message \'notice\'.'
+ 	# flash.now[:notice] = 'Ceci est un message \'notice\'.'
   	# flash.now[:alert] = 'Ceci est un message \'alert\'.'
 
+  end
+
+  def team
+  end
+  def pack
+  end
+  def event
+  end
+  def histoire
+  end
+  def soirees
+  end
+  def pistes
   end
 
   def resource_name

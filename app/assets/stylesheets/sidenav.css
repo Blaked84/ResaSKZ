@@ -1,0 +1,15 @@
+nav .sidenav-button-collapse, .sidenav-button-collapse i {
+    float: left;
+    position: relative;
+    z-index: 1;
+    height: 64px;
+    line-height: 64px !important;
+    margin: 0 18px;
+}
+
+@media only screen and (min-width: 601px) {
+   nav a.button-collapse, nav a.button-collapse i {
+     height: 64px;
+     line-height: 64px;
+   }
+}

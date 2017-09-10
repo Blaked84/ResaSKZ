@@ -1,0 +1,189 @@
+nav{
+	height:64px;
+	width: 100%;
+	background: #3498DB;
+	margin: 0;
+	/*box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.26);*/
+	/*position: fixed;*/
+	top: 0;
+	z-index: 998;
+	/*border-bottom: 2px solid #c0392b;*/
+}
+/*nav > * > * :first-child{
+	content: "helloedfffffffffffffffffffff";
+	display: inline-block;
+   vertical-align: middle;
+   }*/
+   nav a, nav a:visited{color: #fff;}
+   nav a:hover{color: #ddd}
+   nav a, nav a:visited, nav a:hover{
+   	text-decoration: none;
+   	-webkit-transition:.2s linear all;
+   	-moz-transition:.2s linear all;
+   	-o-transition:.2s linear all;
+   	transition:.2s linear all;
+   	font-weight: 600;
+   	font-family: PTSansRegular;
+   }
+   nav il, nav il *{
+   	/*font-size: 1.2em;*/
+   	padding-right: 1em;
+   	line-height: 64px;
+   }
+
+   nav ul il ul {
+   	margin-top: 0;
+   	padding: 0;
+   	position: relative;
+   	top: 20px;
+   	left: 0;
+   	width: 150px;
+   	-webkit-box-shadow: none;
+   	-moz-box-shadow: none;
+   	box-shadow: none;
+   	display: none;
+   	opacity: 0;
+   	visibility: hidden;
+   	-webkit-transiton: opacity 0.2s;
+   	-moz-transition: opacity 0.2s;
+   	-ms-transition: opacity 0.2s;
+   	-o-transition: opacity 0.2s;
+   	-transition: opacity 0.2s;
+   }
+   nav ul il ul li { 
+   	background: #fff; 
+   	display: block; 
+   	color: #333;
+   	text-shadow: 0 -1px 0 #000;
+   }
+   nav ul il ul li:hover { background: #666; }
+   nav ul il:hover ul {
+   	display: block;
+   	opacity: 1;
+   	visibility: visible;
+   }
+
+   nav ul { overflow:auto; }
+   nav li { float:left; }
+   nav li:last-child { float:right; }
+
+   /*Sidebare*/
+
+   #sidebare{
+   	border-right: 1px solid #ccc;
+   	float: left;
+   	position: fixed;
+   	top: 0;
+   	background: #fff;
+   	height: 100%;
+   	overflow:auto;
+    }
+
+
+   #sidebare li{
+   	font-size: 1.1em;
+   	padding: 0.6em;
+   }
+
+   #sidebare ul li ul {
+   	margin-top: 0;
+   	padding: 0;
+   	position: relative;
+   	top: 20px;
+   	left: 0;
+   	width: 150px;
+   	-webkit-box-shadow: none;
+   	-moz-box-shadow: none;
+   	box-shadow: none;
+   	display: none;
+   	opacity: 0;
+   	visibility: hidden;
+   	-webkit-transiton: opacity 0.2s;
+   	-moz-transition: opacity 0.2s;
+   	-ms-transition: opacity 0.2s;
+   	-o-transition: opacity 0.2s;
+   	-transition: opacity 0.2s;
+   }
+
+   #sidebare ul{padding-left: 0}
+
+   #sidebare a, #sidebare a:visited{color: #333; font-family: PTSansRegular;}
+   #sidebare a:hover{color: #666}
+   #sidebare a, #sidebare a:visited, #sidebare a:hover{
+   	text-decoration: none;
+   	-webkit-transition:.2s linear all;
+   	-moz-transition:.2s linear all;
+   	-o-transition:.2s linear all;
+   	transition:.2s linear all;
+   	font-weight: 600;
+
+   }
+
+   #logo{
+   	height: 64px;
+   	border-bottom: 1px solid #ccc;
+   	line-height: 64px;
+   	padding-left: 0.6em;
+   	color: #3498DB;
+   }
+   #logo a, #logo a:visited{
+   	color: #3498DB;
+   }
+
+
+/*sidebare tuning*/
+#sidebare::-webkit-scrollbar-track
+{
+	background-color: transparent;
+}
+
+#sidebare::-webkit-scrollbar
+{
+	width: 5px;
+	background-color: transparent;
+	overflow: visible;
+}
+
+#sidebare::-webkit-scrollbar-thumb
+{
+	background-color: rgba(0, 0, 0, 0.39);
+}
+
+
+#sidebare{
+	overflow: hidden;
+	z-index: 999;
+/*	width: 100px;
+*/	-webkit-transition:.2s linear all;
+   	-moz-transition:.2s linear all;
+   	-o-transition:.2s linear all;
+   	transition:.2s linear all;
+}
+#sidebare:hover{
+	overflow: auto;
+	width: auto;
+	padding-right: 0px;
+}
+#sidebare:hover >*{
+	overflow: hidden;
+}
+
+#mask{
+   height: 100%;
+   width: 100%;
+   background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.57);
+   position: fixed;
+   top: 0;
+   left:0;
+   z-index: 998;
+}
+
+.toggle-menu{display: none;}
+.hide-by-default{display: none;}
+
+@media (max-width: 1355px) {
+.hidesidebare{    transform: translateX(-400px);}
+.showsidebare{    transform: translateX( 0px);}
+.toggle-menu{display: inline;}
+
+}

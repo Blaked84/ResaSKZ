@@ -1,40 +1,62 @@
-.center.mw960p.pa3
-	.grid-2-small-1
+#firstScreen.section.sfullscreen{:style => "height: 989px; width: 1905px;"}
+  .centrer
+    %h1.header.center.white-text SKZ
+    .row.center
+      %h3.header.col.s12.light.white-text Le plus grand évènement de ski étudiant !
+    .row.center
+      %a.btn-large.waves-effect.pulse{:href => "signin.html"} S'inscrire
+      %br/
+      %br/
+      %br/
+      %a.btn-large.btn-floating{:href => "#infos_generales"}
+        %i.material-icons keyboard_arrow_down
+#infos_generales.divider
+.section.centrer
+  %div
+    / Icon Section
+    .row
+      .col.s12.m4
+        .card
+          .card-image
+            %img{:src => "assets/backgrounds/duski.jpg"}/
+            %span.card-title Du ski
+          .content
+            %p.light Des anim's pistes pour t'éclater ! Que tu sois débutant ou zident tu trouveras forcément ton bonheur !
+            %a{:href => "pistes.html"}
+              .card-action
+                En savoir plus sur les Anim's Pistes
+      .col.s12.m4
+        .card
+          .card-image
+            %img{:src => "assets/backgrounds/soiree2.jpg"}/
+            %span.card-title Une expérience 100% gadz !
+          .content
+            %p.light Une semaine tout compris à prix PG !
+            %a{:href => "lepack.html"}
+              .card-action
+                En savoir plus sur Le Pack
+      .col.s12.m4
+        .card
+          .card-image
+            %img{:src => "assets/backgrounds/soiree3.jpg"}/
+            %span.card-title Des soirées
+          .content
+            %p.light Des soirées mémorables jusqu'au bout de la nuit !
+            %a{:href => "soirees.html"}
+              .card-action
+                En savoir plus sur les Anim's Soirées
+    .row.center
+      %a.btn-large.btn-floating{:href => "#endScreenDivider"}
+        %i.material-icons keyboard_arrow_down
+#endScreenDivider.divider{:style => "margin-bottom: 56px;"}
+#endScreen.section.sfullscreen{:style => "height: 989px; width: 1905px;"}
+  .centrer
+    .row
+      .col.s12
+        %iframe{:allowfullscreen => "", :frameborder => "0", :src => "https://www.youtube.com/embed/hGpg325CkUQ?ecver=1", :style => "height: 692.3px; width: 1333.5px;"}
+    .row.center 
+      %a.btn-large.btn-floating{:href => "#firstScreen"}
+        %i.material-icons keyboard_arrow_up
 
-		.div.pl2.pr2.txtcenter
-			-unless user_signed_in? || @maintenance
-				.div.brdr-b.pl2.pr2.pb2
-					%h2 Gadzarts et Conscrits
-					=render "devise/shared/linkscas"
-				.div.pl2.pr2.pt2
-					%h2 Invités
-					= form_for(resource, :as => resource_name, :url => session_path(resource_name),:html => {:class => "pure-form"}) do |f|
-						%fieldset.pure-group
-							= f.email_field :email, :autofocus => true, :placeholder => "Email", :class => "pure-input-1"
-							= f.password_field :password, :placeholder => "Mot de passe", :class => "pure-input-1"
-							%div= f.submit "Connexion invité", :class => "pure-button pure-button-primary pure-input-1"
-							- if devise_mapping.rememberable?
-								%div.pt1.pure-form-message-inline
-									= f.check_box :remember_me
-									= f.label :remember_me, 'Se souvenir de moi'
-						.pure-form-message-inline= render "devise/shared/links"
-
-
-
-				-# .center.txtcenter=link_to 'Connexion', new_user_session_path, :class => "pure-button pure-button-primary"
-
-			-else
-				.center.txtcenter
-					Le site est en cours de maintenance, veuillez vous connectez ultérieurement
-
-		.div.small-hidden.pl3.brdr-l
-			-#=image_tag("logo_2017.png")
-			%h2 Inscriptions SKZ
-
-			%h3 Conscrits
-			Si tu ne l'as pas déjà fait, tu dois t'inscrire à
-			=link_to "Arts et Métier Alumni", "https://www.arts-et-metiers.asso.fr/index.php/user/inscriptionEleve", target: "_blank"
-			Tu pourras alors te connecter via l'authentification universelle
-
-			%h3 Anciens, P3 et Archis
-			Connecte-toi simplement via l'authentification universelle.
+.hiddendiv.common
+.drag-target{"data-sidenav" => "nav-mobile", :style => "left: 0px; touch-action: pan-y; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"}

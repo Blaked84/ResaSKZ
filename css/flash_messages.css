@@ -1,0 +1,32 @@
+.flash_messages{
+	width: 40%;
+	min-width: 150px;
+	margin: auto;
+	text-align: center;
+
+}
+
+.flash_messages .flash{
+/*
+	border-left: 2px solid #c0392b;
+	border-right: 2px solid #c0392b;
+	border-bottom: 2px solid #c0392b;*/
+	background-color: white;
+
+}
+
+.flash_messages .flash:first-child{
+
+}
+
+.flash_messages .alert{
+	background-color: #d75b4e;
+	color: white;
+	font-weight: bold;
+}
+
+.flash_messages .notice{
+	background-color: #28a4b1;
+	color: white;
+	font-weight: bold;
+}

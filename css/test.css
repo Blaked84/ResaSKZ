@@ -1,0 +1,14 @@
+.one{
+	display: flex;
+	background-color: blue;
+	height: 100vh;
+	width: 100%;
+	
+}
+
+.two{
+	margin: auto;
+	background-color: red;
+	height: 50%;
+	width: 50%;
+}

@@ -14,10 +14,21 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
-
 //= require_tree .
 
 $(document).ready(function() {
+  $('img').error(function(){
+   $(this).attr('src', '/missing.png');
+  });
+
+  $(".button-collapse").sideNav();
+  $(".sidenav-button-collapse").sideNav();
+  $('.parallax').parallax();
+  $(".dropdown-button").dropdown();
+  $('.scrollspy').scrollSpy();
+  $('.collapsible').collapsible();
+  $('.scollapsible').collapsible();
+  $('.modal').modal();
 
  $('#hidden').hide(); //Initially form wil be hidden.
  $("#sidebare").addClass("hidesidebare");
@@ -31,22 +42,20 @@ $(document).ready(function() {
  });
 
 function togglemenu () {
-	if ($("#sidebare").hasClass("showsidebare")) {
-		$("#sidebare").addClass("hidesidebare");
-		$("#sidebare").removeClass("showsidebare");
-		 $("#mask").hide();
+        if ($("#sidebare").hasClass("showsidebare")) {
+                $("#sidebare").addClass("hidesidebare");
+                $("#sidebare").removeClass("showsidebare");
+                 $("#mask").hide();
 
-	}
-	else	{
-		$("#sidebare").removeClass("hidesidebare");
-		$("#sidebare").addClass("showsidebare");
-		 $("#mask").show();
+        }
+        else    {
+                $("#sidebare").removeClass("hidesidebare");
+                $("#sidebare").addClass("showsidebare");
+                 $("#mask").show();
 
-	
-	};
+
+        };
 
 
 }
-
-
 

@@ -1,0 +1,62 @@
+.navbar-fixed.hide-on-med-and-down
+  %nav{:role => "navigation"}
+    - if can? :see_admin, User
+      %a.sidenav-button-collapse{"data-activates" => "sidebare", :href => "#"}
+        %i.material-icons
+          menu
+    .nav-wrapper.container
+      = link_to root_path do
+        #logo-container.brand-logo.center.white-text{:href => "index.html"}
+          %img{:height => "113px",:src => "/assets/skz_2018_logo.png"}/
+      %ul.hide-on-med-and-down
+        %li
+          %a.dropdown-button{"data-activates" => "dropdownEvent", :href => "#"} L'évènement
+          %ul#dropdownEvent.dropdown-content
+            %li
+              = link_to "La Station", home_event_path
+            %li
+              = link_to "Un peu d'histoire", home_histoire_path
+            %li
+              = link_to "Les Anim's Pistes", home_pistes_path
+            %li
+              = link_to "Les Soirées", home_soirees_path
+        %li
+          = link_to "Le Pack", home_pack_path
+        %li
+          = link_to "La Team", home_team_path
+
+      %ul.right.hide-on-med-and-down
+        - if user_signed_in?
+          %li
+            = link_to current_user.nom_complet, current_user.admin? ? admin_index_path : dashboard_user_path(current_user)
+          %li
+            = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
+        - else
+          = link_to "Se connecter", new_user_session_path
+
+
+.navbar.hide-on-large-only
+  %nav{:role => "navigation"}
+    .nav-wrapper.container
+      %a#logo-container.brand-logo.center.white-text{:href => "index.html"}
+        %img{:height => "113px", :src => "/assets/skz_2018_logo.png"}/
+      %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
+        %li
+          %a.dropdown-button{:href => "index.html"} L'évènement
+        %ul
+          %li
+            %a{:href => "evenement.html"} La Station
+          %li
+            %a{:href => "histoire.html"} Un peu d'histoire
+          %li
+            %a{:href => "pistes.html"} Les Anim's Pistes
+          %li
+            %a{:href => "soirees.html"} Les Soirées
+        %li
+          %a{:href => "lepack.html"} Le Pack
+        %li
+          %a{:href => "signin.html"} Inscription
+        %li
+          %a{:href => "lateam.html"} La Team
+      %a.button-collapse{"data-activates" => "nav-mobile", :href => "#"}
+        %i.material-icons menu

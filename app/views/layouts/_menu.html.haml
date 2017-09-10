@@ -1,33 +1,13 @@
 -if user_signed_in?
-  -if can? :see_admin, User
-    %nav
-      .mw960p.center
-        .pl0
-          %ul.inline.pl0
-            //%il ResaSKZ
-            / %il= link_to "Accueil", root_path
-            / %il= link_to "Personnes", personnes_path
-            / %il= link_to "Produits", products_path
-            / %il= link_to "Evenements", events_path
-            / %il= link_to "Commandes", commandes_path
-            / %il= link_to "Comptes", users_path
-            / %il= link_to "Paiements", paiements_path
-            / %il= link_to "Admin", admin_index_path
-            %il.toggle-menu
-              = link_to "", :onclick => "togglemenu(); return false" do
-                %i.md-menu
-                Menu
-            %il.right= render 'layouts/user_widget'
-  -else
+  -unless can? :see_admin, User
     %nav
       .mw960p.center
         .pl0
           %ul.inline.pl0
             %il= link_to "ResaSKZ", dashboard_user_path(current_user)
-            %il.right= render 'layouts/user_widget'
 
   -if can? :see_admin, User
-    #sidebare.hidesidebare
+    %ul#sidebare.hidesidebare.side-nav
       #logo
         .ml1
           = link_to "ResaSKZ", dashboard_user_path(current_user)
@@ -53,7 +33,3 @@
 
           %li= link_to "Check-In", admin_check_in_path
           %li= link_to "Boulangerie", recap_boulangerie_chambres_path
-
-= link_to "", :onclick => "togglemenu(); return false" do
-  #mask.hide-by-default
-

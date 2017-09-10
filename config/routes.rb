@@ -1,6 +1,7 @@
 LooklaDev::Application.routes.draw do
   
 
+  get "static/index"
   resources :activites do
     member do
       get :export
@@ -23,7 +24,14 @@ LooklaDev::Application.routes.draw do
   get "admin/index"
   get "admin/check_in"
   get "admin/graph"
+  # Static
   get "home/index"
+  get "home/team"
+  get "home/pack"
+  get "home/pistes"
+  get "home/event"
+  get "home/histoire"
+  get "home/soirees"
   resources :commandes do
     member do
       post :add_product

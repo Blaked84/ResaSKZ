@@ -5,25 +5,26 @@
 	<%= javascript_include_tag "application"%>
 	<%= csrf_meta_tags %>
 	<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
-	<%= include_gon %>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Resa-SKZ</title>
+	<%= Gon::Base.render_data %>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+	<title>Skioz'Arts</title>
 </head>
 <body>
 
 	<%= render 'layouts/menu' %>
+	<%= render 'layouts/navbar' %>
 
-
+<!--
 	<% flash.each do |key, value| %>
 	<div id="notif" class="">
 		<div class="<%= key %> notif"><%= value %></div>
 	</div>
 	<% end %>
-<!-- 
+-->
+ 
 	<%= javascript_include_tag "application" %>
 	<%= custom_bootstrap_flash %>
- -->
- 	<div id="top"></div>
+
 	<div id="wrapper" class="mw960p center">
 		<%= yield %>
 	</div>

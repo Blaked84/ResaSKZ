@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Resa-SKZ</title>
+	<title>Skioz'Arts</title>
 	<%= stylesheet_link_tag    "application", media: "all"%>
 	<%= javascript_include_tag "application" %>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<%= csrf_meta_tags %>
+	<%= Gon::Base.render_data %>
 </head>
 <body>
 
 	<%if user_signed_in?%>
-	<%= render 'layouts/menu' %>
+		<%= render 'layouts/menu' %>
 	<%end%>
-
-	<% flash.each do |key, value| %>
-	<div id="notif" class="mw960p center pa1">
-		<div class="<%= key %> notif"><%= value %></div>
-	</div>
-	<% end %>
-	
-<!-- 	<%= javascript_include_tag "application" %>
-	<%= custom_bootstrap_flash %> -->
+		
+	<%= javascript_include_tag "application" %>
+	<%= custom_bootstrap_flash %>
 
 
-	<div id="wrapper2" class="center">
+	<div id="wrapper2">
+		<%= render 'layouts/navbar' %>
 		<%= yield %>
 	</div>
 

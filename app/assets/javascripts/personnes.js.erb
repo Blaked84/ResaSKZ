@@ -7,8 +7,10 @@ $(document).ready(function () {
 
 // calls action refreshing the partial
 function refreshPartial() {
+  if (Object.keys(gon).length > 0) {
 	uri = '/personnes/' + gon.personne_id + '/refresh_list_lits.js' 
-  $.ajax({
-    url: uri
- })
+        $.ajax({
+          url: uri
+        })
+  }
 }
