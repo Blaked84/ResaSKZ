@@ -9,7 +9,7 @@
 nav ul a,
 nav .brand-logo {
   color: #fff;
-  
+
 }
 
 p {
@@ -47,11 +47,11 @@ h5,h6{
     position: absolute;
     top: 0;
   }
-  
+
 }
 
 @media only screen and (max-width : 600px) {
-  
+
 }
 
 
@@ -81,6 +81,7 @@ footer.page-footer {
 
 .sfullscreen{
 	display: flex;
+    min-height: 100vh;
 }
 
 .centrer{
@@ -120,17 +121,35 @@ footer.page-footer {
 .illustration{
 	width:40%;
 	margin-left: 30%;
-	
+
 }
 
 .divider{
 	margin-bottom: 125px;
 }
 
+@media only screen and (max-width: 992px) {
+    .divider{
+        margin: 125px 0;
+    }
+}
+
 .btn-border{
 	border: white 2px solid;
 }
 
+.table-of-contents{
+    font-size: 12px;
+}
+
+#choix_masque{
+    display: none;
+}
+
+.large-row{
+    min-width: 700px;
+}
+
 .auth-dropdown-content{
-	min-width: 400px;
+    min-width: 400px; 
 }
