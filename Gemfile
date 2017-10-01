@@ -128,3 +128,7 @@ group :development do
 	gem 'hirb' #better cli table view for db
 
 end
+
+group :production do
+  gem 'pg'
+end
