@@ -38,25 +38,29 @@
 .navbar.hide-on-large-only
   %nav{:role => "navigation"}
     .nav-wrapper.container
-      %a#logo-container.brand-logo.center.white-text{:href => "index.html"}
-        %img{:height => "113px", :src => "/assets/skz_2018_logo.png"}/
+      = link_to root_path do
+        #logo-container.brand-logo.center.white-text{:href => "index.html"}
+          %img{:height => "113px",:src => "/assets/skz_2018_logo.png"}/
       %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
-        %li
-          %a.dropdown-button{:href => "index.html"} L'évènement
         %ul
           %li
-            %a{:href => "evenement.html"} La Station
+            = link_to "La Station", home_event_path
           %li
-            %a{:href => "histoire.html"} Un peu d'histoire
+            = link_to "Un peu d'histoire", home_histoire_path
           %li
-            %a{:href => "pistes.html"} Les Anim's Pistes
+            = link_to "Les Anim's Pistes", home_pistes_path
           %li
-            %a{:href => "soirees.html"} Les Soirées
+            = link_to "Les Soirées", home_soirees_path
         %li
-          %a{:href => "lepack.html"} Le Pack
+          = link_to "Le Pack", home_pack_path
         %li
-          %a{:href => "signin.html"} Inscription
-        %li
-          %a{:href => "lateam.html"} La Team
+          = link_to "La Team", home_team_path
+        - if user_signed_in?
+          %li
+            = link_to current_user.nom_complet, current_user.admin? ? admin_index_path : dashboard_user_path(current_user)
+          %li
+            = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
+        - else
+          = link_to "Se connecter", new_user_session_path
       %a.button-collapse{"data-activates" => "nav-mobile", :href => "#"}
         %i.material-icons menu

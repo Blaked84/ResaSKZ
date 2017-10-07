@@ -2,6 +2,7 @@
 <html>
 <head>
 	<title>Skioz'Arts</title>
+        <meta name="viewport" content="width=device-width, user-scalable=no">
 	<%= stylesheet_link_tag    "application", media: "all"%>
 	<%= javascript_include_tag "application" %>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -24,7 +25,7 @@
 	</div>
 
 	<%if ENV['RAILS_ENV'] == "development"%>
-	<div id="debug">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
+	<div id="debug" style="display: none;">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
 	<%end%>
 
 </body>
