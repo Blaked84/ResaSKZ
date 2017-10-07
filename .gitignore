@@ -15,7 +15,6 @@
 # Ignore all logfiles and tempfiles.
 /log/**
 /tmp
-Gemfile.lock
 /public/assets/**
 
 # Ignore file type
