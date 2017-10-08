@@ -81,7 +81,8 @@ footer.page-footer {
 
 .sfullscreen{
 	display: flex;
-    min-height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
 }
 
 .centrer{
