@@ -115,9 +115,13 @@ footer.page-footer {
 	background: url(../assets/backgrounds/soiree7.jpg);
 	background-size: cover;
   padding-top: 56px;
+  padding-bottom: 58px;
 	margin-top: 0px;
-  margin-bottom: 58px;
 	}
+
+.teaser{
+  max-width: 100%;
+}
 
 .illustration{
 	width:40%;
