@@ -114,8 +114,9 @@ footer.page-footer {
 #endScreen{
 	background: url(../assets/backgrounds/soiree7.jpg);
 	background-size: cover;
+  padding-top: 56px;
 	margin-top: 0px;
-	padding-top: 56px;
+  margin-bottom: 58px;
 	}
 
 .illustration{
@@ -151,5 +152,5 @@ footer.page-footer {
 }
 
 .auth-dropdown-content{
-    min-width: 400px; 
+    min-width: 400px;
 }
