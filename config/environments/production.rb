@@ -84,7 +84,7 @@ LooklaDev::Application.configure do
   # Precompile additional assets
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
-  config.action_mailer.default_url_options = { :host => 'resaskz.gadz.org' }
+  config.action_mailer.default_url_options = { :host => 'skz.gadz.org' }
   config.action_mailer.delivery_method = :sendmail
   # Defaults to:
   # config.action_mailer.sendmail_settings = {
