@@ -180,10 +180,10 @@ class User < ActiveRecord::Base
         :prenom => auth_data[:extra][:firstname],
         :nom => auth_data[:extra][:lastname],
         :email => auth_data[:info][:email],
-        :bucque => nil ,
-        :fams => nil ,
-        :promo => nil,
-        :type_pers => 'Gadz',
+        :bucque => auth_data[:extra][:buque_texte].nil? ? nil:auth_data[:extra][:buque_texte] ,
+        :fams => auth_data[:extra][:fams].nil? ? nil:auth_data[:extra][:fams] ,
+        :promo => (auth_data[:extra][:tbk].nil? or auth_data[:extra][:proms].nil?) ? nil:auth_data[:extra][:tbk]+auth_data[:extra][:proms],
+        :type_pers => auth_data[:extra][:type]=="gadz" ? 'Gadz':'NonGadz',
         :moderated => true,
         enregistrement_termine: false
         )
