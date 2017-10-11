@@ -160,6 +160,10 @@ def is_gadz?
 	%w(Gadz).include? self.type_pers
 end
 
+def is_pecs?
+	%w(Pec's).include? self.type_pers
+end
+
 
 # def assure?
 # 	return self.assurance 

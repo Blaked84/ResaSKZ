@@ -6,7 +6,16 @@
 .container
   .row
     .col.s12.light-blue.white-text.center
-      %h4 Mes informations principales (2/2)
+      - if current_page?(personne_infos_personne_path(@personne))
+        - if @personne.is_gadz?
+          %h4 Mes informations principales (2/2)
+        - else
+          %h4 Mes informations principales
+      - else
+        - if @personne.is_gadz?
+          %h4 Mes informations principales (3/3)
+        - else
+          %h4 Mes informations principales (2/2)
 
 .section.sfullscreen
   .container

@@ -1,0 +1,32 @@
+#myinfo1.divider.scrollspy
+  %br
+  %br
+  %br
+  %br
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Mes informations principales (2/3)
+.section.sfullscreen
+  .container
+    .row
+      %p Les informations ne seront sauvegardées qu'à la fin de l'inscription
+      %ul
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :bucque
+              =f.label :bucque, "Bucque (Vide si t'es .onscrit)"
+            .input-field.col.s10.m5
+              =f.text_field :fams
+              =f.label :fams
+        %li
+          .row
+            .input-field.col.s10.m4.offset-m4
+              =f.text_field :promo
+              =f.label :promo, "Promo ou hyp promo ex:(me215)"
+
+        %br/
+        %a.btn.waves-effect.waves-light.right{:href => "#myinfo2"}
+          Suivant
+          %i.material-icons.right send

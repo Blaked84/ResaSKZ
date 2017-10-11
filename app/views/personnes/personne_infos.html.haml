@@ -6,8 +6,14 @@
   .col.hide-on-small-only.m1
     .toc-wrapper.pinned
       %ul.section.table-of-contents
-        %li
-          %a{:href => "#myinfo2"} Mes infos
+        - if @personne.is_gadz?
+          %li
+            %a{:href => "#myinfo1"} Mes infos (1/2)
+          %li
+            %a{:href => "#myinfo2"} Mes infos (2/2)
+        - else
+          %li
+            %a{:href => "#myinfo2"} Mes infos
         %li
           %a{:href => "#contactperson"} Personne à prévenir
         %li

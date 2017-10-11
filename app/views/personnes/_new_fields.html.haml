@@ -1,3 +1,5 @@
+
+= render partial: "personnes/form_section/myinfo1", :locals => {:f => f, :reg => @reg_pers, personne: @personne} if @personne.is_gadz?
 = render partial: "personnes/form_section/myinfo2", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
 = render partial: "personnes/form_section/contactperson", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
 = render partial: "personnes/form_section/mensurations", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
