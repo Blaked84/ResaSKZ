@@ -54,9 +54,13 @@
               =f.label :gender, 'Sexe'
 
     %br/
-    - if (@parrain && current_page?(parrainer_user_path(@parrain))) or not reg
+    - if (@parrain && current_page?(parrainer_user_path(@parrain)))
       %button{type: "submit", class: "btn waves-effect waves-light right"}
         Confirmer
+        %i.material-icons.right send
+    - elsif (@user && current_page?(user_infos_user_path(@user)))
+      %a.btn.waves-effect.waves-light.right{:href => "#myinfo1"}
+        Suivant
         %i.material-icons.right send
     - else
       %a.btn.waves-effect.waves-light.right{:href => "#myinfo1"}
