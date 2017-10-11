@@ -288,9 +288,9 @@ table.table-auto {
 caption {
 	padding: 10px;
 	color: #555;
-	font-style: italic;	
+	font-style: italic;
 }
-table { 
+table {
 	border: 1px solid #ccc;
 }
 tr > * + * {
@@ -308,8 +308,8 @@ td {
 
 /* alternate tables */
 .alternate { border: 0; }
-.alternate tbody { 
-	border: 1px solid #ccc; 
+.alternate tbody {
+	border: 1px solid #ccc;
 }
 .alternate thead tr > * + * {
 	border-left: 0;
@@ -319,7 +319,7 @@ td {
 }
 
 /* alternate-vert tables */
-.alternate-vert { 
+.alternate-vert {
 	border: 0;
 	border-right: 1px solid #ccc;
 }
@@ -346,7 +346,7 @@ td {
 /* ----------------------------- */
 
 /* thanks to HTML5boilerplate,
-* github.com/nathansmith/formalize 
+* github.com/nathansmith/formalize
 * and www.sitepen.com
 */
 
@@ -370,7 +370,7 @@ label,
 	font-family: inherit;
 	font-size: inherit;
 }
-label { 
+label {
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
@@ -492,10 +492,10 @@ input[type='submit']::-moz-focus-inner {
 	content: "\2716";
 	font-weight: bold;
 }
-.icon-arrow1:before, 
+.icon-arrow1:before,
 .icon-arrow1.after:after {
 	content: "\2192";
-	position: relative; 
+	position: relative;
 		top: -0.15em;
 }
 .icon-arrow2:before,
@@ -511,7 +511,7 @@ input[type='submit']::-moz-focus-inner {
 	content: "\2039";
 	font-weight: bold;
 	font-size: 1.6em;
-	position: relative; 
+	position: relative;
 		top: -0.15em;
 }
 .icon-bracket2:before,
@@ -519,7 +519,7 @@ input[type='submit']::-moz-focus-inner {
 	content: "\203A";
 	font-weight: bold;
 	font-size: 1.6em;
-	position: relative; 
+	position: relative;
 		top: -0.15em;
 }
 .icon-up:before,
@@ -684,11 +684,6 @@ input[type='submit']::-moz-focus-inner {
 		float: none;
 		vertical-align: top;
 	}
-	.large-row {
-		display: table;
-		table-layout: fixed;
-		width: 100% !important;
-	}
 	.large-col {
 		display: table-cell;
 		vertical-align: top;
@@ -707,7 +702,7 @@ input[type='submit']::-moz-focus-inner {
 		width: auto !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
-		border: 0;		
+		border: 0;
 	}
 
 	/* margins for large (l) screens */
@@ -722,10 +717,10 @@ input[type='submit']::-moz-focus-inner {
 	.w800p,
 	.w960p,
 	.mw960p,
-	.small-wauto { 
+	.small-wauto {
 		width: auto;
 		float: none;
-		} 
+		}
 
 	/* you shall not pass */
 	div, textarea, table, td, th, code, pre, samp {
@@ -770,7 +765,7 @@ input[type='submit']::-moz-focus-inner {
 		width: auto !important;
 		margin-left: 0 !important;
 		margin-right: 0 !important;
-		border: 0;		
+		border: 0;
 	}
 	/* margins for small (s) screens */
 	.small-ma0 { margin: 0 !important; }
@@ -796,7 +791,7 @@ input[type='submit']::-moz-focus-inner {
 		width: auto;
 		float: none;
 	}
-	.row { 
+	.row {
 		display: block !important;
 		width: 100% !important;
 	}
@@ -834,7 +829,7 @@ input[type='submit']::-moz-focus-inner {
 	.tiny-w50 { width: 50% !important; }
 	.tiny-w66 { width: 66.6666% !important; }
 	.tiny-w75 { width: 75% !important; }
-	.tiny-w100 { 
+	.tiny-w100 {
 		display: block !important;
 		float: none !important;
 		clear: none !important;
@@ -936,12 +931,12 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 }
 
 .tree li {
-	float: left; 
+	float: left;
 	text-align: center;
 	list-style-type: none;
 	position: relative;
 	padding: 20px 5px 0 5px;
-	
+
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -960,7 +955,7 @@ https://github.com/yui/pure/blob/master/LICENSE.md
 	border-left: 1px solid #ccc;
 }
 
-/*We need to remove left-right connectors from elements without 
+/*We need to remove left-right connectors from elements without
 any siblings*/
 .tree li:only-child::after, .tree li:only-child::before {
 	display: none;
@@ -969,7 +964,7 @@ any siblings*/
 /*Remove space from the top of single children*/
 .tree li:only-child{ padding-top: 0;}
 
-/*Remove left connector from first child and 
+/*Remove left connector from first child and
 right connector from last child*/
 .tree li:first-child::before, .tree li:last-child::after{
 	border: 0 none;
@@ -1003,11 +998,11 @@ right connector from last child*/
 	font-family: arial, verdana, tahoma;
 	font-size: 11px;
 	display: inline-block;
-	
+
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	
+
 	transition: all 0.5s;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
@@ -1019,9 +1014,9 @@ right connector from last child*/
 	background: #c8e4f8; color: #000; border: 1px solid #94a0b4;
 }
 /*Connector styles on hover*/
-.tree li a:hover+ul li::after, 
-.tree li a:hover+ul li::before, 
-.tree li a:hover+ul::before, 
+.tree li a:hover+ul li::after,
+.tree li a:hover+ul li::before,
+.tree li a:hover+ul::before,
 .tree li a:hover+ul ul::before{
 	border-color:  #94a0b4;
 }
@@ -1055,7 +1050,7 @@ z-index: 100001;
 	border-radius:2px;
 	display:inline;
 	color:#FFF;
-	
+
 }
 
 body{background: #ecf0f1;}
@@ -1093,7 +1088,7 @@ body{background: #ecf0f1;}
 }
 
 .box{
-	
+
 	/*border: 2px solid #c0392b;*/
 	padding: 0.3em 1em;
 	border-radius: 3px;
@@ -1104,4 +1099,3 @@ body{background: #ecf0f1;}
 .alert{
 	background-color: #c0392b;
 }
-

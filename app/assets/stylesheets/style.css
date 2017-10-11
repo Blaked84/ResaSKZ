@@ -152,10 +152,6 @@ footer.page-footer {
     display: none;
 }
 
-.large-row{
-    min-width: 700px;
-}
-
 .auth-dropdown-content{
     min-width: 400px;
 }
