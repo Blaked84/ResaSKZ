@@ -12,7 +12,7 @@ class Personne < ActiveRecord::Base
 	belongs_to :user
         # Mensurations
 	belongs_to :taillevetement
-	belongs_to :tourtete
+	belongs_to :tour_tete
         belongs_to :niveau_ski
 
 	has_many :commandes
@@ -70,6 +70,8 @@ class Personne < ActiveRecord::Base
 	validates :user, presence: true
 	validates :genre, presence: true
 	validates :taillevetement, presence: true
+	validates :tour_tete, presence: true
+	validates :niveau_ski, presence: true
 
 ###############################################################################
 	  # EXTRACT FROM SCHEMA

@@ -229,6 +229,8 @@ private
               :pointure,
               :taille,
               :taillevetement_id,
+              :tour_tete_id, 
+              :niveau_ski_id,
               :pprenom,
               :pnom,
               :plienparente,
