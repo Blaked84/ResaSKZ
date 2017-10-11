@@ -19,20 +19,13 @@
               =f.label :pointure
         %li
           .input-field.col.s12.m4
-            =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}, :prompt => 'Taille (S/M/L)'
+            =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}, :prompt => 'Taille (S/M/L):'
         %li
           .input-field.col.s12.m4
-            %select
-              %option{:disabled => "disabled", :selected => "selected", :value => ""} Tour de tête :
-              %option{:value => "1"} 56-59 cm
-              %option{:value => "2"} 59-62 cm
+            =f.select :tour_tete_id, TourTete.all.map{|t| [t.mesure,t.id]}, :prompt => 'Tour de tête:'
         %li
           .input-field.col.s12.m4
-            %select
-              %option{:disabled => "disabled", :selected => "selected", :value => ""} Niveau de ski :
-              %option{:value => "1"} Débutant
-              %option{:value => "2"} Intermédiaire
-              %option{:value => "3"} Avancé
+            =f.select :niveau_ski_id, NiveauSki.all.map{|t| [t.nom,t.id]}, :prompt => 'Niveau de ski:'
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#les_anims"}
       Suivant

@@ -33,16 +33,16 @@
         %li
           .row
             .input-field.col.s10.m5
-              =f.label :prenom
-              =f.text_field :prenom
+              =f.label :first_name, 'Prénom'
+              =f.text_field :first_name
             .input-field.col.s10.m5
-              =f.label :nom
-              =f.text_field :nom
+              =f.label :last_name, 'Nom'
+              =f.text_field :last_name
         %li
           .row
             .input-field.col.s10
-              =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}
-              =f.label :genre_id
+              =f.select :gender, Genre.all.map{|g| [g.nom_complet,g.nom_cas]}
+              =f.label :gender, 'Sexe'
 
         - if @personne.is_gadz?
           %li

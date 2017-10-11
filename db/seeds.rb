@@ -39,10 +39,21 @@ puts "Genres"
 Genre.create(:sexe => "H", :nom_cas => "male", :nom_complet => "Homme")
 Genre.create(:sexe => "F", :nom_cas => "female", :nom_complet => "Femme")
 
+#Mensuration
 puts "taillevetements"
 listevet=["S","M","L","XL","XXL"]
 listevet.each do |c|
 	Taillevetement.create(:name =>c)
+end
+puts "tour tete"
+listetrtete=["56-59 cm","59-62 cm"]
+listetrtete.each do |c|
+	TourTete.create(:mesure =>c)
+end
+puts "Niveau SKI"
+listeniveau=["Débutant","Intermédiaire","Avancé"]
+listeniveau.each do |c|
+	NiveauSki.create(:nom =>c)
 end
 
 puts "tbk"

@@ -10,7 +10,11 @@ class Personne < ActiveRecord::Base
 	belongs_to :genre
 	has_one :usertype
 	belongs_to :user
+        # Mensurations
 	belongs_to :taillevetement
+	belongs_to :tourtete
+        belongs_to :niveau_ski
+
 	has_many :commandes
 	#has_and_belongs_to_many :chambres
 	has_many :activites, through: :activites_personnes
