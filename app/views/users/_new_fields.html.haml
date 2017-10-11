@@ -5,10 +5,16 @@
   %br
   .row
     .col.s12.light-blue.white-text.center
-      - if @personne.is_gadz?
-        %h4 Mes informations principales (1/3)
+      - if not reg
+        - if current_page?(edit_user_path(@user))
+          %h4 Mes informations principales
+        - else
+          %h4 Mes informations principales (1/3)
       - else
-        %h4 Mes informations principales (1/2)
+        - if current_page?(parrainer_user_path(@parrain))
+          %h4 Mes informations principales
+        - else
+          %h4 Mes informations principales (1/2)
 
 .section.sfullscreen
   .container
@@ -48,12 +54,12 @@
               =f.label :gender, 'Sexe'
 
     %br/
-    - if @personne.is_gadz?
-      %a.btn.waves-effect.waves-light.right{:href => "#myinfo1"}
-        Suivant
+    - if (@parrain && current_page?(parrainer_user_path(@parrain))) or not reg
+      %button{type: "submit", class: "btn waves-effect waves-light right"}
+        Confirmer
         %i.material-icons.right send
     - else
-      %a.btn.waves-effect.waves-light.right{:href => "#myinfo2"}
+      %a.btn.waves-effect.waves-light.right{:href => "#myinfo1"}
         Suivant
         %i.material-icons.right send
 
@@ -61,6 +67,7 @@
   .section.sfullscreen
     .container
       .row
+        %h3 Administration
         %ul
           %li
             .row
@@ -72,15 +79,14 @@
               .input-field.col.s10
                 =f.check_box :moderated
                 =f.label :moderated, 'Inscription Valide'
+   
           %li
             .row
               .input-field.col.s10
-                =f.check_box :moderated
-                =f.label :moderated, 'Inscription Valide'
-          %li
-            .row
-              .input-field.col.s10
-                =label "roles[#{r.name}]",r.name
-                =check_box_tag "roles[#{r.name}]", "1", !!@roles[r.name]
+                %h4 Roles:
+                - Role.all.each do |r|
+                  %p
+                    =check_box_tag "roles[#{r.name}]", "1", !!@roles[r.name], id: "user_roles_#{r.name}"
+                    =f.label "roles_#{r.name}",r.name
 
 

@@ -1,18 +1,25 @@
 %div.top-info.pa1
   %h1 Parrainer un ami
 %div.pa1.fiche.brdr-b
-  = form_for @user, :url => parrainer_user_path(@parrain), :html => {:class => "pure-form pure-form-aligned"}, :method => :post do |f|
-    - if @user.errors.any?
-      #error_explanation
-        %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-        %ul
-          - @user.errors.full_messages.each do |msg|
-            %li= msg
+  .row
+    .col.m11
+      = form_for @user, :url => parrainer_user_path(@parrain), :html => {:class => "col s12"}, :method => :post do |f|
+        - if @user.errors.any?
+          #error_explanation
+            %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+            %ul
+              - @user.errors.full_messages.each do |msg|
+                %li= msg
+   
+        Vous avez la possibilité de parrainer un ami.
+    
+        = render :partial => "new_fields", :locals => {:f => f, :reg => true}
 
-    Vous avez la possibilité de parrainer un ami.
+      = link_to 'Retour', dashboard_user_path(@parrain)
 
-    = render :partial => "form_fields", :locals => {:f => f, :reg => true}
-    .actions
-      = f.submit 'Save', :class => "pure-button pure-button-success"
+    .col.hide-on-small-only.m1
+      .toc-wrapper.pinned
+        %ul.section.table-of-contents
+          %li
+            %a{:href => "#myinfouser"} Mes infos
 
-  = link_to 'Retour', dashboard_user_path(@parrain)

@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
     if current_user
       unless current_user.moderated
         signed_out = (Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name))
-        return redirect_to root_path, alert: "Votre compte n'a pas encore été accépté par les administrateurs"
+        return redirect_to root_path, alert: "Votre compte n'a pas encore été accepté par les administrateurs"
     end
     end
 

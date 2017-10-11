@@ -6,7 +6,11 @@
 .container
   .row
     .col.s12.light-blue.white-text.center
-      %h4 Mes informations principales (2/3)
+      - if (@user.nil? && current_page?(personne_infos_personne_path(@personne))) or (current_page?(new_personne_user_path(@user)))
+        %h4 Mes informations principales (1/2)
+      - else
+        %h4 Mes informations principales (2/3)
+
 .section.sfullscreen
   .container
     .row
@@ -44,11 +48,11 @@
               .input-field.col.s10.m5
                 =f.text_field :fams
                 =f.label :fams
-        %li
-          .row
-            .input-field.col.s10.m4.offset-m4
-              =f.text_field :promo
-              =f.label :promo, "Promo ou hyp promo ex:(me215)"
+          %li
+            .row
+              .input-field.col.s10.m4.offset-m4
+                =f.text_field :promo
+                =f.label :promo, "Promo ou hyp promo ex:(me215)"
 
         %br/
         %a.btn.waves-effect.waves-light.right{:href => "#myinfo2"}
