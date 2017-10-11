@@ -1,11 +1,4 @@
 -if user_signed_in?
-  -unless can? :see_admin, User
-    %nav
-      .mw960p.center
-        .pl0
-          %ul.inline.pl0
-            %il= link_to "ResaSKZ", dashboard_user_path(current_user)
-
   -if can? :see_admin, User
     %ul#sidebare.hidesidebare.side-nav
       #logo
