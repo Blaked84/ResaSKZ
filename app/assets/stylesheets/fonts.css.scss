@@ -71,3 +71,31 @@
     font-style: normal;
 
 }
+
+@font-face {
+    font-family: 'Responsive';
+    src: font-url('responsive/Responsive-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ResponsiveLight';
+    src: font-url('responsive/Responsive-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ResponsiveBold';
+    src: font-url('responsive/Responsive-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ResponsiveSemiBold';
+    src: font-url('responsive/Responsive-SemiBold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
