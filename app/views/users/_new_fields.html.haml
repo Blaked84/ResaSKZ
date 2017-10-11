@@ -38,11 +38,27 @@
             .input-field.col.s10.m5
               =f.label :nom
               =f.text_field :nom
+        %li
+          .row
+            .input-field.col.s10
+              =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}
+              =f.label :genre_id
+
+        - if @personne.is_gadz?
           %li
             .row
-              .input-field.col.s10
-                =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}
-                =f.label :genre_id
+              .input-field.col.s10.m5
+                =f.text_field :bucque
+                =f.label :bucque, "Bucque (Vide si t'es .onscrit)"
+              .input-field.col.s10.m5
+                =f.text_field :fams
+                =f.label :fams
+          %li
+            .row
+              .input-field.col.s10.m4.offset-m4
+                =f.text_field :promo
+                =f.label :promo, "Promo ou hyp promo ex:(me215)"
+
 
 - if can? :see_admin, User
   .section.sfullscreen
@@ -62,9 +78,16 @@
           %li
             .row
               .input-field.col.s10
+                =f.check_box :moderated
+                =f.label :moderated, 'Inscription Valide'
+          %li
+            .row
+              .input-field.col.s10
                 =label "roles[#{r.name}]",r.name
-                =check_box_tag "roles[#{r.name}]", "1", !!@roles[r.name]              
-
-=f.hidden_field :user_id
+                =check_box_tag "roles[#{r.name}]", "1", !!@roles[r.name]
 
 
+        %br/
+        %a.btn.waves-effect.waves-light.right{:href => "#myinfo2"}
+          Suivant
+          %i.material-icons.right send
