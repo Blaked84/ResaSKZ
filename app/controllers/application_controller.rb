@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
         return redirect_to user_infos_user_url(user), :notice => "Veuillez renseigner vos informations d'inscription avant de continuer" unless user.inscription_terminee
 
         user.personnes.each do |p|
-          return redirect_to personne_infos_personne_url(p), :alert => "Vous n'avez pas fini de remplir vos information d'inscription" unless p.enregistrement_termine
+          return redirect_to personne_infos_personne_url(p), :alert => "Vous n'avez pas fini de remplir vos informations d'inscription" unless p.enregistrement_termine
         end
 
         nil
