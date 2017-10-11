@@ -59,7 +59,7 @@ gem "omniauth-cas", :git => "https://github.com/loocla/omniauth-cas.git", :branc
 
 # Authorisation
 gem 'cancan'
-gem 'rolify', '~> 3.2.0'
+gem 'rolify', '~> 4.0.0'
 
 gem 'haml-rails'
 gem 'configurable_engine'
