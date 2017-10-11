@@ -1,0 +1,39 @@
+#mensurations.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Tes mensurations
+
+.section.sfullscreen
+  .container
+    .row
+      %h5 Je donne mes mensurations pour réserver mon matériel :
+      %ul
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :taille
+              =f.label :taille
+            .input-field.col.s10.m5
+              =f.text_field :pointure
+              =f.label :pointure
+        %li
+          .input-field.col.s12.m4
+            =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}, :prompt => 'Taille (S/M/L)'
+        %li
+          .input-field.col.s12.m4
+            %select
+              %option{:disabled => "disabled", :selected => "selected", :value => ""} Tour de tête :
+              %option{:value => "1"} 56-59 cm
+              %option{:value => "2"} 59-62 cm
+        %li
+          .input-field.col.s12.m4
+            %select
+              %option{:disabled => "disabled", :selected => "selected", :value => ""} Niveau de ski :
+              %option{:value => "1"} Débutant
+              %option{:value => "2"} Intermédiaire
+              %option{:value => "3"} Avancé
+    %br/
+    %a.btn.waves-effect.waves-light.right{:href => "#les_anims"}
+      Suivant
+      %i.material-icons.right send

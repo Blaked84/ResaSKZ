@@ -1,0 +1,45 @@
+#contactperson.divider.scrollspy
+  %br
+  %br
+  %br
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Personne à prévenir en cas d'urgence
+
+.section.sfullscreen
+  .container
+    .row
+      %ul
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :pnom
+              =f.label :pnom
+            .input-field.col.s10.m5
+              =f.text_field :pprenom
+              =f.label :pprenom
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :plienparente
+              =f.label :plienparente
+            .input-field.col.s10.m5
+              =f.text_field :pphone
+              =f.label :pphone
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :padresse
+              =f.label :padresse
+            .input-field.col.s10.m5
+              =f.text_field :pcomplement
+              =f.label :pcomplement
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :pcodepostal
+              =f.label :pcodepostal
+            .input-field.col.s10.m5
+              =f.text_field :pville
+              =f.label :pville

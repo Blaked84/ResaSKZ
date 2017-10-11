@@ -1,0 +1,48 @@
+#myinfo2.divider.scrollspy
+  %br
+  %br
+  %br
+  %br
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Mes informations principales (2/2)
+
+.section.sfullscreen
+  .container
+    #signin_form_student.row
+      %p Les informations ne seront sauvegardées qu'à la fin de l'inscription
+      %ul
+        %li
+          .row
+            .input-field.col.s10
+              =f.date_field :naissance
+
+        %li
+          .row
+            .input-field.col.s10
+              =f.text_field :phone
+              =f.label :phone
+        %li
+          .row
+            .input-field.col.s10
+              =f.text_field :adresse
+              =f.label :adresse
+        %li
+          .row
+            .input-field.col.s10
+              =f.text_field :complement
+              =f.label :complement
+        %li
+          .row
+            .input-field.col.s10.m5
+              =f.text_field :codepostal
+              =f.label :codepostal
+            .input-field.col.s10.m5
+              =f.text_field :ville
+              =f.label :ville
+
+        %br/
+        %a.btn.waves-effect.waves-light.right{:href => "#contactperson"}
+          Suivant
+          %i.material-icons.right send

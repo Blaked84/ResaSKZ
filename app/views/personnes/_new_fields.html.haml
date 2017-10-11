@@ -1,0 +1,30 @@
+= render partial: "personnes/form_section/myinfo1", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
+= render partial: "personnes/form_section/myinfo2", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
+= render partial: "personnes/form_section/contactperson", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
+= render partial: "personnes/form_section/mensurations", :locals => {:f => f, :reg => @reg_pers, personne: @personne}
+
+
+- if can? :see_admin, User
+  .section.sfullscreen
+    .container
+      .row
+        %ul
+          %li
+            .row
+              .input-field.col.s10
+                =f.text_area :commentaires_admin
+                =f.label :commentaires_admin
+          %li
+            .row
+              .input-field.col.s10
+                =f.check_box :documentassurance
+                =f.label :documentassurance
+          %li
+            .row
+              .input-field.col.s10
+                =f.check_box :moderated
+                =f.label :moderated
+
+=f.hidden_field :user_id
+
+

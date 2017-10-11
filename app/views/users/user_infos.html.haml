@@ -1,4 +1,13 @@
-%div.top-info.pa1
-	%h1 Edition de mes informations
-%div.fiche.pa1.brdr-b
-	= render 'form_pub'
+%br
+%br
+%br
+.row
+  .col.m11
+    = render 'form_pub'
+
+
+  .col.hide-on-small-only.m1
+    .toc-wrapper.pinned
+      %ul.section.table-of-contents
+        %li
+          %a{:href => "#myinfo"} Mes infos

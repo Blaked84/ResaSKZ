@@ -25,10 +25,10 @@
  
 	<%= javascript_include_tag "application" %>
 	<%= custom_bootstrap_flash %>
-
-	<div id="wrapper" class="mw960p center">
-		<%= yield %>
-	</div>
+       
+        <div id="wrapper">
+        	<%= yield %>
+        </div>
 
 	<%if ENV['RAILS_ENV'] == "development"%>
 	<div id="debug" style="display:none;">ENV: <%= ENV['RAILS_ENV'] %><br/><%= debug(params) %><%= request.headers["X-Real-IP"] %></div>
@@ -51,8 +51,8 @@
 	</script>
 	<%end%>
 
-	<div class='footer center txtcenter'>
-	157 & 84 me211 - <a href="http://skz.ueensam.org/" >skz.ueensam.org</a> - Contact : skz.ue@gadz.org
+	<div class='footer center txtcenter container'>
+	157 & 84 Me211 - 144 & 53 Me215 - <a href="http://skz.ueensam.org/" >skz.ueensam.org</a> - Contact : skz.ue@gadz.org
 	</div>
 
 </body>
