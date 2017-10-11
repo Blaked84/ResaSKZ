@@ -10,7 +10,7 @@ Devise.setup do |config|
   require "omniauth-cas"
 
   config.omniauth :cas, name: "GadzOrg",
-                  host:     ENV["CAS_PROVIDER_URL"],
+                  host:    Rails.env.production? ? ENV["CAS_PROVIDER_URL"]:'auth-dev.gadz.org:443' ,
                   login_url: '/cas/login',
                   logout_url: '/cas/logout',
                   service_validate_url: '/cas/serviceValidate',

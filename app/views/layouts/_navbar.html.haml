@@ -32,7 +32,7 @@
           %li
             = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
         - else
-          = link_to "Se connecter", new_user_session_path
+          = link_to "Se connecter", root_path, class: "disabled"
 
 
 .navbar.hide-on-large-only
@@ -62,6 +62,6 @@
             = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
         - else
           %li
-            = link_to "Se connecter", new_user_session_path
+            = link_to "Se connecter", root_path, class: "disabled"
       %a.button-collapse{"data-activates" => "nav-mobile", :href => "#"}
         %i.material-icons menu
