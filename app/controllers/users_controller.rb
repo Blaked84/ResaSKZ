@@ -144,7 +144,7 @@ class UsersController < ApplicationController
         render action: 'cgu'
       end
     else
-      flash.now[:alert] = "Une erreur a eu lieu lors de la sauvegarde. Si l'erreur persiste, contactez un adminnistrateur"
+      flash.now[:alert] = "Une erreur a eu lieu lors de la sauvegarde. Si l'erreur persiste, contactez un administrateur"
       render action: 'cgu'
     end
   end
@@ -189,9 +189,42 @@ class UsersController < ApplicationController
       @transportsar.destroy
     end
 
-    # Options
-    @options = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["4"]["id"],
-                                                     nombre: 1)
+    # Options Pack food
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["4"].present?
+      @options = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["4"]["id"],
+                                                    nombre: 1)
+    end
+    # Options autres packs
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["5"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["5"]["product_id"].count > 1
+        @baguette = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["5"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["6"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["6"]["product_id"].count > 1
+        @croissant = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["6"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["7"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["7"]["product_id"].count > 1
+        @pain_chocolat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["7"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["8"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["8"]["product_id"].count > 1
+        @saucisson = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["8"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["9"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["9"]["product_id"].count > 1
+        @fromage = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["9"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
 
     @events = Event.all
     authorize! :user_infos, @user
@@ -215,7 +248,7 @@ class UsersController < ApplicationController
               @user.add_role r if ok
             end
         end
-        sign_in(@user, :bypass => true)
+        sign_in(@user, :bypass_sign_in => true)
         format.html { redirect_to dashboard_user_url @user, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
@@ -429,11 +462,15 @@ class UsersController < ApplicationController
                                                       :pcodepostal,
                                                       :pville,
                                                       :commentaires,
+                                                      :user_id,
                                                       :commandes_attributes => [
                                                            :event_id,
                                                            :tbk_id,
                                                            :glisse_id,
-                                                           :products_attributes => [:id,:nombre]
+                                                           :products_attributes => [:id,
+                                                                                    :nombre,
+                                                                                    :product_id => []
+                                                                                   ]
                                                       ]
                                                       )
     end

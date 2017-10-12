@@ -37,4 +37,12 @@ class Product < ActiveRecord::Base
 
 	end
 
+        def product_id
+          return self.id
+        end
+
+        def oui
+          return "Oui"
+        end
+
 end
