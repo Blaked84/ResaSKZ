@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
       @products = Product.all.where(event_id: params[:event_id]).sort_by{|a| a.name}
       @evenement = Event.find(params[:event_id]).name
     else
-      @products = Product.all.sort_by{|a| a.name}
+      @products = Product.all.order(:name)
     end
     authorize! :read, @products
     @categories = Categorie.all
