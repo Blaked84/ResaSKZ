@@ -23,4 +23,11 @@
           %h6 6. Les Goodies ! Surprise...
     .row
       .input-field.col.s12.m4.offset-m4
-        =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Pack de base")).map{|t| [t.name,t.id]}
+        =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Pack de base")).map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, prompt: "Je choisis mon pack :"
+
+
+    %br/
+    %a.btn.waves-effect.waves-light.right{:href => "#le_transport"}
+      Suivant
+      %i.material-icons.right send
+

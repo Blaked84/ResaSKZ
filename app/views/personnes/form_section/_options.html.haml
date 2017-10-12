@@ -1,0 +1,22 @@
+#les_options.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Les options
+.section.sfullscreen
+  .container
+    = fc.fields_for :products do |fp|
+      .row
+        %h6{:style => "color: #f99c43;"} Pack food :
+        = fp.collection_radio_buttons :id, Product.where(categorie: Categorie.second), :id, :name, {}, multiple: false
+
+    .row
+      %br/
+      %h5{:style => "color: #f99c43;"} Et maintenant, fais toi plaisir !
+      %br/
+      - Product.where(categorie: Categorie.find_by_nom("Boulangerie")).each do |p|
+        = fc.fields_for :products do |fp|
+          %h6 #{p.name} : #{p.description}
+          = fp.check_box :id, {}, true, false
+          = fp.label "id", p.name
+          %br/

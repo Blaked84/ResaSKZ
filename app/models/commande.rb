@@ -9,9 +9,9 @@ class Commande < ActiveRecord::Base
 	belongs_to :personne
 	belongs_to :event
 	has_many :products, through: :commande_products
-        accepts_nested_attributes_for :products, :reject_if => :reject_nested, :allow_destroy => true
+        accepts_nested_attributes_for :products, :allow_destroy => true
 
-	has_many :commande_products, dependent: :destroy
+	has_many :commande_products, dependent: :destroy        
 
 	has_many :paiements
 
@@ -25,6 +25,8 @@ class Commande < ActiveRecord::Base
 	validates :personne, :presence => true
 	validates :event, :presence => true
 	validates :event, uniqueness: { scope: :personne, message: "Une seule commande par evenement par personne" }
+#        validates :products, :presence => true
+        
 
 	def ok?
 		return false

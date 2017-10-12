@@ -168,8 +168,31 @@ class UsersController < ApplicationController
     @commandes = @personne.commandes.build(event_id: referant_params["commandes_attributes"]["0"]["event_id"],
                                           tbk_id: referant_params["commandes_attributes"]["0"]["tbk_id"],
                                           glisse_id: referant_params["commandes_attributes"]["0"]["glisse_id"])
-    @produits = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
-                                                   nombre: 1)
+    # Packs
+    @packs = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
+                                                     nombre: 1)
+    # Transports
+    @transportsar = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["1"]["id"],
+                                                     nombre: 1)
+    @transportsa = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["2"]["id"],
+                                                     nombre: 1)
+    @transportsr = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["3"]["id"],
+                                                     nombre: 1)
+    if @transportsar.present? && @transportsar.nombre > 0
+      if @transportsa.present? && @transportsa.nombre > 0
+        @transportsa.destroy
+      end
+      if @transportsr.present? && @transportsr.nombre > 0
+        @transportsr.destroy
+      end
+    elsif (@transportsa.present? && @transportsa.nombre > 0) or (@transportsr.present? && @transportsr.present?)
+      @transportsar.destroy
+    end
+
+    # Options
+    @options = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["4"]["id"],
+                                                     nombre: 1)
+
     @events = Event.all
     authorize! :user_infos, @user
 

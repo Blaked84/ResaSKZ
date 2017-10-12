@@ -1,4 +1,4 @@
-= f.fields_for :commandes, :html => {:class => "pure-form pure-form-aligned"} do |fc|
+= f.fields_for :commandes do |fc|
   #ma_commande.divider.scrollspy
   .container
     .row
@@ -24,3 +24,7 @@
 
   = fc.fields_for :products do |fp|
     = render partial: "personnes/form_section/pack", :locals => {:fp => fp, :reg => reg, personne: @personne}
+
+  = render partial: "personnes/form_section/transport", :locals => {:fc => fc, :reg => reg, personne: @personne}
+
+  = render partial: "personnes/form_section/options", :locals => {:fc => fc, :reg => reg, personne: @personne}
