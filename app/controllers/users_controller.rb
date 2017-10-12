@@ -155,6 +155,9 @@ class UsersController < ApplicationController
     redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
     @roles = Hash[@user.roles.map{|r| [r.name, true]}]
+    @commandes = @personne.commandes.build
+    @produits = @commandes.products.build
+    @events = Event.all
     authorize! :user_infos, @user
   end
 
@@ -162,6 +165,12 @@ class UsersController < ApplicationController
     set_user
     redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
+    @commandes = @personne.commandes.build(event_id: referant_params["commandes_attributes"]["0"]["event_id"],
+                                          tbk_id: referant_params["commandes_attributes"]["0"]["tbk_id"],
+                                          glisse_id: referant_params["commandes_attributes"]["0"]["glisse_id"])
+    @produits = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
+                                                   nombre: 1)
+    @events = Event.all
     authorize! :user_infos, @user
 
     @personne.type_pers ||= "Pec's"
@@ -171,9 +180,7 @@ class UsersController < ApplicationController
       @user.gender="male"
       @user.save!(:validate=>false)
     end
-
     respond_to do |format|
-
       if @user.update(user_params_pub) && @personne.sync_from_user(@user, without_save: true) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
       # if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
@@ -398,7 +405,13 @@ class UsersController < ApplicationController
                                                       :pcomplement,
                                                       :pcodepostal,
                                                       :pville,
-                                                      :commentaires
+                                                      :commentaires,
+                                                      :commandes_attributes => [
+                                                           :event_id,
+                                                           :tbk_id,
+                                                           :glisse_id,
+                                                           :products_attributes => [:id,:nombre]
+                                                      ]
                                                       )
     end
 

@@ -1,0 +1,26 @@
+#mon_pack.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Mon pack
+.section.sfullscreen
+  .container
+    .row
+      %ul#monpack_infos
+        %li
+          %h3{:style => "color: #f99c43;"} Le Pack de base contient :
+        %li
+          %h6 1. Le logement dans la résidence au pied des pistes. Taxes de séjour comprises.
+        %li
+          %h6 2. Le Pack Food pour 7 jours (matin, midi et soir) quelques soit ton régime alimentaire.
+        %li
+          %h6 3. Le forfait domaine pour skier pendant tout le séjour.
+        %li
+          %h6 4. Les animations sur les pistes : compétitions, barbecue... (hors activités spéciales payantes)
+        %li
+          %h6 5. Les animations soirées (hors RCC).
+        %li
+          %h6 6. Les Goodies ! Surprise...
+    .row
+      .input-field.col.s12.m4.offset-m4
+        =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Pack de base")).map{|t| [t.name,t.id]}

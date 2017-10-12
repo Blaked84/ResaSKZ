@@ -1,0 +1,26 @@
+= f.fields_for :commandes, :html => {:class => "pure-form pure-form-aligned"} do |fc|
+  #ma_commande.divider.scrollspy
+  .container
+    .row
+      .col.s12.light-blue.white-text.center
+        %h4 Ma commande
+  .section.sfullscreen
+    .container
+      .row
+        .input-field.col.s12.m5
+          =fc.select :event_id, @events.map{|t| [t.name,t.id]}
+        .input-field.col.s12.m5
+          =fc.select :tbk_id, Tbk.all.map{|t| [t.nom_complet,t.id]}
+          =f.label :tbk_id, "Centre gérant la commande"
+      .row
+        .input-field.col.s12.m4.offset-m4
+          =fc.select :glisse_id, Glisse.all.map{|t| [t.nom,t.id]}
+          =fc.label :glisse_id
+      %br/
+      %a.btn.waves-effect.waves-light.right{:href => "#mon_pack"}
+        Suivant
+        %i.material-icons.right send
+
+
+  = fc.fields_for :products do |fp|
+    = render partial: "personnes/form_section/pack", :locals => {:fp => fp, :reg => reg, personne: @personne}

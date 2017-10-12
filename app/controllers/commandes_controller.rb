@@ -371,7 +371,7 @@ require 'barby'
     end
 
     def commande_params
-      params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution)
+      params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution,:products_attributes => [])
     end
 
     def sort_column

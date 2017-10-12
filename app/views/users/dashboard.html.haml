@@ -49,15 +49,15 @@
         .shadow-1.fiche.mt1
           %div.pa1
             .row
-              .w50
-                %h1 Ma commande
+              .col.s12
+                %h2 Ma commande
                 .grey-txt 
                   \#
                   =c.idlong
-              .w50.txtright
-                %h1
-                =c.montant_total/100.0
-                €
+              .col.s12.txtright
+                %h3
+                  =c.montant_total/100.0
+                  €
           %div.pa1.brdr-b
             %p
               =conditional_format(c.etape_valide? 1)

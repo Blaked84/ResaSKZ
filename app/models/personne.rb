@@ -15,7 +15,8 @@ class Personne < ActiveRecord::Base
 	belongs_to :tour_tete
         belongs_to :niveau_ski
 
-	has_many :commandes
+	has_many :commandes, dependent: :destroy, inverse_of: :personne
+        accepts_nested_attributes_for :commandes, :reject_if => :reject_nested, :allow_destroy => true
 	#has_and_belongs_to_many :chambres
 	has_many :activites, through: :activites_personnes
 	has_many :activites_personnes, dependent: :destroy
@@ -122,6 +123,13 @@ def init
 end
 
 #=== Méthodes publiques ==============================================
+def reject_nested(attributes)
+    exists = attributes['id'].present?
+    empty = attributes.slice(:when, :where).values.all?(&:blank?)
+    attributes.merge!({:_destroy => 1}) if exists and empty
+    return (!exists and empty)
+end
+
 def disabled?
 	if self.disabled
 		return true

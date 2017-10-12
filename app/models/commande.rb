@@ -9,7 +9,10 @@ class Commande < ActiveRecord::Base
 	belongs_to :personne
 	belongs_to :event
 	has_many :products, through: :commande_products
+        accepts_nested_attributes_for :products, :reject_if => :reject_nested, :allow_destroy => true
+
 	has_many :commande_products, dependent: :destroy
+
 	has_many :paiements
 
 
@@ -26,6 +29,13 @@ class Commande < ActiveRecord::Base
 	def ok?
 		return false
 	end
+
+        def reject_nested(attributes)
+          exists = attributes['id'].present?
+          empty = attributes.slice(:when, :where).values.all?(&:blank?)
+          attributes.merge!({:_destroy => 1}) if exists and empty
+          return (!exists and empty)
+        end
 
 	#Ajoute un produit à la commande en précisant le nombre de produits
 	def add_product (product, nbr = 1, options = Hash.new)
