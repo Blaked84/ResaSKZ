@@ -20,20 +20,20 @@
           %li
             .row
               .input-field.col.s10
-                =f.email_field :email
+                =f.email_field :email, input_html:{:data => { :validation => "email" }}
                 =f.label :email
           %li
             .row
               .input-field.col.s10.m5
-                =f.text_field :nom
+                =f.text_field :nom, input_html:{:data => { :validation => "nom" }}
                 =f.label :nom
               .input-field.col.s10.m5
-                =f.text_field :prenom
+                =f.text_field :prenom, input_html:{:data => { :validation => "prenom" }}
                 =f.label :prenom
           %li
             .row
               .input-field.col.s10
-                =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]}    , :class => "pure-input-1-3"
+                =f.select :genre_id, Genre.all.map{|g| [g.nom_complet,g.id]} , :class => "pure-input-1-3" , input_html:{:data => { :validation => "genre_id" }}
                 =f.label :genre_id
 
         - else
@@ -45,13 +45,14 @@
               .input-field.col.s10.m5
                 =f.text_field :bucque
                 =f.label :bucque, "Bucque (Vide si t'es .onscrit)"
+
               .input-field.col.s10.m5
                 =f.text_field :fams
                 =f.label :fams
           %li
             .row
               .input-field.col.s10.m4.offset-m4
-                =f.text_field :promo
+                =f.text_field :promo, input_html:{:data => { :validation => "promo" }}
                 =f.label :promo, "Promo ou hyp promo ex:(me215)"
 
         %br/
