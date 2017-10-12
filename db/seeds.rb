@@ -205,6 +205,8 @@ personne_gorgu=Personne.create!(
 	taille: 214,
 	pointure: 60,
 	taillevetement_id: 2,
+        tour_tete_id: 1,
+        niveau_ski_id: 1,
 	complement: "",
 	pnom: "Maman gorgu",
 	pprenom: "Gadz",
