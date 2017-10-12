@@ -55,7 +55,11 @@ listeniveau=["Débutant","Intermédiaire","Avancé"]
 listeniveau.each do |c|
 	NiveauSki.create(:nom =>c)
 end
-
+puts "Gammes"
+listegammes=["Ecoski","Découverte","Sensation","Excellence"]
+listegammes.each do |c|
+	Gamme.create(:nom =>c)
+end
 puts "tbk"
 listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
@@ -99,21 +103,18 @@ listeproduits=[["Pack PG",29500,0,DateTime.new(2017,10,30),".onscrit et de 216 �
 ["Aix-en-Provence retour",3000,0,DateTime.new(2017,10,30),"",1,5],
 ["Chalons retour",4000,0,DateTime.new(2017,10,30),"",1,5],
 ["Je viendrai par mes propres moyens aller",0,0,DateTime.new(2017,10,30),"",1,5],
-["Bronze - Pack Ski Complet",5400,0,DateTime.new(2017,10,30),"",1,6],
-["Bronze - Chaussures ski seules",2200,0,DateTime.new(2017,10,30),"",1,6],
-["Bronze - Skis seuls",4400,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Pack Complet Ski",6500,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Pack Complet Surf",6500,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Chaussures ski seules",2900,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Chaussures surf seules",2900,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Skis seuls",5500,0,DateTime.new(2017,10,30),"",1,6],
-["Argent - Snow seul",5500,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Pack Complet Ski",7900,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Pack Complet Surf",7900,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Chaussures ski seules",2900,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Chaussures surf seules",2900,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Skis seuls",7000,0,DateTime.new(2017,10,30),"",1,6],
-["Or - Snow seul",7000,0,DateTime.new(2017,10,30),"",1,6],
+["Ecoski - Skis + Chaussures",5000,0,DateTime.new(2017,10,30),"",1,6,1],
+["Ecoski - Skis seul",4500,0,DateTime.new(2017,10,30),"",1,6,1],
+["Ecoski - Chaussures seules",3500,0,DateTime.new(2017,10,30),"",1,6,1],
+["Découverte - Skis + Chaussures",6500,0,DateTime.new(2017,10,30),"",1,6,2],
+["Découverte - Skis seul",5900,0,DateTime.new(2017,10,30),"",1,6,2],
+["Découverte - Chaussures seules",4500,0,DateTime.new(2017,10,30),"",1,6,2],
+["Sensation - Skis + Chaussures",8200,0,DateTime.new(2017,10,30),"",1,6,3],
+["Sensation - Skis seul",7400,0,DateTime.new(2017,10,30),"",1,6,3],
+["Sensation - Chaussures seules",6100,0,DateTime.new(2017,10,30),"",1,6,3],
+["Excellence - Skis + Chaussures",11600,0,DateTime.new(2017,10,30),"",1,6,4],
+["Excellence - Skis seul",11100,0,DateTime.new(2017,10,30),"",1,6,4],
+["Excellence - Chaussures seules",9800,0,DateTime.new(2017,10,30),"",1,6,4],
 ["Annulation",1900,0,DateTime.new(2017,10,30),"Annulation jusqu'à 48h avant le séjour si condition valable (voir conditions sur le site)",1,9],
 ["Assistance rapatriement bagages",1700,0,DateTime.new(2017,10,30),"Rapatriement sur les pistes, en dehors des pistes et rapatriement chez vous avec vos bagages si besoin",1,9],
 ["Bris et Vol",1200,0,DateTime.new(2017,10,30),"Pour couvrir les bris et vols",1,9],

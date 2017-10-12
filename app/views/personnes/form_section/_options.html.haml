@@ -17,5 +17,10 @@
       - Product.where(categorie: Categorie.find_by_nom("Boulangerie")).each do |p|
         = fc.fields_for :products do |fp|
           %h6 #{p.name} : #{p.description}
-          = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :name
+          = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :oui
           %br/
+    %br/
+    %a.btn.waves-effect.waves-light.right{:href => "#les_skis"}
+      Suivant
+      %i.material-icons.right send
+

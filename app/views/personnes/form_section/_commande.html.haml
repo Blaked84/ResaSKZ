@@ -28,3 +28,7 @@
   = render partial: "personnes/form_section/transport", :locals => {:fc => fc, :reg => reg, personne: @personne}
   = render partial: "personnes/form_section/options", :locals => {:fc => fc, :reg => reg, personne: @personne}
 
+  = fc.fields_for :products do |fp|
+    = render partial: "personnes/form_section/skis", :locals => {:fp => fp, :reg => reg, personne: @personne}
+
+  = render partial: "personnes/form_section/anims", :locals => {:fc => fc, :reg => reg, personne: @personne}

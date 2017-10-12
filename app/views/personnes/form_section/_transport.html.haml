@@ -21,6 +21,6 @@
           =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id]}, prompt: "Je souhaite revenir en car vers :"
  
     %br/
-    %a.btn.waves-effect.waves-light.right{:href => "#la_residence"}
+    %a.btn.waves-effect.waves-light.right{:href => "#les_options"}
       Suivant
       %i.material-icons.right send

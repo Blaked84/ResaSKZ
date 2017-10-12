@@ -194,6 +194,7 @@ class UsersController < ApplicationController
       @options = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["4"]["id"],
                                                     nombre: 1)
     end
+  
     # Options autres packs
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["5"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["5"]["product_id"].count > 1
@@ -225,7 +226,15 @@ class UsersController < ApplicationController
                                                        nombre: 1)
       end
     end
+    
+    # Skis
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["10"].present?
+      @skis = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"],
+                                                 nombre: 1)
+    end
+    
 
+  
     @events = Event.all
     authorize! :user_infos, @user
 
@@ -469,6 +478,7 @@ class UsersController < ApplicationController
                                                            :glisse_id,
                                                            :products_attributes => [:id,
                                                                                     :nombre,
+                                                                                    :preference,
                                                                                     :product_id => []
                                                                                    ]
                                                       ]

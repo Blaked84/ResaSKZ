@@ -8,6 +8,7 @@ class Product < ActiveRecord::Base
 	has_many :pack
 	belongs_to :categorie
 	belongs_to :event
+        belongs_to :gamme
 
 	#attr_accessible :name, :price, :stock, :echeance
 
@@ -43,6 +44,10 @@ class Product < ActiveRecord::Base
 
         def oui
           return "Oui"
+        end
+
+        def name_gamme
+          return self.gamme.nom + " - " + self.name
         end
 
 end
