@@ -130,12 +130,12 @@ choix_chambre:
 
 lydia_url:
   name: URL Lydia
-  default: Rails.env.production? ? ENV["LYDIA_URL"]:'lydia'
+  default: ENV["LYDIA_URL"]
   type: string
 
 lydia_vendor_token:
   name: Token Lydia
-  default: Rails.env.production? ? ENV["LYDIA_TOKEN"]:'token' 
+  default: ENV["LYDIA_TOKEN"]
   type: string
 
 display_button_type_residence:
