@@ -33,12 +33,12 @@ class PaiementsController < ApplicationController
       # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
 
       # TODO : changer pour la production
-      lydiaURI = URI(ENV["LYDIA_URL"].to_s)
+      lydiaURI = URI(Figaro.env.lydia_url.to_s)
       # uri = URI('http://lydia-app.com/api/request/do.json')
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
       # TODO : changer pour la production
-      vendorToken = ENV["LYDIA_TOKEN"].to_s
+      vendorToken = Figaro.env.lydia_token.to_s
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
       baseURL = root_url

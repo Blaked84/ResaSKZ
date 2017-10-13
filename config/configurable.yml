@@ -128,16 +128,6 @@ choix_chambre:
   default: false
   type: boolean
 
-lydia_url:
-  name: URL Lydia
-  default: ENV["LYDIA_URL"]
-  type: string
-
-lydia_vendor_token:
-  name: Token Lydia
-  default: ENV["LYDIA_TOKEN"]
-  type: string
-
 display_button_type_residence:
   name: Afficher le bouton de choix du type de résidence
   default: false

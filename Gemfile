@@ -63,6 +63,7 @@ gem 'rolify', '~> 4.0.0'
 
 gem 'haml-rails'
 gem 'configurable_engine'
+gem 'figaro'
 # pour les charts sur la page admin
 gem "chartkick"
 gem 'groupdate'
