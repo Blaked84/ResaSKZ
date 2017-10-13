@@ -233,7 +233,16 @@ class UsersController < ApplicationController
                                                  nombre: 1)
     end
     
-
+    # Anim's
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["11"].present?
+      @rcc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"],
+                                                 nombre: 1)
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["12"].present?
+      @freeride = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["12"]["id"],
+                                                     preference: referant_params["commandes_attributes"]["0"]["products_attributes"]["12"]["preference"],
+                                                     nombre: 1)
+    end
   
     @events = Event.all
     authorize! :user_infos, @user
@@ -479,7 +488,8 @@ class UsersController < ApplicationController
                                                            :products_attributes => [:id,
                                                                                     :nombre,
                                                                                     :preference,
-                                                                                    :product_id => []
+                                                                                    :option_id => [],
+                                                                                    :anims_id => []
                                                                                    ]
                                                       ]
                                                       )

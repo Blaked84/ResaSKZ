@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012195812) do
+ActiveRecord::Schema.define(version: 20171012221531) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -233,6 +233,8 @@ ActiveRecord::Schema.define(version: 20171012195812) do
     t.integer  "max_par_personne"
     t.integer  "gamme_id"
     t.integer  "preference"
+    t.integer  "type_product_id"
+    t.boolean  "votable"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -262,6 +264,12 @@ ActiveRecord::Schema.define(version: 20171012195812) do
 
   create_table "tour_tetes", force: :cascade do |t|
     t.string   "mesure"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "type_products", force: :cascade do |t|
+    t.string   "nom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -9,88 +9,18 @@
       %h5 Choisis les anim's auxquelles tu veux participer :
       Classe les anim's en fonction de ta préférence (0 à 7). 0 ou rien = ça ne m'interesse pas
       %br/
-      .input-field.col.s12.m8.offset-m2
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :style => "color: #f99c43;", :value => ""} RCC (10€) :
-          %option{:value => "1"} Oui
-          %option{:value => "2"} Non
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Freeride (gratuit) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Raquette (gratuit) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Biathlon (5€) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Handiski (gratuit) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Telemark (10€) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Sortie rando (15€) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
-      .input-field.col.s6.m3
-        %select
-          %option{:disabled => "disabled", :selected => "selected", :value => ""} Initiation ski (gratuit) :
-          %option{:value => "1"} 0
-          %option{:value => "2"} 1
-          %option{:value => "3"} 2
-          %option{:value => "4"} 3
-          %option{:value => "5"} 4
-          %option{:value => "6"} 5
-          %option{:value => "7"} 6
-          %option{:value => "8"} 7
+      - Product.where(categorie: Categorie.find(7)).each do |p|
+        = fc.fields_for :products do |fp|
+          - if p == Product.where(categorie: Categorie.find(7)).first
+            .input-field.col.s12.m8.offset-m2
+              = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
+              = fp.label p.name
+      - Product.where(categorie: Categorie.find(7), votable: true).each do |pvotable|
+        = fc.fields_for :products do |fp|
+          .input-field.col.s6.m3
+            = fp.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{pvotable.name} (#{pvotable.price_euro.round}€)" }
+            = fp.hidden_field :id,  :value => pvotable.id
+            = fp.label pvotable.name
 
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#la_super_option"}

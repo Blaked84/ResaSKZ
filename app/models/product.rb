@@ -9,6 +9,7 @@ class Product < ActiveRecord::Base
 	belongs_to :categorie
 	belongs_to :event
         belongs_to :gamme
+        belongs_to :type_product
 
 	#attr_accessible :name, :price, :stock, :echeance
 
@@ -41,6 +42,9 @@ class Product < ActiveRecord::Base
         def product_id
           return self.id
         end
+        def anims_id
+          return self.id
+        end
 
         def oui
           return "Oui"
@@ -48,6 +52,23 @@ class Product < ActiveRecord::Base
 
         def name_gamme
           return self.gamme.nom + " - " + self.name
+        end
+
+        def self.preferences_form
+          arr = []
+          self.preferences.each do |p|
+            arr << [p,p.to_i]
+          end
+          return arr
+	end
+
+        def self.preferences
+          count = Product.where(categorie_id: 7, votable: true).count
+          array = []
+          (0..count-1).each do |i|
+            array << i.to_s
+          end
+          return array
         end
 
 end

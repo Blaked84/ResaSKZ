@@ -55,10 +55,15 @@ listeniveau=["Débutant","Intermédiaire","Avancé"]
 listeniveau.each do |c|
 	NiveauSki.create(:nom =>c)
 end
-puts "Gammes"
+puts "Gammes Ski"
 listegammes=["Ecoski","Découverte","Sensation","Excellence"]
 listegammes.each do |c|
 	Gamme.create(:nom =>c)
+end
+puts "Type produits (anim's)"
+listetproduits=["Slalom","Derby","Boardercross"]
+listetproduits.each do |c|
+	TypeProduct.create(:nom =>c)
 end
 puts "tbk"
 listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
@@ -121,18 +126,47 @@ listeproduits=[["Pack PG",29500,0,DateTime.new(2017,10,30),".onscrit et de 216 �
 ["Tout compris",3300,0,DateTime.new(2017,10,30),"Les trois précédentes cumulées",1,9],
 ["Pas d'assurance",0,0,DateTime.new(2017,10,30),"Attestation responsabilité civile à fournir obligatoirement, même en cas d'assurance complémentaire sélectionnée.",1,9],
 ["RCC",1000,0,DateTime.new(2017,10,30),"Tournée des bars attaché par groupe",1,7],
-["Pack Chill",2500,0,DateTime.new(2017,10,30),"Un Lamzac à un prix PG !",1,7]]
+["Freeride",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Raquette",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Biathlon",500,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Handski",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Telemark",1000,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Sortie rando",1500,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Sortie ski",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Initiation snow",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Initiation ARVA",0,0,DateTime.new(2017,10,30),"",1,7,nil,nil,true],
+["Slalom Ski Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,1],
+["Slalom Ski Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,1],
+["Slalom Snow Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,1],
+["Slalom Snow Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,1],
+["Derby Ski Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,2],
+["Derby Ski Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,2],
+["Derby Snow Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,2],
+["Derby Snow Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,2],
+["Boardercross Ski Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,3],
+["Boardercross Ski Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,3],
+["Boardercross Snow Homme",0,0,DateTime.new(2017,10,30),"",1,7,nil,3],
+["Boardercross Snow Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,3],
+["Snakegli's",0,0,DateTime.new(2017,10,30),"",1,7],
+["Show-competition freestyle",0,0,DateTime.new(2017,10,30),"",1,7],
+["Descente aux flambeaux",0,0,DateTime.new(2017,10,30),"",1,7]]
+
 
 listeproduits.each do |c|
-	a=Product.create(
+	produits_hash = {
 		:name => c[0],
 		:price => c[1],
 		:stock => c[2],
 		:echeance => c[3],
 		:description => c[4],
 		:event_id => c[5],
-		:categorie_id => c[6]
-		)
+		:categorie_id => c[6],
+                :gamme_id => c[7],
+                :type_product_id => c[8],
+                :votable => c[9],
+	}.reject { |k, v| v.nil? }
+
+	a=Product.create(produits_hash)
 	a.save
 end
 
