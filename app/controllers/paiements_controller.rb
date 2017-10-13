@@ -38,7 +38,7 @@ class PaiementsController < ApplicationController
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
       # TODO : changer pour la production
-      vendorToken = Configurable[:lydia_vendor_token]
+      vendorToken = Configurable[:lydia_vendor_token].to_s
 
       # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
       baseURL = root_url
