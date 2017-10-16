@@ -170,6 +170,18 @@ def is_gadz?
 	%w(Gadz).include? self.type_pers
 end
 
+def is_pg?
+  return type_gadz == "PG"
+end
+
+def is_jp?
+  return type_gadz == "JP"
+end
+
+def is_archi?
+  return type_gadz == "Archi"
+end
+
 def is_pecs?
 	%w(Pec's).include? self.type_pers
 end

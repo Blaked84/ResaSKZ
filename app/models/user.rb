@@ -183,7 +183,7 @@ class User < ActiveRecord::Base
         :bucque => auth_data[:extra][:buque_texte].nil? ? nil:auth_data[:extra][:buque_texte] ,
         :fams => auth_data[:extra][:fams].nil? ? nil:auth_data[:extra][:fams] ,
         :promo => (auth_data[:extra][:tbk].nil? or auth_data[:extra][:proms].nil?) ? nil:auth_data[:extra][:tbk]+auth_data[:extra][:proms],
-        :type_pers => auth_data[:extra][:type]=="gadz" ? 'Gadz':'NonGadz',
+        :type_pers => (auth_data[:extra][:type]=="gadz" and auth_data[:extra][:tbk] != "am") ? "Gadz":"Pec's",
         :moderated => true,
         enregistrement_termine: false
         )
