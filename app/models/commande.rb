@@ -11,10 +11,13 @@ class Commande < ActiveRecord::Base
 	has_many :products, through: :commande_products
         accepts_nested_attributes_for :products, :allow_destroy => true
 
+        has_many :product_personne_preferences
+        accepts_nested_attributes_for :product_personne_preferences, :allow_destroy => true
+
 	has_many :commande_products, dependent: :destroy        
 
 	has_many :paiements
-
+        
 
 	#attr_accessible :assurance, :status
 

@@ -23,12 +23,15 @@
           %h6 6. Les Goodies ! Surprise...
     .row
       .input-field.col.s12.m4.offset-m4
-        - if @personne.is_pg?
-          =fp.select :id, Product.where(name: "Pack PG").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
-        - elsif @personne.is_jp? or @personne.is_archi?
-          =fp.select :id, Product.where(name: "Pack Archi").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
+        - if current_page?(new_personne_user_path(@user))
+          =fp.select :id, Product.where(name: "Pack Extérieurs").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
         - else
-          =fp.select :id, Product.where(name: "Pack Extérieur").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
+          - if @personne.is_pg?
+            =fp.select :id, Product.where(name: "Pack PG").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
+          - elsif @personne.is_jp? or @personne.is_archi?
+            =fp.select :id, Product.where(name: "Pack Archi").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
+          - else
+            =fp.select :id, Product.where(name: "Pack Extérieurs").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true
 
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#le_transport"}

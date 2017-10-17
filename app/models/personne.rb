@@ -17,6 +17,8 @@ class Personne < ActiveRecord::Base
 
 	has_many :commandes, dependent: :destroy, inverse_of: :personne
         accepts_nested_attributes_for :commandes, :reject_if => :reject_nested, :allow_destroy => true
+
+        has_many :product_personne_preferences
 	#has_and_belongs_to_many :chambres
 	has_many :activites, through: :activites_personnes
 	has_many :activites_personnes, dependent: :destroy

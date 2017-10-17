@@ -155,9 +155,14 @@ class UsersController < ApplicationController
     redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
     @roles = Hash[@user.roles.map{|r| [r.name, true]}]
-    @commandes = @personne.commandes.build
-    @produits = @commandes.products.build
     @events = Event.all
+    @type_products = TypeProduct.all
+    if @events.count > @personne.commandes.count
+      @commandes = @personne.commandes.build
+      @produits = @commandes.products.build
+      @anims_notes = Product.where(categorie_id: 7, votable: true)
+      @commandes_anims_notes = @commandes.product_personne_preferences.build
+    end
     authorize! :user_infos, @user
   end
 
@@ -234,16 +239,37 @@ class UsersController < ApplicationController
     end
     
     # Anim's
+    # RCC
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["11"].present?
-      @rcc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"],
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"].present?
+        @rcc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"],
                                                  nombre: 1)
+      end
     end
-    if referant_params["commandes_attributes"]["0"]["products_attributes"]["12"].present?
-      @freeride = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["12"]["id"],
-                                                     preference: referant_params["commandes_attributes"]["0"]["products_attributes"]["12"]["preference"],
-                                                     nombre: 1)
+   
+    # Anim's notés
+    @anims_notes = Product.where(categorie_id: 7, votable: true)
+    (0..@anims_notes.count-1).each do |i|
+      if referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"].present?
+        # Sauvegarde préférence
+        @anims = @commandes.product_personne_preferences.find_or_initialize_by(personne_id: @personne.id,
+                            product_id: referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"])
+        @anims.preference = referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["preference"]
+        # Sauvegarde du produit dans la commande
+        @anims_com = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"],
+                                                        nombre: 1)
+      end
     end
-  
+    # Anim's avec type de produit
+    (0..TypeProduct.all.count-1).each do |i|
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"].present?
+        if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"].present?
+          @anims_type = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"],
+                                                   nombre: 1)
+        end
+      end
+    end
+        
     @events = Event.all
     authorize! :user_infos, @user
 
@@ -288,6 +314,14 @@ class UsersController < ApplicationController
     set_user
     @personne = @user.personnes.new
     authorize! :create, @personne
+    @events = Event.all
+    if @events.count > @personne.commandes.count
+      @commandes = @personne.commandes.build
+      @produits = @commandes.products.build
+      @anims_notes = Product.where(categorie_id: 7, votable: true)
+      @commandes_anims_notes = @commandes.product_personne_preferences.build
+    end
+
   end
 
   def parrainer
@@ -489,9 +523,13 @@ class UsersController < ApplicationController
                                                                                     :nombre,
                                                                                     :preference,
                                                                                     :option_id => [],
-                                                                                    :anims_id => []
-                                                                                   ]
-                                                      ]
+                                                                                   ],
+                                                           :product_personne_preferences_attributes => [
+                                                               :id,
+                                                               :product_id,
+                                                               :preference
+                                                           ]
+                                                      ],
                                                       )
     end
 

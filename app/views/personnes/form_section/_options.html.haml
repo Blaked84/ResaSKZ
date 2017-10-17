@@ -1,3 +1,4 @@
+
 #les_options.divider.scrollspy
 .container
   .row
@@ -8,7 +9,7 @@
     = fc.fields_for :products do |fp|
       .row
         %h6{:style => "color: #f99c43;"} Pack food :
-        = fp.collection_radio_buttons :id, Product.where(categorie: Categorie.second), :id, :name, {}, multiple: false
+        = fp.collection_radio_buttons :id, Product.where(categorie: Categorie.second), :id, :name, {checked: Product.where(categorie: Categorie.second).first.id}
 
     .row
       %br/

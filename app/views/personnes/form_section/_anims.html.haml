@@ -13,15 +13,27 @@
         = fc.fields_for :products do |fp|
           - if p == Product.where(categorie: Categorie.find(7)).first
             .input-field.col.s12.m8.offset-m2
-              = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
+              = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€) : (Non / Oui)", :include_blank => "Non" }
               = fp.label p.name
-      - Product.where(categorie: Categorie.find(7), votable: true).each do |pvotable|
+        - if @anims_notes.include? p
+          = fc.fields_for :product_personne_preferences do |fppp|
+            .input-field.col.s6.m3
+              = fppp.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
+              = fppp.label p.name
+              = fppp.hidden_field :product_id,  :value => p.id
+
+      - @type_products.each do |tp|
         = fc.fields_for :products do |fp|
           .input-field.col.s6.m3
-            = fp.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{pvotable.name} (#{pvotable.price_euro.round}€)" }
-            = fp.hidden_field :id,  :value => pvotable.id
-            = fp.label pvotable.name
+            = fp.collection_select :id, Product.where(categorie_id: 7, type_product_id: tp.id), :id, :name, { :prompt => "#{tp.nom} : " }
+            = fp.label tp.nom
 
+      - Product.where(categorie_id: 7).last(3).each do |p|
+        = fc.fields_for :products do |fp|
+          .input-field.col.s12.s6.m3
+            = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
+            = fp.label p.name
+ 
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#la_super_option"}
       Suivant

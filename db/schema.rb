@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171012221531) do
+ActiveRecord::Schema.define(version: 20171016202909) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -220,6 +220,18 @@ ActiveRecord::Schema.define(version: 20171012221531) do
     t.datetime "updated_at"
   end
 
+  create_table "product_personne_preferences", force: :cascade do |t|
+    t.integer  "preference"
+    t.integer  "personne_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "commande_id"
+  end
+
+  add_index "product_personne_preferences", ["personne_id"], name: "index_product_personne_preferences_on_personne_id"
+  add_index "product_personne_preferences", ["product_id"], name: "index_product_personne_preferences_on_product_id"
+
   create_table "products", force: :cascade do |t|
     t.string   "name",             limit: 255
     t.integer  "price"
@@ -232,7 +244,6 @@ ActiveRecord::Schema.define(version: 20171012221531) do
     t.integer  "categorie_id"
     t.integer  "max_par_personne"
     t.integer  "gamme_id"
-    t.integer  "preference"
     t.integer  "type_product_id"
     t.boolean  "votable"
   end
