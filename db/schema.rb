@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018182657) do
+ActiveRecord::Schema.define(version: 20171018205726) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -248,7 +248,7 @@ ActiveRecord::Schema.define(version: 20171018182657) do
     t.date     "echeance"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "description",      limit: 255
+    t.text     "description",      limit: 255
     t.integer  "event_id"
     t.integer  "categorie_id"
     t.integer  "max_par_personne"
