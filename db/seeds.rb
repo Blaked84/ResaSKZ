@@ -39,6 +39,12 @@ puts "Genres"
 Genre.create(:sexe => "H", :nom_cas => "male", :nom_complet => "Homme")
 Genre.create(:sexe => "F", :nom_cas => "female", :nom_complet => "Femme")
 
+puts "Type Resids"
+listeres=["Anim's +","Anim's","Calme"]
+listeres.each do |c|
+  Typeresid.create(:name =>c)
+end
+
 #Mensuration
 puts "taillevetements"
 listevet=["S","M","L","XL","XXL"]

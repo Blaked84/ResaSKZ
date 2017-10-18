@@ -580,6 +580,7 @@ class UsersController < ApplicationController
                                                       :pville,
                                                       :commentaires,
                                                       :user_id,
+                                                      :typeresid_id,
                                                       :commandes_attributes => [
                                                            :event_id,
                                                            :tbk_id,

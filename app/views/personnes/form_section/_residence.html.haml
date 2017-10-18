@@ -1,0 +1,20 @@
+#la_residence.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 La Resid's
+
+.section.sfullscreen
+  .container
+    .row
+      %h5 Choisis le type de résidence que tu préfères :
+      %h6 Remarque : La repart's sera faite plus tard
+      .input-field.col.s12.m4.offset-m4
+        =f.select :typeresid_id, options_for_select(Typeresid.all) do
+          %option{:disabled => "disabled", :selected => "selected", :value => ""} Je préfère loger dans la résid's :
+          - Typeresid.all.each do |tr|
+            %option{:value => "#{tr.id}"}= tr.name
+      %br/
+      %a.btn.waves-effect.waves-light.right{:href => "#les_options"}
+        Suivant
+        %i.material-icons.right send
