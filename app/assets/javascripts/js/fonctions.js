@@ -52,6 +52,97 @@ $(document).ready(function() {
            }
        });
 
+       function ryft_color() {
+           if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Bleu"){
+               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                  $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_12.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_13.jpg');
+               }
+           }
+           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rouge"){
+               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                  $('.img_ryft').attr('src', '/assets/masque/ryft_21.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_22.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_23.jpg');
+               }
+           }
+           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rose"){
+               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                  $('.img_ryft').attr('src', '/assets/masque/ryft_31.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_32.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_33.jpg');
+               }
+           }
+           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Blanc"){
+               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                  $('.img_ryft').attr('src', '/assets/masque/ryft_41.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_42.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_43.jpg');
+               }
+           }
+           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Jaune"){
+               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                  $('.img_ryft').attr('src', '/assets/masque/ryft_51.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_52.jpg');
+               }
+               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_53.jpg');
+               }
+           }
+           else{
+               $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
+           }
 
+
+       }
+
+       $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').change(function(){
+         ryft_color()
+       });
+       $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').change(function(){
+         ryft_color()
+       });
+
+       $('select').change(function(){
+           id = $(this).attr('id');
+
+           $('#res_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').text());
+       });
+
+       $('input[type=text]').change(function(){
+           id = $(this).attr('id');
+
+           $('#res_' + id).text($(this).val());
+       });
+
+       $('input[type=checkbox]').change(function(){
+           id = $(this).attr('id');
+           if($(this).is(':checked')){
+               $('#res_' + id).text('Oui');
+           }
+           else{
+                $('#res_' + id).text('Non');
+           }
+
+       });
     });
 	 });

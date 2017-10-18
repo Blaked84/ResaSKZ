@@ -272,34 +272,47 @@ class UsersController < ApplicationController
       end
     end
 
-    # Assurances
-    if referant_params["commandes_attributes"]["0"]["products_attributes"]["42"].present?
-      if referant_params["commandes_attributes"]["0"]["products_attributes"]["42"]["product_id"].count > 1
-        @assu_annulation = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["42"]["product_id"].first, 
-                                                       nombre: 1)
+    # Options supplémentaires (Super option)
+    super_option = referant_params["commandes_attributes"]["0"]["products_attributes"]["42"] 
+    if super_option.present?
+      if super_option["couleur_cadre"].present? and super_option["couleur_verre"].present?
+        opt_sup =  OptionSup.find_by(nom: "Masque Ryft",
+                             couleur_cadre: super_option["couleur_cadre"],
+                             couleur_verre: super_option["couleur_verre"])
+        @option_sup_product = Product.find_by(option_sup_id: opt_sup.id)
+        @option_sup_com = @commandes.commande_products.build(product_id: @option_sup_product.id, nombre: 1)
+                          
       end
     end
+
+    # Assurances
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].count > 1
-        @assu_rapat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].first, 
+        @assu_annulation = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].count > 1
-        @assu_skipass = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first, 
+        @assu_rapat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].count > 1
-        @assu_tc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first, 
+        @assu_skipass = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].count > 1
-        @pas_assu = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first, 
+        @assu_tc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["47"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].count > 1
+        @pas_assu = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
@@ -573,6 +586,8 @@ class UsersController < ApplicationController
                                                                                     :preference,
 										    :en_attente,
       										    :option_sup_id,
+										    :couleur_cadre,
+                                                                                    :couleur_verre,
                                                                                     :option_id => [],
                                                                                     :product_id => []
                                                                                    ],

@@ -24,7 +24,7 @@
                   %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                     +
                   %span{ :id => 'product'+p.id.to_s}
-                    =!@commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+                    =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
                   %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                     \-
                 %td=link_to p.name, product_path(p.id)
@@ -44,6 +44,11 @@
                 %td=conditional_format(p.reste?)
                 %td=p.price_euro
         Choix :
-        =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+        - if c[:id] == 1
+          - if current_user.admin?
+            =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+        - else
+          =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+    
               
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"

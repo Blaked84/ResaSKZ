@@ -17,7 +17,7 @@ Event.create(
 
 
 puts "Categories"
-listecategorries=["Pack de base","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances"]
+listecategorries=["Pack de base","Options au food pack standard","Transport Aller/Retour","Transport Aller","Transport Retour","Matériel de Glisse","Animations complémentaires","Boulangerie","Assurances","Options supplémentaires"]
 listecategorries.each {|c| Categorie.create(:nom =>c) }
 Configurable[:id_cat_assurance]=Categorie.find_by( nom: 'Assurances').id.to_s
 Configurable[:id_cat_busaller]=Categorie.find_by( nom: 'Transport Aller').id.to_s
@@ -65,12 +65,26 @@ listetproduits=["Slalom","Derby","Boardercross"]
 listetproduits.each do |c|
 	TypeProduct.create(:nom =>c)
 end
+
+puts "Options supplémentaires"
+liste_couleurs_cadre = ["Bleu","Rouge","Rose","Blanc","Jaune"]
+liste_couleurs_verre = ["Bleu","Noir","Rouge"]
+liste_options_sups = ["Masque Ryft"]
+liste_options_sups.each do |c|
+  liste_couleurs_cadre.each do |cc|
+    liste_couleurs_verre.each do |cv|
+      OptionSup.create(:nom => c, couleur_cadre: cc, couleur_verre: cv)
+    end
+  end
+end
+
 puts "tbk"
 listet=[["Kanak","Karlsruhe","ka"],["Siber's","Metz","me"],["Clun's","Cluny","cl"],["Chalon's","Chalons-en-Champagne","ch"],["Bordel's","Bordeaux","bo"],["KIN","Aix-en-Provence","ai"],["Boquette","Angers","an"],["Birse","Lille","li"],["P3","Paris","pa"]].sort
 listet.each do |c|
 	Tbk.create(:nom =>c[0], :nom_pecs => c[1], :diminutif=>c[2])
 end
 
+puts "Produits"
 listeproduits=[["Pack PG",29500,0,DateTime.new(2017,10,30),".onscrit et de 216 à 214",1,1],
 ["Pack Archi",34500,0,DateTime.new(2017,10,30),"promo 213 et antérieures",1,1],
 ["Pack Extérieurs",34500,0,DateTime.new(2017,10,30),"Pour les non Gadz",1,1],
@@ -149,7 +163,24 @@ listeproduits=[["Pack PG",29500,0,DateTime.new(2017,10,30),".onscrit et de 216 �
 ["Boardercross Snow Femme",0,0,DateTime.new(2017,10,30),"",1,7,nil,3],
 ["Snakegli's",0,0,DateTime.new(2017,10,30),"",1,7],
 ["Show-competition freestyle",0,0,DateTime.new(2017,10,30),"",1,7],
-["Descente aux flambeaux",0,0,DateTime.new(2017,10,30),"",1,7]]
+["Descente aux flambeaux",0,0,DateTime.new(2017,10,30),"",1,7],
+["Masque Ryft Cadre Bleu / Verre bleu",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,1],
+["Masque Ryft Cadre Bleu / Verre noir",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,2],
+["Masque Ryft Cadre Bleu / Verre rouge",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,3],
+["Masque Ryft Cadre Rouge / Verre bleu",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,4],
+["Masque Ryft Cadre Rouge / Verre noir",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,5],
+["Masque Ryft Cadre Rouge / Verre rouge",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,6],
+["Masque Ryft Cadre Rose / Verre bleu",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,7],
+["Masque Ryft Cadre Rose / Verre noir",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,8],
+["Masque Ryft Cadre Rose / Verre rouge",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,9],
+["Masque Ryft Cadre Blanc / Verre bleu",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,10],
+["Masque Ryft Cadre Blanc / Verre noir",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,11],
+["Masque Ryft Cadre Blanc / Verre rouge",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,12],
+["Masque Ryft Cadre Jaune / Verre bleu",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,13],
+["Masque Ryft Cadre Jaune / Verre noir",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,14],
+["Masque Ryft Cadre Jaune / Verre rouge",3300,0,DateTime.new(2017,10,30),"",1,10,nil,nil,nil,15],
+
+]
 
 
 listeproduits.each do |c|
@@ -164,6 +195,7 @@ listeproduits.each do |c|
                 :gamme_id => c[7],
                 :type_product_id => c[8],
                 :votable => c[9],
+                :option_sup_id => c[10]
 	}.reject { |k, v| v.nil? }
 
 	a=Product.create(produits_hash)

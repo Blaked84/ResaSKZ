@@ -151,6 +151,13 @@ class Commande < ActiveRecord::Base
 		self.products.select{|p| p.categorie_id == Configurable[:id_pack]}.count
 	end
 
+        def produit_en_attente?(product_id)
+          cp = self.commande_products.where(product_id: product_id).first
+          if cp.present?
+            return cp.en_attente == true
+          end
+        end
+
 	#Montant total de la commande (Produits * quantités)
 	def montant_total
 		self.commande_products.where(en_attente: false).map{|cp| cp.nombre.to_i * cp.product.price}.sum

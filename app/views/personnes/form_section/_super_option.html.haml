@@ -1,0 +1,45 @@
+#la_super_option.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 La super option
+.section.sfullscreen.masque
+  .container
+    .row
+      %h5{:style => "color: #f99c43;"} Et maintenant, fais toi encore plus plaisir !
+      %img.illustration.img_ryft{:alt => "Masque Ryft", :src => "/assets/masque/ryft_11.jpg", :style => "width: 30%;"}/
+      %h5 Un masque Ryft haut de gamme à prix PG !
+      %a{:href => "https://ryftoptics.com/shop/ski-goggles/goggle/?currency=EUR", :style => "color: #f99c43;", :target => "_blank"} Le site de Ryft
+      %br/
+      %br/
+      %h6 J'en veux un pour seulement 33€ (soit 65% de réduction !)
+      %h6 Stock restant :
+      .switch.switch_masque
+        %label
+          Non
+          %input#masque{:type => "checkbox"}/
+          = succeed "Oui" do
+            %span.lever
+      #choix_masque
+        .row
+          .input-field.col.s12.m4.offset-m2
+            =fp.select :couleur_cadre, options_for_select(OptionSup.couleurs_cadre_form) do
+              %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du cadre :
+              %option{:value => "Bleu"} Bleu
+              %option{:value => "Rouge"} Rouge
+              %option{:value => "Rose"} Rose
+              %option{:value => "Blanc"} Blanc
+              %option{:value => "Jaune"} Jaune
+            =fp.label "Couleur du cadre"
+
+          .input-field.col.s12.m4
+            =fp.select :couleur_verre, options_for_select(OptionSup.couleurs_verre_form) do
+              %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du verre :
+              %option{:value => "Bleu"} Bleu
+              %option{:value => "Noir"} Noir
+              %option{:value => "Rouge"} Rouge
+            =fp.label "Couleur du verre"
+      %br/
+      %a.btn.waves-effect.waves-light.right{:href => "#assurances"}
+        Suivant
+        %i.material-icons.right send

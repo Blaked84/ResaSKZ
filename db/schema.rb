@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018170322) do
+ActiveRecord::Schema.define(version: 20171018182657) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -142,6 +142,14 @@ ActiveRecord::Schema.define(version: 20171018170322) do
     t.string   "nom"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "option_sups", force: :cascade do |t|
+    t.string   "nom"
+    t.string   "couleur_cadre"
+    t.string   "couleur_verre"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "packs", force: :cascade do |t|

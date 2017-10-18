@@ -12,8 +12,10 @@ class Product < ActiveRecord::Base
 	belongs_to :event
         belongs_to :gamme
         belongs_to :type_product
+        belongs_to :option_sup
 
 	#attr_accessible :name, :price, :stock, :echeance
+        attr_accessor :couleur_cadre, :couleur_verre
 
 	def to_s
 		return self.name
