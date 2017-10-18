@@ -257,19 +257,68 @@ class UsersController < ApplicationController
         @anims.preference = referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["preference"]
         # Sauvegarde du produit dans la commande
         @anims_com = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"],
-                                                        nombre: 1)
+                                                        nombre: 1, en_attente: true)
       end
     end
+
     # Anim's avec type de produit
+    @type_products = TypeProduct.all
     (0..TypeProduct.all.count-1).each do |i|
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"].present?
         if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"].present?
           @anims_type = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"],
-                                                   nombre: 1)
+                                                   nombre: 1, en_attente: true)
         end
       end
     end
-        
+
+    # Assurances
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["42"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["42"]["product_id"].count > 1
+        @assu_annulation = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["42"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].count > 1
+        @assu_rapat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].count > 1
+        @assu_skipass = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].count > 1
+        @assu_tc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].count > 1
+        @pas_assu = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+
+    if @assu_tc.present? && @assu_tc.nombre > 0
+      [@assu_annulation,@assu_rapat,@assu_skipass,@pas_assu].each do |assu|
+        if assu.present? && assu.nombre > 0
+          assu.destroy
+        end
+      end
+    end
+    if @pas_assu.present? && @pas_assu.nombre > 0
+      [@assu_annulation,@assu_rapat,@assu_skipass].each do |assu|
+        if assu.present? && assu.nombre > 0
+          assu.destroy
+        end
+      end
+    end
+
     @events = Event.all
     authorize! :user_infos, @user
 
@@ -304,7 +353,7 @@ class UsersController < ApplicationController
           @user.errors.add(:base, m)
         end
 
-        format.html { render action: 'user_infos' }
+        format.html { redirect_to user_infos_user_path(@user), alert: "Des champs nécessaires sont manquants, le compte n'a pas été créé"  }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -522,7 +571,10 @@ class UsersController < ApplicationController
                                                            :products_attributes => [:id,
                                                                                     :nombre,
                                                                                     :preference,
+										    :en_attente,
+      										    :option_sup_id,
                                                                                     :option_id => [],
+                                                                                    :product_id => []
                                                                                    ],
                                                            :product_personne_preferences_attributes => [
                                                                :id,

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016202909) do
+ActiveRecord::Schema.define(version: 20171018170322) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20171016202909) do
     t.integer  "nombre"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "en_attente",  default: false
   end
 
   create_table "commandes", force: :cascade do |t|
@@ -246,6 +247,8 @@ ActiveRecord::Schema.define(version: 20171016202909) do
     t.integer  "gamme_id"
     t.integer  "type_product_id"
     t.boolean  "votable"
+    t.boolean  "en_attente",                   default: false
+    t.integer  "option_sup_id"
   end
 
   create_table "roles", force: :cascade do |t|

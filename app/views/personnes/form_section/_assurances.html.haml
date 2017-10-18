@@ -1,0 +1,22 @@
+#assurances.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Les assurances
+.section.sfullscreen
+  .container
+    .row
+      %br/
+      %h5{:style => "color: #f99c43;"} Tu veux une assurance ?
+      %div
+        - Product.where(categorie_id: Categorie.find_by_nom("Assurances")).each do |p|
+          %br/
+          %h6 #{p.name} (#{p.price_euro.round}€)
+          %p #{p.description} 
+          = fc.fields_for :products do |fp|
+            = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :oui
+
+      %br/
+      %a.btn.waves-effect.waves-light.right{:href => "#confirmation"}
+        Suivant
+        %i.material-icons.right send

@@ -153,7 +153,7 @@ class Commande < ActiveRecord::Base
 
 	#Montant total de la commande (Produits * quantités)
 	def montant_total
-		self.commande_products.map{|cp| cp.nombre.to_i * cp.product.price}.sum
+		self.commande_products.where(en_attente: false).map{|cp| cp.nombre.to_i * cp.product.price}.sum
 	end
 
 	#Montant déjà payé (Somme des paiements)

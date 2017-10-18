@@ -85,11 +85,16 @@
           %th Quantitée
           %th Prix (€)
       %tbody
-        - @commande.commande_products.each do |cprd|
+        - @commande.commande_products.where(en_attente: false).each do |cprd|
           %tr
             %td=link_to cprd.product.name, product_path(cprd.product.id)
             %td=cprd.nombre
             %td=cprd.product.price_euro
+        - @commande.commande_products.where(en_attente: true).each do |cprdatt|
+          %tr
+            %td=link_to cprdatt.product.name+ " (en attente)", product_path(cprdatt.product.id)
+            %td=cprdatt.nombre
+            %td #{cprdatt.product.price_euro} (en attente)
         %tr 
           %td
             %hr
