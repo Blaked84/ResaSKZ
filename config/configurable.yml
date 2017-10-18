@@ -134,6 +134,6 @@ display_button_type_residence:
   type: boolean
 
 limite_inscription:
-  name: "Limite l'inscription des gens et mets le reste en liste d'attente"
-  default: 1
+  name: "Seuil limite d'inscription des gens avant qu'ils ne soient mis en liste d'attente"
+  default: 1360
   type: integer

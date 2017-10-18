@@ -143,7 +143,7 @@ class User < ActiveRecord::Base
   end
 
   def self.limite_inscription?
-    return User.all.count > Configurable[:limite_inscription]
+    return User.all.count-2 > Configurable[:limite_inscription]
   end
 
   def self.limite_inscription_restant
