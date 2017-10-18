@@ -15,10 +15,16 @@
       %br/
       %h5{:style => "color: #f99c43;"} Et maintenant, fais toi plaisir !
       %br/
-      - Product.where(categorie: Categorie.find_by_nom("Boulangerie")).each do |p|
+      - @boulangerie.each do |p|
         = fc.fields_for :products do |fp|
           %h6 #{p.name} : #{p.description}
-          = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :oui
+          .switch
+            %label{for: "user_personne_commandes_attributes_0_products_attributes_#{5+@boulangerie.index(p)}_product_id_#{p.id}"}
+              Non
+              = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :oui do
+                %input{:type => "checkbox", :id => "user_personne_commandes_attributes_0_products_attributes_#{5+@boulangerie.index(p)}_product_id_#{p.id}", :name => "user[personne][commandes_attributes][0][products_attributes][#{5+@boulangerie.index(p)}][product_id][]", :value => p.id}
+                = succeed "Oui" do
+                  %span.lever
           %br/
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#les_skis"}
