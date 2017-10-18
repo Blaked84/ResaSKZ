@@ -10,7 +10,3 @@
 
   =f.fields_for @personne do |fp|
     = render :partial => "personnes/new_fields", :locals => {:f => fp, :reg => true}
-
-
-  .actions
-    = f.submit 'Sauvegarder', :class => "pure-button pure-button-success"
