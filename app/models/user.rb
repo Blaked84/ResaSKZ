@@ -142,6 +142,14 @@ class User < ActiveRecord::Base
 
   end
 
+  def self.limite_inscription?
+    return User.all.count > Configurable[:limite_inscription]
+  end
+
+  def self.limite_inscription_restant
+    return Configurable[:limite_inscription] - User.all.count+2
+  end
+
 
   #Retrouve un user a partir du UID ou le crée
   def self.omniauth(auth_data, signed_in_resource=nil)
@@ -165,9 +173,9 @@ class User < ActiveRecord::Base
         gender: auth_data[:extra][:sex],
         inscription_terminee: false,
         cgu_accepted: false,
-        moderated: true,
+        moderated: User.limite_inscription? ? false:true,
         )
-      # parce que le cas ne renvoit pas toujours le genre
+      # parce que le cas ne renvoie pas toujours le genre
       user.gender="male" if user.gender.nil?
 
       user.save!(:validate=>false)

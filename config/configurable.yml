@@ -132,3 +132,8 @@ display_button_type_residence:
   name: Afficher le bouton de choix du type de résidence
   default: false
   type: boolean
+
+limite_inscription:
+  name: "Limite l'inscription des gens et mets le reste en liste d'attente"
+  default: 1
+  type: integer
