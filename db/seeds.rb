@@ -12,7 +12,7 @@
 puts "Evenements"
 Event.create(
 	:name => "SKZ Semaine 1",
-	:description => " Du 14 au 21 janvier 2017, tous les TBK ")
+	:description => " Du 13 au 20 janvier 2017, tous les TBK ")
 
 
 

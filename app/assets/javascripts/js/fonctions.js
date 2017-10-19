@@ -292,13 +292,15 @@ $(document).ready(function() {
                if (id == e) {
                  // Si assurance (on annule tout si la personne coche tout compris ou pas d'assu
                  if (id != u+"_commandes_attributes_0_products_attributes_47_product_id_54") {
-                   if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked') || $('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked')) {
+                   if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked') || $('#'+u+'_commandes_attributes_0_products_attributes_47_product_id_54').is(':checked')) {
+                       $('#'+e).prop('checked', false);
                        $('#res_' + e).text('Non');
                        $('#price_' + e).text("0€");
                    }
                  } else {
                  // Si pas d'assu (on annule tout si la personne coche tout compris)
                    if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked')) {
+                       $('#'+e).prop('checked', false);
                        $('#res_' + e).text('Non');
                        $('#price_' + e).text("0€");
                    }
