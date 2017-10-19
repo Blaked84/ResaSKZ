@@ -26,8 +26,8 @@ Configurable[:id_pack]=Categorie.find_by( nom: 'Pack de base').id.to_s
 
 puts "Date paiements"
 Configurable[:echeances_paiement1]=DateTime.new(2017,11,5)
-Configurable[:echeances_paiement2]=DateTime.new(2017,11,10)
-Configurable[:echeances_paiement3]=DateTime.new(2017,11,20)
+Configurable[:echeances_paiement2]=DateTime.new(2017,11,20)
+Configurable[:echeances_paiement3]=DateTime.new(2017,12,11)
 # puts "UserTypes"
 # Usertype.create(:)
 
