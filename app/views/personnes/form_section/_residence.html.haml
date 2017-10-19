@@ -14,7 +14,8 @@
           %option{:disabled => "disabled", :selected => "selected", :value => ""} Je préfère loger dans la résid's :
           - Typeresid.all.each do |tr|
             %option{:value => "#{tr.id}", :data => {name: tr.name} }= tr.name
+      
       %br/
-      %button.btn.waves-effect.waves-light.right{:type => "submit"}
-        Confirmer
+      %a.btn.waves-effect.waves-light.right{:href => "#confirmation"}
+        Suivant
         %i.material-icons.right send

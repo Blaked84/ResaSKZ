@@ -166,3 +166,8 @@ footer.page-footer {
 .tr-decale > td {
   padding-left: 40px;
 }
+
+.table-of-contents a.active {
+    font-weight: 800;
+    font-size: 15px;
+}

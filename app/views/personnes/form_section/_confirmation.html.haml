@@ -21,13 +21,13 @@
           %tr
             %td{rowspan: 4} Transport
             %tr
-              %td Transport A/R
+              %td#res_user_personne_commandes_attributes_0_products_attributes_1_id Transport A/R
               %td#price_user_personne_commandes_attributes_0_products_attributes_1_id 0€
             %tr
-              %td Transport Aller
+              %td#res_user_personne_commandes_attributes_0_products_attributes_2_id Transport Aller
               %td#price_user_personne_commandes_attributes_0_products_attributes_2_id 0€
             %tr
-              %td Transport Retour
+              %td#res_user_personne_commandes_attributes_0_products_attributes_3_id Transport Retour
               %td#price_user_personne_commandes_attributes_0_products_attributes_3_id 0€
           %tr
             %td Pack food sans porc
@@ -83,6 +83,7 @@
             %td
             %td
               %b#price_total 0€
+
       %br/
       %a.waves-effect.waves-light.btn{:href => "#reglement"} Lire le règlement
       / Modal Structure
@@ -104,7 +105,8 @@
           %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Accepter
   %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Refuser
 
-
-%a.btn.waves-effect.waves-light.right{:action => "submit"}
+%br/
+%button.btn.waves-effect.waves-light.right{:type => "submit"}
   Confirmer
   %i.material-icons.right send
+
