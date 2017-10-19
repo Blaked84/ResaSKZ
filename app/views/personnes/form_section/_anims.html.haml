@@ -6,22 +6,14 @@
 .section.sfullscreen
   .container
     .row
+      %p Les informations ne seront sauvegardées qu'à la fin de l'inscription
       %h5 Choisis les anim's auxquelles tu veux participer :
-      Classe les anim's en fonction de ta préférence (0 à 7). 0 ou rien = ça ne m'interesse pas
-      %br/
-      - Product.where(categorie: Categorie.find(7)).each do |p|
+      - Product.where(categorie_id: 7).each do |p|
         = fc.fields_for :products,@commandes.products.build do |fp|
           - if p == Product.where(categorie: Categorie.find(7)).first
             .input-field.col.s12.m8.offset-m2
               =fp.select :id, Product.where(id: p.id).map{|t| ["Oui",t.id, data: {name: "Oui", price: "#{t.price_euro.round}€"}]}, { :prompt => "#{p.name} (#{p.price_euro.round}€) : (Non/Oui) ", :include_blank => "Non" }
               = fp.label p.name
-        - if @anims_notes.include? p
-          = fc.fields_for :product_personne_preferences,@commandes.product_personne_preferences.build do |fppp|
-            .input-field.col.s6.m3
-              = fppp.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
-              = fppp.label p.name
-              = fppp.hidden_field :product_id,  :value => p.id
-
       - @type_products.each do |tp|
         = fc.fields_for :products,@commandes.products.build do |fp|
           .input-field.col.s6.m3
@@ -33,6 +25,20 @@
           .input-field.col.s12.s6.m3
             = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
             = fp.label p.name
+      %br/
+      %br/
+      .col.s12
+        %h6.blue-text.text-darken-2 Classe les anim's en fonction de ta préférence (1 à 3). 1= premier choix ou (3 ou rien) = ça ne m'interesse pas
+        %br/
+        %br/
+      - Product.where(categorie_id: 7, votable: true).each do |p|
+        - if @anims_notes.include? p
+          = fc.fields_for :product_personne_preferences,@commandes.product_personne_preferences.build do |fppp|
+            .input-field.col.s6.m3
+              = fppp.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
+              = fppp.label p.name
+              = fppp.hidden_field :product_id,  :value => p.id
+
  
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#la_super_option"}

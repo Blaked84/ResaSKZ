@@ -61,15 +61,21 @@ class Product < ActiveRecord::Base
         def self.preferences_form
           arr = []
           self.preferences.each do |p|
-            arr << [p,p.to_i]
+            if p == "1"
+              arr << [p.to_s+" (1er choix)",p.to_i]
+            elsif p == "2"
+              arr << [p.to_s+" (2nd choix)",p.to_i]
+            else
+              arr << [p.to_s+" (3ème choix)",p.to_i]
+            end
           end
           return arr
 	end
 
         def self.preferences
-          count = Product.where(categorie_id: 7, votable: true).count
+          count = 3
           array = []
-          (0..count-1).each do |i|
+          (1..count).each do |i|
             array << i.to_s
           end
           return array

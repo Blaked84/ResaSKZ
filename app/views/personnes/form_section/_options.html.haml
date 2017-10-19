@@ -6,6 +6,7 @@
       %h4 Les options
 .section.sfullscreen
   .container
+    %p Les informations ne seront sauvegardées qu'à la fin de l'inscription
     = fc.fields_for :products,@commandes.products.build do |fp|
       .row
         %h6{:style => "color: #f99c43;"} Pack food :

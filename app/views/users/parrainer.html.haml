@@ -1,5 +1,5 @@
 %div.top-info.pa1
-  %h1 Parrainer un ami
+  %h1 Demander l'ouverture d'un compte d'un ami
 %div.pa1.fiche.brdr-b
   .row
     .col.m11
@@ -11,8 +11,9 @@
               - @user.errors.full_messages.each do |msg|
                 %li= msg
    
-        Vous avez la possibilité de parrainer un ami.
-    
+        %h4.blue-text.text-darken-2 Vous avez la possibilité de demander l'ouverture d'un compte pour un ami.
+        %h5 Cette demande est soumise à acceptation de la team SKZ.
+
         = render :partial => "new_fields", :locals => {:f => f, :reg => true}
 
       = link_to 'Retour', dashboard_user_path(@parrain)

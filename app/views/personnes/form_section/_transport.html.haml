@@ -6,6 +6,7 @@
 .section.sfullscreen
   .container
     .row
+      %p Les informations ne seront sauvegardées qu'à la fin de l'inscription
       %h5 Le car c'est l'occasion de chouiller avec tes cop's !
       = fc.fields_for :products,@commandes.products.build do |fp|
         .input-field.col.s12.m4
