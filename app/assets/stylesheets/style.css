@@ -163,7 +163,7 @@ footer.page-footer {
 .tr-decale {
   font-size: 13px;
 }
-.tr-decale > td {
+.tr-decale > td:first-child {
   padding-left: 40px;
 }
 

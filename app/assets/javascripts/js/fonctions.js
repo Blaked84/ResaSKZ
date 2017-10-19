@@ -154,7 +154,38 @@ $(document).ready(function() {
              $('#res_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').attr("data-name"));
              $('#price_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').attr("data-price"));
              recap_total()
-       }
+           }
+        
+       // Transports
+           var transports = ["user_personne_commandes_attributes_0_products_attributes_2_id",
+                             "user_personne_commandes_attributes_0_products_attributes_3_id"]
+           // On prend l'aller-retour
+           if (id == "user_personne_commandes_attributes_0_products_attributes_1_id") {
+             if ($(this).val() != "") {
+               transports.forEach(function(e) {
+                 $('#res_' + e).text("");
+                 $('#price_' + e).text("0€");
+               })
+             } else {
+               transports.forEach(function(e) {
+                 if ($('#'+e).val() != "") {
+                   $('#res_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-name"));
+                   $('#price_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-price")); 
+                 }
+               })
+             }
+           }
+
+           // On prend aller et/ou retour
+           transports.forEach(function(e) {
+             if (id == e) {
+               if ($("#user_personne_commandes_attributes_0_products_attributes_1_id").val() != "") {
+                 $('#res_' + e).text("");
+                 $('#price_' + e).text("0€");
+               }
+             }
+           })
+           recap_total()
 
        });
 
@@ -165,7 +196,7 @@ $(document).ready(function() {
        });
 
        $('input[type=checkbox]').change(function(){
-           id = $(this).attr('id');
+           var id = $(this).attr('id');
            if($(this).is(':checked')){
                $('#res_' + id).text('Oui');
                $('#price_' + id).text($(this).attr("data-price"));
@@ -175,6 +206,76 @@ $(document).ready(function() {
                 $('#res_' + id).text('Non');
                 $('#price_' + id).text("0€");
                 recap_total()
+           }
+
+       // Assurances
+ 
+           // Si assurance tout compris coché
+           var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
+                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
+                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
+                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
+           assurances.forEach(function(e) {
+             if (id == e) {
+               // Si assurance (on annule tout si la personne coche tout compris ou pas d'assu
+               if (id != "user_personne_commandes_attributes_0_products_attributes_47_product_id_54") {
+                 if ($("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked') || $("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked')) {
+                     $('#res_' + e).text('Non');
+                     $('#price_' + e).text("0€");
+                 }
+               } else {
+               // Si pas d'assu (on annule tout si la personne coche tout compris)
+                 if ($("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked')) {
+                     $('#res_' + e).text('Non');
+                     $('#price_' + e).text("0€");
+                 }
+
+               }
+             }
+           })
+
+           // On coche assurance tout compris, annuler le reste, sinon remettre
+           if (id == "user_personne_commandes_attributes_0_products_attributes_46_product_id_53") {
+             if ($('#user_personne_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked'))  {
+               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
+                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
+                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
+                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
+               assurances.forEach(function(e) {
+                 $('#res_' + e).text('Non');
+                 $('#price_' + e).text("0€");
+               })
+             } else {
+               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
+                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
+                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
+                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
+               assurances.forEach(function(e) {
+                 $('#res_' + e).text($('#'+e).attr("data-name"));
+                 $('#price_' + e).text($('#'+e).attr("data-price"));
+               })
+             }
+           }
+
+           // On coche pas d'assurance tout compris, annuler le reste sauf assu tout compris
+           if (id == "user_personne_commandes_attributes_0_products_attributes_47_product_id_54") {
+             if ($('#user_personne_commandes_attributes_0_products_attributes_47_product_id_54').is(':checked'))  {
+               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
+                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
+                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52"]
+               assurances.forEach(function(e) {
+                 $('#res_' + e).text('Non');
+                 $('#price_' + e).text("0€");
+               })
+             } else {
+               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
+                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
+                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52"]
+               assurances.forEach(function(e) {
+                 $('#res_' + e).text($('#'+e).attr("data-name"));
+                 $('#price_' + e).text($('#'+e).attr("data-price"));
+               })
+             }
            }
        });
 

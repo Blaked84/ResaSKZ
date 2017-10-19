@@ -18,7 +18,7 @@
               %label{for: "user_personne_commandes_attributes_0_products_attributes_#{43+@assurances.index(p).to_i}_product_id_#{p.id}"}
                 Non
                 = fp.collection_check_boxes :product_id, Product.where(id: p.id), :id, :oui do
-                  %input{:type => "checkbox", :id => "user_personne_commandes_attributes_0_products_attributes_#{43+@assurances.index(p).to_i}_product_id_#{p.id}", :name => "user[personne][commandes_attributes][0][products_attributes][#{43+@assurances.index(p).to_i}][product_id][]", :value => p.id}
+                  %input{:type => "checkbox", :id => "user_personne_commandes_attributes_0_products_attributes_#{43+@assurances.index(p).to_i}_product_id_#{p.id}", :name => "user[personne][commandes_attributes][0][products_attributes][#{43+@assurances.index(p).to_i}][product_id][]", :value => p.id, :data => {name: "Oui", price: "#{p.price_euro.round}€"}}
                   = succeed "Oui" do
                     %span.lever
 
