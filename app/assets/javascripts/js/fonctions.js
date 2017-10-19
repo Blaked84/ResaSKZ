@@ -53,59 +53,58 @@ $(document).ready(function() {
        var user_personne = ["user_personne","personne"]
        function ryft_color() {
 
-           user_personne.forEach(function(u) {
-             if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Bleu") {
-                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+             if($('#user_personnennn_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Bleu") {
+                 if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                     $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_12.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_13.jpg');
                  }
              }
-             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rouge"){
-                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+             else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rouge"){
+                 if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                     $('.img_ryft').attr('src', '/assets/masque/ryft_21.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_22.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_23.jpg');
                  }
              }
-             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rose"){
-                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+             else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rose"){
+                 if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                    $('.img_ryft').attr('src', '/assets/masque/ryft_31.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                    $('.img_ryft').attr('src', '/assets/masque/ryft_32.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_33.jpg');
                  }
              }
-             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Blanc"){
-                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+             else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Blanc"){
+                 if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                     $('.img_ryft').attr('src', '/assets/masque/ryft_41.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_42.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_43.jpg');
                  }
              }
-             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Jaune"){
-                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+             else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Jaune"){
+                 if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                     $('.img_ryft').attr('src', '/assets/masque/ryft_51.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_52.jpg');
                  }
-                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_53.jpg');
                  }
              }
@@ -113,18 +112,15 @@ $(document).ready(function() {
                  $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
              }
  
-           })
          
        }
       
-       user_personne.forEach(function(u) {
-         $('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').change(function(){
+         $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').change(function(){
            ryft_color()
          });
-         $('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').change(function(){
+         $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').change(function(){
            ryft_color()
          });
-       })
 
        // Récapitulatif
        // Total
