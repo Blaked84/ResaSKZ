@@ -231,6 +231,7 @@ Categorie.find_by( nom: 'Transport Aller/Retour').update_attribute(:max_par_pers
 Categorie.find_by( nom: 'Transport Aller').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Transport Retour').update_attribute(:max_par_personne,1)
 Categorie.find_by( nom: 'Matériel de Glisse').update_attribute(:max_par_personne,1)
+Categorie.find_by( nom: 'Options supplémentaires').update_attribute(:max_par_personne,5)
 
 
 user_gorgu=User.create!(

@@ -15,7 +15,13 @@
           - Typeresid.all.each do |tr|
             %option{:value => "#{tr.id}", :data => {name: tr.name} }= tr.name
       
-      %br/
-      %a.btn.waves-effect.waves-light.right{:href => "#confirmation"}
-        Suivant
-        %i.material-icons.right send
+      - if @commandes.new_record?
+        %br/
+        %a.btn.waves-effect.waves-light.right{:href => "#confirmation"}
+          Suivant
+          %i.material-icons.right send
+      - else
+        %br/
+        %button.btn.waves-effect.waves-light.right{:type => "submit"}
+          Confirmer
+          %i.material-icons.right send

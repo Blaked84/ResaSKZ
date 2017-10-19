@@ -1,6 +1,6 @@
 .shadow-1
   %div.top-info.pa1
-    %h1 Ajouter des produit à ma commande
+    %h1 Modifier ma commande (Ajout de produits)
   %div.fiche.pa1.brdr-b
 
     .box.pa1
@@ -43,12 +43,16 @@
                 %td=link_to p.name, product_path(p.id)
                 %td=conditional_format(p.reste?)
                 %td=p.price_euro
-        Choix :
+  
         - if c[:id] == 1
           - if current_user.admin?
+            Choix :
             =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+          - else
+            Choix: #{@commande.products.where(categorie_id: 1).first.name}
         - else
-          =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+          Choix :
+          =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
     
               
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"

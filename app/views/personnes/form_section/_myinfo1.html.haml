@@ -20,7 +20,10 @@
           %li
             .row
               .input-field.col.s10
-                =f.email_field :email
+                - if !@commandes.new_record? && !current_user.admin?
+                  =f.email_field :email, readonly: true
+                - else
+                  =f.email_field :email
                 =f.label :email
           %li
             .row

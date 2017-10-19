@@ -56,6 +56,8 @@ class PersonnesController < ApplicationController
     @commandes = @personne.commandes.build(event_id: personne_params["commandes_attributes"]["0"]["event_id"],
                                           tbk_id: personne_params["commandes_attributes"]["0"]["tbk_id"],
                                           glisse_id: personne_params["commandes_attributes"]["0"]["glisse_id"])
+    @commandes.idlong = @commandes.gen_idlong
+
     # Packs
     @packs = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
                                                      nombre: 1)
@@ -285,6 +287,7 @@ private
                   :event_id,
                   :tbk_id,
                   :glisse_id,
+                  :idlong,
                   :products_attributes => [:id,
                                            :nombre,
                                            :preference,

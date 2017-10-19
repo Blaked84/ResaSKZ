@@ -239,7 +239,7 @@ require 'barby'
       set_commande
       authorize! :add_product, @commande    
 
-      @categories=Categorie.all.map do|c|
+      @categories=Categorie.order(:id).all.map do|c|
 
         prods = c.products.where(event_id: @commande.event_id)
 

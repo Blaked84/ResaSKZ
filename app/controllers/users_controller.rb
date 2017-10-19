@@ -175,7 +175,9 @@ class UsersController < ApplicationController
     @personne = @user.referant
     @commandes = @personne.commandes.build(event_id: referant_params["commandes_attributes"]["0"]["event_id"],
                                           tbk_id: referant_params["commandes_attributes"]["0"]["tbk_id"],
-                                          glisse_id: referant_params["commandes_attributes"]["0"]["glisse_id"])
+                                          glisse_id: referant_params["commandes_attributes"]["0"]["glisse_id"],
+                                          )
+    @commandes.idlong = @commandes.gen_idlong
     # Packs
     @packs = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
                                                      nombre: 1)
@@ -588,6 +590,7 @@ class UsersController < ApplicationController
                                                            :event_id,
                                                            :tbk_id,
                                                            :glisse_id,
+                                                           :idlong,
                                                            :products_attributes => [:id,
                                                                                     :nombre,
                                                                                     :preference,
