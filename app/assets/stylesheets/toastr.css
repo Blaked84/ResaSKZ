@@ -3,6 +3,7 @@
 }
 .toast-message {
     word-wrap: break-word;
+    word-break: break-word;
 }
 
 .toast-message a,
