@@ -15,7 +15,7 @@
       %br/
       %h5{:style => "color: #f99c43;"} Et maintenant, fais toi plaisir !
       %br/
-      - @boulangerie.order(:id).each do |p|
+      - @boulangerie.each do |p|
         = fc.fields_for :products, @commandes.products.build do |fp|
           %h6 #{p.name} : #{p.description}
           .switch

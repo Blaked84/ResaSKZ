@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require autocomplete-rails
-//= require jquery-form-validator
 //= require_tree .
 
 $(document).ready(function() {
