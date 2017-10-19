@@ -1,23 +1,21 @@
 .mw960p.center
   .grid-2-small-1
     - @user.personnes.where.not(:disabled =>  true).each do |p| 
-      .shadow-1.fiche.mt1
+      .shadow-1.fiche.mt1.hoverable
         %div.pa1
           .row
-            .w70
-              %h2= p.nom_complet
-            .w30.txtright
+            .txtright
               -if p.moderated || current_user.admin?
-                = link_to personne_infos_personne_path(p), :class => "icon-button right" do
-                  .icon-button-h-blue.icon-dark
-                    Editer
-                    .md-create
+                = link_to personne_infos_personne_path(p), :class => "btn waves-effect waves-light" do
+                  Editer
+            .col.s12
+              %h2= p.nom_complet
 
         %div.pr1.pl1.pb1
           - unless p.nil?
             %p
-              =p.bucque
-              =p.fams+p.promo.capitalize
+              =p.bucque              
+              #{p.fams} #{p.promo}
             %p
               =p.phone
             %p
@@ -46,7 +44,7 @@
 
     -if @commandes
       - @commandes.each do |c| 
-        .shadow-1.fiche.mt1
+        .shadow-1.fiche.mt1.hoverable
           %div.pa1
             .row
               .col.s12

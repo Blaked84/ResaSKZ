@@ -13,110 +13,322 @@
             %th Intitulé
             %th Choix
             %th Prix
-        %tbody
-          %tr
-            %td Pack de base
-            %td#res_user_personne_commandes_attributes_0_products_attributes_0_id 
-            %td#price_user_personne_commandes_attributes_0_products_attributes_0_id 0€
-          %tr.no-lineheight
-            %td Transport
-            %td
-            %td
-          %tr.tr-decale.no-lineheight
-            %td Transport A/R
-            %td#res_user_personne_commandes_attributes_0_products_attributes_1_id
-            %td#price_user_personne_commandes_attributes_0_products_attributes_1_id 0€
-          %tr.tr-decale.no-lineheight
-            %td Transport Aller
-            %td#res_user_personne_commandes_attributes_0_products_attributes_2_id
-            %td#price_user_personne_commandes_attributes_0_products_attributes_2_id 0€
-          %tr.tr-decale.no-lineheight
-            %td Transport Retour
-            %td#res_user_personne_commandes_attributes_0_products_attributes_3_id
-            %td#price_user_personne_commandes_attributes_0_products_attributes_3_id 0€
-          %tr
-            %td Pack food sans porc
-            %td#res_user_personne_commandes_attributes_0_products_attributes_4_id_5 Non
-            %td 0€
+        - if (@user && current_page?(user_infos_user_path(@user)))
+          %tbody
+            %tr
+              %td Pack de base
+              %td#res_user_personne_commandes_attributes_0_products_attributes_0_id 
+              %td#price_user_personne_commandes_attributes_0_products_attributes_0_id 0€
+            %tr.no-lineheight
+              %td Transport
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Transport A/R
+              %td#res_user_personne_commandes_attributes_0_products_attributes_1_id
+              %td#price_user_personne_commandes_attributes_0_products_attributes_1_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Aller
+              %td#res_user_personne_commandes_attributes_0_products_attributes_2_id
+              %td#price_user_personne_commandes_attributes_0_products_attributes_2_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Retour
+              %td#res_user_personne_commandes_attributes_0_products_attributes_3_id
+              %td#price_user_personne_commandes_attributes_0_products_attributes_3_id 0€
+            %tr
+              %td Pack food sans porc
+              %td#res_user_personne_commandes_attributes_0_products_attributes_4_id_5 Non
+              %td 0€
 
-          %tr.no-lineheight
-            %td Les options
-            %td
-            %td
-          %tr.tr-decale.no-lineheight
-            %td Pack Baguette
-            %td#res_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 0€
-          %tr.tr-decale.no-lineheight
-            %td Pack Croissant
-            %td#res_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 0€
-          %tr.tr-decale.no-lineheight
-            %td Option chocolatine
-            %td#res_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 0€
-          %tr.tr-decale.no-lineheight
-            %td Pack Saucisson
-            %td#res_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 0€
-          %tr.tr-decale.no-lineheight
-            %td Pack Fromage
-            %td#res_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 0€
-          %tr
-            %td Les Skis
-            %td#res_user_personne_commandes_attributes_0_products_attributes_10_id <a href="#les_skis">Tu dois faire un choix!</a>
-            %td#price_user_personne_commandes_attributes_0_products_attributes_10_id 0€
-          %tr
-            %td Anim's - RCC
-            %td#res_user_personne_commandes_attributes_0_products_attributes_11_id Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_11_id 0€
-          %tr.no-lineheight
-            %td Masque Ryft
-            %td#res_masque Non
-            %td#price_masque 0€
-          %tr.tr-decale.no-lineheight
-            %td Couleur cadre
-            %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre
-            %td
-          %tr.tr-decale.no-lineheight
-            %td Couleur verre
-            %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_verre
-            %td
-          %tr.no-lineheight
-            %td Assurances
-            %td
-            %td
-          %tr.tr-decale.no-lineheight
-            %td Assurance Annulation
-            %td#res_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 0€
-          %tr.tr-decale.no-lineheight
-            %td Assurance rapatriement/bagage
-            %td#res_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 0€
-          %tr.tr-decale.no-lineheight
-            %td Assurance interruption ski-pass
-            %td#res_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 0€
-          %tr.tr-decale.no-lineheight
-            %td Assurance: Tout-compris
-            %td#res_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 0€
-          %tr.tr-decale.no-lineheight
-            %td Pas d'assurance
-            %td#res_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 Non
-            %td#price_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 0€
-          %tr
-            %td La Resid's
-            %td#res_user_personne_typeresid_id <a href="#la_residence">Tu dois faire un choix!</a>
-            %td
-          %tr{style: "font-size: 18px"}
-            %td
-              %b Total
-            %td
-            %td
-              %b#price_total 0€
+            %tr.no-lineheight
+              %td Les options
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Pack Baguette
+              %td#res_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Croissant
+              %td#res_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 0€
+            %tr.tr-decale.no-lineheight
+              %td Option chocolatine
+              %td#res_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Saucisson
+              %td#res_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Fromage
+              %td#res_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 0€
+            %tr
+              %td Les Skis
+              %td#res_user_personne_commandes_attributes_0_products_attributes_10_id <a href="#les_skis">Tu dois faire un choix!</a>
+              %td#price_user_personne_commandes_attributes_0_products_attributes_10_id 0€
+            %tr
+              %td Anim's - RCC
+              %td#res_user_personne_commandes_attributes_0_products_attributes_11_id Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_11_id 0€
+            %tr.no-lineheight
+              %td Masque Ryft
+              %td#res_masque Non
+              %td#price_masque 0€
+            %tr.tr-decale.no-lineheight
+              %td Couleur cadre
+              %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Couleur verre
+              %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_verre
+              %td
+            %tr.no-lineheight
+              %td Assurances
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Assurance Annulation
+              %td#res_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance rapatriement/bagage
+              %td#res_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance interruption ski-pass
+              %td#res_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance: Tout-compris
+              %td#res_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 0€
+            %tr.tr-decale.no-lineheight
+              %td Pas d'assurance
+              %td#res_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 0€
+            %tr
+              %td La Resid's
+              %td#res_user_personne_typeresid_id <a href="#la_residence">Tu dois faire un choix!</a>
+              %td
+            %tr{style: "font-size: 18px"}
+              %td
+                %b Total
+              %td
+              %td
+                %b#price_total 0€
+        - elsif (@user && current_page?(new_personne_user_path(@user)))
+          %tbody
+            %tr
+              %td Pack de base
+              %td#res_personne_commandes_attributes_0_products_attributes_0_id 
+              %td#price_personne_commandes_attributes_0_products_attributes_0_id 0€
+            %tr.no-lineheight
+              %td Transport
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Transport A/R
+              %td#res_personne_commandes_attributes_0_products_attributes_1_id
+              %td#price_personne_commandes_attributes_0_products_attributes_1_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Aller
+              %td#res_personne_commandes_attributes_0_products_attributes_2_id
+              %td#price_personne_commandes_attributes_0_products_attributes_2_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Retour
+              %td#res_personne_commandes_attributes_0_products_attributes_3_id
+              %td#price_personne_commandes_attributes_0_products_attributes_3_id 0€
+            %tr
+              %td Pack food sans porc
+              %td#res_personne_commandes_attributes_0_products_attributes_4_id_5 Non
+              %td 0€
+
+            %tr.no-lineheight
+              %td Les options
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Pack Baguette
+              %td#res_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Croissant
+              %td#res_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 0€
+            %tr.tr-decale.no-lineheight
+              %td Option chocolatine
+              %td#res_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Saucisson
+              %td#res_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Fromage
+              %td#res_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 0€
+            %tr
+              %td Les Skis
+              %td#res_personne_commandes_attributes_0_products_attributes_10_id <a href="#les_skis">Tu dois faire un choix!</a>
+              %td#price_personne_commandes_attributes_0_products_attributes_10_id 0€
+            %tr
+              %td Anim's - RCC
+              %td#res_personne_commandes_attributes_0_products_attributes_11_id Non
+              %td#price_personne_commandes_attributes_0_products_attributes_11_id 0€
+            %tr.no-lineheight
+              %td Masque Ryft
+              %td#res_masque Non
+              %td#price_masque 0€
+            %tr.tr-decale.no-lineheight
+              %td Couleur cadre
+              %td#res_personne_commandes_attributes_0_products_attributes_42_couleur_cadre
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Couleur verre
+              %td#res_personne_commandes_attributes_0_products_attributes_42_couleur_verre
+              %td
+            %tr.no-lineheight
+              %td Assurances
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Assurance Annulation
+              %td#res_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_43_product_id_50 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance rapatriement/bagage
+              %td#res_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_44_product_id_51 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance interruption ski-pass
+              %td#res_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_45_product_id_52 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance: Tout-compris
+              %td#res_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_46_product_id_53 0€
+            %tr.tr-decale.no-lineheight
+              %td Pas d'assurance
+              %td#res_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 Non
+              %td#price_user_personne_commandes_attributes_0_products_attributes_47_product_id_54 0€
+            %tr
+              %td La Resid's
+              %td#res_personne_typeresid_id <a href="#la_residence">Tu dois faire un choix!</a>
+              %td
+            %tr{style: "font-size: 18px"}
+              %td
+                %b Total
+              %td
+              %td
+                %b#price_total 0€
+
+        -else
+          %tbody
+            %tr
+              %td Pack de base
+              %td#res_personne_commandes_attributes_0_products_attributes_0_id 
+              %td#price_personne_commandes_attributes_0_products_attributes_0_id 0€
+            %tr.no-lineheight
+              %td Transport
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Transport A/R
+              %td#res_personne_commandes_attributes_0_products_attributes_1_id
+              %td#price_personne_commandes_attributes_0_products_attributes_1_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Aller
+              %td#res_personne_commandes_attributes_0_products_attributes_2_id
+              %td#price_personne_commandes_attributes_0_products_attributes_2_id 0€
+            %tr.tr-decale.no-lineheight
+              %td Transport Retour
+              %td#res_personne_commandes_attributes_0_products_attributes_3_id
+              %td#price_personne_commandes_attributes_0_products_attributes_3_id 0€
+            %tr
+              %td Pack food sans porc
+              %td#res_personne_commandes_attributes_0_products_attributes_4_id_5 Non
+              %td 0€
+
+            %tr.no-lineheight
+              %td Les options
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Pack Baguette
+              %td#res_personne_commandes_attributes_0_products_attributes_5_product_id_6 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_5_product_id_6 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Croissant
+              %td#res_personne_commandes_attributes_0_products_attributes_6_product_id_7 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_6_product_id_7 0€
+            %tr.tr-decale.no-lineheight
+              %td Option chocolatine
+              %td#res_personne_commandes_attributes_0_products_attributes_7_product_id_8 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_7_product_id_8 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Saucisson
+              %td#res_personne_commandes_attributes_0_products_attributes_8_product_id_9 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_8_product_id_9 0€
+            %tr.tr-decale.no-lineheight
+              %td Pack Fromage
+              %td#res_personne_commandes_attributes_0_products_attributes_9_product_id_10 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_9_product_id_10 0€
+            %tr
+              %td Les Skis
+              %td#res_personne_commandes_attributes_0_products_attributes_10_id <a href="#les_skis">Tu dois faire un choix!</a>
+              %td#price_personne_commandes_attributes_0_products_attributes_10_id 0€
+            %tr
+              %td Anim's - RCC
+              %td#res_personne_commandes_attributes_0_products_attributes_11_id Non
+              %td#price_personne_commandes_attributes_0_products_attributes_11_id 0€
+            %tr.no-lineheight
+              %td Masque Ryft
+              %td#res_masque Non
+              %td#price_masque 0€
+            %tr.tr-decale.no-lineheight
+              %td Couleur cadre
+              %td#res_personne_commandes_attributes_0_products_attributes_42_couleur_cadre
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Couleur verre
+              %td#res_personne_commandes_attributes_0_products_attributes_42_couleur_verre
+              %td
+            %tr.no-lineheight
+              %td Assurances
+              %td
+              %td
+            %tr.tr-decale.no-lineheight
+              %td Assurance Annulation
+              %td#res_personne_commandes_attributes_0_products_attributes_43_product_id_50 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_43_product_id_50 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance rapatriement/bagage
+              %td#res_personne_commandes_attributes_0_products_attributes_44_product_id_51 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_44_product_id_51 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance interruption ski-pass
+              %td#res_personne_commandes_attributes_0_products_attributes_45_product_id_52 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_45_product_id_52 0€
+            %tr.tr-decale.no-lineheight
+              %td Assurance: Tout-compris
+              %td#res_personne_commandes_attributes_0_products_attributes_46_product_id_53 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_46_product_id_53 0€
+            %tr.tr-decale.no-lineheight
+              %td Pas d'assurance
+              %td#res_personne_commandes_attributes_0_products_attributes_47_product_id_54 Non
+              %td#price_personne_commandes_attributes_0_products_attributes_47_product_id_54 0€
+            %tr
+              %td La Resid's
+              %td#res_personne_typeresid_id <a href="#la_residence">Tu dois faire un choix!</a>
+              %td
+            %tr{style: "font-size: 18px"}
+              %td
+                %b Total
+              %td
+              %td
+                %b#price_total 0€
 
       %br/
       %a.waves-effect.waves-light.btn{:href => "#reglement"} Lire le règlement

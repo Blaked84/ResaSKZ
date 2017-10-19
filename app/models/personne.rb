@@ -61,6 +61,7 @@ class Personne < ActiveRecord::Base
 	validates :pville , :presence => true
 	validates :pcodepostal , :presence => true
 	validates :type_pers, :inclusion => {  :in => @@types}
+        validates :typeresid_id, :presence => true
 
 	# validates :documentassurance, :inclusion => {  :in => [true,false]}
 	# validates :enregistrement_termine, :inclusion => {  :in => [true,false]}

@@ -380,13 +380,15 @@ class UsersController < ApplicationController
     @personne = @user.personnes.new
     authorize! :create, @personne
     @events = Event.all
+    @type_products = TypeProduct.all
     if @events.count > @personne.commandes.count
       @commandes = @personne.commandes.build
       @produits = @commandes.products.build
       @anims_notes = Product.where(categorie_id: 7, votable: true)
       @commandes_anims_notes = @commandes.product_personne_preferences.build
     end
-
+    @boulangerie = Product.where(categorie: Categorie.find_by_nom("Boulangerie"))
+    @assurances = Product.where(categorie_id: Categorie.find_by_nom("Assurances"))
   end
 
   def parrainer

@@ -53,13 +53,43 @@ class PersonnesController < ApplicationController
 
     @personne.type_pers="Pec's"
 
+    @commandes = @personne.commandes.build(event_id: personne_params["commandes_attributes"]["0"]["event_id"],
+                                          tbk_id: personne_params["commandes_attributes"]["0"]["tbk_id"],
+                                          glisse_id: personne_params["commandes_attributes"]["0"]["glisse_id"])
+    # Packs
+    @packs = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
+                                                     nombre: 1)
+    # Transports
+    @transportsar = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["1"]["id"],
+                                                     nombre: 1)
+    @transportsa = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["2"]["id"],
+                                                     nombre: 1)
+    @transportsr = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["3"]["id"],
+                                                     nombre: 1)
+    if @transportsar.present? && @transportsar.nombre > 0
+      if @transportsa.present? && @transportsa.nombre > 0
+        @transportsa.destroy
+      end
+      if @transportsr.present? && @transportsr.nombre > 0
+        @transportsr.destroy
+      end
+    elsif (@transportsa.present? && @transportsa.nombre > 0) or (@transportsr.present? && @transportsr.present?)
+      @transportsar.destroy
+    end
+
+    # Options Pack food
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["4"].present?
+      @options = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["4"]["id"],
+                                                    nombre: 1)
+    end
+
     respond_to do |format|
-      if @personne.save && @personne.update_attribute(:enregistrement_termine, true)
+      if @personne.save && @personne.update(enregistrement_termine: true, moderated: true)
         format.html { redirect_to dashboard_user_url @personne.user, :notice => 'User was successfully updated.' }
         format.json { head :no_content }
       else
         @user=User.find(@personne.user_id)
-        format.html { render 'users/new_personne' }
+        format.html { redirect_to new_personne_user_path(@user), alert: "Un problème empêche la création du compte" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +99,14 @@ class PersonnesController < ApplicationController
   def personne_infos 
     set_personne
     authorize! :update, @personne
+    @events = Event.all
+    @type_products = TypeProduct.all
+    @commandes = @personne.commandes.first
+    @products = @commandes.products.build
+    @anims_notes = Product.where(categorie_id: 7, votable: true)
+    @commandes_anims_notes = @commandes.product_personne_preferences.build
+    @boulangerie = Product.where(categorie: Categorie.find_by_nom("Boulangerie"))
+    @assurances = Product.where(categorie_id: Categorie.find_by_nom("Assurances"))
   end
 
   def update_personne_infos 
@@ -246,7 +284,28 @@ private
               :email,
               :user_id,
               :documentassurance,
-              :typeresid_id]
+              :typeresid_id,
+              :commandes_attributes => [
+                  :id,
+                  :event_id,
+                  :tbk_id,
+                  :glisse_id,
+                  :products_attributes => [:id,
+                                           :nombre,
+                                           :preference,
+                                           :en_attente,
+                                           :option_sup_id,
+                                           :couleur_cadre,
+                                           :couleur_verre,
+                                           :option_id => [],
+                                           :product_id => []
+                                          ],
+                  :product_personne_preferences_attributes => [
+                                       :id,
+                                       :product_id,
+                                       :preference
+                  ]
+              ]]
     perm_list << :user_id if options[:registration] || current_user.admin?
     perm_list << :moderated if current_user.admin?
 

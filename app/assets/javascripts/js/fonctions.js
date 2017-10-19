@@ -52,75 +52,81 @@ $(document).ready(function() {
            }
        });
 
+       var user_personne = ["user_personne","personne"]
        function ryft_color() {
-           if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Bleu"){
-               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
-                  $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_12.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_13.jpg');
-               }
-           }
-           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rouge"){
-               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
-                  $('.img_ryft').attr('src', '/assets/masque/ryft_21.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_22.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_23.jpg');
-               }
-           }
-           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rose"){
-               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
-                  $('.img_ryft').attr('src', '/assets/masque/ryft_31.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+
+           user_personne.forEach(function(u) {
+             if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Bleu") {
+                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                    $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_12.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_13.jpg');
+                 }
+             }
+             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rouge"){
+                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                    $('.img_ryft').attr('src', '/assets/masque/ryft_21.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_22.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_23.jpg');
+                 }
+             }
+             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Rose"){
+                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                   $('.img_ryft').attr('src', '/assets/masque/ryft_31.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                    $('.img_ryft').attr('src', '/assets/masque/ryft_32.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_33.jpg');
-               }
-           }
-           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Blanc"){
-               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
-                  $('.img_ryft').attr('src', '/assets/masque/ryft_41.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_42.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_43.jpg');
-               }
-           }
-           else if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Jaune"){
-               if($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
-                  $('.img_ryft').attr('src', '/assets/masque/ryft_51.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_52.jpg');
-               }
-               else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
-                   $('.img_ryft').attr('src', '/assets/masque/ryft_53.jpg');
-               }
-           }
-           else{
-               $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
-           }
-
-
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_33.jpg');
+                 }
+             }
+             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Blanc"){
+                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                    $('.img_ryft').attr('src', '/assets/masque/ryft_41.jpg');
+                 }
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_42.jpg');
+                 }
+                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_43.jpg');
+                 }
+             }
+             else if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').val() == "Jaune"){
+                 if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
+                    $('.img_ryft').attr('src', '/assets/masque/ryft_51.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_52.jpg');
+                 }
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                     $('.img_ryft').attr('src', '/assets/masque/ryft_53.jpg');
+                 }
+             }
+             else{
+                 $('.img_ryft').attr('src', '/assets/masque/ryft_11.jpg');
+             }
+ 
+           })
+         
        }
-
-       $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').change(function(){
-         ryft_color()
-       });
-       $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').change(function(){
-         ryft_color()
-       });
+      
+       user_personne.forEach(function(u) {
+         $('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').change(function(){
+           ryft_color()
+         });
+         $('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_cadre').change(function(){
+           ryft_color()
+         });
+       })
 
        // Récapitulatif
        // Total
@@ -131,17 +137,25 @@ $(document).ready(function() {
          for (i = 0; i < nombre; i++) {
            price += parseFloat(td_prices[i].textContent)
          }
-         $('#price_total').text(price+"€")
+         $('#price_total').text(Math.round(price*100)/100+"€")
        }
 
        // Pack
        if ($('#user_personne_commandes_attributes_0_products_attributes_0_id').length > 0) {
-         id = $('#user_personne_commandes_attributes_0_products_attributes_0_id').attr('id');
-
-         $('#res_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-name"));
-         $('#price_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-price"));
-         recap_total()
+           id = $('#user_personne_commandes_attributes_0_products_attributes_0_id').attr('id');
+  
+           $('#res_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-name"));
+           $('#price_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-price"));
+           recap_total()
        }
+       if ($('#personne_commandes_attributes_0_products_attributes_0_id').length > 0) {
+           id = $('#personne_commandes_attributes_0_products_attributes_0_id').attr('id');
+  
+           $('#res_' + id).text($('#' + id + ' option[value='+ $('#personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-name"));
+           $('#price_' + id).text($('#' + id + ' option[value='+ $('#personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-price"));
+           recap_total()
+       }
+       
 
        $('select').change(function(){
            id = $(this).attr('id');
@@ -157,37 +171,40 @@ $(document).ready(function() {
            }
         
        // Transports
-           var transports = ["user_personne_commandes_attributes_0_products_attributes_2_id",
-                             "user_personne_commandes_attributes_0_products_attributes_3_id"]
-           // On prend l'aller-retour
-           if (id == "user_personne_commandes_attributes_0_products_attributes_1_id") {
-             if ($(this).val() != "") {
-               transports.forEach(function(e) {
-                 $('#res_' + e).text("");
-                 $('#price_' + e).text("0€");
-               })
-             } else {
-               transports.forEach(function(e) {
-                 if ($('#'+e).val() != "") {
-                   $('#res_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-name"));
-                   $('#price_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-price")); 
-                 }
-               })
-             }
-           }
-
-           // On prend aller et/ou retour
-           transports.forEach(function(e) {
-             if (id == e) {
-               if ($("#user_personne_commandes_attributes_0_products_attributes_1_id").val() != "") {
-                 $('#res_' + e).text("");
-                 $('#price_' + e).text("0€");
+           user_personne.forEach(function(u) {
+             var transports = [u+"_commandes_attributes_0_products_attributes_2_id",
+                               u+"_commandes_attributes_0_products_attributes_3_id"]
+             // On prend l'aller-retour
+             if (id == u+"_commandes_attributes_0_products_attributes_1_id") {
+               
+               if ($('#'+id).val() != "") {
+                 transports.forEach(function(e) {
+                   $('#res_' + e).text("");
+                   $('#price_' + e).text("0€");
+                 })
+               } else {
+                 transports.forEach(function(e) {
+                   if ($('#'+e).val() != "") {
+                     $('#res_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-name"));
+                     $('#price_' + e).text($('#' + e + ' option[value='+ $('#'+e).val() + ']').attr("data-price")); 
+                   }
+                 })
                }
              }
-           })
-           recap_total()
 
+             // On prend aller et/ou retour
+             transports.forEach(function(e) {
+               if (id == e) {
+                 if ($(u+"_commandes_attributes_0_products_attributes_1_id").val() != "") {
+                   $('#res_' + e).text("");
+                   $('#price_' + e).text("0€");
+                 }
+               }
+             })
+             recap_total()
+           })
        });
+        
 
        $('input[type=text]').change(function(){
            id = $(this).attr('id');
@@ -211,72 +228,74 @@ $(document).ready(function() {
        // Assurances
  
            // Si assurance tout compris coché
-           var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
-                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
-                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
-                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
-           assurances.forEach(function(e) {
-             if (id == e) {
-               // Si assurance (on annule tout si la personne coche tout compris ou pas d'assu
-               if (id != "user_personne_commandes_attributes_0_products_attributes_47_product_id_54") {
-                 if ($("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked') || $("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked')) {
-                     $('#res_' + e).text('Non');
-                     $('#price_' + e).text("0€");
+           user_personne.forEach(function(u) {
+             var assurances = [u+"_commandes_attributes_0_products_attributes_43_product_id_50",
+                               u+"_commandes_attributes_0_products_attributes_44_product_id_51",
+                               u+ "_commandes_attributes_0_products_attributes_45_product_id_52",
+                               u+"_commandes_attributes_0_products_attributes_47_product_id_54"]
+             assurances.forEach(function(e) {
+               if (id == e) {
+                 // Si assurance (on annule tout si la personne coche tout compris ou pas d'assu
+                 if (id != u+"_commandes_attributes_0_products_attributes_47_product_id_54") {
+                   if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked') || $('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked')) {
+                       $('#res_' + e).text('Non');
+                       $('#price_' + e).text("0€");
+                   }
+                 } else {
+                 // Si pas d'assu (on annule tout si la personne coche tout compris)
+                   if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked')) {
+                       $('#res_' + e).text('Non');
+                       $('#price_' + e).text("0€");
+                   }
+  
                  }
-               } else {
-               // Si pas d'assu (on annule tout si la personne coche tout compris)
-                 if ($("#user_personne_commandes_attributes_0_products_attributes_46_product_id_53").is(':checked')) {
-                     $('#res_' + e).text('Non');
-                     $('#price_' + e).text("0€");
-                 }
+               }
+             })
 
+             // On coche assurance tout compris, annuler le reste, sinon remettre
+             if (id == u+"_commandes_attributes_0_products_attributes_46_product_id_53") {
+               if ($('#'+u+'_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked'))  {
+                 var assurances = [u+"_commandes_attributes_0_products_attributes_43_product_id_50",
+                                   u+"_commandes_attributes_0_products_attributes_44_product_id_51",
+                                   u+"_commandes_attributes_0_products_attributes_45_product_id_52",
+                                   u+"_commandes_attributes_0_products_attributes_47_product_id_54"]
+                 assurances.forEach(function(e) {
+                   $('#res_' + e).text('Non');
+                   $('#price_' + e).text("0€");
+                 })
+               } else {
+                 var assurances = [u+"_commandes_attributes_0_products_attributes_43_product_id_50",
+                                   u+"_commandes_attributes_0_products_attributes_44_product_id_51",
+                                   u+"_commandes_attributes_0_products_attributes_45_product_id_52",
+                                   u+"_commandes_attributes_0_products_attributes_47_product_id_54"]
+                 assurances.forEach(function(e) {
+                   $('#res_' + e).text($('#'+e).attr("data-name"));
+                   $('#price_' + e).text($('#'+e).attr("data-price"));
+                 })
+               }
+             }
+  
+             // On coche pas d'assurance tout compris, annuler le reste sauf assu tout compris
+             if (id == u+"_commandes_attributes_0_products_attributes_47_product_id_54") {
+               if ($('#'+u+'_commandes_attributes_0_products_attributes_47_product_id_54').is(':checked'))  {
+                 var assurances = [u+"_commandes_attributes_0_products_attributes_43_product_id_50",
+                                   u+"_commandes_attributes_0_products_attributes_44_product_id_51",
+                                   u+"_commandes_attributes_0_products_attributes_45_product_id_52"]
+                 assurances.forEach(function(e) {
+                   $('#res_' + e).text('Non');
+                   $('#price_' + e).text("0€");
+                 })
+               } else {
+                 var assurances = [u+"_commandes_attributes_0_products_attributes_43_product_id_50",
+                                   u+"_commandes_attributes_0_products_attributes_44_product_id_51",
+                                   u+"_commandes_attributes_0_products_attributes_45_product_id_52"]
+                 assurances.forEach(function(e) {
+                   $('#res_' + e).text($('#'+e).attr("data-name"));
+                   $('#price_' + e).text($('#'+e).attr("data-price"));
+                 })
                }
              }
            })
-
-           // On coche assurance tout compris, annuler le reste, sinon remettre
-           if (id == "user_personne_commandes_attributes_0_products_attributes_46_product_id_53") {
-             if ($('#user_personne_commandes_attributes_0_products_attributes_46_product_id_53').is(':checked'))  {
-               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
-                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
-                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
-                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
-               assurances.forEach(function(e) {
-                 $('#res_' + e).text('Non');
-                 $('#price_' + e).text("0€");
-               })
-             } else {
-               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
-                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
-                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52",
-                                 "user_personne_commandes_attributes_0_products_attributes_47_product_id_54"]
-               assurances.forEach(function(e) {
-                 $('#res_' + e).text($('#'+e).attr("data-name"));
-                 $('#price_' + e).text($('#'+e).attr("data-price"));
-               })
-             }
-           }
-
-           // On coche pas d'assurance tout compris, annuler le reste sauf assu tout compris
-           if (id == "user_personne_commandes_attributes_0_products_attributes_47_product_id_54") {
-             if ($('#user_personne_commandes_attributes_0_products_attributes_47_product_id_54').is(':checked'))  {
-               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
-                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
-                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52"]
-               assurances.forEach(function(e) {
-                 $('#res_' + e).text('Non');
-                 $('#price_' + e).text("0€");
-               })
-             } else {
-               var assurances = ["user_personne_commandes_attributes_0_products_attributes_43_product_id_50",
-                                 "user_personne_commandes_attributes_0_products_attributes_44_product_id_51",
-                                 "user_personne_commandes_attributes_0_products_attributes_45_product_id_52"]
-               assurances.forEach(function(e) {
-                 $('#res_' + e).text($('#'+e).attr("data-name"));
-                 $('#price_' + e).text($('#'+e).attr("data-price"));
-               })
-             }
-           }
        });
 
        $('input[type=radio]').change(function(){
@@ -289,10 +308,12 @@ $(document).ready(function() {
                 $('#res_' + id).text('Non');
                 recap_total()
            }
-
-           if (id == "user_personne_commandes_attributes_0_products_attributes_4_id_4") {
-             $('#res_user_personne_commandes_attributes_0_products_attributes_4_id_5').text('Non');
-           }
+           
+           user_personne.forEach(function(u) {
+             if (id == u+"_commandes_attributes_0_products_attributes_4_id_4") {
+               $('#res_'+u+'_commandes_attributes_0_products_attributes_4_id_5').text('Non');
+             }
+           })
 
        });
 

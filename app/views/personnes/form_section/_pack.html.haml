@@ -23,8 +23,8 @@
           %h6 6. Les Goodies ! Surprise...
     .row
       .input-field.col.s12.m4.offset-m4
-        - if current_page?(new_personne_user_path(@user))
-          =fp.select :id, Product.where(name: "Pack Extérieurs").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id]}, readonly: true, data: {name: "Pack Extérieurs", price: Product.where(name: "Pack Extérieurs").map{|t| ["#{t.price_euro.round}€" ,t.id]}}
+        - if (@user && current_page?(new_personne_user_path(@user)))
+          =fp.select :id, Product.where(name: "Pack Extérieurs").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}
         - else
           - if @personne.is_pg?
             =fp.select :id, Product.where(name: "Pack PG").map{|t| ["#{t.name} : #{t.price_euro.round}€" ,t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}
