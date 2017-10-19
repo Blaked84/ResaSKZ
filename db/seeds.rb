@@ -291,4 +291,5 @@ personne_gorgu=Personne.create!(
 	pcodepostal: "00000",
 	type_pers: "Gadz",
 	genre_id: 1,
+        typeresid_id: 1
 	)
