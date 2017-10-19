@@ -76,13 +76,13 @@
 
   %div.fiche.pa1.brdr-b
     %h2
-      Produits
+      Produits commandés
     
     %table.striped.alternate
       %thead
         %tr
           %th Produit
-          %th Quantitée
+          %th Quantité
           %th Prix (€)
       %tbody
         - @commande.commande_products.where(en_attente: false).each do |cprd|
@@ -155,8 +155,7 @@
 
 
     -unless @commande.paiement_etape == 3
-      %p
-        Le prochain paiement sera d'un montant de #{@commande.prochain_paiement / 100.0}€.
+      %h4.center Le prochain paiement sera d'un montant de #{@commande.prochain_paiement / 100.0}€.
       %br
     =link_to "Payer ma commande", new_commande_paiement_path(@commande.id), :class => "pure-button pure-button-primary"
 

@@ -10,26 +10,51 @@
       -unless c[:nom].blank?
         %h2= c[:nom]
       -if not(c[:max]) || c[:max]>1
-        %table.striped.alternate
-          %thead
-            %tr
-              %th
-              %th Produit
-              %th Disponible
-              %th Prix (€)
-          %tbody
-            -c[:products].each do |p|
+        - if c[:id] == 10
+          %table.striped.alternate
+            %thead
               %tr
-                %td
-                  %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                    +
-                  %span{ :id => 'product'+p.id.to_s}
-                    =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                  %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                    \-
-                %td=link_to p.name, product_path(p.id)
-                %td=conditional_format(p.reste?)
-                %td=p.price_euro
+                %th
+                %th Produit
+                %th Disponible
+                %th Prix (€)
+            %tbody
+              -c[:products].each do |p|
+                %tr
+                  %td
+                    %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                      +
+                    %span{ :id => 'product'+p.id.to_s}
+                      =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+                    %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                      \-
+                  %td
+                    = link_to product_path(p.id) do
+                      #{p.name}
+                      %img.illustration.img_ryft{:alt => "Masque Ryft", :src => p.image, :style => "width: 30%;"}/
+                  %td=conditional_format(p.reste?)
+                  %td=p.price_euro
+        - else
+          %table.striped.alternate
+            %thead
+              %tr
+                %th
+                %th Produit
+                %th Disponible
+                %th Prix (€)
+            %tbody
+              -c[:products].each do |p|
+                %tr
+                  %td
+                    %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                      +
+                    %span{ :id => 'product'+p.id.to_s}
+                      =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+                    %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                      \-
+                  %td=link_to p.name, product_path(p.id)
+                  %td=conditional_format(p.reste?)
+                  %td=p.price_euro
       -else
         %table.striped.alternate
           %thead

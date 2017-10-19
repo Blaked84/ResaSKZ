@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018214208) do
+ActiveRecord::Schema.define(version: 20171019201256) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -257,6 +257,7 @@ ActiveRecord::Schema.define(version: 20171018214208) do
     t.boolean  "votable"
     t.boolean  "en_attente",                   default: false
     t.integer  "option_sup_id"
+    t.string   "image"
   end
 
   create_table "roles", force: :cascade do |t|
