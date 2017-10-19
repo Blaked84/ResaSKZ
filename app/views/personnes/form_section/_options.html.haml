@@ -6,7 +6,7 @@
       %h4 Les options
 .section.sfullscreen
   .container
-    = fc.fields_for :products do |fp|
+    = fc.fields_for :products,@commandes.products.build do |fp|
       .row
         %h6{:style => "color: #f99c43;"} Pack food :
         = fp.collection_radio_buttons :id, Product.where(categorie: Categorie.second), :id, :name, {checked: Product.where(categorie: Categorie.second).first.id}
@@ -15,8 +15,8 @@
       %br/
       %h5{:style => "color: #f99c43;"} Et maintenant, fais toi plaisir !
       %br/
-      - @boulangerie.each do |p|
-        = fc.fields_for :products do |fp|
+      - @boulangerie.order(:id).each do |p|
+        = fc.fields_for :products, @commandes.products.build do |fp|
           %h6 #{p.name} : #{p.description}
           .switch
             %label{for: "user_personne_commandes_attributes_0_products_attributes_#{5+@boulangerie.index(p)}_product_id_#{p.id}"}

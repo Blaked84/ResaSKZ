@@ -13,7 +13,7 @@
           %br/
           %h6 #{p.name} (#{p.price_euro.round}€)
           %p #{p.description} 
-          = fc.fields_for :products do |fp|
+          = fc.fields_for :products,@commandes.products.build do |fp|
             .switch
               %label{for: "user_personne_commandes_attributes_0_products_attributes_#{43+@assurances.index(p).to_i}_product_id_#{p.id}"}
                 Non

@@ -584,6 +584,7 @@ class UsersController < ApplicationController
                                                       :user_id,
                                                       :typeresid_id,
                                                       :commandes_attributes => [
+                                                           :id,
                                                            :event_id,
                                                            :tbk_id,
                                                            :glisse_id,

@@ -98,7 +98,7 @@ listeproduits=[["Pack PG",29500,0,DateTime.new(2017,10,30),".onscrit et de 216 �
 ["Food Pack sans Porc",0,0,DateTime.new(2017,10,30),"",1,2],
 ["Baguette",350,0,DateTime.new(2017,10,30),"Le pack baguette : 1 baguette tous les matins pour 3€50",1,8],
 ["Croissant",330,0,DateTime.new(2017,10,30),"Le pack croissant : 1 croissant tous les matins pour 3€30",1,8],
-["Pain au chocolat",360,0,DateTime.new(2017,10,30),"Le pack chocolatin's : 1 chocolatine tous les matins pour 3€60",1,8],
+["Pain au chocolat",360,0,DateTime.new(2017,10,30),"Le pack pain au choc’s : 1 chocolatine tous les matins pour 3€60",1,8],
 ["Pack Saucisson",1000,0,DateTime.new(2017,10,30),"Le pack saucisson : 5 saucissons pour 10€",1,8],
 ["Pack Fromage",1000,0,DateTime.new(2017,10,30),"Le pack fromage : 5 fromages pour 10€",1,8],
 ["Angers A/R",9000,0,DateTime.new(2017,10,30),"",1,3],

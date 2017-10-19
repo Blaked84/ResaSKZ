@@ -21,27 +21,20 @@
           Suivant
           %i.material-icons.right send
 
-    - if @commandes.new_record?
-      = fc.fields_for :products do |fp|
-        = render partial: "personnes/form_section/pack", :locals => {:fp => fp, :reg => reg, personne: @personne}
-    - else
-      = fc.fields_for @commandes.products.where(categorie: 1).first do |fp|
-        = render partial: "personnes/form_section/pack", :locals => {:fp => fp, :reg => reg, personne: @personne}
+    = fc.fields_for :products,@commandes.products.build do |fp|
+      = render partial: "personnes/form_section/pack", :locals => {:fp => fp, :reg => reg, personne: @personne}
 
     = render partial: "personnes/form_section/transport", :locals => {:fc => fc, :reg => reg, personne: @personne}
     = render partial: "personnes/form_section/options", :locals => {:fc => fc, :reg => reg, personne: @personne}
 
-    - if @commandes.new_record?
-      = fc.fields_for :products do |fp|
-        = render partial: "personnes/form_section/skis", :locals => {:fp => fp, :reg => reg, personne: @personne}
-    - else
-      = fc.fields_for @commandes.products.where(categorie: 7).first do |fp|
-        = render partial: "personnes/form_section/skis", :locals => {:fp => fp, :reg => reg, personne: @personne}
+    = fc.fields_for :products,@commandes.products.build do |fp|
+      = render partial: "personnes/form_section/skis", :locals => {:fp => fp, :reg => reg, personne: @personne}
 
     = render partial: "personnes/form_section/anims", :locals => {:fc => fc, :reg => reg, personne: @personne}
 
-    = fc.fields_for :products do |fp|
+    = fc.fields_for :products,@commandes.products.build do |fp|
       = render partial: "personnes/form_section/super_option", :locals => {:fp => fp, :reg => reg, personne: @personne}
+
     = render partial: "personnes/form_section/assurances", :locals => {:fc => fc, :reg => reg, personne: @personne}
 
 - else
