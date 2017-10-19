@@ -298,7 +298,6 @@ private
                                            :couleur_cadre,
                                            :couleur_verre,
                                            :option_id => [],
-                                           :product_id => []
                                           ],
                   :product_personne_preferences_attributes => [
                                        :id,

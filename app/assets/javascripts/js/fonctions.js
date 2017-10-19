@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
     $('select').material_select();
   });
@@ -93,10 +91,10 @@ $(document).ready(function() {
                  if($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Bleu"){
                     $('.img_ryft').attr('src', '/assets/masque/ryft_41.jpg');
                  }
-                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Noir") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_42.jpg');
                  }
-                 else if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
+                 else if ($('#'+u+'_commandes_attributes_0_products_attributes_42_couleur_verre').val() == "Rouge") {
                      $('.img_ryft').attr('src', '/assets/masque/ryft_43.jpg');
                  }
              }
