@@ -109,18 +109,18 @@
     %table.striped.alternate
       %thead
         %tr
-          %th date
+          %th Date
           %th 
           
       %tbody
         %tr
-          %td=Configurable[:echeances_paiement1].gsub("00:00:00.000000","")
+          %td=Configurable[:echeances_paiement1].gsub("T00:00:00+00:00","").to_date.strftime("%d/%m/%Y")
           %td Moitié du pack de base
         %tr
-          %td=Configurable[:echeances_paiement2].gsub("00:00:00.000000","")
+          %td=Configurable[:echeances_paiement2].gsub("T00:00:00+00:00","").to_date.strftime("%d/%m/%Y")
           %td Seconde moitié du pack de base
         %tr
-          %td=Configurable[:echeances_paiement3].gsub("00:00:00.000000","")
+          %td=Configurable[:echeances_paiement3].gsub("T00:00:00+00:00","").to_date.strftime("%d/%m/%Y")
           %td Options
 
   %div.fiche.pa1.brdr-b
@@ -132,7 +132,7 @@
       %thead
         %tr
           %th ID
-          %th date
+          %th Date
           %th Montant
           %th Paiement reçu
           %th Erreur banque
