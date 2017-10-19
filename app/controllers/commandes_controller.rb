@@ -289,7 +289,7 @@ require 'barby'
   end
 
   def add_caution
-    @lastcautioncommandes = Commande.where("caution_updated_at <> ''").where(caution: true).order(caution_updated_at: :desc).limit(10)
+    @lastcautioncommandes = Commande.where.not("caution_updated_at == ''").where(caution: true).order(caution_updated_at: :desc).limit(10)
 
     authorize! :show, @commandes
 
