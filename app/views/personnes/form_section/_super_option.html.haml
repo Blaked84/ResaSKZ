@@ -17,7 +17,7 @@
       .switch.switch_masque
         %label
           Non
-          %input#masque{:type => "checkbox"}/
+          %input#masque{:type => "checkbox", :data => {price: "#{Categorie.find(10).products.first.price_euro}€"}}/
           = succeed "Oui" do
             %span.lever
       #choix_masque
@@ -25,19 +25,15 @@
           .input-field.col.s12.m4.offset-m2
             =fp.select :couleur_cadre, options_for_select(OptionSup.couleurs_cadre_form) do
               %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du cadre :
-              %option{:value => "Bleu"} Bleu
-              %option{:value => "Rouge"} Rouge
-              %option{:value => "Rose"} Rose
-              %option{:value => "Blanc"} Blanc
-              %option{:value => "Jaune"} Jaune
+              - ["Bleu","Rouge","Rose","Blanc","Jaune"].each do |cc|
+                %option{:value => cc, :data => {name: cc}}= cc
             =fp.label "Couleur du cadre"
 
           .input-field.col.s12.m4
             =fp.select :couleur_verre, options_for_select(OptionSup.couleurs_verre_form) do
               %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du verre :
-              %option{:value => "Bleu"} Bleu
-              %option{:value => "Noir"} Noir
-              %option{:value => "Rouge"} Rouge
+              - ["Bleu","Noir","Rouge"].each do |cv|
+                %option{:value => cv, :data => {name: cv}}= cv
             =fp.label "Couleur du verre"
       %br/
       %a.btn.waves-effect.waves-light.right{:href => "#assurances"}

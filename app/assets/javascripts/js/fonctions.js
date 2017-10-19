@@ -122,10 +122,40 @@ $(document).ready(function() {
          ryft_color()
        });
 
+       // Récapitulatif
+       // Total
+       function recap_total() {
+         var td_prices = $("td[id^=price]")
+         var nombre = td_prices.length
+         var price = 0
+         for (i = 0; i < nombre; i++) {
+           price += parseFloat(td_prices[i].textContent)
+         }
+         $('#price_total').text(price+"€")
+       }
+
+       // Pack
+       if ($('#user_personne_commandes_attributes_0_products_attributes_0_id').length > 0) {
+         id = $('#user_personne_commandes_attributes_0_products_attributes_0_id').attr('id');
+
+         $('#res_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-name"));
+         $('#price_' + id).text($('#' + id + ' option[value='+ $('#user_personne_commandes_attributes_0_products_attributes_0_id').val() + ']').attr("data-price"));
+         recap_total()
+       }
+
        $('select').change(function(){
            id = $(this).attr('id');
 
-           $('#res_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').text());
+           if ($(this).val() == "") {
+             $('#res_' + id).text("");
+             $('#price_' + id).text("0€");
+             recap_total()
+           } else {
+             $('#res_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').attr("data-name"));
+             $('#price_' + id).text($('#' + id + ' option[value='+ $(this).val() + ']').attr("data-price"));
+             recap_total()
+       }
+
        });
 
        $('input[type=text]').change(function(){
@@ -138,11 +168,32 @@ $(document).ready(function() {
            id = $(this).attr('id');
            if($(this).is(':checked')){
                $('#res_' + id).text('Oui');
+               $('#price_' + id).text($(this).attr("data-price"));
+               recap_total()
            }
            else{
                 $('#res_' + id).text('Non');
+                $('#price_' + id).text("0€");
+                recap_total()
+           }
+       });
+
+       $('input[type=radio]').change(function(){
+           id = $(this).attr('id');
+           if($(this).is(':checked')){
+               $('#res_' + id).text('Oui');
+               recap_total()
+           }
+           else{
+                $('#res_' + id).text('Non');
+                recap_total()
+           }
+
+           if (id == "user_personne_commandes_attributes_0_products_attributes_4_id_4") {
+             $('#res_user_personne_commandes_attributes_0_products_attributes_4_id_5').text('Non');
            }
 
        });
+
     });
 	 });

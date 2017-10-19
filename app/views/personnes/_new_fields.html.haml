@@ -4,6 +4,7 @@
 = render partial: "personnes/form_section/mensurations", :locals => {:f => f, :reg => reg, personne: @personne}
 = render partial: "personnes/form_section/commande", :locals => {:f => f, :reg => reg, personne: @personne}
 = render partial: "personnes/form_section/residence", :locals => {:f => f, :reg => reg, personne: @personne}
+= render partial: "personnes/form_section/confirmation", :locals => {:reg => reg, personne: @personne}
 
 
 - if can? :see_admin, User

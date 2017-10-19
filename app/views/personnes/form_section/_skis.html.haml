@@ -23,7 +23,7 @@
                   %br/
 
       .input-field.col.s12.m4.offset-m4
-        = fp.grouped_collection_select(:id, Gamme.all, :products, :nom, :id, :name_gamme, prompt: "Je veux :")
+        = fp.select :id, grouped_options_for_select(Gamme.all.map{ |group| [group.nom, group.products.map{ |c| [c.name, c.id, data: {name: c.name, price: "#{c.price_euro}€"}] } ] }), prompt: "Je veux :"
 
       %br/
       %a.btn.waves-effect.waves-light.right{:href => "#les_anims"}

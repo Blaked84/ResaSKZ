@@ -13,7 +13,7 @@
         = fc.fields_for :products do |fp|
           - if p == Product.where(categorie: Categorie.find(7)).first
             .input-field.col.s12.m8.offset-m2
-              = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€) : (Non / Oui)", :include_blank => "Non" }
+              =fp.select :id, Product.where(id: p.id).map{|t| ["Oui",t.id, data: {name: "Oui", price: "#{t.price_euro.round}€"}]}, { :prompt => "#{p.name} (#{p.price_euro.round}€) : (Non/Oui) ", :include_blank => "Non" }
               = fp.label p.name
         - if @anims_notes.include? p
           = fc.fields_for :product_personne_preferences do |fppp|

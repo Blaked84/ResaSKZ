@@ -1,0 +1,110 @@
+#confirmation.divider.scrollspy
+.container
+  .row
+    .col.s12.light-blue.white-text.center
+      %h4 Confirmation
+.section.sfullscreen
+  .container
+    .row
+      %h5{:style => "color: #f99c43;"} Tu as pris :
+      %table
+        %thead
+          %tr
+            %th Intitulé
+            %th Choix
+            %th Prix
+        %tbody
+          %tr
+            %td Pack de base
+            %td#res_user_personne_commandes_attributes_0_products_attributes_0_id 
+            %td#price_user_personne_commandes_attributes_0_products_attributes_0_id 0€
+          %tr
+            %td{rowspan: 4} Transport
+            %tr
+              %td Transport A/R
+              %td#price_user_personne_commandes_attributes_0_products_attributes_1_id 0€
+            %tr
+              %td Transport Aller
+              %td#price_user_personne_commandes_attributes_0_products_attributes_2_id 0€
+            %tr
+              %td Transport Retour
+              %td#price_user_personne_commandes_attributes_0_products_attributes_3_id 0€
+          %tr
+            %td Pack food sans porc
+            %td#res_user_personne_commandes_attributes_0_products_attributes_4_id_5 Non
+            %td 0€
+          %tr
+            %td Pack Baguette
+            %td#res_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_5_product_id_6 0€
+          %tr
+            %td Pack Croissant
+            %td#res_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_6_product_id_7 0€
+          %tr
+            %td Option chocolatine
+            %td#res_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_7_product_id_8 0€
+          %tr
+            %td Pack Saucisson
+            %td#res_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_8_product_id_9 0€
+          %tr
+            %td Pack Fromage
+            %td#res_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_9_product_id_10 0€
+          %tr
+            %td Les Skis
+            %td#res_user_personne_commandes_attributes_0_products_attributes_10_id <a href="#les_skis">Tu dois faire un choix!</a>
+            %td#price_user_personne_commandes_attributes_0_products_attributes_10_id 0€
+          %tr
+            %td Anim's - RCC
+            %td#res_user_personne_commandes_attributes_0_products_attributes_11_id Non
+            %td#price_user_personne_commandes_attributes_0_products_attributes_11_id 0€
+          %tr.no-lineheight
+            %td Masque Ryft
+            %td#res_masque Non
+            %td#price_masque 0€
+          %tr.tr-decale.no-lineheight
+            %td Couleur cadre
+            %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre
+            %td
+          %tr.tr-decale.no-lineheight
+            %td Couleur verre
+            %td#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_verre
+            %td
+          %tr
+            %td La Resid's
+            %td#res_user_personne_typeresid_id <a href="#la_residence">Tu dois faire un choix!</a>
+            %td
+          %tr{style: "font-size: 18px"}
+            %td
+              %b Total
+            %td
+            %td
+              %b#price_total 0€
+      %br/
+      %a.waves-effect.waves-light.btn{:href => "#reglement"} Lire le règlement
+      / Modal Structure
+      #reglement.modal.modal-fixed-footer
+        .modal-content
+          %h5 Le règlement
+          %p
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+            Code de bonne conduit, bla bla bla bla bla...
+        .modal-footer
+          %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Accepter
+  %a.modal-action.modal-close.waves-effect.waves-green.btn-flat Refuser
+
+
+%a.btn.waves-effect.waves-light.right{:action => "submit"}
+  Confirmer
+  %i.material-icons.right send
