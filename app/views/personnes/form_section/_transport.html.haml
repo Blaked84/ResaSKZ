@@ -7,53 +7,18 @@
   .container
     .row
       %h5 Le car c'est l'occasion de chouiller avec tes cop's !
-      - if @commandes.new_record?
-        = fc.fields_for :products,@commandes.products.build do |fp|
-          .input-field.col.s12.m4
-            %h4 Aller-Retour
-            =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller/Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite venir en car de :"
-        = fc.fields_for :products,@commandes.products.build do |fp|
-          .input-field.col.s12.m4
-            %h4 Aller simple
-            =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}, prompt: "Je souhaite venir en car de :"
-        = fc.fields_for :products,@commandes.products.build do |fp|
-          .input-field.col.s12.m4
-            %h4 Retour
-            =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite revenir en car vers :"
-      - else
-        - if @commandes.products.where(categorie_id: Categorie.find_by_nom("Transport Aller/Retour")).first
-          = fc.fields_for :products,@commandes.products.where(categorie_id: Categorie.find_by_nom("Transport Aller/Retour")).first do |fp|
-            .input-field.col.s12.m4
-              %h4 Aller-Retour
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller/Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite venir en car de :"
-        - else
-          = fc.fields_for :products,@commandes.products.build do |fp|
-            .input-field.col.s12.m4
-              %h4 Aller-Retour
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller/Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite venir en car de :"
-
-        - if @commandes.products.where(categorie: Categorie.find_by_nom("Transport Aller")).first
-          = fc.fields_for :products,@commandes.products.where(categorie: Categorie.find_by_nom("Transport Aller")).first do |fp|
-            .input-field.col.s12.m4
-              %h4 Aller simple
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}, prompt: "Je souhaite venir en car de :"
-        - else
-          = fc.fields_for :products,@commandes.products.where(categorie: Categorie.find_by_nom("Transport Aller")).build do |fp|
-            .input-field.col.s12.m4
-              %h4 Aller simple
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}, prompt: "Je souhaite venir en car de :"
-
-        - if @commandes.products.where(categorie: Categorie.find_by_nom("Transport Retour")).first
-          = fc.fields_for :products,@commandes.products.where(categorie: Categorie.find_by_nom("Transport Retour")).first do |fp|
-            .input-field.col.s12.m4
-              %h4 Retour
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite revenir en car vers :"
-        - else
-          = fc.fields_for :products,@commandes.products.where(categorie: Categorie.find_by_nom("Transport Retour")).build do |fp|
-            .input-field.col.s12.m4
-              %h4 Retour
-              =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite revenir en car vers :"
-        
+      = fc.fields_for :products,@commandes.products.build do |fp|
+        .input-field.col.s12.m4
+          %h4 Aller-Retour
+          =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller/Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite venir en car de :"
+      = fc.fields_for :products,@commandes.products.build do |fp|
+        .input-field.col.s12.m4
+          %h4 Aller simple
+          =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Aller")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"} ]}, prompt: "Je souhaite venir en car de :"
+      = fc.fields_for :products,@commandes.products.build do |fp|
+        .input-field.col.s12.m4
+          %h4 Retour
+          =fp.select :id, Product.where(categorie: Categorie.find_by_nom("Transport Retour")).map{|t| ["#{t.name}: #{t.price_euro.round}€",t.id, data: {name: t.name, price: "#{t.price_euro.round}€"}]}, prompt: "Je souhaite revenir en car vers :"
  
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#les_options"}

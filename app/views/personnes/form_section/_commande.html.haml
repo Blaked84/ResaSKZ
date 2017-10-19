@@ -1,4 +1,4 @@
-- if (@user && current_page?(new_personne_user_path(@user))) or (@personne.commandes.present? and @events.count > @personne.commandes.count) or (!@commandes.new_record?)
+- if (@user && current_page?(new_personne_user_path(@user))) or (@personne.commandes.present? and @events.count > @personne.commandes.count)
   = f.fields_for :commandes do |fc|
     #ma_commande.divider.scrollspy
     .container
