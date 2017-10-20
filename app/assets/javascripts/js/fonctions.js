@@ -46,6 +46,23 @@ $(document).ready(function() {
                $('#choix_masque').css('display', 'block');
            }
            else {
+               if ($('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').length > 0) {
+                 $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val(""); 
+                 $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').val(""); 
+                 $('#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').text("")
+                 $('#res_user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').text("")
+                 $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').material_select();
+                 $('#user_personne_commandes_attributes_0_products_attributes_42_couleur_verre').material_select();
+               } else {
+                 $('#personne_commandes_attributes_0_products_attributes_42_couleur_cadre').val(""); 
+                 $('#personne_commandes_attributes_0_products_attributes_42_couleur_verre').val(""); 
+                 $('#res_personne_commandes_attributes_0_products_attributes_42_couleur_cadre').text("")
+                 $('#res_personne_commandes_attributes_0_products_attributes_42_couleur_verre').text("")
+                 $('#personne_commandes_attributes_0_products_attributes_42_couleur_cadre').material_select();
+                 $('#personne_commandes_attributes_0_products_attributes_42_couleur_verre').material_select();
+                 
+               }
+
                $('#choix_masque').css('display', 'none');
            }
        });
@@ -375,4 +392,4 @@ $(document).ready(function() {
        });
 
     });
-	 });
+});
