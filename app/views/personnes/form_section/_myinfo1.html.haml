@@ -56,8 +56,10 @@
             .row
               .input-field.col.s10.m4.offset-m4
                 =f.text_field :promo
-                =f.label :promo, "Promo ou hyp promo ex:(me215)"
+                =f.label :promo, "Promo ou hyp promo ex:(me215) (*)"
 
+          %p.orange-text Le champ promo est requis
+        
         %br/
         %a.btn.waves-effect.waves-light.right{:href => "#myinfo2"}
           Suivant

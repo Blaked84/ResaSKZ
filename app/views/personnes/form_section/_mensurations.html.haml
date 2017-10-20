@@ -27,6 +27,9 @@
         %li
           .input-field.col.s12.m4
             =f.select :niveau_ski_id, NiveauSki.all.map{|t| [t.nom,t.id]}, :prompt => 'Niveau de ski:'
+
+    %p.orange-text Tous les champs sont requis
+
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#ma_commande"}
       Suivant

@@ -16,23 +16,23 @@
           .row
             .input-field.col.s10.m5
               =f.text_field :pnom
-              =f.label :pnom
+              =f.label "Nom de la personne à contacter (*)"
             .input-field.col.s10.m5
               =f.text_field :pprenom
-              =f.label :pprenom
+              =f.label "Prénom de la personne à contacter (*)"
         %li
           .row
             .input-field.col.s10.m5
               =f.text_field :plienparente
-              =f.label :plienparente
+              =f.label "Lien de parenté avec la personne à contacter (*)"
             .input-field.col.s10.m5
               =f.text_field :pphone
-              =f.label :pphone
+              =f.label "Numéro de téléphone de la personne à contacter (*)"
         %li
           .row
             .input-field.col.s10.m5
               =f.text_field :padresse
-              =f.label :padresse
+              =f.label "Adresse de la personne à contacter (*)"
             .input-field.col.s10.m5
               =f.text_field :pcomplement
               =f.label :pcomplement
@@ -40,10 +40,13 @@
           .row
             .input-field.col.s10.m5
               =f.text_field :pcodepostal
-              =f.label :pcodepostal
+              =f.label "Code postal de la personne à contacter (*)"
             .input-field.col.s10.m5
               =f.text_field :pville
-              =f.label :pville
+              =f.label "Ville de la personne à contacter (*)"
+
+      %p.orange-text Les champs (*) sont requis
+
     %br/
     %a.btn.waves-effect.waves-light.right{:href => "#mensurations"}
       Suivant

@@ -45,13 +45,15 @@
               =f.label :first_name, 'Prénom'
               =f.text_field :first_name
             .input-field.col.s10.m5
-              =f.label :last_name, 'Nom'
+              =f.label :last_name, 'Nom '
               =f.text_field :last_name
         %li
           .row
             .input-field.col.s10
               =f.select :gender, Genre.all.map{|g| [g.nom_complet,g.nom_cas]}
               =f.label :gender, 'Sexe'
+
+        %p.orange-text Tous les champs sont requis
 
     %br/
     - if (@parrain && current_page?(parrainer_user_path(@parrain)))

@@ -20,7 +20,6 @@
           .row
             .input-field.col.s10
               =f.date_field :naissance
-
         %li
           .row
             .input-field.col.s10
@@ -44,6 +43,8 @@
             .input-field.col.s10.m5
               =f.text_field :ville
               =f.label :ville
+
+        %p.orange-text Tous les champs à part le complément d'adresse sont requis
 
         %br/
         %a.btn.waves-effect.waves-light.right{:href => "#contactperson"}
