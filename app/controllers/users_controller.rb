@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.where(moderated: true).paginate(:page => params[:page],:per_page => 50)
+    @users = User.where(moderated: true).order(:id).paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @users
     @to_moderate_nbr = User.where(moderated: [false, nil]).count
   end
