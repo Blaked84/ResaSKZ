@@ -36,6 +36,9 @@
               - ["Bleu","Noir","Rouge"].each do |cv|
                 %option{:value => cv, :data => {name: cv}}= cv
             =fp.label "Couleur du verre"
+          
+        %h5.center.blue-text.text-darken-2 Tu en veux N? Sache que tu peux en prendre jusqu'à #{Categorie.find(10).max_par_personne} !
+        %h6.center en éditant ta commande une fois que tu es inscrit(e)
       %br/
       %a.btn.waves-effect.waves-light.right{:href => "#assurances"}
         Suivant

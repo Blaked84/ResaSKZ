@@ -28,7 +28,6 @@ class Commande < ActiveRecord::Base
 	validates :personne, :presence => true
 	validates :event, :presence => true
 	validates :event, uniqueness: { scope: :personne, message: "Une seule commande par evenement par personne" }
-#        validates :products, :presence => true
         
 
 	def ok?

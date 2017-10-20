@@ -13,9 +13,6 @@ gem 'sass-rails', '~> 4.0.0'
 # Assets
 gem 'material-icons-rails'
 #gem 'rails-assets-materialize', source: 'https://rails-assets.org'
-source 'https://rails-assets.org' do
-  gem 'rails-assets-jquery-form-validator'
-end
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

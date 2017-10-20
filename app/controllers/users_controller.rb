@@ -182,12 +182,19 @@ class UsersController < ApplicationController
     @packs = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["0"]["id"],
                                                      nombre: 1)
     # Transports
-    @transportsar = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["1"]["id"],
-                                                     nombre: 1)
-    @transportsa = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["2"]["id"],
-                                                     nombre: 1)
-    @transportsr = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["3"]["id"],
-                                                     nombre: 1)
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["1"]["id"].present?
+      @transportsar = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["1"]["id"],
+                                                       nombre: 1)
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["2"]["id"].present?
+      @transportsa = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["2"]["id"],
+                                                       nombre: 1)
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["3"]["id"].present?
+      @transportsr = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["3"]["id"],
+                                                        nombre: 1)
+    end
+
     if @transportsar.present? && @transportsar.nombre > 0
       if @transportsa.present? && @transportsa.nombre > 0
         @transportsa.destroy
@@ -239,8 +246,10 @@ class UsersController < ApplicationController
     
     # Skis
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["10"].present?
-      @skis = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"],
-                                                 nombre: 1)
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"].present?
+        @skis = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"],
+                                                   nombre: 1)
+      end
     end
     
     # Anim's
