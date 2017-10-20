@@ -9,6 +9,10 @@
         #logo-container.brand-logo.center.white-text{:href => "index.html"}
           %img{:height => "113px",:src => "/assets/logo_2018.png"}/
       %ul.hide-on-med-and-down
+        - if user_signed_in?
+          - if current_user.admin?
+            %li
+              = link_to "Admin", admin_index_path
         %li
           %a.dropdown-button{"data-activates" => "dropdownEvent", :href => "#"} L'évènement
           %ul#dropdownEvent.dropdown-content
@@ -28,7 +32,7 @@
       %ul.right.hide-on-med-and-down
         - if user_signed_in?
           %li
-            = link_to current_user.nom_complet, current_user.admin? ? admin_index_path : dashboard_user_path(current_user)
+            = link_to current_user.nom_complet, dashboard_user_path(current_user)
           %li
             = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
         - else
@@ -57,7 +61,9 @@
           = link_to "La Team", home_team_path
         - if user_signed_in?
           %li
-            = link_to current_user.nom_complet, current_user.admin? ? admin_index_path : dashboard_user_path(current_user)
+            = link_to current_user.nom_complet, dashboard_user_path(current_user)
+          - if current_user.admin?
+            = link_to "Admin", admin_index_path
           %li
             = link_to "Se déconnecter", destroy_user_session_path, :method => :delete
         - else
