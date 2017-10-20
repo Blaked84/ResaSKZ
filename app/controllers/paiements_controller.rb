@@ -87,19 +87,17 @@ class PaiementsController < ApplicationController
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
       
-      if com.montant_du > 0
-
-      else
+      if com.montant_du < 0
         redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
       end
 
-      if @etape == 3 && com.commande_products.where(en_attente: true).present?
+      if @etape == '3' && com.commande_products.where(en_attente: true).present?
         redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
       end
 
       if @montant == 0
         redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
-       end
+      end
     else
       redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
     end

@@ -38,5 +38,5 @@
             %td=conditional_format(p.moderated)
             %td=conditional_format(p.disabled?)
 
-    = will_paginate @users
+    = will_paginate @personnes
     = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"

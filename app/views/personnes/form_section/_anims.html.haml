@@ -11,6 +11,7 @@
       - Product.where(categorie_id: 7).each do |p|
         = fc.fields_for :products,@commandes.products.build do |fp|
           - if p == Product.where(categorie: Categorie.find(7)).first
+            %h6.blue-text.text-darken-2 RCC: C’est une tradition fidèle à SKZ, une tournée des bars made in gadz alors panique de te rhopsser, tu ne seras pas déçu !!
             .input-field.col.s12.m8.offset-m2
               =fp.select :id, Product.where(id: p.id).map{|t| ["Oui",t.id, data: {name: "Oui", price: "#{t.price_euro.round}€"}]}, { :prompt => "#{p.name} (#{p.price_euro.round}€) : (Non/Oui) ", :include_blank => "Non" }
               = fp.label p.name

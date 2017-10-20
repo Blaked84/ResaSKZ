@@ -173,6 +173,8 @@ class UsersController < ApplicationController
     set_user
     redirect_to dashboard_user_path(@user) if @user.inscription_terminee
     @personne = @user.referant
+    @personne.phone = referant_params["phone"].gsub(" ","")
+    @personne.pphone = referant_params["pphone"].gsub(" ","")
     @commandes = @personne.commandes.build(event_id: referant_params["commandes_attributes"]["0"]["event_id"],
                                           tbk_id: referant_params["commandes_attributes"]["0"]["tbk_id"],
                                           glisse_id: referant_params["commandes_attributes"]["0"]["glisse_id"],
