@@ -75,9 +75,9 @@ class PaiementsController < ApplicationController
   end
 
   def new
-      com=Commande.find(params[:commande_id])
-      @paiement = com.paiements.new
-      authorize! :create, @paiement
+    com=Commande.find(params[:commande_id])
+    @paiement = com.paiements.new
+    authorize! :create, @paiement
     # on vérifie si le nombre de commande maxi est atteint ET qu'on est au premier paiement
     # la méthode utilisée ici n'utilise pas les fonction pour vérifier le montant total car ce serait trop long
 
@@ -86,22 +86,25 @@ class PaiementsController < ApplicationController
 
       @montant=com.prochain_paiement / 100.0
       @etape=(com.paiement_etape + 1).to_s
-
-      com=Commande.find(params[:commande_id])
+      
       if com.montant_du > 0
 
       else
         redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
       end
 
-      if @montant == 0
-       redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
-     end
-   else
-    redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
-   end
+      if @etape == 3 && com.commande_products.where(en_attente: true).present?
+        redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
+      end
 
- end
+      if @montant == 0
+        redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
+       end
+    else
+      redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
+    end
+
+  end
 
  def index
     authorize! :read_admin, User

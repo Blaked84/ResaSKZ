@@ -19,12 +19,12 @@
             %tr
               %td= g.nom
               %td
-                - g.products.each do |gp|
+                - g.products.order(:id).each do |gp|
                   #{gp.name} : #{gp.price_euro.round}€
                   %br/
 
       .input-field.col.s12.m4.offset-m4
-        = fp.select :id, grouped_options_for_select(Gamme.all.map{ |group| [group.nom, group.products.map{ |c| [c.name, c.id, data: {name: c.name, price: "#{c.price_euro}€"}] } ] }), {prompt: "Je veux: "}
+        = fp.select :id, grouped_options_for_select(Gamme.all.map{ |group| [group.nom, group.products.order(:id).map{ |c| [c.name, c.id, data: {name: c.name, price: "#{c.price_euro}€"}] } ] }), {prompt: "Je veux: "}
 
       %br/
       %a.btn.waves-effect.waves-light.right{:href => "#les_anims"}
