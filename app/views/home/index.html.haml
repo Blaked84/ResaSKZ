@@ -4,7 +4,13 @@
     .row.center
       %h3.header.col.s12.light.white-text Le plus grand évènement de ski étudiant !
     .row.center
-      %a.btn-large.waves-effect.disabled{:href => "#"} S'inscrire (Bientôt)
+      - if user_signed_in?
+        - if current_user.inscription_terminee
+          = link_to "Mon compte", dashboard_user_path(current_user), class: "btn-large waves-effect"
+        - else
+          = link_to "S'inscrire", new_user_session_path, class: "btn-large waves-effect pulse"
+      - else
+        = link_to "S'inscrire", new_user_session_path, class: "btn-large waves-effect pulse"
       %br/
       %br/
       %br/
