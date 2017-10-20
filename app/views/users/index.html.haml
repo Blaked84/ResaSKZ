@@ -1,7 +1,7 @@
 %div.top-info.pa1
   %h1 Comptes (users)
 %div.fiche.pa1.brdr-b
-  Nombre d'utilisateurs: @users.count
+  %p Nombre d'utilisateurs: #{@users.count} dont #{@users.where(inscription_terminee: true).count} inscrit(s)
   %table.striped.alternate
     %thead
       %tr
