@@ -20,11 +20,12 @@
             = fp.collection_select :id, Product.where(categorie_id: 7, type_product_id: tp.id), :id, :name, { :prompt => "#{tp.nom} : ", :include_blank => "Non" }
             = fp.label tp.nom
 
-      - Product.where(categorie_id: 7).last(3).each do |p|
-        = fc.fields_for :products,@commandes.products.build do |fp|
-          .input-field.col.s12.s6.m3
-            = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
-            = fp.label p.name
+      - Product.where(categorie_id: 7).each do |p|
+        - if p.name == "Snakegli's" or p.name == "Show-competition freestyle" or p.name == "Descente aux flambeaux"
+          = fc.fields_for :products,@commandes.products.build do |fp|
+            .input-field.col.s12.s6.m3
+              = fp.collection_select :id, Product.where(id: p.id), :id, :oui, { :prompt => "#{p.name} (#{p.price_euro.round}€)", :include_blank => "Non" }
+              = fp.label p.name
       %br/
       %br/
       .col.s12
