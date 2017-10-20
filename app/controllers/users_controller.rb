@@ -203,7 +203,9 @@ class UsersController < ApplicationController
         @transportsr.destroy
       end
     elsif (@transportsa.present? && @transportsa.nombre > 0) or (@transportsr.present? && @transportsr.present?)
-      @transportsar.destroy
+      if @transportsar.present?
+        @transportsar.destroy
+      end
     end
 
     # Options Pack food
@@ -278,16 +280,35 @@ class UsersController < ApplicationController
     # Anim's avec type de produit
     @type_products = TypeProduct.all
     (0..TypeProduct.all.count-1).each do |i|
-      if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"].present?
-        if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"].present?
-          @anims_type = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["#{39+i}"]["id"],
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"].present?
+        if referant_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"]["id"].present?
+          @anims_type = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"]["id"],
                                                    nombre: 1, en_attente: true)
         end
       end
     end
+    # Autres anim's
+    snakeglis = referant_params["commandes_attributes"]["0"]["products_attributes"]["40"] 
+    if snakeglis.present?
+      if snakeglis["id"].present?
+        @snakeglis = @commandes.commande_products.build(product_id: snakeglis["id"], nombre: 1, en_attente: true)
+      end
+    end
+    showcompet = referant_params["commandes_attributes"]["0"]["products_attributes"]["41"] 
+    if showcompet.present?
+      if showcompet["id"].present?
+        @showcompet = @commandes.commande_products.build(product_id: showcompet["id"], nombre: 1, en_attente: true)
+      end
+    end
+    descente = referant_params["commandes_attributes"]["0"]["products_attributes"]["42"] 
+    if descente.present?
+      if descente["id"].present?
+        @descente = @commandes.commande_products.build(product_id: descente["id"], nombre: 1, en_attente: true)
+      end
+    end
 
     # Options supplémentaires (Super option)
-    super_option = referant_params["commandes_attributes"]["0"]["products_attributes"]["42"] 
+    super_option = referant_params["commandes_attributes"]["0"]["products_attributes"]["43"] 
     if super_option.present?
       if super_option["couleur_cadre"].present? and super_option["couleur_verre"].present?
         opt_sup =  OptionSup.find_by(nom: "Masque Ryft",
@@ -300,33 +321,33 @@ class UsersController < ApplicationController
     end
 
     # Assurances
-    if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"].present?
-      if referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].count > 1
-        @assu_annulation = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["43"]["product_id"].first, 
-                                                       nombre: 1)
-      end
-    end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].count > 1
-        @assu_rapat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first, 
+        @assu_annulation = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].count > 1
-        @assu_skipass = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first, 
+        @assu_rapat = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].count > 1
-        @assu_tc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first, 
+        @assu_skipass = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first, 
                                                        nombre: 1)
       end
     end
     if referant_params["commandes_attributes"]["0"]["products_attributes"]["47"].present?
       if referant_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].count > 1
-        @pas_assu = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].first, 
+        @assu_tc = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].first, 
+                                                       nombre: 1)
+      end
+    end
+    if referant_params["commandes_attributes"]["0"]["products_attributes"]["48"].present?
+      if referant_params["commandes_attributes"]["0"]["products_attributes"]["48"]["product_id"].count > 1
+        @pas_assu = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["products_attributes"]["48"]["product_id"].first, 
                                                        nombre: 1)
       end
     end

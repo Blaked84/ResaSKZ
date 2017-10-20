@@ -23,11 +23,11 @@ $(function() {
     }
 
     function validate_assurances() {
-      a = document.getElementById("user_personne_commandes_attributes_0_products_attributes_43_product_id_50");
-      r = document.getElementById("user_personne_commandes_attributes_0_products_attributes_44_product_id_51");
-      s = document.getElementById("user_personne_commandes_attributes_0_products_attributes_45_product_id_52");
-      t = document.getElementById("user_personne_commandes_attributes_0_products_attributes_46_product_id_53");
-      n = document.getElementById("user_personne_commandes_attributes_0_products_attributes_47_product_id_54");
+      a = document.getElementById("user_personne_commandes_attributes_0_products_attributes_44_product_id_50");
+      r = document.getElementById("user_personne_commandes_attributes_0_products_attributes_45_product_id_51");
+      s = document.getElementById("user_personne_commandes_attributes_0_products_attributes_46_product_id_52");
+      t = document.getElementById("user_personne_commandes_attributes_0_products_attributes_47_product_id_53");
+      n = document.getElementById("user_personne_commandes_attributes_0_products_attributes_48_product_id_54");
       return (a.checked == true) || (r.checked == true) || (s.checked == true) || (t.checked == true) || (n.checked == true)
     }
 
@@ -125,11 +125,11 @@ $(function() {
     }
 
     function validate_assurances() {
-      a = document.getElementById("user_personne_commandes_attributes_0_products_attributes_43_product_id_50");
-      r = document.getElementById("user_personne_commandes_attributes_0_products_attributes_44_product_id_51");
-      s = document.getElementById("user_personne_commandes_attributes_0_products_attributes_45_product_id_52");
-      t = document.getElementById("user_personne_commandes_attributes_0_products_attributes_46_product_id_53");
-      n = document.getElementById("user_personne_commandes_attributes_0_products_attributes_47_product_id_54");
+      a = document.getElementById("user_personne_commandes_attributes_0_products_attributes_44_product_id_50");
+      r = document.getElementById("user_personne_commandes_attributes_0_products_attributes_45_product_id_51");
+      s = document.getElementById("user_personne_commandes_attributes_0_products_attributes_46_product_id_52");
+      t = document.getElementById("user_personne_commandes_attributes_0_products_attributes_47_product_id_53");
+      n = document.getElementById("user_personne_commandes_attributes_0_products_attributes_48_product_id_54");
       return (a.checked == true) || (r.checked == true) || (s.checked == true) || (t.checked == true) || (n.checked == true)
     }
 

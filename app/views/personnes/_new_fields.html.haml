@@ -2,10 +2,10 @@
 = render partial: "personnes/form_section/myinfo2", :locals => {:f => f, :reg => reg, personne: @personne}
 = render partial: "personnes/form_section/contactperson", :locals => {:f => f, :reg => reg, personne: @personne}
 = render partial: "personnes/form_section/mensurations", :locals => {:f => f, :reg => reg, personne: @personne}
-- if @commandes.new_record?
+- if (@commandes && @commandes.new_record?)
   = render partial: "personnes/form_section/commande", :locals => {:f => f, :reg => reg, personne: @personne}
 = render partial: "personnes/form_section/residence", :locals => {:f => f, :reg => reg, personne: @personne}
-- if @commandes.new_record?
+- if (@commandes && @commandes.new_record?)
   = render partial: "personnes/form_section/confirmation", :locals => {:reg => reg, personne: @personne}
 
 
