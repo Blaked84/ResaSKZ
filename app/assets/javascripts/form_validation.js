@@ -106,7 +106,7 @@ $(function() {
 
 
 
-  } else {
+  } else if ($("#new_personne").length > 0) {
     function validate_transports_pers() {
       transportsar= document.getElementById("personne_commandes_attributes_0_products_attributes_1_id");
       transportsa= document.getElementById("personne_commandes_attributes_0_products_attributes_2_id");
