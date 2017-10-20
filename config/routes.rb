@@ -1,6 +1,8 @@
 LooklaDev::Application.routes.draw do
   
 
+  resources :gammes
+
   get "static/index"
   resources :activites do
     member do

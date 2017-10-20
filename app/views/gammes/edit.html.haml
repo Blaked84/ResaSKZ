@@ -1,0 +1,7 @@
+%div.top-info.pa1
+  %h1 Edition de la gamme #{@gamme.nom}
+%div.fiche.pa1.brdr-b
+
+  = render 'form'
+
+  = link_to 'Back', gammes_path

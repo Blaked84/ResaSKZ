@@ -1,0 +1,22 @@
+%div.top-info.pa1
+  %h1
+    Gammes de ski
+
+    =link_to "Créer une nouvelle gamme", new_gamme_path, :class => "pure-button pure-button-success  md-add-circle-outline right"
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate
+    %thead
+      %tr
+        %th Nom
+        %th Description
+        %th Produits
+        %th
+    %tbody
+      - @gammes.each do |g|
+        %tr
+          %td=g.nom
+          %td=g.description
+          %td
+            - g.products.each do |gp|
+              %li=gp.name
+          %td=link_to "Editer", edit_gamme_path(g)
