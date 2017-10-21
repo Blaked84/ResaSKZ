@@ -287,6 +287,10 @@ class Commande < ActiveRecord::Base
 	self.save
 	end
 
+	def aucun_produit_en_attente?
+		self.commande_products.where(:en_attente =>  true).empty?
+	end
+
 	def serialize
 		pers = self.personne
 		result = Hash.new
