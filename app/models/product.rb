@@ -55,12 +55,17 @@ class Product < ActiveRecord::Base
                 end
               end
             end
-            return self.stock.to_i - max
+            if self.stock.nil? or self.stock == 0
+              return "infini"
+            else
+              return self.stock.to_i - max
+            end
           end
         end
 
         def reste_masque?
-          return self.restant_masque > 0
+   	  return true if self.stock == 0 || self.stock.nil?
+          self.restant_masque > 0
         end
 
         def product_id

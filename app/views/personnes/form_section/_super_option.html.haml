@@ -28,7 +28,7 @@
               %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du cadre :
               - ["Bleu","Rouge","Rose","Blanc","Jaune"].each do |cc|
                 - if Product.where(option_sup_id: OptionSup.where(couleur_cadre: cc).first).first.reste_masque?
-                  %option{:value => cc, :data => {name: cc}}= cc
+                  %option{:value => cc, :data => {name: cc}} #{cc} (En stock: #{Product.where(option_sup_id: OptionSup.where(couleur_cadre: cc).first).first.restant_masque})
             =fp.label "Couleur du cadre"
 
           .input-field.col.s12.m4
