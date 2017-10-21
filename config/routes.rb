@@ -1,5 +1,5 @@
 LooklaDev::Application.routes.draw do
-  
+
 
   resources :gammes
 
@@ -23,6 +23,7 @@ LooklaDev::Application.routes.draw do
 
   get "commande_products/check_nombre"
   post "commande_products/check_nombre"
+  post "commande_products/validate/:id" => 'commande_products#validate', as: 'commande_products_validate'
   get "admin/index"
   get "admin/check_in"
   get "admin/graph"
@@ -64,11 +65,11 @@ LooklaDev::Application.routes.draw do
   get "chart/tbkcommandes" => "chart#tbkcommandes"
   get "chart/statsinsctiptions" => "chart#statsinsctiptions"
   get "chart/choix_resids" => "chart#choix_resids"
-  get "chart/statsbus/:categorie_id/:event_id" => "chart#statsbus", as: :statsbus 
-  
+  get "chart/statsbus/:categorie_id/:event_id" => "chart#statsbus", as: :statsbus
+
   resources :events do
     resources :products
-  end 
+  end
   #paiements
   resources :paiements do
     put :force_validation, :on => :collection

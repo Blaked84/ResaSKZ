@@ -5,8 +5,8 @@
         %h1
           Commande #
           =@commande.idlong
-      -if Configurable[:facture_visible]    
-        .w50.txtright    
+      -if Configurable[:facture_visible]
+        .w50.txtright
           =link_to commande_path(@commande.id, :format=>:pdf) do
             .pure-button.pure-button-primary
               .md-file-download.btn
@@ -77,25 +77,33 @@
   %div.fiche.pa1.brdr-b
     %h2
       Produits commandés
-    
+
     %table.striped.alternate
       %thead
         %tr
           %th Produit
           %th Quantité
           %th Prix (€)
+          -if can? :see_admin, User
+            %th Valider
       %tbody
         - @commande.commande_products.where(en_attente: false).each do |cprd|
           %tr
             %td=link_to cprd.product.name, product_path(cprd.product.id)
             %td=cprd.nombre
             %td=cprd.product.price_euro
+            -if can? :see_admin, User
+              %td
+                %hr
         - @commande.commande_products.where(en_attente: true).each do |cprdatt|
           %tr
             %td=link_to cprdatt.product.name+ " (en attente)", product_path(cprdatt.product.id)
             %td=cprdatt.nombre
             %td #{cprdatt.product.price_euro} (en attente)
-        %tr 
+            -if can? :see_admin, User
+              %td
+                =button_to "Valider", commande_products_validate_path( cprdatt.id ), :class => "pure-button pure-button-primary"
+        %tr
           %td
             %hr
           %td
@@ -110,8 +118,8 @@
       %thead
         %tr
           %th Date
-          %th 
-          
+          %th
+
       %tbody
         %tr
           %td=Configurable[:echeances_paiement1].gsub("T00:00:00+00:00","").to_date.strftime("%d/%m/%Y")
@@ -136,7 +144,7 @@
           %th Montant
           %th Paiement reçu
           %th Erreur banque
-          
+
       %tbody
         - @paiements.each do |p|
           %tr
@@ -146,7 +154,7 @@
             %td=conditional_format(p.verif)
             %td=conditional_badge(!p.erreur?)
 
-        %tr 
+        %tr
           %td
             %hr
           %td
