@@ -10,11 +10,11 @@
             =type
   %div.pa1.fiche.brdr-b
     %p
-      =form_tag @personnes :method => :get do
+      = form_tag personnes_path, :method => :get do
         = text_field_tag :search, params[:search]
-        =hidden_field_tag "id"
-        = submit_tag 'Recherche', :class => "pure-button pure-button-success pure-button-xsmall "
-    %p Nombre de personnes: #{@personnes.count} dont #{@personnes.where(enregistrement_termine: true).count} inscrite(s)
+        = hidden_field_tag "id"
+        = submit_tag 'Recherche', :nom => nil, :class => "pure-button pure-button-success pure-button-xsmall "
+    %p Nombre de personnes: #{@personnes_tot.count} dont #{@personnes_tot.where(enregistrement_termine: true).count} inscrite(s)
     %table.striped.alternate
       %thead
         %tr
@@ -38,5 +38,5 @@
             %td=conditional_format(p.moderated)
             %td=conditional_format(p.disabled?)
 
-    = will_paginate @personnes
+    = will_paginate @personnes_tot
     = link_to "En attentes de validation (#{@to_moderate_nbr})", to_moderate_personnes_path, :class => "pure-button pure-button-primary"

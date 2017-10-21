@@ -20,6 +20,7 @@ class PersonnesController < ApplicationController
       @personnes = Personne.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
     end
     authorize! :show, @personnes
+    @personnes_tot = Personne.paginate(:page => params[:page],:per_page => 50)
     @nb_by_type = Personne.all.map { |p| p.type_pers  }.each_with_object(Hash.new(0)) { |type,counts| counts[type] += 1 }
     @to_moderate_nbr=Personne.where(moderated: [false, nil]).count
     @titre = "Personnes"
