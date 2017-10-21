@@ -27,13 +27,14 @@
             =fp.select :couleur_cadre, options_for_select(OptionSup.couleurs_cadre_form) do
               %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du cadre :
               - ["Bleu","Rouge","Rose","Blanc","Jaune"].each do |cc|
-                %option{:value => cc, :data => {name: cc}}= cc
+                - if Product.where(option_sup_id: OptionSup.where(couleur_cadre: cc).first).first.reste_masque?
+                  %option{:value => cc, :data => {name: cc}}= cc
             =fp.label "Couleur du cadre"
 
           .input-field.col.s12.m4
             =fp.select :couleur_verre, options_for_select(OptionSup.couleurs_verre_form) do
               %option{:disabled => "disabled", :selected => "selected", :value => ""} Couleur du verre :
-              - ["Bleu","Noir","Rouge"].each do |cv|
+              - ["Noir","Rouge"].each do |cv|
                 %option{:value => cv, :data => {name: cv}}= cv
             =fp.label "Couleur du verre"
           

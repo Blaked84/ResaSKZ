@@ -43,6 +43,26 @@ class Product < ActiveRecord::Base
 
 	end
 
+        def restant_masque
+          if self.option_sup_id != nil
+            c_cadre = self.option_sup.couleur_cadre           
+            max = self.commande_products.map{|cp| cp.nombre}.sum
+            OptionSup.where(couleur_cadre: c_cadre).each do |o|
+              if o.products.first.commande_products.present?
+                commandes= o.products.first.commande_products.map{|cp| cp.nombre}.sum
+                if commandes > max
+                  max = commandes
+                end
+              end
+            end
+            return self.stock.to_i - max
+          end
+        end
+
+        def reste_masque?
+          return self.restant_masque > 0
+        end
+
         def product_id
           return self.id
         end
