@@ -7,3 +7,5 @@
           %li= msg
 
   = render :partial => "new_fields", :locals => {:f => f, :reg => false}
+  .actions
+    = f.submit 'Save', :class => "pure-button pure-button-success"
