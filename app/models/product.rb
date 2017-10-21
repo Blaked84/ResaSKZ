@@ -46,19 +46,17 @@ class Product < ActiveRecord::Base
         def restant_masque
           if self.option_sup_id != nil
             c_cadre = self.option_sup.couleur_cadre           
-            max = self.commande_products.map{|cp| cp.nombre}.sum
+            cumul = 0
             OptionSup.where(couleur_cadre: c_cadre).each do |o|
               if o.products.first.commande_products.present?
                 commandes= o.products.first.commande_products.map{|cp| cp.nombre}.sum
-                if commandes > max
-                  max = commandes
-                end
+                cumul += commandes
               end
             end
             if self.stock.nil? or self.stock == 0
               return "infini"
             else
-              return self.stock.to_i - max
+              return self.stock.to_i - cumul
             end
           end
         end
