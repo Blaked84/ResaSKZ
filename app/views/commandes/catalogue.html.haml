@@ -22,8 +22,9 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                      +
+                    - if p.reste_masque?
+                      %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                        +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
                     %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
@@ -46,8 +47,9 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                      +
+                    - if p.reste?
+                      %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                        +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
                     %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
