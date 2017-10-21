@@ -93,7 +93,7 @@ LooklaDev::Application.routes.draw do
       get 'add_commande'
     end
     collection do
-      post 'search' => 'personnes#index'
+#      post 'search' => 'personnes#index'
       get 'export'
       get 'to_moderate'
       get 'add_assurance'

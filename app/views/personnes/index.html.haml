@@ -10,8 +10,8 @@
             =type
   %div.pa1.fiche.brdr-b
     %p
-      =form_tag search_personnes_path :method => :post do
-        =autocomplete_field_tag 'nom', '', autocomplete_personne_nom_personnes_path, :id_element=>"#id", :size => 30, :placeholder => "Recherche par nom"
+      =form_tag @personnes :method => :get do
+        = text_field_tag :search, params[:search]
         =hidden_field_tag "id"
         = submit_tag 'Recherche', :class => "pure-button pure-button-success pure-button-xsmall "
     %p Nombre de personnes: #{@personnes.count} dont #{@personnes.where(enregistrement_termine: true).count} inscrite(s)

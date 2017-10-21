@@ -298,6 +298,13 @@ def serialize
     result
 end
 
+def self.search
+  if search
+    where('name LIKE ?', "%#{search}%")
+  else
+    all
+  end
+end
 def self.types
 	@@types
 end
