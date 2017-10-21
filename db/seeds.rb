@@ -241,6 +241,7 @@ user_gorgu=User.create!(
 			first_name: 'Gorgu',
 			last_name: 'Gadz',
 			gender: 'male',
+			referant_id: 1,
 			cgu_accepted: true,
 			inscription_terminee: true,
 			moderated: true
@@ -254,6 +255,7 @@ user_admin=User.create!(
 		first_name: 'Admin',
 		last_name: 'Gadz',
 		gender: 'male',
+		referant_id: 2,
 		cgu_accepted: true,
 		inscription_terminee: true,
 		moderated: true
