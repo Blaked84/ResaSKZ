@@ -3,7 +3,7 @@ class Personne < ActiveRecord::Base
 
 	#################################################
 	# Les personnes physiques. Appartiennent à un user
-	# Les champs précédés de "p" correspondent à la 
+	# Les champs précédés de "p" correspondent à la
 	# personne à contacter en cas de problème
 	#################################################
 	has_many :groupe
@@ -27,9 +27,59 @@ class Personne < ActiveRecord::Base
 	#has_many :lits, through: :lits_personnes
 	has_and_belongs_to_many :lits
 	#attr_accessible :nom, :prenom, :phone, :email, :assurance
-	has_many :chambres, :through => :lit  
+	has_many :chambres, :through => :lit
 
 	@@types= %w(Pec's Gadz)
+
+
+  # EXTRACT FROM SCHEMA :
+	# create_table "personnes", force: :cascade do |t|
+	# 	t.string   "nom",                    limit: 255
+	# 	t.string   "prenom",                 limit: 255
+	# 	t.string   "phone",                  limit: 255
+	# 	t.string   "email",                  limit: 255
+	# 	t.boolean  "assurance"
+	# 	t.datetime "created_at"
+	# 	t.datetime "updated_at"
+	# 	t.integer  "user_id"
+	# 	t.string   "adresse",                limit: 255
+	# 	t.string   "ville",                  limit: 255
+	# 	t.integer  "codepostal"
+	# 	t.string   "bucque",                 limit: 255
+	# 	t.string   "fams",                   limit: 255
+	# 	t.string   "promo",                  limit: 255
+	# 	t.string   "idGadzOrg",              limit: 255
+	# 	t.integer  "taille"
+	# 	t.integer  "pointure"
+	# 	t.integer  "taillevetement_id"
+	# 	t.string   "complement",             limit: 255
+	# 	t.string   "pnom",                   limit: 255
+	# 	t.string   "pprenom",                limit: 255
+	# 	t.string   "plienparente",           limit: 255
+	# 	t.string   "padresse",               limit: 255
+	# 	t.string   "pcomplement",            limit: 255
+	# 	t.string   "pville",                 limit: 255
+	# 	t.string   "pcodepostal",            limit: 255
+	# 	t.string   "pphone",                 limit: 255
+	# 	t.datetime "naissance"
+	# 	t.boolean  "documentassurance"
+	# 	t.integer  "genre_id"
+	# 	t.boolean  "enregistrement_termine"
+	# 	t.string   "commentaires",           limit: 255
+	# 	t.string   "commentaires_admin",     limit: 255
+	# 	t.string   "type_pers",              limit: 255
+	# 	t.boolean  "moderated"
+	# 	t.datetime "assurance_uptated_at"
+	# 	t.boolean  "disabled"
+	# 	t.integer  "typeresid_id"
+	# 	t.integer  "lit_id"
+	# 	t.integer  "tour_tete_id"
+	# 	t.integer  "niveau_ski_id"
+	# end
+
+
+
+
 
 #### VALIDATIONS ##############################################################
 
@@ -86,12 +136,12 @@ class Personne < ActiveRecord::Base
 	  #   t.string   "phone"
 	  #   t.datetime "naissance"
 	  #   t.integer  "genre_id"
-	  
+
 	  #   t.boolean  "assurance"
 	  #   t.datetime "created_at"
 	  #   t.datetime "updated_at"
 	  #   t.integer  "user_id"
-	  
+
 	  #   t.string   "adresse"
 	  #   t.string   "ville"
 	  #   t.integer  "codepostal"
@@ -103,7 +153,7 @@ class Personne < ActiveRecord::Base
 	  #   t.integer  "pointure"
 	  #   t.integer  "taillevetement_id"
 	  #   t.string   "complement"
-	  
+
 	  #   t.string   "pnom"
 	  #   t.string   "pprenom"
 	  #   t.string   "plienparente"
@@ -112,8 +162,8 @@ class Personne < ActiveRecord::Base
 	  #   t.string   "pville"
 	  #   t.string   "pcodepostal"
 	  #   t.string   "pphone"
-	  
-	  
+
+
 	  #   t.boolean  "documentassurance"
 	  #   t.boolean  "enregistrement_termine"
 	  # end
@@ -154,15 +204,15 @@ def taille_metre
 end
 
 def referant
-	return self.user.referant 
+	return self.user.referant
 end
 
 def is_referant?
-	self == self.user.referant 
+	self == self.user.referant
 end
 
 def referant?
-	if self == self.user.referant 
+	if self == self.user.referant
 		return "Compte référent"
 	else
 		return "Lié au compte de: " + self.referant.nom_complet
@@ -191,7 +241,7 @@ end
 
 
 # def assure?
-# 	return self.assurance 
+# 	return self.assurance
 # end
 
 def document_assurance
@@ -222,7 +272,7 @@ def sync_from_user(user, opt=Hash.new)
   if opt[:without_save]
   	true
   else
-  	self.save(:validate => false) 
+  	self.save(:validate => false)
   end
 
 end
@@ -292,7 +342,7 @@ def serialize
       commande[:annulation]=c.products.any?{|p| p.name=="Annulation"} ? "Oui" : "Non"
       commande[:inter_skipass]=c.products.any?{|p| p.name=="Inter Ski Pass"} ? "Oui" : "Non"
       commande[:rapatriement]=c.products.any?{|p| p.name=="Assistance rapatriement bagages"} ? "Oui" : "Non"
-      commande[:tout_compris]=c.products.any?{|p| p.name=="Tout compris"} ? "Oui" : "Non"   
+      commande[:tout_compris]=c.products.any?{|p| p.name=="Tout compris"} ? "Oui" : "Non"
       commande
     end
     result

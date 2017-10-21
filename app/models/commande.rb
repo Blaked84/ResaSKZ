@@ -14,10 +14,28 @@ class Commande < ActiveRecord::Base
         has_many :product_personne_preferences
         accepts_nested_attributes_for :product_personne_preferences, :allow_destroy => true
 
-	has_many :commande_products, dependent: :destroy        
+	has_many :commande_products, dependent: :destroy
 
 	has_many :paiements
-        
+
+  # EXTRACT FROM SCHEMA :
+	# create_table "commandes", force: :cascade do |t|
+	# 	t.boolean  "assurance"
+	# 	t.boolean  "status"
+	# 	t.datetime "created_at"
+	# 	t.datetime "updated_at"
+	# 	t.integer  "personne_id"
+	# 	t.boolean  "caution"
+	# 	t.string   "ean",                limit: 255
+	# 	t.integer  "tbk_id"
+	# 	t.integer  "bypasspaiement"
+	# 	t.integer  "bypassassurance"
+	# 	t.integer  "event_id"
+	# 	t.integer  "pack_id"
+	# 	t.integer  "glisse_id"
+	# 	t.string   "idlong",             limit: 255
+	# 	t.datetime "caution_updated_at"
+	# end
 
 	#attr_accessible :assurance, :status
 
@@ -28,7 +46,7 @@ class Commande < ActiveRecord::Base
 	validates :personne, :presence => true
 	validates :event, :presence => true
 	validates :event, uniqueness: { scope: :personne, message: "Une seule commande par evenement par personne" }
-        
+
 
 	def ok?
 		return false
@@ -43,10 +61,10 @@ class Commande < ActiveRecord::Base
 
 	#Ajoute un produit à la commande en précisant le nombre de produits
 	def add_product (product, nbr = 1, options = Hash.new)
-		
+
 		product= Product.find(product)
 		can_add=true
-		unless options[:force] 
+		unless options[:force]
 			cat=product.categorie
 
 			cp = self.commande_products.find_by(product_id: product)
@@ -61,7 +79,7 @@ class Commande < ActiveRecord::Base
 			end
 		end
 
-		
+
 
 		if can_add
 			if product.event_id == self.event_id
@@ -89,7 +107,7 @@ class Commande < ActiveRecord::Base
 			end
 		else
 			false
-		end		
+		end
 	end
 
 	##### Vérification du statut d'une commande
@@ -145,7 +163,7 @@ class Commande < ActiveRecord::Base
 		missings.blank?
 
 	end
-	
+
 	def nbr_pack
 		self.products.select{|p| p.categorie_id == Configurable[:id_pack]}.count
 	end
@@ -185,7 +203,7 @@ class Commande < ActiveRecord::Base
 	def paiement_etape
 		# case montant_paye
 		# when 0
-			
+
 		# when montant_pack / 2
 		# 	# premier paiement réalisé
 		# 	return 1
@@ -199,11 +217,11 @@ class Commande < ActiveRecord::Base
 		if montant_pack>0
 			if montant_paye >= montant_total
 				# 3eme paiement réalisé
-				return 3			
+				return 3
 			elsif montant_paye >= montant_pack
 				# second paiment réalisé
 				return 2
-			elsif montant_paye >= montant_pack / 2 
+			elsif montant_paye >= montant_pack / 2
 				# premier paiement réalisé
 				return 1
 			else
@@ -211,7 +229,7 @@ class Commande < ActiveRecord::Base
 			return 0
 			end
 		else
-			return 0 
+			return 0
 		end
 	end
 
@@ -230,7 +248,7 @@ class Commande < ActiveRecord::Base
 			montant_du
 		when 3
 			0
-		end		 	 
+		end
 	end
 
 	def gen_idlong
@@ -260,7 +278,7 @@ class Commande < ActiveRecord::Base
 	def gen_and_record_ean13
 		self.ean=self.gen_ean13
 		self.save
-		
+
 	end
 
 	def a_donne_caution
