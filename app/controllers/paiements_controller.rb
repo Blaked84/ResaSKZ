@@ -270,7 +270,7 @@ end
   end
 
   def paiement_params
-    params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif)
+    params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif,:etape)
   end
 
   def sort_column
