@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
       @products = Product.all.order(:id)
     end
     authorize! :read, @products
-    @categories = Categorie.all
+    @categories = Categorie.all.order(:id)
     @titre = "Produit"
 
   end
