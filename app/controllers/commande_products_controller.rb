@@ -14,7 +14,7 @@ class CommandeProductsController < ApplicationController
   end
 
   def validate
-    if @current_user.admin?
+    if current_user.admin?
       set_commande_products
       @commande_products.en_attente=false
       if @commande_products.save
