@@ -104,67 +104,63 @@ class PaiementsController < ApplicationController
 
   end
 
- def index
+  def index
     authorize! :read_admin, User
     @paiements=Paiement.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
   end
 
   def show
-   authorize! :show, @commandes
-   @paiement=Paiement.find(params[:id])
-   @commande=@paiement.commande
-   @personne=@commande.personne
-   @referant=@personne.referant
-   @url=urlpaiement(@paiement)
- end
+    authorize! :show, @commandes
+    @paiement=Paiement.find(params[:id])
+    @commande=@paiement.commande
+    @personne=@commande.personne
+    @referant=@personne.referant
+    @url=urlpaiement(@paiement)
+  end
 
- def update
-  authorize! :read_admin, User
-end
+  def update
+    authorize! :read_admin, User
+  end
 
-require 'will_paginate/array'
-def check
-  authorize! :read_admin, User
-  @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
-  authorize! :show, @personnes
-  @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
+  require 'will_paginate/array'
+  def check
+    authorize! :read_admin, User
+    @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
+    authorize! :show, @personnes
+    @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
+  end
 
-end
+  def force_validation
+    authorize! :read_admin, User
+    paiement=Paiement.find(params[:paiementid])
+    paiement.force_valid(@current_user.id)
+    redirect_to :back, notice: "La validation à forcée"
+  end
 
-def force_validation
-  authorize! :read_admin, User
-  paiement=Paiement.find(params[:paiementid])
-  paiement.force_valid(@current_user.id)
-  redirect_to :back, notice: "La validation à forcée"
+  require 'csv'
 
-
-end
-
-require 'csv'
-
-def csv_import
-  authorize! :read_admin, User
-
-  amount_cents_row = 4
-  id_long_row = 21
-  reponse_code_row = 12
-  banque_reponse_code_row = 29
-
-  file_data = params[:file].read
+  def csv_import
+    authorize! :read_admin, User
+ 
+    amount_cents_row = 4
+    id_long_row = 21
+    reponse_code_row = 12
+    banque_reponse_code_row = 29
+    file_data = params[:file].read
 
     #handle the differents csv row sep
     if file_data.include?("\r\r\n")
-     csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:row_sep=> "\r\r\n", :col_sep => ';')
-   else
-    csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:col_sep => ';')
-  end
-  nbre_paiements_valides = 0
-  nbre_paiements_refuses = 0
-  nbre_paiement=csv_rows.size - 2
-  csv_rows.each_with_index do |row,line|
+       csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:row_sep=> "\r\r\n", :col_sep => ';')
+    else
+      csv_rows  = CSV.parse(file_data,encoding: "UTF-8",:col_sep => ';')
+    end
+    nbre_paiements_valides = 0
+    nbre_paiements_refuses = 0
+    nbre_paiement=csv_rows.size - 2
+    csv_rows.each_with_index do |row,line|
     case line
-    when 0
-        # useless
+      when 0
+      # useless
       when 1
         # header2
       else
@@ -172,13 +168,12 @@ def csv_import
         nbre_paiements_valides +=1 if valcode[0]
         nbre_paiements_refuses +=1 if valcode[1]
       end
-
     end
 
     respond_to do |format|
       format.html { redirect_to check_paiement_path, :notice => "CSV traité avec succés! " + nbre_paiements_valides.to_s + " paiements traités sur " + nbre_paiement.to_s  + " présents dans le fichier. " + nbre_paiements_refuses.to_s + " paiement ont été refusés pas la banque." , :plop => "truc" }
     end
-end
+  end
 
   def check_lydia_ok
     paiement = Paiement.find_by(paiement_hash: @request_id)
@@ -194,8 +189,6 @@ end
     paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_erreur(1)
   end
-
-
 
   private
   def site
