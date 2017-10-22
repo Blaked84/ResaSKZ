@@ -83,6 +83,160 @@ class PersonnesController < ApplicationController
                                                     nombre: 1)
     end
 
+    # Options autres packs
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["5"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["5"]["product_id"].count > 1
+        @baguette = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["5"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["6"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["6"]["product_id"].count > 1
+        @croissant = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["6"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["7"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["7"]["product_id"].count > 1
+        @pain_chocolat = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["7"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["8"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["8"]["product_id"].count > 1
+        @saucisson = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["8"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["9"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["9"]["product_id"].count > 1
+        @fromage = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["9"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+
+    # Skis
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["10"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"].present?
+        @skis = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["10"]["id"],
+                                                   nombre: 1)
+      end
+    end
+
+    # Anim's
+    # RCC
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["11"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"].present?
+        @rcc = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["11"]["id"],
+                                                 nombre: 1)
+      end
+    end
+
+    # Anim's notés
+    @anims_notes = Product.where(categorie_id: 7, votable: true)
+    (0..@anims_notes.count-1).each do |i|
+      if personne_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"].present?
+        # Sauvegarde préférence
+        @anims = @commandes.product_personne_preferences.find_or_initialize_by(personne_id: @personne.id,
+                            product_id: personne_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"])
+        @anims.preference = personne_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["preference"]
+        # Sauvegarde du produit dans la commande
+        @anims_com = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"],
+                                                        nombre: 1, en_attente: true)
+      end
+    end
+
+    # Anim's avec type de produit
+    @type_products = TypeProduct.all
+    (0..TypeProduct.all.count-1).each do |i|
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"].present?
+        if personne_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"]["id"].present?
+          @anims_type = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["#{37+i}"]["id"],
+                                                   nombre: 1, en_attente: true)
+        end
+      end
+    end
+
+    # Autres anim's
+    snakeglis = personne_params["commandes_attributes"]["0"]["products_attributes"]["40"]
+    if snakeglis.present?
+      if snakeglis["id"].present?
+        @snakeglis = @commandes.commande_products.build(product_id: snakeglis["id"], nombre: 1, en_attente: true)
+      end
+    end
+    showcompet = personne_params["commandes_attributes"]["0"]["products_attributes"]["41"]
+    if showcompet.present?
+      if showcompet["id"].present?
+        @showcompet = @commandes.commande_products.build(product_id: showcompet["id"], nombre: 1, en_attente: true)
+      end
+    end
+    descente = personne_params["commandes_attributes"]["0"]["products_attributes"]["42"]
+    if descente.present?
+      if descente["id"].present?
+        @descente = @commandes.commande_products.build(product_id: descente["id"], nombre: 1, en_attente: true)
+      end
+    end
+
+    # Options supplémentaires (Super option)
+    super_option = personne_params["commandes_attributes"]["0"]["products_attributes"]["43"]
+    if super_option.present?
+      if super_option["couleur_cadre"].present? and super_option["couleur_verre"].present?
+        opt_sup =  OptionSup.find_by(nom: "Masque Ryft",
+                             couleur_cadre: super_option["couleur_cadre"],
+                             couleur_verre: super_option["couleur_verre"])
+        @option_sup_product = Product.find_by(option_sup_id: opt_sup.id)
+        @option_sup_com = @commandes.commande_products.build(product_id: @option_sup_product.id, nombre: 1)
+
+      end
+    end
+ 
+    # Assurances
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["44"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].count > 1
+        @assu_annulation = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["44"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["45"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].count > 1
+        @assu_rapat = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["45"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["46"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].count > 1
+        @assu_skipass = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["46"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["47"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].count > 1
+        @assu_tc = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["47"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    if personne_params["commandes_attributes"]["0"]["products_attributes"]["48"].present?
+      if personne_params["commandes_attributes"]["0"]["products_attributes"]["48"]["product_id"].count > 1
+        @pas_assu = @commandes.commande_products.build(product_id: personne_params["commandes_attributes"]["0"]["products_attributes"]["48"]["product_id"].first,
+                                                       nombre: 1)
+      end
+    end
+    
+    if @assu_tc.present? && @assu_tc.nombre > 0
+      [@assu_annulation,@assu_rapat,@assu_skipass,@pas_assu].each do |assu|
+        if assu.present? && assu.nombre > 0
+          assu.destroy
+        end
+      end
+    end
+    if @pas_assu.present? && @pas_assu.nombre > 0
+      [@assu_annulation,@assu_rapat,@assu_skipass].each do |assu|
+        if assu.present? && assu.nombre > 0
+          assu.destroy
+        end
+      end
+    end
+
     respond_to do |format|
       if @personne.save && @personne.update(enregistrement_termine: true, moderated: true)
         format.html { redirect_to dashboard_user_url @personne.user, :notice => 'User was successfully updated.' }
@@ -294,6 +448,7 @@ private
                                            :couleur_cadre,
                                            :couleur_verre,
                                            :option_id => [],
+                                           :product_id => []
                                           ],
                   :product_personne_preferences_attributes => [
                                        :id,
@@ -301,6 +456,7 @@ private
                                        :preference
                   ]
               ]]
+
     perm_list << :user_id if options[:registration] || current_user.admin?
     perm_list << :moderated if current_user.admin?
 

@@ -21,7 +21,10 @@
             .row
               .input-field.col.s10
                 - if !current_user.admin?
-                  =f.email_field :email, readonly: true
+                  - if (@user && current_page?(new_personne_user_path(@user)))
+                    =f.email_field :email
+                  - else
+                    =f.email_field :email, readonly: true
                 - else
                   =f.email_field :email
                 =f.label :email
