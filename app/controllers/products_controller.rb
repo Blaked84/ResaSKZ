@@ -9,10 +9,10 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if params[:event_id]
-      @products = Product.all.where(event_id: params[:event_id]).sort_by{|a| a.name}
+      @products = Product.all.where(event_id: params[:event_id]).order(:id)
       @evenement = Event.find(params[:event_id]).name
     else
-      @products = Product.all.order(:name)
+      @products = Product.all.order(:id)
     end
     authorize! :read, @products
     @categories = Categorie.all
