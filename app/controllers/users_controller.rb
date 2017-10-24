@@ -268,14 +268,17 @@ class UsersController < ApplicationController
     # Anim's notés
     @anims_notes = Product.where(categorie_id: 7, votable: true)
     (0..@anims_notes.count-1).each do |i|
-      if referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"].present?
-        # Sauvegarde préférence
-        @anims = @commandes.product_personne_preferences.find_or_initialize_by(personne_id: @personne.id,
-                            product_id: referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"])
-        @anims.preference = referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["preference"]
-        # Sauvegarde du produit dans la commande
-        @anims_com = @commandes.commande_products.build(product_id: referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]["product_id"],
-                                                        nombre: 1, en_attente: true)
+      anims_note = referant_params["commandes_attributes"]["0"]["product_personne_preferences_attributes"]["#{i}"]
+      if anims_note.present?
+        if anims_note["preference"].present?
+          # Sauvegarde préférence
+          @anims = @commandes.product_personne_preferences.find_or_initialize_by(personne_id: @personne.id,
+                              product_id: anims_note["product_id"])
+          @anims.preference = anims_note["preference"]
+          # Sauvegarde du produit dans la commande
+          @anims_com = @commandes.commande_products.build(product_id: anims_note["product_id"],
+                                                          nombre: 1, en_attente: true)
+        end
       end
     end
 
@@ -380,7 +383,7 @@ class UsersController < ApplicationController
       @user.save!(:validate=>false)
     end
     respond_to do |format|
-      if @user.update(user_params_pub) && @personne.sync_from_user(@user, without_save: true) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true) && personne.valid?
+      if @user.update(user_params_pub) && @personne.sync_from_user(@user, without_save: true) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true) && @personne.valid?
       # if @user.update(user_params_pub) && @personne.update_attributes(referant_params)  && @personne.update_attribute(:enregistrement_termine, true) && @user.update_attribute(:inscription_terminee, true)
 
         if current_user.admin?
