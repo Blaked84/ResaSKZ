@@ -91,6 +91,10 @@ GEM
     ean13 (2.0.1)
     erubi (1.6.1)
     erubis (2.7.0)
+    exception_handler (0.7.7.0)
+      bundler
+      rails (>= 4.2.0)
+      responders
     execjs (2.7.0)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -275,6 +279,7 @@ DEPENDENCIES
   configurable_engine
   devise
   ean13
+  exception_handler
   execjs
   figaro
   flamegraph
