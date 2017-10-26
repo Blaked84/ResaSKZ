@@ -20,23 +20,5 @@ module LooklaDev
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :fr
 
-    config.exception_handler = {
-      dev:    false, # => defaults to "false" for dev mode. Set to true in production
-      #db:     nil, # => defaults to :errors if true, else use "table_name" / :table_name
-      #email: 	nil, # => requires string email and ActionMailer
-      layouts: {
-        # => nil inherits from ApplicationController
-        # => 4xx errors should be nil
-        # => 5xx errors should be "exception" but can be nil if explicitly defined
-        500 => "exception",
-        501 => "exception",
-        502 => "exception",
-        503 => "exception",
-        504 => "exception",
-        505 => "exception",
-        507 => "exception",
-        510 => "exception"
-      }
-    }
   end
 end
