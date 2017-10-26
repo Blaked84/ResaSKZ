@@ -1,0 +1,8 @@
+
+#notFoundScreen.sfullscreen
+  .centrer
+    %h1.header.center.white-text.error_title
+      =@exception.status
+    .row.center
+      %h3.header.col.s12.light.white-text
+        = @exception.description.html_safe

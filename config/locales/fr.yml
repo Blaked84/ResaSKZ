@@ -262,3 +262,7 @@ fr:
     warning:
       pers:
         wrong_tbk: "La commande n'a pas été passée dans le même TBK que la chambre"
+  exception_handler:
+    not_found: "Oups, une avalanche a emporté la page !"
+    unauthorized: "Oups, cette piste est reservée ! "
+    internal_server_error: "Oups, le serveur est parti skier !"

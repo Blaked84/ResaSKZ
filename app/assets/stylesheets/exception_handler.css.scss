@@ -1,0 +1,13 @@
+// Place all the styles related to the errors controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#notFoundScreen{
+	background: url(../assets/backgrounds/montagne3.jpg);
+	background-size: cover;
+	margin-top: 0px;
+}
+
+.error_title{
+	font-size: 7rem;
+}
