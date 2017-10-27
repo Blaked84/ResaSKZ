@@ -152,7 +152,13 @@ class UsersController < ApplicationController
 
   def user_infos
     set_user
-    redirect_to dashboard_user_path(@user) if @user.inscription_terminee
+	if @user.inscription_terminee
+      redirect_to dashboard_user_path(@user)
+	else
+	  if Personne.where(enregistrement_termine: true)-2 > Configurable["limite_inscription"]
+	    redirect_to root_path, alert: "La limite d'inscription a été dépassée"
+	  end	 
+	end
     @personne = @user.referant
     @roles = Hash[@user.roles.map{|r| [r.name, true]}]
     @events = Event.all
