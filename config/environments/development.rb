@@ -39,8 +39,8 @@ LooklaDev::Application.configure do
   config.action_controller.perform_caching = true
 
 
-  ## Exception handler. -> Show full message in dev
-  config.consider_all_requests_local  = false # true
+  ## Exception handler
+  config.consider_all_requests_local  = true # set to true to show full message in dev, false to get the same as prod
 
 
 
