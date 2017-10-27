@@ -95,28 +95,4 @@ LooklaDev::Application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_options = {from: 'resaskz@gorgu.net'}
 
-
-
-
-
-  ## Exception handler.
-  config.exception_handler = {
-    dev:    true, # => defaults to "false" for dev mode
-    #db:     nil, # => defaults to :errors if true, else use "table_name" / :table_name
-    #email: 	"mael.lacour.web@gmail.com", # => requires string email and ActionMailer
-    layouts: {
-      # => nil inherits from ApplicationController
-      # => 4xx errors should be nil
-      # => 5xx errors should be "exception" but can be nil if explicitly defined
-      500 => "exception",
-      501 => "exception",
-      502 => "exception",
-      503 => "exception",
-      504 => "exception",
-      505 => "exception",
-      507 => "exception",
-      510 => "exception"
-    }
-  }
-
 end

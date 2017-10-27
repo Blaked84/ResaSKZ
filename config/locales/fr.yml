@@ -262,7 +262,14 @@ fr:
     warning:
       pers:
         wrong_tbk: "La commande n'a pas été passée dans le même TBK que la chambre"
-  exception_handler:
-    not_found: "Oups, une avalanche a emporté la page !"
-    unauthorized: "Oups, cette piste est reservée ! "
-    internal_server_error: "Oups, le serveur est parti skier !"
+  exception:
+    show:
+      not_found:
+        title: "Erreur 404"
+        description: "Oups, une avalanche a emporté la page !"
+      internal_server_error:
+        title: "Erreur Serveur"
+        description: "Oups, le serveur est parti skier !"
+      unauthorized:
+        title: "Accès non autorisé"
+        description: "Désolé, cette piste est reservée ! "

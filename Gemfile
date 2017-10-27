@@ -107,10 +107,6 @@ gem "js-routes"
 #gem 'thin', require: false
 #gem 'sync'
 
-# Pour la gestion des erreurs
-gem 'exception_handler'
-
-
 #Ajouter gem de recherche pour active record
 
 group :development do
