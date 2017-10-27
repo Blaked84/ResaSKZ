@@ -103,7 +103,7 @@ LooklaDev::Application.configure do
   config.exception_handler = {
     dev:    true, # => defaults to "false" for dev mode
     #db:     nil, # => defaults to :errors if true, else use "table_name" / :table_name
-    email: 	"mael.lacour.web@gmail.com", # => requires string email and ActionMailer
+    #email: 	"mael.lacour.web@gmail.com", # => requires string email and ActionMailer
     layouts: {
       # => nil inherits from ApplicationController
       # => 4xx errors should be nil
