@@ -3,6 +3,10 @@
     Commandes
 
   =excel_block
+  
+  %p Nombre de commandes payées: "#{@paiements.where(etape: '1').count}"
+  %p Nombre de commandes à l'étape 2: "#{@paiements.where(etape: '2').count}"
+  %p Nombre de commandes entièrement payées: "#{@paiements.where(etape: '3').count}" 
 
 %div.pa1.fiche.brdr-b
   %table.striped.alternate#unfixedtable

@@ -71,6 +71,7 @@ class CommandesController < ApplicationController
 
   def index
   	@commandes = Commande.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+	@paiements = Paiements.all
   	authorize! :show, @commandes
 
     respond_to do |format|
