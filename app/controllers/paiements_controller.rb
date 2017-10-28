@@ -26,6 +26,7 @@ class PaiementsController < ApplicationController
 
     p.idlong=p.gen_idlong
     p.paiement_hash=hashpaiement(p)
+	p.etape = (com.paiement_etape + 1).to_s
     p.save if p.valid?
     respond_to do |format|
       # décommenter la ligne ci-dessous pour payer par gadz.org
