@@ -95,7 +95,7 @@ echeances_paiement3:
 
 export__commande_pool_size:
   name: Nombre d'éléments dans un export de commande
-  default: 300
+  default: 100
   type: integer
 
 facture_visible:
