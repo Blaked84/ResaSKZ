@@ -137,3 +137,8 @@ limite_inscription:
   name: "Seuil limite d'inscription des gens avant qu'ils ne soient mis en liste d'attente"
   default: 1360
   type: integer
+  
+option_limite_inscription:
+  name: "Option pour limiter l'inscription"
+  default: false            # sets the default value
+  type: boolean
