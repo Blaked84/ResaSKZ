@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019201256) do
+ActiveRecord::Schema.define(version: 20171102130533) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(version: 20171019201256) do
     t.integer  "erreur"
     t.integer  "verified_by"
     t.boolean  "verif_forced"
+    t.boolean  "en_attente",                default: false
   end
 
   add_index "paiements", ["idlong"], name: "index_paiements_on_idlong"
