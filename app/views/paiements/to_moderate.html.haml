@@ -5,7 +5,8 @@
     %thead
       %tr
         %th=sortable "idlong", "ID"
-        %th=sortable "created_at", "date"
+        %th=sortable "created_at", "Date"
+        %th Personne
         %th=sortable 'amount_cents', "Montant"
         %th Etape
         %th Classement liste d'attente
@@ -14,6 +15,7 @@
         %tr
           %td=link_to p.idlong, paiement_path(p.id)
           %td=p.date.to_s.gsub("UTC","")
+          %td=link_to p.commande.personne.nom_complet, personne_path(p.commande.personne_id)
           %td=p.amount_euro
           %td=p.etape
           %td=Paiement.where(en_attente: true).index(p)+1
