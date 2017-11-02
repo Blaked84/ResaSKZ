@@ -23,7 +23,7 @@ class PaiementsController < ApplicationController
       :paiement_hash => "paiement en cours...",
       :verif => false)
 
-
+    
     p.idlong=p.gen_idlong
     p.paiement_hash=hashpaiement(p)
 	p.etape = (com.paiement_etape + 1).to_s
@@ -100,7 +100,22 @@ class PaiementsController < ApplicationController
         redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
       end
     else
-      redirect_to commande_path(com.id), alert: "Nombre maximun d'inscrits atteint."
+      paiement_enattente = com.paiements.where(en_attente: true, etape: '1').first
+      if paiement_enattente.present?
+        redirect_to commande_path(com.id), notice: "Tu es déjà en liste d'attente: n° #{Paiement.order(:id).where(en_attente: true).index(paiement_enattente)+1}"
+      else
+        @paiement.etape = (com.paiement_etape + 1).to_s
+        @paiement.amount_cents = com.prochain_paiement
+        @paiement.idlong=@paiement.gen_idlong
+        @paiement.paiement_hash=hashpaiement(@paiement)
+        @paiement.verif = false
+        @paiement.en_attente = true
+        if @paiement.save
+          redirect_to commande_path(com.id), alert: "Nombre maximum d'inscrits atteint. Tu es mis en liste d'attente"
+        else
+          redirect_to commande_path(com.id), alert: "Un problème empêche l'enregistrement du paiement"
+        end
+      end
     end
 
   end
@@ -264,7 +279,7 @@ class PaiementsController < ApplicationController
   end
 
   def paiement_params
-    params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif,:etape)
+    params.require(:paiement).permit(:idlong,:amount_cents,:paiement_hash,:verif,:etape,:en_attente)
   end
 
   def sort_column

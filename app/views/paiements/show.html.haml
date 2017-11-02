@@ -9,8 +9,13 @@
 		%thead
 			%tr
 				%th ID
-				%th date
+				%th Date
+				%th.w50p Etape
 				%th Montant
+				- if @paiement.en_attente
+					%th.w150p En liste d'attente
+					%th.w150p Classement liste d'attente
+							
 				%th.w100p Vérifié
 				%th.w100p Refusé banque
 
@@ -18,7 +23,12 @@
 			%tr
 				%td=@paiement.idlong
 				%td=@paiement.date
+				%td=@paiement.etape
 				%td=@paiement.amount_euro
+				- if @paiement.en_attente
+					%td=conditional_format(@paiement.en_attente)
+					%td=Paiement.order(:created_at).where(en_attente: true).index(@paiement)+1
+				
 				%td=conditional_format(@paiement.verif)
 				%td=conditional_badge(!@paiement.erreur?)
 
