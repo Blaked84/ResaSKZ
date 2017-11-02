@@ -1,0 +1,22 @@
+%div.top-info.pa1
+  %h1 Paiements en attente
+%div.pa1.fiche.brdr-b
+  %table.striped.alternate
+    %thead
+      %tr
+        %th=sortable "idlong", "ID"
+        %th=sortable "created_at", "date"
+        %th=sortable 'amount_cents', "Montant"
+        %th Etape
+        %th Classement liste d'attente
+    %tbody
+      - @paiements.each do |p|
+        %tr
+          %td=link_to p.idlong, paiement_path(p.id)
+          %td=p.date.to_s.gsub("UTC","")
+          %td=p.amount_euro
+          %td=p.etape
+          %td=Paiement.where(en_attente: true).index(p)+1
+
+  = will_paginate @paiements
+  = link_to 'Retour', paiements_path

@@ -142,6 +142,7 @@
           %th ID
           %th Date
           %th Montant
+          %th Etape
           %th Paiement reçu
           %th Erreur banque
 
@@ -151,6 +152,7 @@
             %td=link_to p.idlong, paiement_path(p.id)
             %td=p.date.to_s.gsub("UTC","")
             %td=p.amount_euro
+            %td=p.etape
             %td=conditional_format(p.verif)
             %td=conditional_badge(!p.erreur?)
 

@@ -7,7 +7,7 @@
 			%tr
 				%th=sortable "idlong", "ID"
 				%th=sortable "created_at", "date"
-				%th=sortable 'amount_cents', "Montant"
+				%th=sortable 'amount_cents', "Montant"                                
 				%th.w100p=sortable "verif", "Vérifié"
 				%th.w100p=sortable "erreur" ,"Refusé"
 				%th.w100p=sortable "verif_forced", "Forcé"
@@ -22,4 +22,5 @@
 					%td=conditional_badge(!p.erreur?)
 					%td=conditional_badge(!p.forced?)
 
-	=will_paginate @paiements
+	= will_paginate @paiements
+	= link_to "En liste d'attente (#{@to_moderate_nbr})", to_moderate_paiements_path, :class => "pure-button pure-button-primary"

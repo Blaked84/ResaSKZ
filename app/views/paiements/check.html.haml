@@ -3,12 +3,12 @@
 %div.fiche.pa1.brdr-b
   %p La vérification de paiements se fait à partir du ficher fourni par la banque. Seuls les fichier CSV peuvent être téléchargé.
 
-  %p Le traitement peu être un peu long et il ne faut pas fermer le navigateur avant d'avoir le message de confirmation de l'opération.
+  %p Le traitement peut être un peu long et il ne faut pas fermer le navigateur avant d'avoir eu le message de confirmation de l'opération.
 
 %div.fiche.pa1.brdr-b
   = form_tag csv_import_path, :multipart => true do
-    .field= file_field_tag :file, :accept => "text/csv"
-    .field= submit_tag "Télécharger et le traiter le fichier ", :class => "pure-button pure-button-primary"
+    .input-field.field= file_field_tag :file, :accept => "text/csv", class: "pure-button"
+    .input-field.field= submit_tag "Télécharger et le traiter le fichier ", :class => "pure-button pure-button-primary"
 
 %div.fiche.pa1.brdr-b
   %h2 Derniers paiements vérifiés

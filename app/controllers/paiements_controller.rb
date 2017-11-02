@@ -15,7 +15,7 @@ class PaiementsController < ApplicationController
 
 
   def create
-    # attention les controleur create et new on été fait à l'arrache.
+    # attention les controleur create et new ont été fait à l'arrache.
     # C'es sale mais ça marche. Mais ce serait mieux de modifier ça quand même.
     com=Commande.find(params[:commande_id])
     p=com.paiements.new(
@@ -33,15 +33,12 @@ class PaiementsController < ApplicationController
       # format.html{redirect_to urlpaiement(p).to_s}
       # format.html{redirect_to commande_path(com.id), notice: "Votre paiement a bien été pris en compte." }
 
-      # TODO : changer pour la production
       lydiaURI = URI(Figaro.env.lydia_url.to_s)
       # uri = URI('http://lydia-app.com/api/request/do.json')
 
       # Token de test. Le vrai doit rester sécurisé (genre pas sur un github public)
-      # TODO : changer pour la production
       vendorToken = Figaro.env.lydia_token.to_s
 
-      # TODO : mettre la bonne, idéalement en la récupérant avec je-sais-pas-quelle fonction de ruby
       baseURL = root_url
       logger.debug("debuglydia1")
 
@@ -80,9 +77,9 @@ class PaiementsController < ApplicationController
     @paiement = com.paiements.new
     authorize! :create, @paiement
     # on vérifie si le nombre de commande maxi est atteint ET qu'on est au premier paiement
-    # la méthode utilisée ici n'utilise pas les fonction pour vérifier le montant total car ce serait trop long
+    # la méthode utilisée ici n'utilise pas les fonctions pour vérifier le montant total car ce serait trop long
 
-    nombre_commande_avec_paiement = Paiement.where(verif: true).map{|p| p.commande}.uniq.count
+    nombre_commande_avec_paiement = Paiement.where(verif: true, en_attente: false).map{|p| p.commande}.uniq.count
     if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0
 
       @montant=com.prochain_paiement / 100.0
@@ -123,6 +120,7 @@ class PaiementsController < ApplicationController
   def index
     authorize! :read_admin, User
     @paiements=Paiement.all.order(sort_column + " " + sort_direction).paginate(:page => params[:page],:per_page => 50)
+    @to_moderate_nbr=Paiement.where(en_attente: true).count
   end
 
   def show
@@ -141,7 +139,7 @@ class PaiementsController < ApplicationController
   require 'will_paginate/array'
   def check
     authorize! :read_admin, User
-    @paiements_verified = Paiement.find(:all, :order => "verified_at", :conditions => {:verif => true }).paginate(:page => params[:page],:per_page => 50)
+    @paiements_verified = Paiement.order(:verified_at).where(verif: true).paginate(:page => params[:page],:per_page => 50)
     authorize! :show, @personnes
     @paiements = Paiement.all.where(verif: false).sort_by{|a| a.created_at.to_s}
   end
@@ -151,6 +149,12 @@ class PaiementsController < ApplicationController
     paiement=Paiement.find(params[:paiementid])
     paiement.force_valid(@current_user.id)
     redirect_to :back, notice: "La validation à forcée"
+  end
+
+  def to_moderate
+    @paiements = Paiement.order(:created_at).where(en_attente: true).paginate(:page => params[:page],:per_page => 50)
+    authorize! :show, @paiement
+    @titre = "Paiements en attente"
   end
 
   require 'csv'

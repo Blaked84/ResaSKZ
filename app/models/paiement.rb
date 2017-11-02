@@ -61,6 +61,9 @@ class Paiement < ActiveRecord::Base
 	def force_valid(userid)
 		self.verif_forced=true
 		self.verified_by=userid
+		if self.en_attente
+			self.en_attente = false
+                end
 		self.save
 
 		set_verif
