@@ -335,7 +335,7 @@ class Commande < ActiveRecord::Base
 		end
 
 		result[:products]=products
-		result[:complete]= complete? ? "OUI" : "NON"
+		result[:complete]= self.complete? ? "OUI" : "NON"
 
 		return result
 	end
