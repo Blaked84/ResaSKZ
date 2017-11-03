@@ -94,7 +94,7 @@ class CommandesController < ApplicationController
     @commandes = coms.map{|c| c.serialize}
     authorize! :show, @commandes
 
-    nbr_pages=(Commande.count/pool_size.to_f).ceil
+    nbr_pages=(Paiement.where(verif: true, etape: '1').count/pool_size.to_f).ceil
 
     respond_to do |format|
       format.xls do
