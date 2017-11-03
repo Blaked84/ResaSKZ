@@ -142,3 +142,8 @@ option_limite_inscription:
   name: "Option pour limiter l'inscription"
   default: false            # sets the default value
   type: boolean
+  
+modification_options:
+  name: Possibilité de modifier les options
+  default: true
+  type: boolean

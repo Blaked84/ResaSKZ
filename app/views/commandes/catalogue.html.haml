@@ -22,13 +22,15 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    - if p.reste_masque?
-                      %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                        +
+                    - if Configurable[:modification_options]
+                      - if p.reste_masque?
+                        %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                          +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                    %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                      \-
+                    - if Configurable[:modification_options]
+                      %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                        \-
                   %td
                     = link_to product_path(p.id) do
                       #{p.name}
@@ -47,13 +49,15 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    - if p.reste?
-                      %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                        +
+                    - if Configurable[:modification_options]
+                      - if p.reste?
+                        %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                          +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                    %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
-                      \-
+                    - if Configurable[:modification_options]
+                      %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                        \-
                   %td=link_to p.name, product_path(p.id)
                   %td=conditional_format(p.reste?)
                   %td=p.price_euro
