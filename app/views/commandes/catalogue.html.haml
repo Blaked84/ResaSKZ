@@ -82,12 +82,15 @@
           - else
             Choix: #{@commande.products.where(categorie_id: 1).first.name}
         - else
-          - if c[:id] == 3 or c[:id] == 4 or c[:id] == 5
+          - if c[:id] == 3 or c[:id] == 4 or c[:id] == 5 or c[:id] == 6
             - if Configurable[:modification_options]
               Choix :
               = select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
             - else
-              Modification des transports fermée
+              - if c[:id] == 6
+                Modification des skis fermée
+              - else
+                Modification des transports fermée
           - else
             Choix :
             =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"

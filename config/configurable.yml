@@ -145,5 +145,5 @@ option_limite_inscription:
   
 modification_options:
   name: Possibilité de modifier les options
-  default: false
+  default: true
   type: boolean
