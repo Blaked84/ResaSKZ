@@ -90,7 +90,7 @@ class CommandesController < ApplicationController
     page_number=params[:page].to_i || 1
     debut=(page_number-1)*pool_size
     fin=(page_number)*pool_size-1
-    coms = Commande.includes(:personne, :event, :paiements).all[debut..fin]
+    coms = Paiement.where(verif: true).map{|p| p.commande}.uniq[debut..fin]
     @commandes = coms.map{|c| c.serialize}
     authorize! :show, @commandes
 
