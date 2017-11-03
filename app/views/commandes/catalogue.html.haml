@@ -82,8 +82,15 @@
           - else
             Choix: #{@commande.products.where(categorie_id: 1).first.name}
         - else
-          Choix :
-          =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+          - if c[:id] == 3 or c[:id] == 4 or c[:id] == 5
+            - if Configurable[:modification_options]
+              Choix :
+              = select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
+            - else
+              Modification des transports fermée
+          - else
+            Choix :
+            =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
     
               
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"
