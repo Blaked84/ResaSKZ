@@ -22,13 +22,13 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    - if Configurable[:modification_options]
+                    - if Configurable[:modification_options] or current_user.admin?
                       - if p.reste_masque?
                         %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                           +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                    - if Configurable[:modification_options]
+                    - if Configurable[:modification_options] or current_user.admin?
                       %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                         \-
                   %td
@@ -49,13 +49,13 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    - if Configurable[:modification_options]
+                    - if Configurable[:modification_options] or current_user.admin?
                       - if p.reste?
                         %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                           +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                    - if Configurable[:modification_options]
+                    - if Configurable[:modification_options] or current_user.admin?
                       %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                         \-
                   %td=link_to p.name, product_path(p.id)
@@ -83,7 +83,7 @@
             Choix: #{@commande.products.where(categorie_id: 1).first.name}
         - else
           - if c[:id] == 3 or c[:id] == 4 or c[:id] == 5 or c[:id] == 6
-            - if Configurable[:modification_options]
+            - if Configurable[:modification_options] or current_user.admin?
               Choix :
               = select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
             - else
