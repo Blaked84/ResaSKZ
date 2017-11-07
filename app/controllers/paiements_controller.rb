@@ -89,9 +89,9 @@ class PaiementsController < ApplicationController
         redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
       end
 
-      if @etape == '3' && com.commande_products.where(en_attente: true).present?
-        redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
-      end
+   #   if @etape == '3' && com.commande_products.where(en_attente: true).present?
+   #     redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
+   #   end
 	  
       if @etape == '3'
         redirect_to commande_path(com.id), alert: "Le 3ème paiement est bloqué."
