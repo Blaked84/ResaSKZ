@@ -63,8 +63,8 @@
                   %td=conditional_format(p.reste?)
                   %td=p.price_euro
                   - if p.votable && current_user.admin?
-                    = form_for @preference, method: :put do |f|
-                      %td= f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
+                    = form_for @preference do |f|
+                      = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
                       = f.submit 'Modifier', id: 'submitPreference_#{p.id}'
 				  
         - else
