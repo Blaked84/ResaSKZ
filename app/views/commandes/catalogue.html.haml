@@ -37,6 +37,36 @@
                       %img.illustration.img_ryft{:alt => "Masque Ryft", :src => p.image, :style => "width: 30%;"}/
                   %td=conditional_format(p.reste_masque?)
                   %td=p.price_euro
+        - elsif
+          %table.striped.alternate
+            %thead
+              %tr
+                %th
+                %th Produit
+                %th Disponible
+                %th Intérêt
+                %th Prix (€)
+            %tbody
+              -c[:products].each do |p|
+                %tr
+                  %td
+                    - if Configurable[:modification_options] or current_user.admin?
+                      - if p.reste?
+                        %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                          +
+                    %span{ :id => 'product'+p.id.to_s}
+                      =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
+                    - if Configurable[:modification_options] or current_user.admin?
+                      %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
+                        \-
+                  %td=link_to p.name, product_path(p.id)
+                  %td=conditional_format(p.reste?)
+                  %td=p.price_euro
+                  - if p.votable && current_user.admin?
+                    = form_for @preference, method: :put do |f|              
+                      = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
+                      = f.submit 'Modifier', id: 'submitPreference_#{p.id}'
+				  
         - else
           %table.striped.alternate
             %thead

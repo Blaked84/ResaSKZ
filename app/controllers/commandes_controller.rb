@@ -240,6 +240,7 @@ require 'barby'
       set_commande
       authorize! :add_product, @commande    
 
+      @preference = ProductPersonnePreference.new
       @categories=Categorie.order(:id).all.map do|c|
 
         prods = c.products.where(event_id: @commande.event_id)
