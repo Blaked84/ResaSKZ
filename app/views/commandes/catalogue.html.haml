@@ -136,7 +136,7 @@
             %div{id: "modal_#{p.id}", class: "modal"}
               .modal-content
                 %h4 #{p.name}
-                = form_for ProductPersonnePreference.find_or_initialize_by(commande_id: @commande.id, product_id: p.id) do |f|
+                = form_for @commande.product_personne_preferences.build do |f|
                   = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
                   = f.submit 'Modifier', id: 'submitPreference_#{p.id}'   
               .modal-footer
