@@ -44,8 +44,8 @@
                 %th
                 %th Produit
                 %th Disponible
-                %th Intérêt
                 %th Prix (€)
+                %th Intérêt
             %tbody
               -c[:products].each do |p|
                 %tr
@@ -65,7 +65,7 @@
                   - if p.votable && current_user.admin?
                     - if p.product_personne_preferences.where(commande_id: @commande).present?
                       %td
-                        = p.product_personne_preferences.where(commande_id: @commande).first
+                        = p.product_personne_preferences.where(commande_id: @commande).first.preference
                         %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
 			
         - else
@@ -131,10 +131,11 @@
           - if p.votable
             %div{id: "modal_#{p.id}", class: "modal"}
               .modal-content
-                %h4 Modal Header
-                %p A bunch of text    
+                %h4 #{p.name}
+                %p A remplacer par le formulaire    
               .modal-footer
-                %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
+                %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{href: "#!"}
+                  Fermer
 			
 	  
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"
