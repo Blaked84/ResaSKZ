@@ -66,8 +66,14 @@
                     - if p.product_personne_preferences.where(commande_id: @commande).present?
                       = p.product_personne_preferences.where(commande_id: @commande).first
                       %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
-
-				  
+      -c[:products].each do |p|
+	    %div{id: "modal_#{p.id}"}.modal
+          %div.modal-content
+            %h4 Modal Header
+            %p A bunch of text    
+          %div.modal-footer
+            %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
+			  
         - else
           %table.striped.alternate
             %thead
