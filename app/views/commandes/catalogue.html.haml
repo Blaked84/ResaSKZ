@@ -37,7 +37,7 @@
                       %img.illustration.img_ryft{:alt => "Masque Ryft", :src => p.image, :style => "width: 30%;"}/
                   %td=conditional_format(p.reste_masque?)
                   %td=p.price_euro
-        - elsif
+        - elsif c[:id] == 7
           %table.striped.alternate
             %thead
               %tr
