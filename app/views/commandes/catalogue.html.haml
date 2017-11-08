@@ -67,7 +67,7 @@
                       - if p.product_personne_preferences.where(commande_id: @commande).present?
                         = p.product_personne_preferences.where(commande_id: @commande).first.preference
 	                  - else
-					    0
+                        0
                       %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
                         Modifier ma note
 
