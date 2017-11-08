@@ -63,10 +63,14 @@
                   %td=conditional_format(p.reste?)
                   %td=p.price_euro
                   - if p.votable && current_user.admin?
-                    - if p.product_personne_preferences.where(commande_id: @commande).present?
-                      %td
+                    %td
+                      - if p.product_personne_preferences.where(commande_id: @commande).present?
                         = p.product_personne_preferences.where(commande_id: @commande).first.preference
-                        %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
+	                  - else
+					    0
+                      %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
+                        Modifier ma note
+
 			
         - else
           %table.striped.alternate
@@ -132,7 +136,9 @@
             %div{id: "modal_#{p.id}", class: "modal"}
               .modal-content
                 %h4 #{p.name}
-                %p A remplacer par le formulaire    
+                = form_for ProductPersonnePreference.find_or_initialize_by(commande_id: @commande.id, product_id: p.id) do |f|
+                  = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
+                  = f.submit 'Modifier', id: 'submitPreference_#{p.id}'   
               .modal-footer
                 %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{href: "#!"}
                   Fermer
