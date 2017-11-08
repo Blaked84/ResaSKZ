@@ -66,14 +66,7 @@
                     - if p.product_personne_preferences.where(commande_id: @commande).present?
                       = p.product_personne_preferences.where(commande_id: @commande).first
                       %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
-      -c[:products].each do |p|
-	    %div{id: "modal_#{p.id}"}.modal
-          %div.modal-content
-            %h4 Modal Header
-            %p A bunch of text    
-          %div.modal-footer
-            %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
-			  
+			
         - else
           %table.striped.alternate
             %thead
@@ -132,5 +125,14 @@
             Choix :
             =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
     
-              
+      -c[:products].each do |p|
+        - if p.votable
+          %div{id: "modal_#{p.id}"}.modal
+            %div.modal-content
+              %h4 Modal Header
+              %p A bunch of text    
+            %div.modal-footer
+              %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
+			
+	  
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"
