@@ -64,8 +64,9 @@
                   %td=p.price_euro
                   - if p.votable && current_user.admin?
                     - if p.product_personne_preferences.where(commande_id: @commande).present?
-                      = p.product_personne_preferences.where(commande_id: @commande).first
-                      %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
+                      %td
+                        = p.product_personne_preferences.where(commande_id: @commande).first
+                        %a.waves-effect.waves-light.btn.modal-trigger{href: "#modal_#{p.id}"}
 			
         - else
           %table.striped.alternate
@@ -124,15 +125,16 @@
           - else
             Choix :
             =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
-    
-      -c[:products].each do |p|
-        - if p.votable
-          %div{id: "modal_#{p.id}", class: "modal"}
-            .modal-content
-              %h4 Modal Header
-              %p A bunch of text    
-            .modal-footer
-              %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
+
+      - if current_user.admin?
+        -c[:products].each do |p|
+          - if p.votable
+            %div{id: "modal_#{p.id}", class: "modal"}
+              .modal-content
+                %h4 Modal Header
+                %p A bunch of text    
+              .modal-footer
+                %a{href: "#!"}.modal-action.modal-close.waves-effect.waves-green.btn-flat Agree
 			
 	  
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"
