@@ -63,8 +63,8 @@
                   %td=link_to p.name, product_path(p.id)
                   %td=conditional_format(p.reste?)
                   %td=p.price_euro
-                  - if p.votable && current_user.admin?
-                    %td
+                  - if p.votable
+                    %td{id: "product_#{p.id}_update_preference"}
                       - if p.product_personne_preferences.where(commande_id: @commande.id).present?
                         = p.product_personne_preferences.where(commande_id: @commande.id).first.preference || 0
                       - else
@@ -132,19 +132,16 @@
             Choix :
             =select_tag 'choix_cat'+c[:id].to_s, options_for_select(c[:products].map{|p| [p.name,p.id]}, c[:selected]), prompt: "Fais ton choix :",include_blank: true, :class => 'select_cat',:onchange => "maj_cat_product(#{@commande.id.to_s},#{c[:id].to_s})"
 
-      - if current_user.admin?
-        -c[:products].each do |p|
-          - if p.votable
-            %div{id: "modal_#{p.id}", class: "modal"}
+      -c[:products].each do |p|
+        - if p.votable
+          %div{id: "modal_#{p.id}", class: "modal bottom-sheet", style: "height: 400px"}
+            = form_for p.product_personne_preferences.build, :url => {action: "maj_product_personne_preference", params: {id: @commande.id, product_id: p.id, preference: params[:preference]}},:html => {:method => :post}, remote: true do |f|
               .modal-content
                 %h4 #{p.name}
-                = form_for @preference, :url => {action: "maj_product_personne_preference", params: {id: @commande.id, product_id: p.id, preference: params[:preference]}},:html => {:method => :post} do |f|
-                  = f.hidden_field :product_id, :value => p.id		
-                  = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }
-                  = f.submit 'Modifier', id: 'submitPreference_#{p.id}'   
+                = f.hidden_field :product_id, :value => p.id		
+                = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }, {class: 'select_preference', 'data-product' => "#{p.id}"}
               .modal-footer
-                %a.modal-action.modal-close.waves-effect.waves-green.btn-flat{href: "#!"}
-                  Fermer
+                = f.submit 'Modifier', id: "submitPreference_#{p.id}", class: "waves-effect waves-green btn-flat"
 			
 	  
     =link_to "Résumé de la commande", commande_path(@commande.id), :class => "pure-button pure-button-primary"

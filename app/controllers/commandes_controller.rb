@@ -292,13 +292,28 @@ require 'barby'
   def maj_product_personne_preference
     set_commande
     authorize! :add_product, @commande
-	@product = Product.find_by_id(params[:product_id])
-	@preference = @product.product_personne_preferences.build(product_personne_preferences_params)	
 
-	if @preference.save
-	  redirect_to root_path
-	end
-	
+    @product = Product.find_by_id(params[:product_id])
+    @preference = @product.product_personne_preferences.build(product_personne_preferences_params)	
+
+    @preference.commande = @commande
+    @preference.personne = @commande.personne
+
+    if @product.product_personne_preferences.where(commande_id: @commande.id).present?
+      @preference = @product.product_personne_preferences.where(commande_id: @commande.id).first
+      @preference.preference = product_personne_preferences_params[:preference]
+      
+      respond_to do |format|
+        if @preference.save
+          format.js
+        end
+      end
+    else
+      @preference.preference = product_personne_preferences_params[:preference]
+      if @preference.save
+        redirect_to catalogue_commande_path(@commande)
+      end
+    end
   end
   
   def add_caution
@@ -387,9 +402,9 @@ require 'barby'
       params.require(:commande).permit(:personne_id,:event_id,:tbk_id,:glisse_id,:caution,:products_attributes => [])
     end
 
-	def product_personne_preferences_params
-	  params.require(:commande).permit(:id, :product_id, :personne_id, :preference)
-	end
+    def product_personne_preferences_params
+      params.require(:product_personne_preference).permit(:id, :product_id, :personne_id, :preference)
+    end
 	
     def sort_column
       Commande.column_names.include?(params[:sort]) ? params[:sort] : "created_at"

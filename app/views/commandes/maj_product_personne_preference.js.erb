@@ -1,0 +1,3 @@
+toastr.success("Le classement pour <%= @product.name %> a bien été modifié");
+$("#modal_<%= @product.id %>").modal('close');
+$("#product_<%= @product.id %>_update_preference").text("<%= @preference.preference %>")

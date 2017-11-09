@@ -42,7 +42,7 @@ LooklaDev::Application.routes.draw do
       post :remove_product
       post :maj_cat_product
       get :catalogue
-	  post :maj_product_personne_preference
+      post :maj_product_personne_preference
     end
     collection do
       post :check_in
