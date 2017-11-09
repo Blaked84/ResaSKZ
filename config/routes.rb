@@ -45,6 +45,7 @@ LooklaDev::Application.routes.draw do
       post :remove_product
       post :maj_cat_product
       get :catalogue
+	  post :catalogue
     end
     collection do
       post :check_in
