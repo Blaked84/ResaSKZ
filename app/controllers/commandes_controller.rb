@@ -250,6 +250,13 @@ require 'barby'
         {id: c.id,nom: c.nom, max: c.max_par_personne, selected: select_id ,products: prods }
 
       end
+	  
+	  @product = Product.find_by_id(params[:product_id]||0)
+	  @preference = @product.product_personne_preferences.find_or_initialize_by(commande_id: @commande.id, personne_id: @commande.personne.id)
+ 	  @preference.preference = params[:preference]
+      if @preference.save
+	    redirect_to root_path
+	  end
     else
       redirect_to :back, alert: "Les commandes sont désormais bloquées!"
     end
