@@ -140,7 +140,7 @@
                 %h4 #{p.name}
                 = f.hidden_field :product_id, :value => p.id		
                 = f.select :preference, options_for_select(Product.preferences_form), { :prompt => "#{p.name} (#{p.price_euro.round}€)" }, {class: 'select_preference', 'data-product' => "#{p.id}"}
-              .modal-footer
+              .modal-footer.hide
                 = f.submit 'Modifier', id: "submitPreference_#{p.id}", class: "waves-effect waves-green btn-flat"
 			
 	  
