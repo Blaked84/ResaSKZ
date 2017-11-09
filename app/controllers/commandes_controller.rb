@@ -289,6 +289,19 @@ require 'barby'
     end
   end
 
+  def maj_product_personne_preference
+    set_commande
+    authorize! :add_product, @commande
+	
+	@product = Product.find_by_id(params[:product_id]||0)
+	@preference = @product.product_personne_preferences.find_or_initialize_by(commande_id: @commande.id, personne_id: @commande.personne.id)
+	@preference.preference = params[:preference]
+	if @preference.save
+	  redirect_to root_path
+	end
+	
+  end
+  
   def add_caution
     @lastcautioncommandes = Commande.where.not(caution_updated_at: '').where(caution: true).order(caution_updated_at: :desc).limit(10)
 
