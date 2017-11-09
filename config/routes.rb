@@ -35,7 +35,10 @@ LooklaDev::Application.routes.draw do
   get "home/event"
   get "home/histoire"
   get "home/soirees"
-  resources :commandes do
+  resources :commandes 
+    resources :products do
+	  post :product_personne_preference
+	end
     member do
       post :add_product
       post :remove_product
