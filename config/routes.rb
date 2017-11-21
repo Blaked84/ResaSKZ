@@ -76,6 +76,7 @@ LooklaDev::Application.routes.draw do
   resources :paiements do
     put :force_validation, :on => :collection
     collection do
+	  get :export_attente
       get 'to_moderate'
     end
   end
