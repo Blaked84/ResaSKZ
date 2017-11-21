@@ -213,6 +213,24 @@ class PaiementsController < ApplicationController
     paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_erreur(1)
   end
+  
+  def export_attente
+    pool_size=Configurable[:export__commande_pool_size]
+    page_number=params[:page].to_i || 1
+    debut=(page_number-1)*pool_size
+    fin=(page_number)*pool_size-1
+    pa = Paiement.where(en_attente: true)[debut..fin]
+    @paiements = pa.map{|c| c.serialize}
+    authorize! :show, @commandes
+
+    nbr_pages=(Paiement.where(en_attente: true).count/pool_size.to_f).ceil
+
+    respond_to do |format|
+      format.xls do
+        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_commandes_"+Date.today.to_s+"_"+page_number.to_s+"of"+nbr_pages.to_s+ '.xls"'
+      end
+    end
+  end
 
   private
   def site
@@ -284,24 +302,6 @@ class PaiementsController < ApplicationController
       else
         return [false,false]
       end
-  end
-  
-  def export_attente
-    pool_size=Configurable[:export__commande_pool_size]
-    page_number=params[:page].to_i || 1
-    debut=(page_number-1)*pool_size
-    fin=(page_number)*pool_size-1
-    pa = Paiement.where(en_attente: true)[debut..fin]
-    @paiements = pa.map{|c| c.serialize}
-    authorize! :show, @commandes
-
-    nbr_pages=(Paiement.where(en_attente: true).count/pool_size.to_f).ceil
-
-    respond_to do |format|
-      format.xls do
-        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_commandes_"+Date.today.to_s+"_"+page_number.to_s+"of"+nbr_pages.to_s+ '.xls"'
-      end
-    end
   end
 
   def paiement_params
