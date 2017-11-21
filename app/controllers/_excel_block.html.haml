@@ -1,0 +1,3 @@
+.excel_block
+	-(1..nbr_pages).to_a.each do |i|
+		=link_to "Excel "+i.to_s, export_attente_paiements_path(format: 'xls', page: i)

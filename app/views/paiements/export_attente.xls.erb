@@ -22,9 +22,7 @@
         <Cell><Data ss:Type="String">Taille vêtement</Data></Cell>
         <Cell><Data ss:Type="String">TBK</Data></Cell>
         <Cell><Data ss:Type="String">Type resid's</Data></Cell>
-        <Cell><Data ss:Type="String">Chambre</Data></Cell>
-		<Cell><Data ss:Type="String">Lit</Data></Cell>
-        <% @commandes.first[:products].each do |k,v| %>        
+        <% @paiements.first[:products].each do |k,v| %>        
           <Cell><Data ss:Type="String"><%= k %></Data></Cell>
         <% end %>
         <Cell><Data ss:Type="String">Paiement 1</Data></Cell>
@@ -32,7 +30,7 @@
         <Cell><Data ss:Type="String">Paiement 3</Data></Cell>
         <Cell><Data ss:Type="String">Complete</Data></Cell>
       </Row>
-    <% @commandes.each do |c| %>
+    <% @paiements.each do |c| %>
       <Row>
         <Cell><Data ss:Type="String"><%= c[:id] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:idlong] %></Data></Cell>
@@ -49,8 +47,6 @@
         <Cell><Data ss:Type="String"><%= c[:vetement] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:tbk] %></Data></Cell>
         <Cell><Data ss:Type="String"><%= c[:typeresid] %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= c[:chambre] %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= c[:lit] %></Data></Cell>
         <% c[:products].each do |k,v| %>
           <Cell><Data ss:Type="String"><%= v %></Data></Cell>
         <% end %>

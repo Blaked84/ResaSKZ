@@ -312,7 +312,6 @@ class Commande < ActiveRecord::Base
 			temp=pers.chambres.where(event_id: self.event_id).first
 			result[:chambre]=temp.identifiant if temp
 			result[:typeresid]=pers.typeresid.name if pers.typeresid.present?
-			result[:lit]=pers.lit.name if pers.lit.present?
 		end
 
 		result[:tbk]=self.tbk ? self.tbk.nom_complet : "AUCUN"
