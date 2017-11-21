@@ -78,7 +78,7 @@ class Paiement < ActiveRecord::Base
 		result = Hash.new
 		result[:id]=self.commande.id
 		result[:idlong]=self.commande.idlong
-		result[:event]=self.commande.event ? self.event.name : "EVENT NON RENSEIGNE"
+		result[:event]=self.commande.event ? self.commande.event.name : "EVENT NON RENSEIGNE"
 
 		if pers
 			result[:email]=pers.email
@@ -91,7 +91,7 @@ class Paiement < ActiveRecord::Base
 			result[:taille]=pers.taille
 			result[:pointure]=pers.pointure
 			result[:vetement]=pers.taillevetement.name if pers.taillevetement
-			temp=pers.chambres.where(event_id: self.event_id).first
+			temp=pers.chambres.where(event_id: self.commande.event_id).first
 			result[:chambre]=temp.identifiant if temp
 			result[:typeresid]=pers.typeresid.name if pers.typeresid.present?
 			result[:lit]=pers.lit.name if pers.lit.present?
@@ -107,11 +107,11 @@ class Paiement < ActiveRecord::Base
 		Categorie.all.each do|c|
 			if not(c.max_par_personne) || c.max_par_personne > 1
 				c.products.each do |p|
-					cp=self.commande_products.select{|cp| cp.product_id==p.id}.first
+					cp=self.commande.commande_products.select{|cp| cp.product_id==p.id}.first
 					products[p.name+"- semaine "+p.event_id.to_s]=cp ? cp.nombre : 0
 				end
 			else
-				cp = self.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
+				cp = self.commande.commande_products.select{|cp| cp.product.categorie_id==c.id}.first
 				products[c.nom]= cp ? cp.product.name : 0
 			end
 		end
