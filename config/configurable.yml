@@ -147,3 +147,8 @@ modification_options:
   name: Possibilité de modifier les options
   default: false
   type: boolean
+
+ski_commandes:
+  name: Ski commandés
+  default: non
+  type: string
