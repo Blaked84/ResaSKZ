@@ -152,3 +152,9 @@ ski_commandes:
   name: Ski commandés
   default: 'non'
   type: string
+
+super_option_commandee:
+  name: Super option commandée
+  default: 'non'
+  type: string
+
