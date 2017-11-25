@@ -150,5 +150,5 @@ modification_options:
 
 ski_commandes:
   name: Ski commandés
-  default: non
+  default: 'non'
   type: string

@@ -38,16 +38,7 @@
               .input-field.col.s10.m5
                 =f.text_field :pointure, readonly: true
                 =f.label :pointure
-          %li
-            .input-field.col.s12.m4
-              =f.select :taillevetement_id, Taillevetement.all.map{|t| [t.name,t.id]}, :prompt => 'Taille (S/M/L):', readonly: true
-          %li
-            .input-field.col.s12.m4
-              =f.select :tour_tete_id, TourTete.all.map{|t| [t.mesure,t.id]}, :prompt => 'Tour de tête:', readonly: true
-          %li
-            .input-field.col.s12.m4
-              =f.select :niveau_ski_id, NiveauSki.all.map{|t| [t.nom,t.id]}, :prompt => 'Niveau de ski:', readonly: true
-
+          %p.blue-text.text-darken-2 Vous ne pouvez plus éditer ces informations.
     %p.orange-text Tous les champs sont requis
 
     %br/
