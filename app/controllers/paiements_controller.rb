@@ -204,8 +204,9 @@ class PaiementsController < ApplicationController
     @paiement=Paiement.find(params[:id])
     @personne= @paiement.commande.personne
     
-    if @personne.update_attribute(status: "from_pending_list")
+    if @personne.update(status: "from_pending_list")
       @paiement.delete
+      redirect_to to_moderate_paiements_path
     end
   end
   
