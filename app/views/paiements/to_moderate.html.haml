@@ -12,6 +12,7 @@
         %th=sortable 'amount_cents', "Montant"
         %th Etape
         %th Classement liste d'attente
+        %th
     %tbody
       - @paiements.each do |p|
         %tr
@@ -21,6 +22,7 @@
           %td=p.amount_euro
           %td=p.etape
           %td=Paiement.where(en_attente: true).index(p)+1
+          %td=link_to "Sortir de la liste d'attente",remove_from_pending_list_paiement_path
 
   = will_paginate @paiements
   = link_to 'Retour', paiements_path

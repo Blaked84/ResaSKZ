@@ -81,44 +81,29 @@ class PaiementsController < ApplicationController
 
     nombre_commande_avec_paiement = Paiement.where(verif: true, en_attente: false).map{|p| p.commande}.uniq.count
     if nombre_commande_avec_paiement < Configurable[:max_commamdes_payables] || com.paiement_etape > 0
-
-      @montant=com.prochain_paiement / 100.0
-      @etape=(com.paiement_etape + 1).to_s
-      
-      if com.montant_du < 0
-        redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
-      end
-
-   #   if @etape == '3' && com.commande_products.where(en_attente: true).present?
-   #     redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
-   #   end
-	  
-      if @etape == '3'
-        redirect_to commande_path(com.id), alert: "Le 3ème paiement est bloqué."
-      end
-
-      if @montant == 0
-        redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
-      end
+      procedure_paiement
     else
-      paiement_enattente = com.paiements.where(en_attente: true, etape: '1').first
-      if paiement_enattente.present?
-        redirect_to commande_path(com.id), notice: "Tu es déjà en liste d'attente: n° #{Paiement.order(:id).where(en_attente: true).index(paiement_enattente)+1}"
+      if com.personne.status == "from_pending_list"
+        procedure_paiement
       else
-        @paiement.etape = (com.paiement_etape + 1).to_s
-        @paiement.amount_cents = com.prochain_paiement
-        @paiement.idlong=@paiement.gen_idlong
-        @paiement.paiement_hash=hashpaiement(@paiement)
-        @paiement.verif = false
-        @paiement.en_attente = true
-        if @paiement.save
-          redirect_to commande_path(com.id), alert: "Nombre maximum d'inscrits atteint. Tu es mis en liste d'attente"
+        paiement_enattente = com.paiements.where(en_attente: true, etape: '1').first
+        if paiement_enattente.present?
+          redirect_to commande_path(com.id), notice: "Tu es déjà en liste d'attente: n° #{Paiement.order(:id).where(en_attente: true).index(paiement_enattente)+1}"
         else
-          redirect_to commande_path(com.id), alert: "Un problème empêche l'enregistrement du paiement"
+          @paiement.etape = (com.paiement_etape + 1).to_s
+          @paiement.amount_cents = com.prochain_paiement
+          @paiement.idlong=@paiement.gen_idlong
+          @paiement.paiement_hash=hashpaiement(@paiement)
+          @paiement.verif = false
+          @paiement.en_attente = true
+          if @paiement.save
+            redirect_to commande_path(com.id), alert: "Nombre maximum d'inscrits atteint. Tu es mis en liste d'attente"
+          else
+            redirect_to commande_path(com.id), alert: "Un problème empêche l'enregistrement du paiement"
+          end
         end
       end
     end
-
   end
 
   def index
@@ -212,6 +197,16 @@ class PaiementsController < ApplicationController
   def check_lydia_expire
     paiement = Paiement.find_by(paiement_hash: @request_id)
     paiement.set_erreur(1)
+  end
+
+  def remove_from_pending_list 
+    authorize! :read_admin, User
+    @paiement=Paiement.find(params[:id])
+    @personne= @paiement.commande.personne
+    
+    if @personne.update_attribute(status: "from_pending_list")
+      @paiement.delete
+    end
   end
   
   def export_attente
@@ -319,6 +314,28 @@ class PaiementsController < ApplicationController
   def get_lydia_data
     @order_ref = params[:order_ref]
     @request_id = params[:request_id]
+  end
+
+  def procedure_paiement
+    com=Commande.find(params[:commande_id])
+    @montant=com.prochain_paiement / 100.0
+    @etape=(com.paiement_etape + 1).to_s
+
+    if com.montant_du < 0
+      redirect_to commande_path(com.id), alert: "Votre commande est déjà payée en totalité."
+    end
+
+   #   if @etape == '3' && com.commande_products.where(en_attente: true).present?
+   #     redirect_to commande_path(com.id), alert: "Vous ne pouvez pas effectuer le dernier paiement, certains produits sont en attente"
+   #   end
+
+    if @etape == '3'
+      redirect_to commande_path(com.id), alert: "Le 3ème paiement est bloqué."
+    end
+
+    if @montant == 0
+      redirect_to commande_path(com.id), alert: "Vous ne pouvez effectuer un paiement de 0€."
+    end
   end
 
 end

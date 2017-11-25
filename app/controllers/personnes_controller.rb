@@ -433,6 +433,7 @@ private
               :email,
               :user_id,
               :documentassurance,
+              :status,
               :typeresid_id,
               :commandes_attributes => [
                   :id,

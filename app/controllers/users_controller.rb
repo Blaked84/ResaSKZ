@@ -627,6 +627,7 @@ class UsersController < ApplicationController
                                                       :pville,
                                                       :commentaires,
                                                       :user_id,
+                                                      :status,
                                                       :typeresid_id,
                                                       :commandes_attributes => [
                                                            :id,

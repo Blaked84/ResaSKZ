@@ -77,7 +77,10 @@ LooklaDev::Application.routes.draw do
     put :force_validation, :on => :collection
     collection do
       get 'to_moderate'
-	  get 'export_attente'
+      get 'export_attente'   
+    end
+    member do
+      get 'remove_from_pending_list'
     end
   end
 

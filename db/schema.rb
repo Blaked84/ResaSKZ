@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102130533) do
+ActiveRecord::Schema.define(version: 20171125181415) do
 
   create_table "activites", force: :cascade do |t|
     t.string   "nom",         limit: 255
@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(version: 20171102130533) do
     t.integer  "lit_id"
     t.integer  "tour_tete_id"
     t.integer  "niveau_ski_id"
+    t.string   "status"
   end
 
   add_index "personnes", ["lit_id"], name: "index_personnes_on_lit_id"
