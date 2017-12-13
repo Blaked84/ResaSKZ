@@ -51,13 +51,13 @@
               -c[:products].each do |p|
                 %tr
                   %td
-                    - if Configurable[:modification_options] or current_user.admin? or c[:id] == 7
+                    - if Configurable[:modification_options] or current_user.admin?
                       - if p.reste?
                         %button{onclick: "add_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                           +
                     %span{ :id => 'product'+p.id.to_s}
                       =!@commande.commande_products.find_by(product_id: p.id).nil? ? @commande.commande_products.find_by(commande_id: @commande.id, product_id: p.id).nombre  : "0"
-                    - if Configurable[:modification_options] or current_user.admin? or c[:id] == 7
+                    - if Configurable[:modification_options] or current_user.admin?
                       %button{onclick: "remove_to_commande(#{@commande.id},#{p.id})", class: "btn-floating btn-tiny"}
                         \-
                   %td=link_to p.name, product_path(p.id)
