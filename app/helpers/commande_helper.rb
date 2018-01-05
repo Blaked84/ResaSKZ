@@ -7,7 +7,7 @@ module CommandeHelper
 		nbr_pages=(Commande.count/pool_size.to_f).ceil
 		nbr_pages_trd=(Commande.count/pool_size.to_f).ceil
 
-		render :partial => "commandes/excel_block", :locals => {:nbr_pages => nbr_pages}
+		render :partial => "commandes/excel_block", :locals => {:nbr_pages => nbr_pages, :nbr_pages_trd => nbr_pages_trd }
 
 	end
 	
