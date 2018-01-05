@@ -102,6 +102,24 @@ class CommandesController < ApplicationController
       end
     end
   end
+  
+  def export_last_payment
+    pool_size=Configurable[:export__commande_pool_size]
+    page_number=params[:page].to_i || 1
+    debut=(page_number-1)*pool_size
+    fin=(page_number)*pool_size-1
+    coms_trd = Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}[debut..fin]
+    @commandes_trd = coms_trd.map{|c| c.serialize}
+    authorize! :show, @commandes
+
+    nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
+
+    respond_to do |format|
+      format.xls do
+        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_commandes_"+Date.today.to_s+"_"+page_number.to_s+"of"+nbr_pages.to_s+ '.xls"'
+      end
+    end
+  end
 
   def show
   	@commande = Commande.includes(:personne, :event, :paiements, :products).find(params[:id])
