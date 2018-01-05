@@ -3,5 +3,6 @@
 		=link_to "Excel "+i.to_s, export_commandes_path(format: 'xls', page: i)
 		
 .excel_block
+	%h4 Liste des personnes n'ayant pas fini leur paiement
 	-(1..nbr_pages_trd).to_a.each do |i|
 		=link_to "Excel "+i.to_s, export_last_payment_commandes_path(format: 'xls', page: i)

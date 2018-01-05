@@ -111,7 +111,7 @@ class CommandesController < ApplicationController
     fin=(page_number)*pool_size-1
     coms_trd = Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}[debut..fin]
     @commandes_trd = coms_trd.map{|c| c.serialize}
-    authorize! :show, @commandes
+    authorize! :show, @commandes_trd
 
     nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
 
