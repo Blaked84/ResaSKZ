@@ -108,7 +108,7 @@ class CommandesController < ApplicationController
     page_number=params[:page].to_i || 1
     debut=(page_number-1)*pool_size
     fin=(page_number)*pool_size-1
-    coms =  Commande.order("updated_at").select{|c| !c.paiementok?}[debut..fin]
+    coms =  Commande.order("updated_at").select{|c| (c.montant_du > 0 && c.montant_paye > 0)}[debut..fin]
     @commandes = coms.map{|c| c.serialize}
     authorize! :show, @commandes
 
