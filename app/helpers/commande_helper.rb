@@ -5,10 +5,13 @@ module CommandeHelper
 		pool_size=Configurable[:export__commande_pool_size]
 
 		nbr_pages=(Commande.count/pool_size.to_f).ceil
+		nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
 
 		render :partial => "commandes/excel_block", :locals => {:nbr_pages => nbr_pages}
 
 	end
+	
+	
 
 
 end

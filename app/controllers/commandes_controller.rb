@@ -95,7 +95,6 @@ class CommandesController < ApplicationController
     authorize! :show, @commandes
 
     nbr_pages=(Paiement.where(verif: true, etape: '1').count/pool_size.to_f).ceil
-    nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
 	
     respond_to do |format|
       format.xls do
@@ -113,11 +112,11 @@ class CommandesController < ApplicationController
     @commandes_trd = coms_trd.map{|c| c.serialize}
     authorize! :show, @commandes_trd
 
-    nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
+	nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
 
     respond_to do |format|
       format.xls do
-        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_commandes_"+Date.today.to_s+"_"+page_number.to_s+"of"+nbr_pages.to_s+ '.xls"'
+        response.headers['Content-Disposition'] = 'attachment; filename="' +"export_commandes_"+Date.today.to_s+"_"+page_number.to_s+ '.xls"'
       end
     end
   end
