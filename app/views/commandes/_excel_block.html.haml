@@ -1,4 +1,5 @@
 .excel_block
+	%h4 Liste complète
 	-(1..nbr_pages).to_a.each do |i|
 		=link_to "Excel "+i.to_s, export_commandes_path(format: 'xls', page: i)
 		

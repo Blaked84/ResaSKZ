@@ -108,11 +108,9 @@ class CommandesController < ApplicationController
     page_number=params[:page].to_i || 1
     debut=(page_number-1)*pool_size
     fin=(page_number)*pool_size-1
-    coms_trd = Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}[debut..fin]
-    @commandes_trd = coms_trd.map{|c| c.serialize}
+    coms = Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}[debut..fin]
+    @commandes = coms.map{|c| c.serialize}
     authorize! :show, @commandes_trd
-
-	nbr_pages_trd=(Commande.order("updated_at").select{|c| c.montant_paye < c.montant_total}.count/pool_size.to_f).ceil
 
     respond_to do |format|
       format.xls do
