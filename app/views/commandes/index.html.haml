@@ -3,7 +3,6 @@
     Commandes
 
   =excel_block
-  =excel_block_last_payment
   
   %p Nombre de commandes payées: #{Paiement.where(verif: true, en_attente: false).map{|p| p.commande}.uniq.count}
   %p Nombre de commandes à l'étape 2: #{@paiements.where(etape: '2').count}
