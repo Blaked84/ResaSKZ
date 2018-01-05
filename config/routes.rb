@@ -47,6 +47,7 @@ LooklaDev::Application.routes.draw do
     collection do
       post :check_in
       get :export
+	  get :export_last_payment
       get :add_caution
       post :validate_caution
       post :validate_caution_batch
